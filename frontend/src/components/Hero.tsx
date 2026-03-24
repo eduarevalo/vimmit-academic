@@ -3,7 +3,7 @@ import { IconArrowRight } from '@tabler/icons-react';
 import { useTranslation } from 'react-i18next';
 import { useInstitution } from '../hooks/useInstitution';
 
-export function Hero() {
+export function Hero({ onExplore }: { onExplore?: () => void }) {
   const { t } = useTranslation();
   const { name } = useInstitution();
 
@@ -26,7 +26,13 @@ export function Hero() {
           {t('hero.subtitle')}
         </Text>
         <Group justify="center">
-          <Button size="xl" radius="xl" rightSection={<IconArrowRight size={20} />} style={{ boxShadow: '0 8px 15px rgba(22, 136, 74, 0.2)' }}>
+          <Button 
+            size="xl" 
+            radius="xl" 
+            onClick={onExplore}
+            rightSection={<IconArrowRight size={20} />} 
+            style={{ boxShadow: '0 8px 15px rgba(22, 136, 74, 0.2)' }}
+          >
             {t('hero.explorePrograms')}
           </Button>
           <Button size="xl" variant="white" radius="xl" c="dark.8">

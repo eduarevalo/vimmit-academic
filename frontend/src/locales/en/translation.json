@@ -48,5 +48,37 @@
     "quickLinks": "Quick Links",
     "contact": "Contact",
     "rights": "All rights reserved."
+  },
+  "registration": {
+    "title": "Intent Registration",
+    "subtitle": "Join our community and take the first step towards your professional future today.",
+    "fields": {
+      "fullName": "Full Name",
+      "email": "Email Address",
+      "phone": "Phone Number",
+      "program": "Program of Interest",
+      "programPlaceholder": "Select a program"
+    },
+    "submit": "Register My Interest",
+    "disclaimer": "This is only an intent registration, it does not imply enrollment commitment."
+  },
+  "infoPage": {
+    "academic": {
+      "title": "Academic Excellence",
+      "p1": "At Aseder, we pride ourselves on offering a rigorous and updated curriculum that responds to real-world demands. Our faculty are experts in their fields and are committed to your professional success.",
+      "p2": "We believe in active learning where theory meets practice in state-of-the-art laboratories and collaborative projects. Here you don't just learn, you create and transform.",
+      "p3": "Our faculties are designed to foster curiosity and innovation, providing students with the resources needed to research and lead significant changes in society."
+    },
+    "career": {
+      "title": "Your Professional Future",
+      "p1": "The transition to the professional world is a fundamental pillar of our training. We have strategic alliances with leading companies in the sector to ensure high-impact professional internships.",
+      "p2": "Our graduates are recognized for their technical capacity and leadership skills. 95% of our students secure employment in their area of study in less than 6 months after graduation.",
+      "p3": "We offer personalized career advice, exclusive job fairs, and access to a global alumni network that will open doors for you in any market in the world."
+    },
+    "life": {
+      "title": "Student Life",
+      "p1": "The university experience goes beyond the classroom. On our vibrant campus, you will find clubs, sports, and cultural activities that will enrich your personal and social growth.",
+      "p2": "We foster a diverse and inclusive community where every voice counts. Participate in international seminars, entrepreneurship events, and research groups from your first semester."
+    }
   }
 }

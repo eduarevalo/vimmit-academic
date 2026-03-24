@@ -48,5 +48,37 @@
     "quickLinks": "Enlaces Rápidos",
     "contact": "Contacto",
     "rights": "Todos los derechos reservados."
+  },
+  "registration": {
+    "title": "Registro de Intención",
+    "subtitle": "Únete a nuestra comunidad y da el primer paso hacia tu futuro profesional hoy mismo.",
+    "fields": {
+      "fullName": "Nombre Completo",
+      "email": "Correo Electrónico",
+      "phone": "Teléfono",
+      "program": "Programa de Interés",
+      "programPlaceholder": "Selecciona un programa"
+    },
+    "submit": "Registrar Mi Interés",
+    "disclaimer": "Este es solo un registro de interés, no implica compromiso de matrícula."
+  },
+  "infoPage": {
+    "academic": {
+      "title": "Excelencia Académica",
+      "p1": "En Aseder, nos enorgullecemos de ofrecer un currículo riguroso y actualizado que responde a las demandas del mundo real. Nuestros docentes son expertos en sus áreas y están comprometidos con tu éxito profesional.",
+      "p2": "Creemos en un aprendizaje activo donde la teoría se encuentra con la práctica en laboratorios de última generación y proyectos colaborativos. Aquí no solo aprendes, sino que creas y transformas.",
+      "p3": "Nuestras facultades están diseñadas para fomentar la curiosidad y la innovación, proporcionando a los estudiantes los recursos necesarios para investigar y liderar cambios significativos en la sociedad."
+    },
+    "career": {
+      "title": "Tu Futuro Profesional",
+      "p1": "La transición al mundo laboral es un pilar fundamental de nuestra formación. Contamos con alianzas estratégicas con las principales empresas del sector para asegurar prácticas profesionales de alto impacto.",
+      "p2": "Nuestros egresados son reconocidos por su capacidad técnica y sus habilidades de liderazgo. El 95% de nuestros estudiantes aseguran un empleo en su área de estudio en menos de 6 meses tras la graduación.",
+      "p3": "Te ofrecemos asesoría de carrera personalizada, ferias de empleo exclusivas y acceso a una red de alumni global que te abrirá puertas en cualquier mercado del mundo."
+    },
+    "life": {
+      "title": "Vida Estudiantil",
+      "p1": "La experiencia universitaria va más allá de las aulas. En nuestro campus vibrante, encontrarás clubes, deportes y actividades culturales que enriquecerán tu crecimiento personal y social.",
+      "p2": "Fomentamos una comunidad diversa e inclusiva donde cada voz cuenta. Participa en seminarios internacionales, eventos de emprendimiento y grupos de investigación desde tu primer semestre."
+    }
   }
 }
