@@ -1,0 +1,52 @@
+{
+  "header": {
+    "about": "Nosotros",
+    "programs": "Programas",
+    "admissions": "Admisiones",
+    "campusLife": "Vida Estudiantil",
+    "startJourney": "Iniciar Camino"
+  },
+  "hero": {
+    "welcome": "Bienvenido a",
+    "title": "Academia",
+    "subtitle": "Tu futuro comienza aquí. Explora nuestros programas de clase mundial, nuestra vibrante comunidad, e ignita tu potencial en un entorno diseñado para innovadores.",
+    "explorePrograms": "Explorar Programas",
+    "learnMore": "Saber Más"
+  },
+  "programs": {
+    "title": "Explora Nuestros Programas Académicos",
+    "learnMore": "Saber Más →",
+    "list": {
+      "computerScience": {
+        "title": "Ciencias de la Computación",
+        "desc": "Ingeniería de software, IA y computación de diseño de sistemas."
+      },
+      "business": {
+        "title": "Negocios e Innovación",
+        "desc": "Mercados globales, emprendimiento y estrategias de gestión."
+      },
+      "environmental": {
+        "title": "Ciencias Ambientales",
+        "desc": "Sostenibilidad, ecología y soluciones climáticas."
+      },
+      "arts": {
+        "title": "Artes y Humanidades",
+        "desc": "Historia, literatura, filosofía y expresión creativa."
+      },
+      "medicine": {
+        "title": "Medicina y Salud",
+        "desc": "Investigación clínica, salud pública y pre-medicina."
+      },
+      "law": {
+        "title": "Derecho y Justicia",
+        "desc": "Derecho constitucional, sociología y ética."
+      }
+    }
+  },
+  "footer": {
+    "description": "Una universidad prestigiosa dedicada al desarrollo de la próxima generación de líderes, pensadores y creadores globales.",
+    "quickLinks": "Enlaces Rápidos",
+    "contact": "Contacto",
+    "rights": "Todos los derechos reservados."
+  }
+}

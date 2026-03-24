@@ -1,0 +1,22 @@
+# IDEs
+.vscode/
+.idea/
+.DS_Store
+
+# Backend
+backend/.venv/
+backend/.pytest_cache/
+backend/.mypy_cache/
+backend/.ruff_cache/
+backend/__pycache__/
+backend/test.db
+backend/.coverage
+backend/htmlcov/
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.antigravityignore
+
+# OS files
+*.log
