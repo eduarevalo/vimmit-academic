@@ -4,7 +4,20 @@
     "programs": "Programas",
     "admissions": "Admisiones",
     "campusLife": "Vida Estudiantil",
-    "startJourney": "Iniciar Camino"
+    "startJourney": "Iniciar Camino",
+    "educationalPortal": "Portal Educativo"
+  },
+  "auth": {
+    "login": "Iniciar Sesión",
+    "logout": "Cerrar Sesión",
+    "errors": {
+      "AUTH_INVALID_CREDENTIALS": "Usuario o contraseña incorrectos",
+      "AUTH_SESSION_EXPIRED": "Tu sesión ha expirado. Por favor, inicia sesión de nuevo",
+      "AUTH_USER_NOT_FOUND": "Usuario no encontrado",
+      "RESOURCE_NOT_FOUND": "Recurso no encontrado. Por favor, verifica la información",
+      "SYSTEM_ERROR": "Error del sistema. Inténtalo más tarde",
+      "NETWORK_ERROR": "Error de conexión. Verifica tu internet"
+    }
   },
   "hero": {
     "welcome": "Bienvenido a",
@@ -60,7 +73,9 @@
       "programPlaceholder": "Selecciona un programa"
     },
     "submit": "Registrar Mi Interés",
-    "disclaimer": "Este es solo un registro de interés, no implica compromiso de matrícula."
+    "disclaimer": "Este es solo un registro de interés, no implica compromiso de matrícula.",
+    "success": "¡Gracias por tu interés! Nos pondremos en contacto contigo pronto.",
+    "error": "Hubo un error al procesar tu solicitud. Por favor, inténtalo de nuevo."
   },
   "infoPage": {
     "academic": {
@@ -79,6 +94,24 @@
       "title": "Vida Estudiantil",
       "p1": "La experiencia universitaria va más allá de las aulas. En nuestro campus vibrante, encontrarás clubes, deportes y actividades culturales que enriquecerán tu crecimiento personal y social.",
       "p2": "Fomentamos una comunidad diversa e inclusiva donde cada voz cuenta. Participa en seminarios internacionales, eventos de emprendimiento y grupos de investigación desde tu primer semestre."
+    }
+  },
+  "portal": {
+    "title": "Portal Educativo",
+    "accessRequired": "Acceso al Portal",
+    "loginNotice": "Debes iniciar sesión para acceder al portal educativo.",
+    "welcome": "Bienvenido al portal institucional. Aquí podrás acceder a tus recursos académicos, calificaciones y trámites administrativos.",
+    "exploreResources": "Explorar Recursos",
+    "header": {
+      "tag": "Portal",
+      "accountLabel": "Cuenta Educativa",
+      "profile": "Mi Perfil"
+    },
+    "footer": {
+      "rights": "Portal Académico. Todos los derechos reservados.",
+      "support": "Soporte",
+      "privacy": "Privacidad",
+      "terms": "Términos"
     }
   }
 }

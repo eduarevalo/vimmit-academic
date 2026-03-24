@@ -1,28 +1,35 @@
-import { Header } from './components/Header';
-import { Hero } from './components/Hero';
-import { ProgramsSection } from './components/ProgramsSection';
-import { Footer } from './components/Footer';
-import { InformationPage } from './components/InformationPage';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext';
 import { RegistrationModal } from './components/RegistrationModal';
-import { useState } from 'react';
+import { LoginModal } from './components/LoginModal';
+import { MainLayout } from './layouts/MainLayout';
+import { PortalLayout } from './layouts/PortalLayout';
+import { LandingPage } from './pages/LandingPage';
+import { InfoPage } from './pages/InfoPage';
+import { PortalPage } from './pages/PortalPage';
 
 function App() {
-  const [showInfo, setShowInfo] = useState(false);
-
   return (
-    <>
-      <Header onStartJourney={() => setShowInfo(true)} />
-      {!showInfo ? (
-        <>
-          <Hero onExplore={() => setShowInfo(true)} />
-          <ProgramsSection />
-        </>
-      ) : (
-        <InformationPage />
-      )}
-      <Footer />
-      <RegistrationModal />
-    </>
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          {/* Public Routes */}
+          <Route element={<MainLayout />}>
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/info" element={<InfoPage />} />
+          </Route>
+
+          {/* Portal Routes */}
+          <Route path="/portal" element={<PortalLayout />}>
+            <Route index element={<PortalPage />} />
+          </Route>
+        </Routes>
+        
+        {/* Global UI Elements */}
+        <RegistrationModal />
+        <LoginModal />
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
 

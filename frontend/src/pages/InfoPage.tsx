@@ -1,13 +1,13 @@
 import { Stack, Text, Button, Group, Center } from '@mantine/core';
 import { useTranslation } from 'react-i18next';
-import { ScrollSection } from './ScrollSection';
+import { ScrollSection } from '../components/ScrollSection';
 import { useRegistrationModal } from '../hooks/useRegistrationModal';
 
 const BG_ACADEMIC = '/assets/bg_academic.png';
 const BG_CAREER = '/assets/bg_career.png';
 const BG_LIFE = '/assets/bg_student_life.png';
 
-export function InformationPage() {
+export function InfoPage() {
   const { t } = useTranslation();
   const { open } = useRegistrationModal();
 

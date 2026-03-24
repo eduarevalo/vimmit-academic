@@ -12,5 +12,8 @@ test-html:
 verify:
 	PYTHONPATH=src uv run python src/verify_iam.py
 
+prepare-dev:
+	PYTHONPATH=src uv run python src/scripts/create_test_user.py
+
 dev:
 	uv run fastapi dev src/main.py

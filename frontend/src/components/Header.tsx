@@ -1,15 +1,25 @@
-import { Container, Group, Button, Text, Box, Menu, ActionIcon } from '@mantine/core';
-import { IconBook2, IconLanguage } from '@tabler/icons-react';
+import { Container, Group, Button, Text, Box, Menu, Avatar } from '@mantine/core';
+import { IconBook2, IconExternalLink, IconLogout, IconUser } from '@tabler/icons-react';
 import { useTranslation } from 'react-i18next';
 import { useInstitution } from '../hooks/useInstitution';
+import { useAuth } from '../hooks/useAuth';
 
 interface HeaderProps {
   onStartJourney?: () => void;
+  onLogoClick?: () => void;
+  showLogin?: boolean;
+  showUser?: boolean;
 }
 
-export function Header({ onStartJourney }: HeaderProps) {
-  const { t, i18n } = useTranslation();
+export function Header({ 
+  onStartJourney, 
+  onLogoClick, 
+  showLogin = false,
+  showUser = false
+}: HeaderProps) {
+  const { t } = useTranslation();
   const { name } = useInstitution();
+  const { isAuthenticated, user, logout, openLoginModal } = useAuth();
 
   return (
     <Box 
@@ -26,7 +36,7 @@ export function Header({ onStartJourney }: HeaderProps) {
     >
       <Container size="lg">
         <Group justify="space-between" h="100%">
-          <Group gap="xs">
+          <Group gap="xs" onClick={onLogoClick} style={{ cursor: 'pointer' }}>
             <IconBook2 size={30} color="#16884a" />
             <Text size="xl" fw={900} variant="gradient" gradient={{ from: '#16884a', to: '#2b8a3e', deg: 45 }}>
               {name}
@@ -41,17 +51,50 @@ export function Header({ onStartJourney }: HeaderProps) {
           </Group>
 
           <Group gap="sm">
-            <Menu shadow="md" width={120}>
-              <Menu.Target>
-                <ActionIcon variant="subtle" color="gray" size="lg" radius="xl">
-                  <IconLanguage size={20} />
-                </ActionIcon>
-              </Menu.Target>
-              <Menu.Dropdown>
-                <Menu.Item onClick={() => i18n.changeLanguage('es')}>Español</Menu.Item>
-                <Menu.Item onClick={() => i18n.changeLanguage('en')}>English</Menu.Item>
-              </Menu.Dropdown>
-            </Menu>
+            <Button 
+              component="a"
+              href="/portal"
+              target="_blank"
+              radius="xl" 
+              variant="subtle" 
+              color="gray"
+              rightSection={<IconExternalLink size={16} />}
+              visibleFrom="sm"
+            >
+              {t('header.educationalPortal')}
+            </Button>
+            
+            {isAuthenticated && showUser ? (
+              <Menu shadow="md" width={200} position="bottom-end">
+                <Menu.Target>
+                  <Button variant="subtle" color="gray" radius="xl" px={8}>
+                    <Group gap={8}>
+                      <Avatar size={24} color="brand" radius="xl">
+                        {user?.email?.charAt(0).toUpperCase()}
+                      </Avatar>
+                      <Text size="sm" fw={500} visibleFrom="xs">{user?.email?.split('@')[0]}</Text>
+                    </Group>
+                  </Button>
+                </Menu.Target>
+                <Menu.Dropdown>
+                  <Menu.Label>Cuenta</Menu.Label>
+                  <Menu.Item leftSection={<IconUser size={14} />}>Mi Perfil</Menu.Item>
+                  <Menu.Divider />
+                  <Menu.Item 
+                    color="red" 
+                    leftSection={<IconLogout size={14} />}
+                    onClick={logout}
+                  >
+                    {t('header.logout')}
+                  </Menu.Item>
+                </Menu.Dropdown>
+              </Menu>
+            ) : showLogin && (
+              <Button variant="subtle" color="brand" radius="xl" onClick={openLoginModal}>
+                {t('header.login')}
+              </Button>
+            )}
+
             <Button radius="xl" variant="filled" color="brand" onClick={onStartJourney}>
               {t('header.startJourney')}
             </Button>

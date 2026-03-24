@@ -1,15 +1,28 @@
 {
   "header": {
-    "about": "About",
+    "about": "About Us",
     "programs": "Programs",
     "admissions": "Admissions",
     "campusLife": "Campus Life",
-    "startJourney": "Start Journey"
+    "startJourney": "Start Journey",
+    "educationalPortal": "Educational Portal"
+  },
+  "auth": {
+    "login": "Login",
+    "logout": "Logout",
+    "errors": {
+      "AUTH_INVALID_CREDENTIALS": "Incorrect username or password",
+      "AUTH_SESSION_EXPIRED": "Session expired. Please log in again",
+      "AUTH_USER_NOT_FOUND": "User not found",
+      "RESOURCE_NOT_FOUND": "Resource not found. Please verify the information",
+      "SYSTEM_ERROR": "System error. Please try again later",
+      "NETWORK_ERROR": "Network error. Please check your connection"
+    }
   },
   "hero": {
     "welcome": "Welcome to",
-    "title": "Academia",
-    "subtitle": "Your future begins here. Explore our world-class programs, vibrant community, and ignite your potential in an environment built for innovators.",
+    "title": "Academy",
+    "subtitle": "Your future begins here. Explore our world-class programs, vibrant community, and ignite your potential in an environment designed for innovators.",
     "explorePrograms": "Explore Programs",
     "learnMore": "Learn More"
   },
@@ -31,7 +44,7 @@
       },
       "arts": {
         "title": "Arts & Humanities",
-        "desc": "History, literature, philosophy and creative expression."
+        "desc": "History, literature, philosophy, and creative expression."
       },
       "medicine": {
         "title": "Medicine & Health",
@@ -44,13 +57,13 @@
     }
   },
   "footer": {
-    "description": "A prestigious university dedicated to the development of the next generation of global leaders, thinkers, and creators.",
+    "description": "A prestigious university dedicated to developing the next generation of global leaders, thinkers, and creators.",
     "quickLinks": "Quick Links",
     "contact": "Contact",
     "rights": "All rights reserved."
   },
   "registration": {
-    "title": "Intent Registration",
+    "title": "Registration of Interest",
     "subtitle": "Join our community and take the first step towards your professional future today.",
     "fields": {
       "fullName": "Full Name",
@@ -60,25 +73,45 @@
       "programPlaceholder": "Select a program"
     },
     "submit": "Register My Interest",
-    "disclaimer": "This is only an intent registration, it does not imply enrollment commitment."
+    "disclaimer": "This is only a registration of interest, not a commitment to enroll.",
+    "success": "Thank you for your interest! We will get in touch with you soon.",
+    "error": "There was an error processing your request. Please try again."
   },
   "infoPage": {
     "academic": {
       "title": "Academic Excellence",
-      "p1": "At Aseder, we pride ourselves on offering a rigorous and updated curriculum that responds to real-world demands. Our faculty are experts in their fields and are committed to your professional success.",
-      "p2": "We believe in active learning where theory meets practice in state-of-the-art laboratories and collaborative projects. Here you don't just learn, you create and transform.",
+      "p1": "At Aseder, we take pride in offering a rigorous and updated curriculum that meets real-world demands. Our faculty are experts in their fields and are committed to your professional success.",
+      "p2": "We believe in active learning where theory meets practice in state-of-the-art labs and collaborative projects. Here you don't just learn, you create and transform.",
       "p3": "Our faculties are designed to foster curiosity and innovation, providing students with the resources needed to research and lead significant changes in society."
     },
     "career": {
       "title": "Your Professional Future",
-      "p1": "The transition to the professional world is a fundamental pillar of our training. We have strategic alliances with leading companies in the sector to ensure high-impact professional internships.",
-      "p2": "Our graduates are recognized for their technical capacity and leadership skills. 95% of our students secure employment in their area of study in less than 6 months after graduation.",
-      "p3": "We offer personalized career advice, exclusive job fairs, and access to a global alumni network that will open doors for you in any market in the world."
+      "p1": "The transition to the workspace is a fundamental pillar of our training. We have strategic alliances with major industry companies to ensure high-impact professional internships.",
+      "p2": "Our graduates are recognized for their technical ability and leadership skills. 95% of our students secure employment in their field within 6 months of graduation.",
+      "p3": "We offer personalized career advice, exclusive job fairs, and access to a global alumni network that will open doors in any market in the world."
     },
     "life": {
       "title": "Student Life",
-      "p1": "The university experience goes beyond the classroom. On our vibrant campus, you will find clubs, sports, and cultural activities that will enrich your personal and social growth.",
+      "p1": "The university experience goes beyond the classroom. In our vibrant campus, you will find clubs, sports, and cultural activities that will enrich your personal and social growth.",
       "p2": "We foster a diverse and inclusive community where every voice counts. Participate in international seminars, entrepreneurship events, and research groups from your first semester."
+    }
+  },
+  "portal": {
+    "title": "Educational Portal",
+    "accessRequired": "Portal Access",
+    "loginNotice": "You must log in to access the educational portal.",
+    "welcome": "Welcome to the institutional portal. Here you can access your academic resources, grades, and administrative procedures.",
+    "exploreResources": "Explore Resources",
+    "header": {
+      "tag": "Portal",
+      "accountLabel": "Educational Account",
+      "profile": "My Profile"
+    },
+    "footer": {
+      "rights": "Academic Portal. All rights reserved.",
+      "support": "Support",
+      "privacy": "Privacy",
+      "terms": "Terms"
     }
   }
 }

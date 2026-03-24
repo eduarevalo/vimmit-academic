@@ -29,9 +29,14 @@ def get_identity_service(session: Session = Depends(get_session)):
 async def create_user(user_in: UserCreate, service: IdentityService = Depends(get_identity_service)):
     return service.register_user(user_in.email, user_in.password)
 
+from api.identity.v1.error_codes import ErrorCode
+
 @router.post("/{user_id}/roles")
 async def assign_role(user_id: UUID, role_in: RoleAssign, service: IdentityService = Depends(get_identity_service)):
     success = service.assign_role_to_user(user_id, role_in.role_name)
     if not success:
-        raise HTTPException(status_code=404, detail="User or Role not found")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, 
+            detail={"code": ErrorCode.RESOURCE_NOT_FOUND, "message": "User or Role not found"}
+        )
     return {"message": "Role assigned successfully"}

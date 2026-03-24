@@ -6,6 +6,7 @@ from sqlmodel import Session, create_engine, SQLModel
 
 # Import entities and infrastructure
 from domain.identity.models import User, Role, UserRoleLink
+from domain.administration.models import RegistrationIntentModel
 from infrastructure.identity.repositories.user_repository import UserRepository
 from infrastructure.security.token_provider import TokenProvider
 
@@ -25,6 +26,8 @@ SessionDep = Annotated[Session, Depends(get_session)]
 # Defined once here to be reused everywhere
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/v1/identity/auth/token")
 
+from api.identity.v1.error_codes import ErrorCode
+
 def get_current_user(
     session: SessionDep,
     token: str = Depends(oauth2_scheme)
@@ -33,7 +36,7 @@ def get_current_user(
     if not payload:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED, 
-            detail="Could not validate credentials",
+            detail={"code": ErrorCode.AUTH_SESSION_EXPIRED, "message": "Could not validate credentials"},
             headers={"WWW-Authenticate": "Bearer"},
         )
         
@@ -41,7 +44,7 @@ def get_current_user(
     if username is None:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED, 
-            detail="Invalid token payload",
+            detail={"code": ErrorCode.AUTH_SESSION_EXPIRED, "message": "Invalid token payload"},
             headers={"WWW-Authenticate": "Bearer"},
         )
         
@@ -50,6 +53,6 @@ def get_current_user(
     if user is None:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND, 
-            detail="User not found"
+            detail={"code": ErrorCode.AUTH_USER_NOT_FOUND, "message": "User not found"}
         )
     return user

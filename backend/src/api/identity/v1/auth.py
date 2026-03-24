@@ -9,6 +9,7 @@ from application.identity.services.auth_service import AuthService
 from infrastructure.identity.repositories.user_repository import UserRepository
 from infrastructure.security.hash_provider import HashProvider
 from infrastructure.security.token_provider import TokenProvider
+from .error_codes import ErrorCode
 from .schemas import Token, UserOut
 
 router = APIRouter(prefix="/auth", tags=["auth"])
@@ -28,7 +29,7 @@ async def login_for_access_token(
     if not user:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Incorrect username or password",
+            detail={"code": ErrorCode.AUTH_INVALID_CREDENTIALS, "message": "Incorrect username or password"},
             headers={"WWW-Authenticate": "Bearer"},
         )
     
