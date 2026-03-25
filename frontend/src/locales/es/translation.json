@@ -105,7 +105,34 @@
     "header": {
       "tag": "Portal",
       "accountLabel": "Cuenta Educativa",
-      "profile": "Mi Perfil"
+      "profile": "Mi Perfil",
+      "programs": "Gestión de Programas"
+    },
+    "programsManagement": {
+      "title": "Programas Académicos",
+      "subtitle": "Administra la oferta académica de la institución",
+      "create": "Nuevo Programa",
+      "edit": "Editar Programa",
+      "form": {
+        "institution": "Institución",
+        "institutionPlaceholder": "Selecciona la institución",
+        "institutionRequired": "Debes seleccionar una institución",
+        "name": "Nombre del Programa",
+        "namePlaceholder": "Ej: Ingeniería Informática",
+        "description": "Descripción",
+        "descriptionPlaceholder": "Descripción del programa académico...",
+        "duration": "Duración",
+        "durationPlaceholder": "Ej: 4 años",
+        "active": "Activo",
+        "submit": "Guardar Programa"
+      },
+      "list": {
+        "empty": "No hay programas registrados",
+        "name": "Programa",
+        "duration": "Duración",
+        "status": "Estado",
+        "actions": "Acciones"
+      }
     },
     "footer": {
       "rights": "Portal Académico. Todos los derechos reservados.",

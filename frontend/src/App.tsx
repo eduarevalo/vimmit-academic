@@ -7,6 +7,7 @@ import { PortalLayout } from './layouts/PortalLayout';
 import { LandingPage } from './pages/LandingPage';
 import { InfoPage } from './pages/InfoPage';
 import { PortalPage } from './pages/PortalPage';
+import { ProgramsPage } from './pages/ProgramsPage';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           {/* Portal Routes */}
           <Route path="/portal" element={<PortalLayout />}>
             <Route index element={<PortalPage />} />
+            <Route path="programs" element={<ProgramsPage />} />
           </Route>
         </Routes>
         

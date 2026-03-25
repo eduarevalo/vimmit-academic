@@ -105,7 +105,34 @@
     "header": {
       "tag": "Portal",
       "accountLabel": "Educational Account",
-      "profile": "My Profile"
+      "profile": "My Profile",
+      "programs": "Programs Management"
+    },
+    "programsManagement": {
+      "title": "Academic Programs",
+      "subtitle": "Manage the institution's academic offerings",
+      "create": "New Program",
+      "edit": "Edit Program",
+      "form": {
+        "institution": "Institution",
+        "institutionPlaceholder": "Select an institution",
+        "institutionRequired": "You must select an institution",
+        "name": "Program Name",
+        "namePlaceholder": "E.g. Computer Science",
+        "description": "Description",
+        "descriptionPlaceholder": "Description of the academic program...",
+        "duration": "Duration",
+        "durationPlaceholder": "E.g. 4 years",
+        "active": "Active",
+        "submit": "Save Program"
+      },
+      "list": {
+        "empty": "No programs registered",
+        "name": "Program",
+        "duration": "Duration",
+        "status": "Status",
+        "actions": "Actions"
+      }
     },
     "footer": {
       "rights": "Academic Portal. All rights reserved.",

@@ -39,8 +39,26 @@ async def login_for_access_token(
         "token_type": "bearer"
     }
 
+from sqlmodel import Session, select
+from domain.tenants.models import TenantModel
+from domain.identity.models import Role
+
 @router.get("/me", response_model=UserOut)
 async def read_users_me(
-    current_user: Annotated[User, Depends(get_current_user)]
+    current_user: Annotated[User, Depends(get_current_user)],
+    session: Session = Depends(get_session)
 ):
-    return current_user
+    memberships_with_names = []
+    for membership in current_user.memberships:
+        tenant = session.get(TenantModel, membership.tenant_id)
+        role = session.get(Role, membership.role_id)
+        memberships_with_names.append({
+            "tenant_id": membership.tenant_id,
+            "tenant_name": tenant.name if tenant else "Unknown",
+            "role_id": membership.role_id,
+            "role_name": role.name if role else "Unknown",
+        })
+
+    user_data = current_user.model_dump()
+    user_data["memberships"] = memberships_with_names
+    return user_data

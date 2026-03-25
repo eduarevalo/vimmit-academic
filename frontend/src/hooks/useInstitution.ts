@@ -42,6 +42,11 @@ const institutionData: InstitutionData = {
   },
 };
 
+// ... (existing interface)
+
 export function useInstitution() {
-  return institutionData;
+  return {
+    ...institutionData,
+    loading: false,
+  };
 }

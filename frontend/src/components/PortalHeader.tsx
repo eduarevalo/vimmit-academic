@@ -3,6 +3,7 @@ import { IconBook2, IconLogout, IconUser } from '@tabler/icons-react';
 import { useTranslation } from 'react-i18next';
 import { useInstitution } from '../hooks/useInstitution';
 import { useAuth } from '../hooks/useAuth';
+import { Link } from 'react-router-dom';
 
 export function PortalHeader() {
   const { t } = useTranslation();
@@ -20,12 +21,26 @@ export function PortalHeader() {
     >
       <Container size="lg">
         <Group justify="space-between">
-          <Group gap="md">
-            <Group gap="xs">
-              <IconBook2 size={24} color="#16884a" />
-              <Text size="lg" fw={800} color="brand">
-                {name} <Text span fw={400} c="dimmed" size="xs">| {t('portal.header.tag')}</Text>
-              </Text>
+          <Group gap="xl">
+            <Link to="/portal" style={{ textDecoration: 'none', color: 'inherit' }}>
+              <Group gap="xs" style={{ cursor: 'pointer' }}>
+                <IconBook2 size={24} color="#16884a" />
+                <Text size="lg" fw={800} c="brand">
+                  {name} <Text span fw={400} c="dimmed" size="xs">| {t('portal.header.tag')}</Text>
+                </Text>
+              </Group>
+            </Link>
+            
+            <Group gap="md" visibleFrom="sm">
+              <Button 
+                component={Link} 
+                to="/portal/programs" 
+                variant="subtle" 
+                color="gray" 
+                size="sm"
+              >
+                {t('portal.header.programs')}
+              </Button>
             </Group>
           </Group>
 

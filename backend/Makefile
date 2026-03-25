@@ -15,5 +15,8 @@ verify:
 prepare-dev:
 	PYTHONPATH=src uv run python src/scripts/create_test_user.py
 
+init-tenant:
+	PYTHONPATH=src uv run python src/scripts/init_tenant.py
+
 dev:
 	uv run fastapi dev src/main.py

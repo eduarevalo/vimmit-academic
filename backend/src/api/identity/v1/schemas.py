@@ -18,10 +18,24 @@ class UserBase(BaseModel):
 class UserInDB(UserBase):
     hashed_password: str
 
+from typing import List
+
+class TenantSummary(BaseModel):
+    id: UUID
+    name: str
+    slug: str
+
+class MembershipOut(BaseModel):
+    tenant_id: UUID
+    tenant_name: str
+    role_id: UUID
+    role_name: str
+
 class UserOut(BaseModel):
     id: UUID
     email: EmailStr
     is_active: bool
+    memberships: List[MembershipOut] = []
     
     class Config:
         from_attributes = True
