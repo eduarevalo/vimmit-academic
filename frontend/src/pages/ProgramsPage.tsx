@@ -12,38 +12,52 @@ interface Program {
   tenant_id: string;
   tenant_name?: string;
   name: string;
-  description: string;
-  duration: string;
+  description?: string;
+  program_type: string;
+  total_levels: number;
+  level_label: string;
+  degree_title?: string;
   is_active: boolean;
 }
 
 export function ProgramsPage() {
   const { t } = useTranslation();
   const { token } = useAuth();
-  const [opened, setOpened] = useState(false);
-  const [programs, setPrograms] = useState<Program[]>([]);
-  const [editingProgram, setEditingProgram] = useState<Program | null>(null);
+
+  const [opened, setOpened]                   = useState(false);
+  const [programs, setPrograms]               = useState<Program[]>([]);
+  const [editingProgram, setEditingProgram]   = useState<Program | null>(null);
+  const [deletingProgram, setDeletingProgram] = useState<Program | null>(null);
 
   const fetchPrograms = async () => {
     if (!token) return;
     try {
       const response = await fetch(`${API_BASE_URL}/api/v1/academic/programs`, {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-        }
+        headers: { 'Authorization': `Bearer ${token}` }
       });
-      if (response.ok) {
-        const data = await response.json();
-        setPrograms(data);
-      }
+      if (response.ok) setPrograms(await response.json());
     } catch (error) {
       console.error('Error fetching programs:', error);
     }
   };
 
-  useEffect(() => {
-    fetchPrograms();
-  }, [ token]);
+  const deleteProgram = async () => {
+    if (!deletingProgram || !token) return;
+    try {
+      const response = await fetch(
+        `${API_BASE_URL}/api/v1/academic/programs/${deletingProgram.id}`,
+        { method: 'DELETE', headers: { 'Authorization': `Bearer ${token}` } }
+      );
+      if (response.ok || response.status === 204) {
+        setDeletingProgram(null);
+        fetchPrograms();
+      }
+    } catch (error) {
+      console.error('Error deleting program:', error);
+    }
+  };
+
+  useEffect(() => { fetchPrograms(); }, [token]);
 
   const rows = programs.map((program) => (
     <Table.Tr key={program.id}>
@@ -56,10 +70,14 @@ export function ProgramsPage() {
           {program.tenant_name}
         </Badge>
       </Table.Td>
-      <Table.Td>{program.duration}</Table.Td>
+      <Table.Td>
+        <Badge variant="light" color="gray" size="sm">
+          {program.program_type}
+        </Badge>
+      </Table.Td>
       <Table.Td>
         <Badge color={program.is_active ? 'green' : 'gray'} variant="light">
-          {program.is_active ? t('portal.programsManagement.form.active') : 'Inactivo'}
+          {program.is_active ? t('portal.programsManagement.form.active') : t('portal.inactive')}
         </Badge>
       </Table.Td>
       <Table.Td>
@@ -70,7 +88,7 @@ export function ProgramsPage() {
           }}>
             <IconEdit size={16} />
           </ActionIcon>
-          <ActionIcon variant="subtle" color="red">
+          <ActionIcon variant="subtle" color="red" onClick={() => setDeletingProgram(program)}>
             <IconTrash size={16} />
           </ActionIcon>
         </Group>
@@ -87,8 +105,8 @@ export function ProgramsPage() {
             <Text c="dimmed" size="sm">{t('portal.programsManagement.subtitle')}</Text>
           </Stack>
           <Button leftSection={<IconPlus size={18} />} radius="md" color="brand" onClick={() => {
-             setEditingProgram(null);
-             setOpened(true);
+            setEditingProgram(null);
+            setOpened(true);
           }}>
             {t('portal.programsManagement.create')}
           </Button>
@@ -99,8 +117,8 @@ export function ProgramsPage() {
             <Table.Thead>
               <Table.Tr>
                 <Table.Th>{t('portal.programsManagement.list.name')}</Table.Th>
-                <Table.Th>Institución</Table.Th>
-                <Table.Th>{t('portal.programsManagement.list.duration')}</Table.Th>
+                <Table.Th>{t('portal.programsManagement.list.institution')}</Table.Th>
+                <Table.Th>{t('portal.programsManagement.form.programType')}</Table.Th>
                 <Table.Th>{t('portal.programsManagement.list.status')}</Table.Th>
                 <Table.Th>{t('portal.programsManagement.list.actions')}</Table.Th>
               </Table.Tr>
@@ -109,24 +127,45 @@ export function ProgramsPage() {
           </Table>
         ) : (
           <Paper withBorder p="xl" radius="md" ta="center">
-             <Text c="dimmed">{t('portal.programsManagement.list.empty')}</Text>
+            <Text c="dimmed">{t('portal.programsManagement.list.empty')}</Text>
           </Paper>
         )}
       </Stack>
 
-      <Modal 
-        opened={opened} 
-        onClose={() => setOpened(false)} 
+      {/* Create / Edit modal */}
+      <Modal
+        opened={opened}
+        onClose={() => setOpened(false)}
         title={editingProgram ? t('portal.programsManagement.edit') : t('portal.programsManagement.create')}
         radius="md"
       >
-        <ProgramForm 
-          initialValues={editingProgram} 
-          onSuccess={() => {
-            setOpened(false);
-            fetchPrograms();
-          }} 
+        <ProgramForm
+          initialValues={editingProgram}
+          onSuccess={() => { setOpened(false); fetchPrograms(); }}
         />
+      </Modal>
+
+      {/* Delete confirmation modal */}
+      <Modal
+        opened={!!deletingProgram}
+        onClose={() => setDeletingProgram(null)}
+        title={t('portal.programsManagement.deleteConfirm.title')}
+        radius="md"
+        size="sm"
+      >
+        <Stack gap="md">
+          <Text size="sm">
+            {t('portal.programsManagement.deleteConfirm.message', { name: deletingProgram?.name })}
+          </Text>
+          <Group justify="flex-end">
+            <Button variant="default" onClick={() => setDeletingProgram(null)}>
+              {t('common.cancel')}
+            </Button>
+            <Button color="red" onClick={deleteProgram}>
+              {t('common.delete')}
+            </Button>
+          </Group>
+        </Stack>
       </Modal>
     </Container>
   );

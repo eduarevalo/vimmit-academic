@@ -9,8 +9,11 @@ from api.programs.v1.programs import router as programs_router
 from api.tenants.v1.tenants import router as tenants_router
 
 # Ensure models are loaded for init_db()
-from domain.programs.models import ProgramModel
+from domain.programs.models import ProgramModel, ProgramLevelModel
 from domain.tenants.models import TenantModel
+from domain.campus.models import CampusModel
+from domain.calendar.models import CalendarModel, TermModel
+from domain.enrollment.models import EnrollmentModel
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):

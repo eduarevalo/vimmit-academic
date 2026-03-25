@@ -1,4 +1,11 @@
 {
+  "common": {
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "error": {
+      "tooShort": "Must be at least 2 characters"
+    }
+  },
   "header": {
     "about": "About Us",
     "programs": "Programs",
@@ -108,6 +115,7 @@
       "profile": "My Profile",
       "programs": "Programs Management"
     },
+    "inactive": "Inactive",
     "programsManagement": {
       "title": "Academic Programs",
       "subtitle": "Manage the institution's academic offerings",
@@ -117,19 +125,34 @@
         "institution": "Institution",
         "institutionPlaceholder": "Select an institution",
         "institutionRequired": "You must select an institution",
+        "programType": "Program Type",
+        "programTypePlaceholder": "Select a type",
+        "programTypeRequired": "You must select a program type",
+        "programTypeK12": "Basic & High School (K-12)",
+        "programTypeTechnical": "Technical Higher Education",
         "name": "Program Name",
         "namePlaceholder": "E.g. Computer Science",
         "description": "Description",
         "descriptionPlaceholder": "Description of the academic program...",
-        "duration": "Duration",
-        "durationPlaceholder": "E.g. 4 years",
+        "totalLevels": "Total levels",
+        "totalLevelsDescription": "E.g. 13 for K-12, 6 for Technical",
+        "totalLevelsMin": "Must be at least 1",
+        "levelLabel": "Level label",
+        "levelLabelPlaceholder": "E.g. Grade, Semester, Level",
+        "degreeTitle": "Degree title",
+        "degreeTitlePlaceholder": "E.g. High School Diploma, Technical Degree",
+        "creditsPerLevel": "Credits per level",
         "active": "Active",
         "submit": "Save Program"
+      },
+      "deleteConfirm": {
+        "title": "Delete program",
+        "message": "Are you sure you want to delete '{{name}}'? This action cannot be undone."
       },
       "list": {
         "empty": "No programs registered",
         "name": "Program",
-        "duration": "Duration",
+        "institution": "Institution",
         "status": "Status",
         "actions": "Actions"
       }

@@ -1,4 +1,11 @@
 {
+  "common": {
+    "cancel": "Cancelar",
+    "delete": "Eliminar",
+    "error": {
+      "tooShort": "Debe tener al menos 2 caracteres"
+    }
+  },
   "header": {
     "about": "Nosotros",
     "programs": "Programas",
@@ -108,6 +115,7 @@
       "profile": "Mi Perfil",
       "programs": "Gestión de Programas"
     },
+    "inactive": "Inactivo",
     "programsManagement": {
       "title": "Programas Académicos",
       "subtitle": "Administra la oferta académica de la institución",
@@ -117,19 +125,34 @@
         "institution": "Institución",
         "institutionPlaceholder": "Selecciona la institución",
         "institutionRequired": "Debes seleccionar una institución",
+        "programType": "Tipo de Programa",
+        "programTypePlaceholder": "Selecciona el tipo",
+        "programTypeRequired": "Debes seleccionar un tipo de programa",
+        "programTypeK12": "Básica y Bachillerato (K-12)",
+        "programTypeTechnical": "Técnico Superior",
         "name": "Nombre del Programa",
         "namePlaceholder": "Ej: Ingeniería Informática",
         "description": "Descripción",
         "descriptionPlaceholder": "Descripción del programa académico...",
-        "duration": "Duración",
-        "durationPlaceholder": "Ej: 4 años",
+        "totalLevels": "Niveles totales",
+        "totalLevelsDescription": "Ej: 13 para K-12, 6 para Técnico",
+        "totalLevelsMin": "Debe ser al menos 1",
+        "levelLabel": "Etiqueta de nivel",
+        "levelLabelPlaceholder": "Ej: Grado, Semestre, Nivel",
+        "degreeTitle": "Título al graduar",
+        "degreeTitlePlaceholder": "Ej: Bachiller, Técnico Superior",
+        "creditsPerLevel": "Créditos por nivel",
         "active": "Activo",
         "submit": "Guardar Programa"
+      },
+      "deleteConfirm": {
+        "title": "Eliminar programa",
+        "message": "¿Estás seguro de que deseas eliminar '{{name}}'? Esta acción no se puede deshacer."
       },
       "list": {
         "empty": "No hay programas registrados",
         "name": "Programa",
-        "duration": "Duración",
+        "institution": "Institución",
         "status": "Estado",
         "actions": "Acciones"
       }

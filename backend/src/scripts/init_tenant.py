@@ -10,22 +10,35 @@ from infrastructure.security.hash_provider import HashProvider
 from api.identity.dependencies.auth_dependencies import engine, init_db
 from domain.identity.models import User, Role, UserRoleLink
 from domain.tenants.models import TenantModel
-from domain.programs.models import ProgramModel
+from domain.programs.models import ProgramModel, ProgramType
 
 def init_tenant():
-    # Ensure tables are created
+    # Ensure tables are created (creates new columns if DB was reset)
     init_db()
-    
+
     with Session(engine) as session:
-        # Tenants to create
         tenants_data = [
             {
                 "name": "Aseder",
                 "slug": "aseder",
                 "description": "ASEDER en Santander de Quilichao es una institución técnica laboral con más de 25 años de experiencia.",
                 "programs": [
-                    {"name": "Auxiliar en Enfermería", "duration": "3 semestres"},
-                    {"name": "Salud Oral", "duration": "3 semestres"}
+                    {
+                        "name": "Auxiliar en Enfermería",
+                        "program_type": ProgramType.TECHNICAL,
+                        "total_levels": 3,
+                        "level_label": "Semestre",
+                        "degree_title": "Técnico en Enfermería",
+                        "credits_per_level": 20,
+                    },
+                    {
+                        "name": "Salud Oral",
+                        "program_type": ProgramType.TECHNICAL,
+                        "total_levels": 3,
+                        "level_label": "Semestre",
+                        "degree_title": "Técnico en Salud Oral",
+                        "credits_per_level": 20,
+                    },
                 ]
             },
             {
@@ -33,16 +46,29 @@ def init_tenant():
                 "slug": "vimmit-academy",
                 "description": "Una academia moderna enfocada en tecnología y diseño.",
                 "programs": [
-                    {"name": "Desarrollo Web Fullstack", "duration": "6 meses"},
-                    {"name": "Diseño UX/UI", "duration": "4 meses"}
+                    {
+                        "name": "Desarrollo Web Fullstack",
+                        "program_type": ProgramType.TECHNICAL,
+                        "total_levels": 2,
+                        "level_label": "Módulo",
+                        "degree_title": "Certificado Fullstack",
+                        "credits_per_level": 15,
+                    },
+                    {
+                        "name": "Diseño UX/UI",
+                        "program_type": ProgramType.TECHNICAL,
+                        "total_levels": 2,
+                        "level_label": "Módulo",
+                        "degree_title": "Certificado UX/UI",
+                        "credits_per_level": 12,
+                    },
                 ]
             }
         ]
 
         # 1. User
         user_email = "test@aseder.edu.co"
-        user_statement = select(User).where(User.email == user_email)
-        user = session.exec(user_statement).first()
+        user = session.exec(select(User).where(User.email == user_email)).first()
         if not user:
             print(f"Creating user {user_email}...")
             user = User(
@@ -56,8 +82,7 @@ def init_tenant():
         role_name = "Admin"
         for t_data in tenants_data:
             # Tenant
-            statement = select(TenantModel).where(TenantModel.slug == t_data["slug"])
-            tenant = session.exec(statement).first()
+            tenant = session.exec(select(TenantModel).where(TenantModel.slug == t_data["slug"])).first()
             if not tenant:
                 print(f"Creating tenant '{t_data['name']}'...")
                 tenant = TenantModel(
@@ -68,10 +93,11 @@ def init_tenant():
                 session.add(tenant)
                 session.commit()
                 session.refresh(tenant)
-            
+
             # Role per tenant
-            role_statement = select(Role).where(Role.name == role_name, Role.tenant_id == tenant.id)
-            role = session.exec(role_statement).first()
+            role = session.exec(
+                select(Role).where(Role.name == role_name, Role.tenant_id == tenant.id)
+            ).first()
             if not role:
                 print(f"Creating role '{role_name}' for tenant {tenant.name}...")
                 role = Role(name=role_name, tenant_id=tenant.id)
@@ -80,24 +106,28 @@ def init_tenant():
                 session.refresh(role)
 
             # Membership
-            membership_statement = select(UserRoleLink).where(
-                UserRoleLink.user_id == user.id,
-                UserRoleLink.tenant_id == tenant.id
-            )
-            membership = session.exec(membership_statement).first()
+            membership = session.exec(
+                select(UserRoleLink).where(
+                    UserRoleLink.user_id == user.id,
+                    UserRoleLink.tenant_id == tenant.id
+                )
+            ).first()
             if not membership:
                 print(f"Associating user {user_email} with tenant {tenant.name}...")
-                membership = UserRoleLink(user_id=user.id, role_id=role.id, tenant_id=tenant.id)
-                session.add(membership)
+                session.add(UserRoleLink(user_id=user.id, role_id=role.id, tenant_id=tenant.id))
                 session.commit()
 
             # Programs
             for p_data in t_data["programs"]:
-                p_statement = select(ProgramModel).where(ProgramModel.name == p_data["name"], ProgramModel.tenant_id == tenant.id)
-                if not session.exec(p_statement).first():
+                exists = session.exec(
+                    select(ProgramModel).where(
+                        ProgramModel.name == p_data["name"],
+                        ProgramModel.tenant_id == tenant.id
+                    )
+                ).first()
+                if not exists:
                     print(f"Creating program '{p_data['name']}' for {tenant.name}...")
-                    p = ProgramModel(name=p_data["name"], duration=p_data["duration"], tenant_id=tenant.id)
-                    session.add(p)
+                    session.add(ProgramModel(tenant_id=tenant.id, **p_data))
             session.commit()
 
 if __name__ == "__main__":
