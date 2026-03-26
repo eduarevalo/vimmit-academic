@@ -30,6 +30,11 @@ resource "digitalocean_app" "vimmit_academic" {
       dockerfile_path = "backend/Dockerfile"
       source_dir      = "backend"
 
+      # Routing to /api
+      routes {
+        path = "/api"
+      }
+
       # Environment Variables
       env {
         key   = "DATABASE_URL"
@@ -53,6 +58,11 @@ resource "digitalocean_app" "vimmit_academic" {
       github {
         repo   = "eduarevalo/vimmit-academic"
         branch = "main"
+      }
+
+      # Routing to root /
+      routes {
+        path = "/"
       }
     }
   }

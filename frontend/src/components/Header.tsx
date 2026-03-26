@@ -3,7 +3,7 @@ import { IconExternalLink, IconLogout, IconUser } from '@tabler/icons-react';
 import { useTranslation } from 'react-i18next';
 import { useInstitution } from '../hooks/useInstitution';
 import { useAuth } from '../hooks/useAuth';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 
 interface HeaderProps {
   onStartJourney?: () => void;
@@ -20,8 +20,11 @@ export function Header({
 }: HeaderProps) {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const location = useLocation();
   const { name } = useInstitution();
   const { isAuthenticated, user, logout } = useAuth();
+
+  const isActive = (path: string) => location.pathname === path;
 
   return (
     <Box 
@@ -46,10 +49,10 @@ export function Header({
           </Group>
 
           <Group gap={30} visibleFrom="sm">
-            <Text component={Link} to="/about" fw={500} c="dimmed">{t('header.about')}</Text>
-            <Text component={Link} to="/programs" fw={500} c="brand">{t('header.programs')}</Text>
-            <Text component={Link} to="/admissions" fw={500} c="dimmed">{t('header.admissions')}</Text>
-            <Text component={Link} to="/student-life" fw={500} c="dimmed">{t('header.campusLife')}</Text>
+            <Text component={Link} to="/about" fw={500} c={isActive('/about') ? 'brand' : 'dimmed'}>{t('header.about')}</Text>
+            <Text component={Link} to="/programs" fw={500} c={isActive('/programs') ? 'brand' : 'dimmed'}>{t('header.programs')}</Text>
+            <Text component={Link} to="/admissions" fw={500} c={isActive('/admissions') ? 'brand' : 'dimmed'}>{t('header.admissions')}</Text>
+            <Text component={Link} to="/student-life" fw={500} c={isActive('/student-life') ? 'brand' : 'dimmed'}>{t('header.campusLife')}</Text>
           </Group>
 
           <Group gap="sm">
