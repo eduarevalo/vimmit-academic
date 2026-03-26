@@ -1,5 +1,5 @@
 import { Container, Group, Text, Box, Menu, Avatar, Burger } from '@mantine/core';
-import { IconBook2, IconLogout, IconUser } from '@tabler/icons-react';
+import { IconLogout, IconUser } from '@tabler/icons-react';
 import { useTranslation } from 'react-i18next';
 import { useInstitution } from '../hooks/useInstitution';
 import { useAuth } from '../hooks/useAuth';
@@ -46,7 +46,7 @@ export function PortalHeader({ navOpened, onNavToggle }: PortalHeaderProps) {
             )}
             <Link to="/portal" style={{ textDecoration: 'none', color: 'inherit' }}>
               <Group gap="xs" style={{ cursor: 'pointer' }}>
-                <IconBook2 size={24} color="#16884a" />
+                <img src="/logo-clean.png" alt="Vimmit Logo" style={{ height: 28, width: 'auto' }} />
                 <Text size="lg" fw={800} c="brand">
                   {name} <Text span fw={400} c="dimmed" size="xs">| {t('portal.header.tag')}</Text>
                 </Text>
