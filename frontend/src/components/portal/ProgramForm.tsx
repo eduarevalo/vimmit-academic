@@ -33,14 +33,14 @@ export function ProgramForm({ initialValues, onSuccess }: ProgramFormProps) {
       level_label: 'Level',
       degree_title: '',
       credits_per_level: null,
-      tenant_id: user?.memberships[0]?.tenant_id || '',
-      is_active: true,
+      tenant_id: initialValues?.tenant_id || institutionOptions[0]?.value || '',
+      is_active: initialValues?.is_active ?? true,
     },
     validate: {
       name:         (v) => (v.length < 2 ? t('common.error.tooShort') : null),
       program_type: (v) => (!v ? t('portal.programsManagement.form.programTypeRequired') : null),
-      tenant_id:    (v) => (!v ? t('portal.programsManagement.form.institutionRequired') : null),
-      total_levels: (v) => (v < 1 ? t('portal.programsManagement.form.totalLevelsMin') : null),
+      tenant_id:    (v) => (institutionOptions.length > 0 && !v ? t('portal.programsManagement.form.institutionRequired') : null),
+      total_levels: (v) => (!v || v < 1 ? t('portal.programsManagement.form.totalLevelsMin') : null),
     },
   });
 
@@ -73,7 +73,7 @@ export function ProgramForm({ initialValues, onSuccess }: ProgramFormProps) {
   };
 
   return (
-    <form onSubmit={form.onSubmit(handleSubmit)}>
+    <form noValidate onSubmit={form.onSubmit(handleSubmit)}>
       <Stack gap="md">
 
         {/* Institution — hidden when user has only one */}

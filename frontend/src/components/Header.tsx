@@ -3,6 +3,7 @@ import { IconBook2, IconExternalLink, IconLogout, IconUser } from '@tabler/icons
 import { useTranslation } from 'react-i18next';
 import { useInstitution } from '../hooks/useInstitution';
 import { useAuth } from '../hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
 
 interface HeaderProps {
   onStartJourney?: () => void;
@@ -18,8 +19,9 @@ export function Header({
   showUser = false
 }: HeaderProps) {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const { name } = useInstitution();
-  const { isAuthenticated, user, logout, openLoginModal } = useAuth();
+  const { isAuthenticated, user, logout } = useAuth();
 
   return (
     <Box 
@@ -90,8 +92,8 @@ export function Header({
                 </Menu.Dropdown>
               </Menu>
             ) : showLogin && (
-              <Button variant="subtle" color="brand" radius="xl" onClick={openLoginModal}>
-                {t('header.login')}
+              <Button variant="subtle" color="brand" radius="xl" onClick={() => navigate('/portal/login')}>
+                {t('auth.login')}
               </Button>
             )}
 

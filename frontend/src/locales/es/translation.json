@@ -2,6 +2,7 @@
   "common": {
     "cancel": "Cancelar",
     "delete": "Eliminar",
+    "fieldRequired": "Este campo es obligatorio",
     "error": {
       "tooShort": "Debe tener al menos 2 caracteres"
     }
@@ -24,7 +25,8 @@
       "RESOURCE_NOT_FOUND": "Recurso no encontrado. Por favor, verifica la información",
       "SYSTEM_ERROR": "Error del sistema. Inténtalo más tarde",
       "NETWORK_ERROR": "Error de conexión. Verifica tu internet"
-    }
+    },
+    "logoutSuccess": "Has cerrado sesión correctamente"
   },
   "hero": {
     "welcome": "Bienvenido a",
@@ -110,10 +112,11 @@
     "welcome": "Bienvenido al portal institucional. Aquí podrás acceder a tus recursos académicos, calificaciones y trámites administrativos.",
     "exploreResources": "Explorar Recursos",
     "header": {
-      "tag": "Portal",
-      "accountLabel": "Cuenta Educativa",
-      "profile": "Mi Perfil",
-      "programs": "Gestión de Programas"
+      "tag": "Institución",
+      "programs": "Gestión de Programas",
+      "accountLabel": "Configuración de Cuenta",
+      "profile": "Perfil de Usuario",
+      "toggleNav": "Mostrar navegación"
     },
     "inactive": "Inactivo",
     "programsManagement": {
@@ -157,11 +160,80 @@
         "actions": "Acciones"
       }
     },
+    "nav": {
+      "academic": "Académico",
+      "administrative": "Administrativo",
+      "organization": "Organización",
+      "calendar": "Calendario",
+      "programs": "Programas",
+      "courses": "Cursos",
+      "campus": "Sedes",
+      "calendars": "Periodos Académicos",
+      "enrollments": "Matrículas",
+      "deadlines": "Plazos",
+      "enrollmentsSubtitle": "Administra las matrículas de los estudiantes"
+    },
+    "campus": {
+      "title": "Sedes",
+      "subtitle": "Administra las sedes de la institución",
+      "create": "Nueva Sede",
+      "add": "Añadir Sede",
+      "edit": "Editar Sede",
+      "form": {
+        "name": "Nombre de la Sede",
+        "namePlaceholder": "Campus Central",
+        "code": "Código",
+        "codePlaceholder": "MAIN",
+        "address": "Dirección",
+        "addressPlaceholder": "Calle 10 #5-20",
+        "city": "Ciudad",
+        "cityPlaceholder": "Bogotá",
+        "country": "País",
+        "countryPlaceholder": "Colombia"
+      },
+      "list": {
+        "name": "Sede",
+        "code": "Código",
+        "city": "Ciudad",
+        "empty": "No hay sedes registradas"
+      }
+    },
+    "calendars": {
+      "title": "Calendarios Académicos",
+      "subtitle": "Administra los calendarios por programa y sede",
+      "create": "Nuevo Calendario",
+      "edit": "Editar Calendario",
+      "form": {
+        "name": "Nombre del Calendario",
+        "namePlaceholder": "Año Escolar 2025-2026",
+        "program": "Programa",
+        "programPlaceholder": "Selecciona el programa",
+        "campus": "Sede",
+        "campusPlaceholder": "Selecciona la sede",
+        "startDate": "Fecha de inicio",
+        "endDate": "Fecha de fin",
+        "submit": "Guardar Calendario"
+      },
+      "list": {
+        "name": "Calendario",
+        "program": "Programa",
+        "campus": "Sede",
+        "period": "Período",
+        "empty": "No hay calendarios registrados"
+      }
+    },
     "footer": {
       "rights": "Portal Académico. Todos los derechos reservados.",
       "support": "Soporte",
       "privacy": "Privacidad",
       "terms": "Términos"
+    },
+    "notFound": {
+      "title": "404 - Página no encontrada",
+      "subtitle": "Lo sentimos, la página que buscas no existe o ha sido movida.",
+      "backHome": "Volver al Inicio",
+      "backPortal": "Volver al Portal",
+      "loginNotice": "Para acceder a esta sección del portal, debes iniciar sesión."
     }
   }
 }

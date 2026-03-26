@@ -13,7 +13,7 @@ interface LoginFormProps {
 
 export function LoginForm({ onSuccess, title, subtitle }: LoginFormProps) {
   const { t } = useTranslation();
-  const { login } = useAuth();
+  const { login, logoutMessage, setLogoutMessage } = useAuth();
   const [error, setError] = useState<string | null>(null);
 
   const form = useForm({
@@ -29,6 +29,7 @@ export function LoginForm({ onSuccess, title, subtitle }: LoginFormProps) {
 
   const handleSubmit = async (values: typeof form.values) => {
     setError(null);
+    setLogoutMessage(null);
     try {
       await login(values.email, values.password);
       form.reset();
@@ -47,6 +48,12 @@ export function LoginForm({ onSuccess, title, subtitle }: LoginFormProps) {
         {error && (
           <Alert variant="light" color="red" title="Error" icon={<IconAlertCircle size={16} />}>
             {t(error)}
+          </Alert>
+        )}
+
+        {logoutMessage && !error && (
+          <Alert variant="light" color="blue" icon={<IconAlertCircle size={16} />}>
+            {t(logoutMessage)}
           </Alert>
         )}
         

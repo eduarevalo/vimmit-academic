@@ -23,9 +23,9 @@ interface AuthContextType {
   isLoading: boolean;
   login: (email: string, password: string) => Promise<void>;
   logout: () => void;
-  isLoginModalOpen: boolean;
-  openLoginModal: () => void;
-  closeLoginModal: () => void;
+  hasRole: (roles: string[], tenantId?: string) => boolean;
+  logoutMessage: string | null;
+  setLogoutMessage: (msg: string | null) => void;
 }
 
 export const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -34,7 +34,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const [user, setUser] = useState<User | null>(null);
   const [token, setToken] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [logoutMessage, setLogoutMessage] = useState<string | null>(null);
 
   const fetchUserProfile = async (authToken: string) => {
     try {
@@ -93,7 +93,6 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     const { access_token } = await response.json();
     localStorage.setItem('access_token', access_token);
     await fetchUserProfile(access_token);
-    setIsLoginModalOpen(false);
   };
 
   const logout = () => {
@@ -102,8 +101,16 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     setToken(null);
   };
 
-  const openLoginModal = () => setIsLoginModalOpen(true);
-  const closeLoginModal = () => setIsLoginModalOpen(false);
+  const hasRole = (roles: string[], tenantId?: string) => {
+    if (!user) return false;
+    // If no tenantId provided, check if they have the role in ANY of their memberships
+    if (!tenantId) {
+      return user.memberships.some(m => roles.includes(m.role_name));
+    }
+    // Specific tenant check
+    const m = user.memberships.find(m => m.tenant_id === tenantId);
+    return m ? roles.includes(m.role_name) : false;
+  };
 
   return (
     <AuthContext.Provider
@@ -114,9 +121,9 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         isLoading,
         login,
         logout,
-        isLoginModalOpen,
-        openLoginModal,
-        closeLoginModal,
+        hasRole,
+        logoutMessage,
+        setLogoutMessage,
       }}
     >
       {children}

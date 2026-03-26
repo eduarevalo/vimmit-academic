@@ -2,6 +2,7 @@
   "common": {
     "cancel": "Cancel",
     "delete": "Delete",
+    "fieldRequired": "This field is required",
     "error": {
       "tooShort": "Must be at least 2 characters"
     }
@@ -24,7 +25,8 @@
       "RESOURCE_NOT_FOUND": "Resource not found. Please verify the information",
       "SYSTEM_ERROR": "System error. Please try again later",
       "NETWORK_ERROR": "Network error. Please check your connection"
-    }
+    },
+    "logoutSuccess": "You have been logged out successfully"
   },
   "hero": {
     "welcome": "Welcome to",
@@ -110,10 +112,11 @@
     "welcome": "Welcome to the institutional portal. Here you can access your academic resources, grades, and administrative procedures.",
     "exploreResources": "Explore Resources",
     "header": {
-      "tag": "Portal",
-      "accountLabel": "Educational Account",
-      "profile": "My Profile",
-      "programs": "Programs Management"
+      "tag": "Institution",
+      "programs": "Programs Management",
+      "accountLabel": "Account Settings",
+      "profile": "User Profile",
+      "toggleNav": "Toggle navigation"
     },
     "inactive": "Inactive",
     "programsManagement": {
@@ -157,11 +160,80 @@
         "actions": "Actions"
       }
     },
+    "nav": {
+      "academic": "Academic",
+      "administrative": "Administrative",
+      "organization": "Organization",
+      "calendar": "Calendar",
+      "programs": "Programs",
+      "courses": "Courses",
+      "campus": "Campuses",
+      "calendars": "Academic Periods",
+      "enrollments": "Enrollments",
+      "deadlines": "Deadlines",
+      "enrollmentsSubtitle": "Manage student enrollments"
+    },
+    "campus": {
+      "title": "Campuses",
+      "subtitle": "Manage the institution's campuses",
+      "create": "New Campus",
+      "add": "Add Campus",
+      "edit": "Edit Campus",
+      "form": {
+        "name": "Campus Name",
+        "namePlaceholder": "Main Campus",
+        "code": "Code",
+        "codePlaceholder": "MAIN",
+        "address": "Address",
+        "addressPlaceholder": "123 Academic Way",
+        "city": "City",
+        "cityPlaceholder": "City Name",
+        "country": "Country",
+        "countryPlaceholder": "Country Name"
+      },
+      "list": {
+        "name": "Campus",
+        "code": "Code",
+        "city": "City",
+        "empty": "No campuses registered"
+      }
+    },
+    "calendars": {
+      "title": "Academic Calendars",
+      "subtitle": "Manage calendars by program and campus",
+      "create": "New Calendar",
+      "edit": "Edit Calendar",
+      "form": {
+        "name": "Calendar Name",
+        "namePlaceholder": "School Year 2025-2026",
+        "program": "Program",
+        "programPlaceholder": "Select program",
+        "campus": "Campus",
+        "campusPlaceholder": "Select campus",
+        "startDate": "Start date",
+        "endDate": "End date",
+        "submit": "Save Calendar"
+      },
+      "list": {
+        "name": "Calendar",
+        "program": "Program",
+        "campus": "Campus",
+        "period": "Period",
+        "empty": "No calendars registered"
+      }
+    },
     "footer": {
       "rights": "Academic Portal. All rights reserved.",
       "support": "Support",
       "privacy": "Privacy",
       "terms": "Terms"
+    },
+    "notFound": {
+      "title": "404 - Page Not Found",
+      "subtitle": "Sorry, the page you are looking for does not exist or has been moved.",
+      "backHome": "Back to Home",
+      "backPortal": "Back to Portal",
+      "loginNotice": "To access this section of the portal, you must log in."
     }
   }
 }

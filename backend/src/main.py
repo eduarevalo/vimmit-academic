@@ -5,15 +5,19 @@ from api.identity.dependencies.auth_dependencies import init_db
 from api.identity.v1.auth import router as auth_router
 from api.identity.v1.users import router as user_router
 from api.administration.v1.registration_intent import router as registration_intent_router
-from api.programs.v1.programs import router as programs_router
+from api.academic.programs.v1.programs import router as programs_router
+from api.academic.programs.v1.program_levels import router as program_levels_router
+from api.organization.campus.v1.campus import router as campus_router
+from api.calendar.academic_period.v1.calendars import router as calendars_router
+from api.administrative.enrollment.v1.enrollments import router as enrollments_router
 from api.tenants.v1.tenants import router as tenants_router
 
 # Ensure models are loaded for init_db()
-from domain.programs.models import ProgramModel, ProgramLevelModel
+from domain.academic.programs.models import ProgramModel, ProgramLevelModel
 from domain.tenants.models import TenantModel
-from domain.campus.models import CampusModel
-from domain.calendar.models import CalendarModel, TermModel
-from domain.enrollment.models import EnrollmentModel
+from domain.organization.campus.models import CampusModel
+from domain.calendar.academic_period.models import CalendarModel, TermModel
+from domain.administrative.enrollment.models import EnrollmentModel
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -46,6 +50,16 @@ app.include_router(tenants_router, prefix="/api/v1/administration")
 
 # Mounting Academic API
 app.include_router(programs_router, prefix="/api/v1/academic")
+app.include_router(program_levels_router, prefix="/api/v1/academic")
+
+# Mounting Administrative API
+app.include_router(enrollments_router, prefix="/api/v1/administrative")
+
+# Mounting Organization API
+app.include_router(campus_router, prefix="/api/v1/organization")
+
+# Mounting Calendar API
+app.include_router(calendars_router, prefix="/api/v1/calendar")
 
 @app.get("/")
 def read_root():
