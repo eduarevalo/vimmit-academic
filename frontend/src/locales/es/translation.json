@@ -89,23 +89,55 @@
     "success": "¡Gracias por tu interés! Nos pondremos en contacto contigo pronto.",
     "error": "Hubo un error al procesar tu solicitud. Por favor, inténtalo de nuevo."
   },
-  "infoPage": {
-    "academic": {
-      "title": "Excelencia Académica",
-      "p1": "En Aseder, nos enorgullecemos de ofrecer un currículo riguroso y actualizado que responde a las demandas del mundo real. Nuestros docentes son expertos en sus áreas y están comprometidos con tu éxito profesional.",
-      "p2": "Creemos en un aprendizaje activo donde la teoría se encuentra con la práctica en laboratorios de última generación y proyectos colaborativos. Aquí no solo aprendes, sino que creas y transformas.",
-      "p3": "Nuestras facultades están diseñadas para fomentar la curiosidad y la innovación, proporcionando a los estudiantes los recursos necesarios para investigar y liderar cambios significativos en la sociedad."
+  "aboutPage": {
+    "history": {
+      "title": "Nuestra Historia",
+      "p1": "Fundado en el año 2000 en Santander de Quilichao, el Centro Educativo Asesorías Educativas para el Desarrollo Regional (ASEDER) nació de una visión clara: cerrar las brechas educativas en el norte del Cauca y empoderar a las comunidades a través del conocimiento.",
+      "p2": "Con más de 25 años de trayectoria, hemos evolucionado de un pequeño centro de capacitación a una institución líder con múltiples sedes y una oferta académica diversificada que incluye bachillerato para adultos y programas técnicos laborales de alto impacto.",
+      "p3": "Nuestra historia es la historia de miles de graduados que, con esfuerzo y dedicación, han transformado sus vidas y las de sus familias, convirtiéndose en motores de cambio para nuestra región."
     },
-    "career": {
-      "title": "Tu Futuro Profesional",
-      "p1": "La transición al mundo laboral es un pilar fundamental de nuestra formación. Contamos con alianzas estratégicas con las principales empresas del sector para asegurar prácticas profesionales de alto impacto.",
-      "p2": "Nuestros egresados son reconocidos por su capacidad técnica y sus habilidades de liderazgo. El 95% de nuestros estudiantes aseguran un empleo en su área de estudio en menos de 6 meses tras la graduación.",
-      "p3": "Te ofrecemos asesoría de carrera personalizada, ferias de empleo exclusivas y acceso a una red de alumni global que te abrirá puertas en cualquier mercado del mundo."
+    "mission": {
+      "title": "Misión Social y Comunitaria",
+      "p1": "Nuestra labor trasciende las aulas. Estamos profundamente comprometidos con la inclusión de las poblaciones más vulnerables, incluyendo comunidades indígenas, afrodescendientes, madres comunitarias y personas en procesos de resocialización.",
+      "p2": "Entendemos la educación como un puente hacia la paz y la equidad. Por ello, diseñamos programas que no solo brindan competencias técnicas, sino que fomentan el liderazgo y la responsabilidad social en cada uno de nuestros estudiantes.",
+      "p3": "Creemos en un modelo educativo donde nadie se quede atrás, adaptando nuestros recursos para llegar a las zonas rurales y superando las barreras geográficas y sociales del norte del Cauca."
+    }
+  },
+  "publicProgramsPage": {
+    "title": "Nuestros Programas",
+    "subtitle": "Formación técnica y académica diseñada para el trabajo y el desarrollo humano, con un enfoque en las necesidades productivas de nuestra región.",
+    "cta": "Solicitar Información"
+  },
+  "admissionsPage": {
+    "title": "Admisiones",
+    "subtitle": "Inicia tu camino hacia el éxito profesional. Proceso de inscripción sencillo y accesible para todos.",
+    "requirements": {
+      "title": "Requisitos Generales",
+      "item1": "Documento de identidad original y copia.",
+      "item2": "Certificado de estudios del último grado aprobado.",
+      "item3": "Dos fotos tamaño carnet.",
+      "item4": "Copia de un recibo de servicios públicos."
     },
-    "life": {
-      "title": "Vida Estudiantil",
-      "p1": "La experiencia universitaria va más allá de las aulas. En nuestro campus vibrante, encontrarás clubes, deportes y actividades culturales que enriquecerán tu crecimiento personal y social.",
-      "p2": "Fomentamos una comunidad diversa e inclusiva donde cada voz cuenta. Participa en seminarios internacionales, eventos de emprendimiento y grupos de investigación desde tu primer semestre."
+    "process": {
+      "title": "Proceso de Inscripción",
+      "step1": "Elige tu programa de interés.",
+      "step2": "Presenta los requisitos en nuestra sede principal.",
+      "step3": "Realiza la entrevista de orientación vocacional.",
+      "step4": "Formaliza tu matrícula e inicia clases."
+    }
+  },
+  "studentLifePage": {
+    "title": "Vida Estudiantil",
+    "subtitle": "Mucho más que estudio: una comunidad vibrante dedicada al crecimiento personal y el servicio regional.",
+    "campus": {
+      "title": "Nuestras Sedes",
+      "p1": "Contamos con instalaciones modernas en Santander de Quilichao y Miranda, equipadas para brindar una formación práctica y de calidad.",
+      "p2": "Nuestros espacios están diseñados para fomentar la colaboración y el aprendizaje técnico, con laboratorios especializados en salud y áreas administrativas."
+    },
+    "impact": {
+      "title": "Impacto Regional",
+      "p1": "ASEDER se consolida como un pilar del desarrollo en el norte del Cauca, formando profesionales íntegros que aportan soluciones reales a sus comunidades.",
+      "p2": "Nuestros graduados son el reflejo de nuestra labor: líderes territoriales que impulsan el progreso social y económico desde sus respectivos campos."
     }
   },
   "portal": {

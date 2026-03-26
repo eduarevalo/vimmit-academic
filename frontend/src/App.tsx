@@ -4,7 +4,10 @@ import { RegistrationModal } from './components/RegistrationModal';
 import { MainLayout } from './layouts/MainLayout';
 import { PortalLayout } from './layouts/PortalLayout';
 import { LandingPage } from './pages/LandingPage';
-import { InfoPage } from './pages/InfoPage';
+import { AboutPage } from './pages/AboutPage';
+import { PublicProgramsPage } from './pages/PublicProgramsPage';
+import { AdmissionsPage } from './pages/AdmissionsPage';
+import { StudentLifePage } from './pages/StudentLifePage';
 import { PortalPage } from './pages/PortalPage';
 import { ProgramsPage } from './pages/ProgramsPage';
 import { CampusPage } from './pages/CampusPage';
@@ -20,7 +23,10 @@ function App() {
           {/* Public Routes */}
           <Route element={<MainLayout />}>
             <Route path="/" element={<LandingPage />} />
-            <Route path="/info" element={<InfoPage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/programs" element={<PublicProgramsPage />} />
+            <Route path="/admissions" element={<AdmissionsPage />} />
+            <Route path="/student-life" element={<StudentLifePage />} />
           </Route>
           
           {/* Portal Routes */}

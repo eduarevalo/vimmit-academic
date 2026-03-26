@@ -22,20 +22,13 @@ resource "digitalocean_app" "vimmit_academic" {
       instance_count     = 1
       instance_size_slug = "basic-xxs" # $5/month
 
-      image {
-        registry_type = "DOCR" # Or use github source if preferred
-        repository    = "backend" # This will be built by DO if configured
+      github {
+        repo           = "eduarevalo/vimmit-academic"
+        branch         = "main"
+        dockerfile_path = "backend/Dockerfile"
       }
 
-      # Alternatively, build from source using Dockerfile
-      # github {
-      #   repo           = "eduarevalo/vimmit-academic"
-      #   branch         = "main"
-      #   dockerfile_path = "backend/Dockerfile"
-      # }
-
       source_dir = "backend"
-      dockerfile_path = "Dockerfile"
 
       # Environment Variables
       env {

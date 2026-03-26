@@ -86,23 +86,55 @@
     "success": "Thank you for your interest! We will get in touch with you soon.",
     "error": "There was an error processing your request. Please try again."
   },
-  "infoPage": {
-    "academic": {
-      "title": "Academic Excellence",
-      "p1": "At Aseder, we take pride in offering a rigorous and updated curriculum that meets real-world demands. Our faculty are experts in their fields and are committed to your professional success.",
-      "p2": "We believe in active learning where theory meets practice in state-of-the-art labs and collaborative projects. Here you don't just learn, you create and transform.",
-      "p3": "Our faculties are designed to foster curiosity and innovation, providing students with the resources needed to research and lead significant changes in society."
+  "aboutPage": {
+    "history": {
+      "title": "Our History",
+      "p1": "Founded in 2000 in Santander de Quilichao, the Center for Educational Advising for Regional Development (ASEDER) was born from a clear vision: to close educational gaps in Northern Cauca and empower communities through knowledge.",
+      "p2": "With over 25 years of experience, we have evolved from a small training center into a leading institution with multiple locations and a diversified academic offer including adult high school and high-impact technical vocational programs.",
+      "p3": "Our history is the story of thousands of graduates who, with effort and dedication, have transformed their lives and those of their families, becoming engines of change for our region."
     },
-    "career": {
-      "title": "Your Professional Future",
-      "p1": "The transition to the workspace is a fundamental pillar of our training. We have strategic alliances with major industry companies to ensure high-impact professional internships.",
-      "p2": "Our graduates are recognized for their technical ability and leadership skills. 95% of our students secure employment in their field within 6 months of graduation.",
-      "p3": "We offer personalized career advice, exclusive job fairs, and access to a global alumni network that will open doors in any market in the world."
+    "mission": {
+      "title": "Social and Community Mission",
+      "p1": "Our work transcends the classroom. We are deeply committed to the inclusion of the most vulnerable populations, including indigenous communities, Afro-descendants, community mothers, and people in resocialization processes.",
+      "p2": "We understand education as a bridge towards peace and equity. Therefore, we design programs that not only provide technical skills but also foster leadership and social responsibility in each of our students.",
+      "p3": "We believe in an educational model where no one is left behind, adapting our resources to reach rural areas and overcoming the geographical and social barriers of Northern Cauca."
+    }
+  },
+  "publicProgramsPage": {
+    "title": "Our Programs",
+    "subtitle": "Technical and academic training designed for work and human development, with a focus on our region's productive needs.",
+    "cta": "Request Information"
+  },
+  "admissionsPage": {
+    "title": "Admissions",
+    "subtitle": "Start your journey towards professional success. Simple and accessible enrollment process for all.",
+    "requirements": {
+      "title": "General Requirements",
+      "item1": "Original ID and copy.",
+      "item2": "Certificate of studies of the last grade passed.",
+      "item3": "Two passport-sized photos.",
+      "item4": "Copy of a utility bill."
     },
-    "life": {
-      "title": "Student Life",
-      "p1": "The university experience goes beyond the classroom. In our vibrant campus, you will find clubs, sports, and cultural activities that will enrich your personal and social growth.",
-      "p2": "We foster a diverse and inclusive community where every voice counts. Participate in international seminars, entrepreneurship events, and research groups from your first semester."
+    "process": {
+      "title": "Enrollment Process",
+      "step1": "Choose your program of interest.",
+      "step2": "Present the requirements at our main campus.",
+      "step3": "Complete the vocational orientation interview.",
+      "step4": "Formalize your enrollment and start classes."
+    }
+  },
+  "studentLifePage": {
+    "title": "Student Life",
+    "subtitle": "More than just studying: a vibrant community dedicated to personal growth and regional service.",
+    "campus": {
+      "title": "Our Locations",
+      "p1": "We have modern facilities in Santander de Quilichao and Miranda, equipped to provide practical, high-quality training.",
+      "p2": "Our spaces are designed to encourage collaboration and technical learning, with specialized laboratories in health and administrative areas."
+    },
+    "impact": {
+      "title": "Regional Impact",
+      "p1": "ASEDER consolidates itself as a pillar of development in Northern Cauca, forming upright professionals who provide real solutions to their communities.",
+      "p2": "Our graduates are the reflection of our work: territorial leaders who drive social and economic progress from their respective fields."
     }
   },
   "portal": {

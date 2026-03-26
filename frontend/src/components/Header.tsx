@@ -3,7 +3,7 @@ import { IconExternalLink, IconLogout, IconUser } from '@tabler/icons-react';
 import { useTranslation } from 'react-i18next';
 import { useInstitution } from '../hooks/useInstitution';
 import { useAuth } from '../hooks/useAuth';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 interface HeaderProps {
   onStartJourney?: () => void;
@@ -46,10 +46,10 @@ export function Header({
           </Group>
 
           <Group gap={30} visibleFrom="sm">
-            <Text component="a" href="#" fw={500} c="dimmed">{t('header.about')}</Text>
-            <Text component="a" href="#" fw={500} c="brand">{t('header.programs')}</Text>
-            <Text component="a" href="#" fw={500} c="dimmed">{t('header.admissions')}</Text>
-            <Text component="a" href="#" fw={500} c="dimmed">{t('header.campusLife')}</Text>
+            <Text component={Link} to="/about" fw={500} c="dimmed">{t('header.about')}</Text>
+            <Text component={Link} to="/programs" fw={500} c="brand">{t('header.programs')}</Text>
+            <Text component={Link} to="/admissions" fw={500} c="dimmed">{t('header.admissions')}</Text>
+            <Text component={Link} to="/student-life" fw={500} c="dimmed">{t('header.campusLife')}</Text>
           </Group>
 
           <Group gap="sm">
