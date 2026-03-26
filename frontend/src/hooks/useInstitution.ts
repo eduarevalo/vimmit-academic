@@ -25,22 +25,22 @@ export interface InstitutionData {
 const institutionData: InstitutionData = {
   slug: 'aseder',
   name: 'Aseder',
-  fullName: 'Aseder University',
-  description: 'A prestigious university dedicated to the development of the next generation of global leaders, thinkers, and creators.',
+  fullName: 'Asesorías Educativas para el Desarrollo Regional',
+  description: 'Institución educativa en Santander de Quilichao comprometida con la formación integral, ofreciendo programas técnicos en salud y educación básica y media para el progreso regional.',
   contact: {
-    email: 'info@aseder.edu.co',
-    phone: '(555) 123-4567',
+    email: 'asederquilichao@gmail.com',
+    phone: '3136327872 - 3186237156',
     address: {
-      street: '123 University Ave',
-      city: 'City',
-      state: 'State',
-      zip: '12345',
+      street: 'Calle 3 # 10-86',
+      city: 'Santander de Quilichao',
+      state: 'Cauca',
+      zip: '191001',
     },
   },
   socials: {
-    twitter: 'https://twitter.com/academia',
-    youtube: 'https://youtube.com/academia',
-    instagram: 'https://instagram.com/academia',
+    twitter: 'https://twitter.com/aseder',
+    youtube: 'https://youtube.com/@aseder',
+    instagram: 'https://instagram.com/aseder_quilichao',
   },
 };
 

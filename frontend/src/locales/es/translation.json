@@ -12,7 +12,8 @@
     "programs": "Programas",
     "admissions": "Admisiones",
     "campusLife": "Vida Estudiantil",
-    "startJourney": "Iniciar Camino",
+    "contact": "Contacto",
+    "startJourney": "Inicia tu Futuro",
     "educationalPortal": "Portal Educativo"
   },
   "auth": {
@@ -30,10 +31,10 @@
   },
   "hero": {
     "welcome": "Bienvenido a",
-    "title": "Academia",
-    "subtitle": "Tu futuro comienza aquí. Explora nuestros programas de clase mundial, nuestra vibrante comunidad, e ignita tu potencial en un entorno diseñado para innovadores.",
-    "explorePrograms": "Explorar Programas",
-    "learnMore": "Saber Más"
+    "title": "ASEDER",
+    "subtitle": "Tu futuro profesional comienza aquí en Santander de Quilichao. Formación de calidad en salud, básica y media diseñada para transformar tu vida y tu región.",
+    "explorePrograms": "Ver Programas",
+    "learnMore": "Conócenos"
   },
   "programs": {
     "title": "Explora Nuestros Programas Académicos",
@@ -66,9 +67,11 @@
     }
   },
   "footer": {
-    "description": "Una universidad prestigiosa dedicada al desarrollo de la próxima generación de líderes, pensadores y creadores globales.",
-    "quickLinks": "Enlaces Rápidos",
+    "description": "Institución líder en formación técnica y académica en el Cauca, dedicada al desarrollo del potencial humano y regional.",
+    "quickLinks": "Enlaces de Interés",
     "contact": "Contacto",
+    "academics": "Academia",
+    "research": "Investigación y Desarrollo",
     "rights": "Todos los derechos reservados."
   },
   "registration": {

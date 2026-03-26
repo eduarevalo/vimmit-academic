@@ -9,6 +9,7 @@ export function Hero({ onExplore }: { onExplore?: () => void }) {
 
   return (
     <Box 
+      id="hero"
       pt={140}
       pb={120}
       style={{ 

@@ -2,13 +2,15 @@ import { Container, Group, Box, Text, Stack } from '@mantine/core';
 import { IconBook2, IconBrandTwitter, IconBrandYoutube, IconBrandInstagram } from '@tabler/icons-react';
 import { useTranslation } from 'react-i18next';
 import { useInstitution } from '../hooks/useInstitution';
+import { useRegistrationModal } from '../hooks/useRegistrationModal';
 
 export function Footer() {
   const { t } = useTranslation();
   const { name, fullName, description, contact, socials } = useInstitution();
+  const { open: openRegistration } = useRegistrationModal();
 
   return (
-    <Box mt={120} py={60} style={{ borderTop: '1px solid #eaeaea', backgroundColor: '#ffffff' }}>
+    <Box id="footer" mt={120} py={60} style={{ borderTop: '1px solid #eaeaea', backgroundColor: '#ffffff' }}>
       <Container size="lg">
         <Group justify="space-between" align="flex-start" mb={40}>
           <Box style={{ maxWidth: 300 }}>
@@ -23,10 +25,19 @@ export function Footer() {
           <Group gap={80}>
             <Stack gap="sm">
               <Text fw={700} c="dark.8">{t('footer.quickLinks')}</Text>
-              <Text component="a" href="#" size="sm" c="dimmed">{t('header.admissions')}</Text>
-              <Text component="a" href="#" size="sm" c="dimmed">Academics</Text>
-              <Text component="a" href="#" size="sm" c="dimmed">{t('header.campusLife')}</Text>
-              <Text component="a" href="#" size="sm" c="dimmed">Research</Text>
+              <Text 
+                component="a" 
+                href="#" 
+                onClick={(e) => { e.preventDefault(); openRegistration(); }} 
+                size="sm" 
+                c="dimmed"
+                style={{ cursor: 'pointer' }}
+              >
+                {t('header.admissions')}
+              </Text>
+              <Text component="a" href="#programs" size="sm" c="dimmed">{t('footer.academics')}</Text>
+              <Text component="a" href="/info" size="sm" c="dimmed">{t('header.about')}</Text>
+              <Text component="a" href="#" size="sm" c="dimmed">{t('footer.research')}</Text>
             </Stack>
             <Stack gap="sm">
               <Text fw={700} c="dark.8">{t('footer.contact')}</Text>
