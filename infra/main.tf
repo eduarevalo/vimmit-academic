@@ -23,12 +23,12 @@ resource "digitalocean_app" "vimmit_academic" {
       instance_size_slug = "basic-xxs" # $5/month
 
       github {
-        repo           = "eduarevalo/vimmit-academic"
-        branch         = "main"
-        dockerfile_path = "backend/Dockerfile"
+        repo   = "eduarevalo/vimmit-academic"
+        branch = "main"
       }
 
-      source_dir = "backend"
+      dockerfile_path = "backend/Dockerfile"
+      source_dir      = "backend"
 
       # Environment Variables
       env {
