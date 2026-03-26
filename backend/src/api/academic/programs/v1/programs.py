@@ -61,6 +61,22 @@ async def list_programs(
     return programs
 
 
+@router.get("/public/{tenant_slug}", response_model=List[ProgramResponse])
+async def list_public_programs(
+    tenant_slug: str,
+    session: Session = Depends(get_session),
+):
+    """List all active programs for a given tenant slug publicly."""
+    repo = ProgramRepository(session)
+    db_programs = repo.list_by_tenant_slug(tenant_slug)
+
+    programs = []
+    for program in db_programs:
+        programs.append(ProgramResponse.model_validate(program))
+
+    return programs
+
+
 @router.get("/{program_id}", response_model=ProgramResponse)
 async def get_program(
     program_id: UUID,

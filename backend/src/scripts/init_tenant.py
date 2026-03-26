@@ -25,8 +25,13 @@ def get_or_create(session: Session, model_class, filters: dict, defaults: dict):
     if not obj:
         obj = model_class(**{**filters, **defaults})
         session.add(obj)
-        session.commit()
-        session.refresh(obj)
+    else:
+        # Update existing object with new defaults
+        for k, v in defaults.items():
+            setattr(obj, k, v)
+    
+    session.commit()
+    session.refresh(obj)
     return obj
 
 
@@ -44,6 +49,7 @@ TENANTS = [
         "programs": [
             {
                 "name": "Auxiliar en Enfermería",
+                "description": "Formación integral para el cuidado y asistencia de pacientes en entornos hospitalarios y domiciliarios.",
                 "program_type": ProgramType.TECHNICAL,
                 "total_levels": 3,
                 "level_label": "Semestre",
@@ -53,6 +59,7 @@ TENANTS = [
             },
             {
                 "name": "Salud Oral",
+                "description": "Capacitación práctica en higiene dental, asistencia en consultorio y prevención de enfermedades orales.",
                 "program_type": ProgramType.TECHNICAL,
                 "total_levels": 3,
                 "level_label": "Semestre",
@@ -72,6 +79,7 @@ TENANTS = [
         "programs": [
             {
                 "name": "Desarrollo Web Fullstack",
+                "description": "Domina las tecnologías más demandadas: desde el diseño de interfaces hasta la arquitectura de servidores.",
                 "program_type": ProgramType.TECHNICAL,
                 "total_levels": 2,
                 "level_label": "Módulo",
@@ -81,6 +89,7 @@ TENANTS = [
             },
             {
                 "name": "Diseño UX/UI",
+                "description": "Aprende a crear experiencias digitales cautivadoras centradas en el usuario y su necesidad.",
                 "program_type": ProgramType.TECHNICAL,
                 "total_levels": 2,
                 "level_label": "Módulo",

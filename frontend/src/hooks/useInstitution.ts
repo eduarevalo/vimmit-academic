@@ -1,4 +1,5 @@
 export interface InstitutionData {
+  slug: string;
   name: string;
   fullName: string;
   description: string;
@@ -22,6 +23,7 @@ export interface InstitutionData {
 }
 
 const institutionData: InstitutionData = {
+  slug: 'aseder',
   name: 'Aseder',
   fullName: 'Aseder University',
   description: 'A prestigious university dedicated to the development of the next generation of global leaders, thinkers, and creators.',

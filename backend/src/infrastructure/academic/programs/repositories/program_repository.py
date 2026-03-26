@@ -51,6 +51,21 @@ class ProgramRepository:
             statement = statement.where(ProgramModel.is_active == True)
         return self._session.exec(statement).all()
 
+    def list_by_tenant_slug(
+        self, tenant_slug: str, active_only: bool = True
+    ) -> List[ProgramModel]:
+        """
+        Returns all programs for a given tenant slug.
+        """
+        statement = (
+            select(ProgramModel)
+            .join(TenantModel, ProgramModel.tenant_id == TenantModel.id)
+            .where(TenantModel.slug == tenant_slug)
+        )
+        if active_only:
+            statement = statement.where(ProgramModel.is_active == True)
+        return self._session.exec(statement).all()
+
     def save(self, program: ProgramModel) -> ProgramModel:
         self._session.add(program)
         self._session.commit()
