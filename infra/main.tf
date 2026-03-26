@@ -30,11 +30,6 @@ resource "digitalocean_app" "vimmit_academic" {
       dockerfile_path = "backend/Dockerfile"
       source_dir      = "backend"
 
-      # Routing to /api
-      routes {
-        path = "/api"
-      }
-
       # Environment Variables
       env {
         key   = "DATABASE_URL"
@@ -59,10 +54,29 @@ resource "digitalocean_app" "vimmit_academic" {
         repo   = "eduarevalo/vimmit-academic"
         branch = "main"
       }
+    }
 
-      # Routing to root /
-      routes {
-        path = "/"
+    # Central Ingress Routing (Fixes deprecation warning)
+    ingress {
+      rule {
+        component {
+          name = "backend-api"
+        }
+        match {
+          path {
+            prefix = "/api"
+          }
+        }
+      }
+      rule {
+        component {
+          name = "frontend-web"
+        }
+        match {
+          path {
+            prefix = "/"
+          }
+        }
       }
     }
   }
