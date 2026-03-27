@@ -1,7 +1,9 @@
 import { Box, Container, Title, Text, Stack } from '@mantine/core';
+import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 
 export function AboutHero() {
+  const { t } = useTranslation();
   return (
     <Box 
       style={{ 
@@ -41,7 +43,7 @@ export function AboutHero() {
               lts={3} 
               size="sm"
             >
-              Conoce nuestra institución
+              {t('aboutPage.hero.tag')}
             </Text>
             <Title 
               order={1} 
@@ -53,7 +55,7 @@ export function AboutHero() {
               Comprometidos con el <Text span c="brand.5" inherit>Desarrollo Regional</Text>
             </Title>
             <Text size="xl" c="gray.4" mt="xl" style={{ lineHeight: 1.6 }}>
-              Desde hace más de dos décadas, ASEDER ha sido el motor de cambio para miles de personas en el norte del Cauca, brindando educación de calidad y oportunidades de crecimiento.
+              {t('aboutPage.hero.subtitle')}
             </Text>
           </motion.div>
         </Stack>

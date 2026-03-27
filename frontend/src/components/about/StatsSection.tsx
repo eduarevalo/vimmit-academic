@@ -1,40 +1,42 @@
 import { Container, SimpleGrid, Text, Title, Paper, Stack, useMantineTheme, Box } from '@mantine/core';
 import { IconUsers, IconCertificate, IconSchool, IconHistory } from '@tabler/icons-react';
+import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
-
-const stats = [
-  {
-    icon: IconHistory,
-    value: '25+',
-    label: 'Años de Trayectoria',
-    description: 'Transformando el norte del Cauca desde el año 2000.',
-    color: 'blue'
-  },
-  {
-    icon: IconUsers,
-    value: '5000+',
-    label: 'Egresados',
-    description: 'Personas que han mejorado su calidad de vida con nosotros.',
-    color: 'teal'
-  },
-  {
-    icon: IconSchool,
-    value: '15+',
-    label: 'Programas',
-    description: 'Oferta académica diversificada y pertinente.',
-    color: 'orange'
-  },
-  {
-    icon: IconCertificate,
-    value: '100%',
-    label: 'Compromiso Social',
-    description: 'Enfocados en la inclusión de poblaciones vulnerables.',
-    color: 'red'
-  }
-];
 
 export function StatsSection() {
   const theme = useMantineTheme();
+  const { t } = useTranslation();
+
+  const stats = [
+    {
+      icon: IconHistory,
+      value: t('aboutPage.statsSection.items.years.value'),
+      label: t('aboutPage.statsSection.items.years.label'),
+      description: t('aboutPage.statsSection.items.years.desc'),
+      color: 'blue'
+    },
+    {
+      icon: IconUsers,
+      value: t('aboutPage.statsSection.items.graduates.value'),
+      label: t('aboutPage.statsSection.items.graduates.label'),
+      description: t('aboutPage.statsSection.items.graduates.desc'),
+      color: 'teal'
+    },
+    {
+      icon: IconSchool,
+      value: t('aboutPage.statsSection.items.programs.value'),
+      label: t('aboutPage.statsSection.items.programs.label'),
+      description: t('aboutPage.statsSection.items.programs.desc'),
+      color: 'orange'
+    },
+    {
+      icon: IconCertificate,
+      value: t('aboutPage.statsSection.items.commitment.value'),
+      label: t('aboutPage.statsSection.items.commitment.label'),
+      description: t('aboutPage.statsSection.items.commitment.desc'),
+      color: 'red'
+    }
+  ];
 
   return (
     <Box 
@@ -54,10 +56,10 @@ export function StatsSection() {
                 tt="uppercase" 
                 lts={2}
             >
-                Nuestro Impacto
+                {t('aboutPage.statsSection.tag')}
             </Text>
             <Title order={2} size={48} fw={900} ta="center" style={{ letterSpacing: '-1px' }}>
-                ASEDER en Números
+                {t('aboutPage.statsSection.title')}
             </Title>
         </Stack>
 

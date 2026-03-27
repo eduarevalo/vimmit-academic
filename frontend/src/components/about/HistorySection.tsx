@@ -28,7 +28,7 @@ export function HistorySection() {
                     tt="uppercase" 
                     lts={2}
                 >
-                    Nuestros Orígenes
+                    {t('aboutPage.history.tag')}
                 </Text>
                 <Title order={2} size={42} fw={900} style={{ lineHeight: 1.1 }}>
                     {t('aboutPage.history.title')}
@@ -105,7 +105,7 @@ export function HistorySection() {
                     }}
                 >
                     <Text fw={700} fs="italic" size="lg" c="brand.9">
-                        "Transformando vidas a través del conocimiento y el servicio regional."
+                        "{t('aboutPage.history.quote')}"
                     </Text>
                 </Box>
               </Stack>

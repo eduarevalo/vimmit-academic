@@ -17,6 +17,8 @@ const ProgramsPage = lazy(() => import('./pages/ProgramsPage').then(module => ({
 const CampusPage = lazy(() => import('./pages/CampusPage').then(module => ({ default: module.CampusPage })));
 const CalendarsPage = lazy(() => import('./pages/CalendarsPage').then(module => ({ default: module.CalendarsPage })));
 const EnrollmentsPage = lazy(() => import('./pages/EnrollmentsPage').then(module => ({ default: module.EnrollmentsPage })));
+const ImpactPage = lazy(() => import('./pages/ImpactPage').then(module => ({ default: module.ImpactPage })));
+const TechnicalProgramsPage = lazy(() => import('./pages/TechnicalProgramsPage').then(module => ({ default: module.TechnicalProgramsPage })));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage').then(module => ({ default: module.NotFoundPage })));
 
 function App() {
@@ -32,6 +34,8 @@ function App() {
               <Route path="/programs" element={<PublicProgramsPage />} />
               <Route path="/admissions" element={<AdmissionsPage />} />
               <Route path="/student-life" element={<StudentLifePage />} />
+              <Route path="/impact" element={<ImpactPage />} />
+              <Route path="/technical" element={<TechnicalProgramsPage />} />
             </Route>
             
             {/* Portal Routes */}

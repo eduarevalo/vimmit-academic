@@ -56,7 +56,7 @@ export function MissionVision() {
                             >
                                 <IconTargetArrow size={32} />
                             </Box>
-                            <Title order={2} c="white" size={32} fw={900}>Nuestra Misión</Title>
+                            <Title order={2} c="white" size={32} fw={900}>{t('aboutPage.mission.titleText')}</Title>
                         </Box>
                         
                         <Stack gap="md">
@@ -100,7 +100,7 @@ export function MissionVision() {
                             >
                                 <IconEye size={32} />
                             </Box>
-                            <Title order={2} c="white" size={32} fw={900}>Nuestra Visión</Title>
+                            <Title order={2} c="white" size={32} fw={900}>{t('aboutPage.vision.titleText')}</Title>
                         </Box>
                         
                         <Stack gap="md">
@@ -108,7 +108,7 @@ export function MissionVision() {
                                 {t('aboutPage.mission.p3')}
                             </Text>
                             <Text c="white" size="lg" style={{ lineHeight: 1.8 }}>
-                                Ser la institución educativa líder en el norte del Cauca para el 2030, reconocida por nuestra innovación académica y nuestro profundo compromiso con la transformación social y la paz territorial.
+                                {t('aboutPage.vision.text')}
                             </Text>
                         </Stack>
                     </Stack>

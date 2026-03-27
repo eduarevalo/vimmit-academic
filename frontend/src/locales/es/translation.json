@@ -72,7 +72,11 @@
     "contact": "Contacto",
     "academics": "Academia",
     "research": "Investigación y Desarrollo",
-    "rights": "Todos los derechos reservados."
+    "rights": "Todos los derechos reservados.",
+    "links": {
+        "technicalPrograms": "Programas Técnicos",
+        "socialImpact": "Impacto Social"
+    }
   },
   "registration": {
     "title": "Registro de Intención",
@@ -90,17 +94,102 @@
     "error": "Hubo un error al procesar tu solicitud. Por favor, inténtalo de nuevo."
   },
   "aboutPage": {
+    "hero": {
+        "tag": "Conoce nuestra institución",
+        "title": "Comprometidos con el Desarrollo Regional",
+        "subtitle": "Desde hace más de dos décadas, ASEDER ha sido el motor de cambio para miles de personas en el norte del Cauca, brindando educación de calidad y oportunidades de crecimiento."
+    },
     "history": {
+      "tag": "Nuestros Orígenes",
       "title": "Nuestra Historia",
       "p1": "Fundado en el año 2000 en Santander de Quilichao, el Centro Educativo Asesorías Educativas para el Desarrollo Regional (ASEDER) nació de una visión clara: cerrar las brechas educativas en el norte del Cauca y empoderar a las comunidades a través del conocimiento.",
       "p2": "Con más de 25 años de trayectoria, hemos evolucionado de un pequeño centro de capacitación a una institución líder con múltiples sedes y una oferta académica diversificada que incluye bachillerato para adultos y programas técnicos laborales de alto impacto.",
-      "p3": "Nuestra historia es la historia de miles de graduados que, con esfuerzo y dedicación, han transformado sus vidas y las de sus familias, convirtiéndose en motores de cambio para nuestra región."
+      "p3": "Nuestra historia es la historia de miles de graduados que, con esfuerzo y dedicación, han transformado sus vidas y las de sus familias, convirtiéndose en motores de cambio para nuestra región.",
+      "quote": "Transformando vidas a través del conocimiento y el servicio regional."
     },
     "mission": {
       "title": "Misión Social y Comunitaria",
+      "titleText": "Nuestra Misión",
       "p1": "Nuestra labor trasciende las aulas. Estamos profundamente comprometidos con la inclusión de las poblaciones más vulnerables, incluyendo comunidades indígenas, afrodescendientes, madres comunitarias y personas en procesos de resocialización.",
       "p2": "Entendemos la educación como un puente hacia la paz y la equidad. Por ello, diseñamos programas que no solo brindan competencias técnicas, sino que fomentan el liderazgo y la responsabilidad social en cada uno de nuestros estudiantes.",
       "p3": "Creemos en un modelo educativo donde nadie se quede atrás, adaptando nuestros recursos para llegar a las zonas rurales y superando las barreras geográficas y sociales del norte del Cauca."
+    },
+    "vision": {
+        "titleText": "Nuestra Visión",
+        "text": "Ser la institución educativa líder en el norte del Cauca para el 2030, reconocida por nuestra innovación académica y nuestro profundo compromiso con la transformación social y la paz territorial."
+    },
+    "statsSection": {
+        "tag": "Nuestro Impacto",
+        "title": "ASEDER en Números",
+        "items": {
+            "years": {
+                "value": "25+",
+                "label": "Años de Trayectoria",
+                "desc": "Transformando el norte del Cauca desde el año 2000."
+            },
+            "graduates": {
+                "value": "5000+",
+                "label": "Egresados",
+                "desc": "Personas que han mejorado su calidad de vida con nosotros."
+            },
+            "programs": {
+                "value": "15+",
+                "label": "Programas",
+                "desc": "Oferta académica diversificada y pertinente."
+            },
+            "commitment": {
+                "value": "100%",
+                "label": "Compromiso Social",
+                "desc": "Enfocados en la inclusión de poblaciones vulnerables."
+            }
+        }
+    }
+  },
+  "impactPage": {
+    "title": "Impacto Regional y Compromiso Social",
+    "subtitle": "Transformando el Norte del Cauca desde el año 2000 through education and empowerment.",
+    "intro": "ASEDER no es solo una institución educativa; es un pilar de desarrollo en una región que ha enfrentado retos históricos. Nuestra presencia en Santander de Quilichao y Miranda es un testimonio de resiliencia.",
+    "stats": {
+        "graduates": "9,700+",
+        "graduatesLabel": "Egresados transformando la región",
+        "activeStudents": "800+",
+        "activeLabel": "Estudiantes activos hoy",
+        "yearsExcelence": {
+            "value": "15+",
+            "label": "Años de Excelencia"
+        },
+        "regionalCampuses": {
+            "value": "2",
+            "label": "Sedes Regionales"
+        }
+    },
+    "stories": {
+        "title": "Historias que nos impulsan",
+        "naya": {
+            "title": "El camino del Naya",
+            "text": "Cinco estudiantes de la región del Naya caminaron durante tres días cada semana, enfrentando topografías difíciles y orden público, solo para recibir clases de salud. Su esfuerzo de cuatro semestres es el corazón de nuestra misión."
+        },
+        "communities": {
+            "title": "Inclusión Real",
+            "text": "Atendemos a comunidades indígenas y afrodescendientes, mujeres cabeza de familia y ex-actores del conflicto, brindando segundas oportunidades a quienes más lo necesitan."
+        }
+    }
+  },
+  "technicalPage": {
+    "title": "Programas Técnicos Laborales",
+    "subtitle": "Formación práctica diseñada para las necesidades reales del sector salud y administrativo.",
+    "clinic": {
+        "title": "Clínica de Práctica de Enfermería",
+        "text": "Contamos con una clínica de práctica propia equipada para que nuestros estudiantes desarrollen competencias reales antes de enfrentarse al mundo laboral.",
+        "secondaryText": "Nuestra clínica permite a los estudiantes de enfermería y áreas de la salud practicar en un entorno controlado, cumpliendo con los estándares de calidad exigidos por el Ministerio de Educación."
+    },
+    "offersTitle": "Oferta Educativa",
+    "programs": {
+        "nursing": { "title": "Auxiliar en Enfermería", "desc": "Cuidado integral del paciente y apoyo clínico." },
+        "oralHealth": { "title": "Auxiliar en Salud Oral", "desc": "Prevención y asistencia en consultorios odontológicos." },
+        "pharmacy": { "title": "Auxiliar en Farmacia", "desc": "Gestión de medicamentos y atención farmacéutica." },
+        "earlyChildhood": { "title": "Atención a la Primera Infancia", "desc": "Educación y cuidado del desarrollo infantil." },
+        "admin": { "title": "Auxiliar Administrativo", "desc": "Gestión empresarial y procesos institucionales." }
     }
   },
   "publicProgramsPage": {

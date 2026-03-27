@@ -69,7 +69,11 @@
     "description": "A prestigious university dedicated to developing the next generation of global leaders, thinkers, and creators.",
     "quickLinks": "Quick Links",
     "contact": "Contact",
-    "rights": "All rights reserved."
+    "rights": "All rights reserved.",
+    "links": {
+        "technicalPrograms": "Technical Programs",
+        "socialImpact": "Social Impact"
+    }
   },
   "registration": {
     "title": "Registration of Interest",
@@ -87,17 +91,102 @@
     "error": "There was an error processing your request. Please try again."
   },
   "aboutPage": {
+    "hero": {
+        "tag": "Get to know our institution",
+        "title": "Committed to Regional Development",
+        "subtitle": "For more than two decades, ASEDER has been the engine of change for thousands of people in Northern Cauca, providing quality education and growth opportunities."
+    },
     "history": {
+      "tag": "Our Origins",
       "title": "Our History",
       "p1": "Founded in 2000 in Santander de Quilichao, the Center for Educational Advising for Regional Development (ASEDER) was born from a clear vision: to close educational gaps in Northern Cauca and empower communities through knowledge.",
       "p2": "With over 25 years of experience, we have evolved from a small training center into a leading institution with multiple locations and a diversified academic offer including adult high school and high-impact technical vocational programs.",
-      "p3": "Our history is the story of thousands of graduates who, with effort and dedication, have transformed their lives and those of their families, becoming engines of change for our region."
+      "p3": "Our history is the story of thousands of graduates who, with effort and dedication, have transformed their lives and those of their families, becoming engines of change for our region.",
+      "quote": "Transformando vidas a través del conocimiento y el servicio regional."
     },
     "mission": {
       "title": "Social and Community Mission",
+      "titleText": "Our Mission",
       "p1": "Our work transcends the classroom. We are deeply committed to the inclusion of the most vulnerable populations, including indigenous communities, Afro-descendants, community mothers, and people in resocialization processes.",
       "p2": "We understand education as a bridge towards peace and equity. Therefore, we design programs that not only provide technical skills but also foster leadership and social responsibility in each of our students.",
       "p3": "We believe in an educational model where no one is left behind, adapting our resources to reach rural areas and overcoming the geographical and social barriers of Northern Cauca."
+    },
+    "vision": {
+        "titleText": "Our Vision",
+        "text": "To be the leading educational institution in Northern Cauca by 2030, recognized for our academic innovation and our deep commitment to social transformation and territorial peace."
+    },
+    "statsSection": {
+        "tag": "Our Impact",
+        "title": "ASEDER in Numbers",
+        "items": {
+            "years": {
+                "value": "25+",
+                "label": "Years of Experience",
+                "desc": "Transforming Northern Cauca since 2000."
+            },
+            "graduates": {
+                "value": "5000+",
+                "label": "Graduates",
+                "desc": "People who have improved their quality of life with us."
+            },
+            "programs": {
+                "value": "15+",
+                "label": "Programs",
+                "desc": "Diversified and relevant academic offer."
+            },
+            "commitment": {
+                "value": "100%",
+                "label": "Social Commitment",
+                "desc": "Focused on the inclusion of vulnerable populations."
+            }
+        }
+    }
+  },
+  "impactPage": {
+    "title": "Regional Impact and Social Commitment",
+    "subtitle": "Transforming Northern Cauca since 2000 through education and empowerment.",
+    "intro": "ASEDER is not just an educational institution; it is a pillar of development in a region that has faced historic challenges. Our presence in Santander de Quilichao and Miranda is a testament to resilience.",
+    "stats": {
+        "graduates": "9,700+",
+        "graduatesLabel": "Graduates transforming the region",
+        "activeStudents": "800+",
+        "activeLabel": "Active students today",
+        "yearsExcelence": {
+            "value": "15+",
+            "label": "Years of Excellence"
+        },
+        "regionalCampuses": {
+            "value": "2",
+            "label": "Regional Campuses"
+        }
+    },
+    "stories": {
+        "title": "Stories that drive us",
+        "naya": {
+            "title": "The Path of Naya",
+            "text": "Five students from the Naya region walked for three days each week, facing difficult topography and public order issues, just to receive health classes. Their four-semester effort is the heart of our mission."
+        },
+        "communities": {
+            "title": "Real Inclusion",
+            "text": "We serve indigenous and Afro-descendant communities, women heads of household, and former conflict actors, providing second opportunities to those who need them most."
+        }
+    }
+  },
+  "technicalPage": {
+    "title": "Vocational Technical Programs",
+    "subtitle": "Practical training designed for the real needs of the health and administrative sectors.",
+    "clinic": {
+        "title": "Nursing Practice Clinic",
+        "text": "We have our own equipped practice clinic so that our students develop real skills before facing the world of work.",
+        "secondaryText": "Our clinic allows nursing and health students to practice in a controlled environment, complying with the quality standards required by the Ministry of Education."
+    },
+    "offersTitle": "Educational Offer",
+    "programs": {
+        "nursing": { "title": "Nursing Assistant", "desc": "Comprehensive patient care and clinical support." },
+        "oralHealth": { "title": "Oral Health Assistant", "desc": "Prevention and assistance in dental offices." },
+        "pharmacy": { "title": "Pharmacy Assistant", "desc": "Medication management and pharmaceutical care." },
+        "earlyChildhood": { "title": "Early Childhood Care", "desc": "Education and care for child development." },
+        "admin": { "title": "Administrative Assistant", "desc": "Business management and institutional processes." }
     }
   },
   "publicProgramsPage": {

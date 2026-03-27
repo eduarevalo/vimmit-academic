@@ -36,9 +36,9 @@ export function Footer() {
               >
                 {t('header.admissions')}
               </Text>
-              <Text component="a" href="#programs" size="sm" c="dimmed">{t('footer.academics')}</Text>
+              <Text component={Link} to="/technical" size="sm" c="dimmed">{t('footer.links.technicalPrograms')}</Text>
               <Text component={Link} to="/about" size="sm" c="dimmed">{t('header.about')}</Text>
-              <Text component="a" href="#" size="sm" c="dimmed">{t('footer.research')}</Text>
+              <Text component={Link} to="/impact" size="sm" c="dimmed">{t('footer.links.socialImpact')}</Text>
             </Stack>
             <Stack gap="sm">
               <Text fw={700} c="dark.8">{t('footer.contact')}</Text>
