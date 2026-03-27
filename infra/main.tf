@@ -52,19 +52,15 @@ resource "digitalocean_app" "vimmit_academic" {
     # Frontend Static Site
     static_site {
       name               = "frontend-web"
-      build_command      = "npm install && npm run build # SHA: ${var.frontend_sha}"
+      build_command      = "npm install && npm run build"
       output_dir         = "dist"
       source_dir         = "frontend"
       error_document     = "index.html"
       
       github {
-        repo   = "eduarevalo/vimmit-academic"
-        branch = "main"
-      }
-
-      env {
-        key   = "SOURCE_COMMIT_SHA"
-        value = var.frontend_sha
+        repo           = "eduarevalo/vimmit-academic"
+        branch         = "main"
+        deploy_on_push = true
       }
     }
 
