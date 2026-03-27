@@ -24,8 +24,9 @@ resource "digitalocean_app" "vimmit_academic" {
       http_port          = 8080
 
       github {
-        repo   = "eduarevalo/vimmit-academic"
-        branch = "main"
+        repo           = "eduarevalo/vimmit-academic"
+        branch         = "main"
+        deploy_on_push = true
       }
 
       dockerfile_path = "backend/Dockerfile"
@@ -34,18 +35,12 @@ resource "digitalocean_app" "vimmit_academic" {
       # Environment Variables
       env {
         key   = "DATABASE_URL"
-        value = "sqlite:///test.db" # Replace with a real DB later
-        type  = "SECRET"
+        value = "sqlite:///test.db"
       }
       
       env {
         key   = "ENVIRONMENT"
         value = var.environment
-      }
-      
-      env {
-        key   = "SOURCE_COMMIT_SHA"
-        value = var.backend_sha
       }
     }
 
