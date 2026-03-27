@@ -3,7 +3,7 @@ import { IconTargetArrow, IconEye } from '@tabler/icons-react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 
-const BG_MISSION = '/assets/bg_career.png';
+const BG_MISSION = '/assets/aseder_graduation.png';
 
 export function MissionVision() {
   const theme = useMantineTheme();

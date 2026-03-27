@@ -22,7 +22,7 @@ export function TechnicalProgramsPage() {
         py="100px" 
         style={{ 
             position: 'relative', 
-            backgroundImage: 'url(/assets/bg_career.png)', 
+            backgroundImage: 'url(/assets/aseder_graduation.png)', 
             backgroundSize: 'cover', 
             backgroundPosition: 'center',
             color: 'white'
@@ -52,7 +52,7 @@ export function TechnicalProgramsPage() {
                 viewport={{ once: true }}
             >
                 <Image 
-                    src="/assets/bg_academic.png" 
+                    src="/assets/aseder_medical.png" 
                     radius="lg" 
                 />
             </motion.div>

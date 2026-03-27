@@ -2,7 +2,7 @@ import { Container, Text, Title, Stack, Box, useMantineTheme, Image, SimpleGrid 
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 
-const BG_HISTORY = '/assets/bg_academic.png';
+const BG_HISTORY = '/assets/aseder_graduation.png';
 
 export function HistorySection() {
   const theme = useMantineTheme();
@@ -68,7 +68,7 @@ export function HistorySection() {
 
           {/* Parrafo 2 & 3 */}
           <SimpleGrid cols={{ base: 1, md: 2 }} spacing={50} style={{ alignItems: 'center' }}>
-            <Box visibleFrom="md">
+            <Box>
                  <motion.div
                     initial={{ opacity: 0, scale: 0.9 }}
                     whileInView={{ opacity: 1, scale: 1 }}
@@ -76,7 +76,7 @@ export function HistorySection() {
                     viewport={{ once: true }}
                 >
                     <Image 
-                        src="/assets/bg_career.png" 
+                        src="/assets/aseder_medical.png" 
                         radius="lg" 
                         style={{ boxShadow: theme.shadows.xl }}
                     />
