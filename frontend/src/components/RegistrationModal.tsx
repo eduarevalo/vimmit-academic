@@ -1,16 +1,27 @@
-import { useState } from 'react';
-import { Modal, TextInput, MultiSelect, Button, Stack, Text, Box, Alert } from '@mantine/core';
+import { useState, useEffect } from 'react';
+import { Modal, TextInput, MultiSelect, Button, Stack, Text, Box, Alert, Skeleton } from '@mantine/core';
 import { useTranslation } from 'react-i18next';
 import { useRegistrationModal } from '../hooks/useRegistrationModal';
+import { useInstitution } from '../hooks/useInstitution';
 import { IconCheck, IconAlertCircle } from '@tabler/icons-react';
+
+const API_BASE_URL = 'http://localhost:8000';
+
+interface Program {
+  id: string;
+  name: string;
+}
 
 export function RegistrationModal() {
   const { t } = useTranslation();
   const { isOpen, close } = useRegistrationModal();
+  const { slug } = useInstitution();
   
   const [loading, setLoading] = useState(false);
+  const [loadingPrograms, setLoadingPrograms] = useState(true);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [programs, setPrograms] = useState<Program[]>([]);
   
   const [formData, setFormData] = useState({
     fullName: '',
@@ -19,14 +30,27 @@ export function RegistrationModal() {
     programs: [] as string[]
   });
 
-  const programOptions = [
-    { value: 'computerScience', label: t('programs.list.computerScience.title') },
-    { value: 'business', label: t('programs.list.business.title') },
-    { value: 'environmental', label: t('programs.list.environmental.title') },
-    { value: 'arts', label: t('programs.list.arts.title') },
-    { value: 'medicine', label: t('programs.list.medicine.title') },
-    { value: 'law', label: t('programs.list.law.title') },
-  ];
+  useEffect(() => {
+    if (isOpen) {
+      setLoadingPrograms(true);
+      fetch(`${API_BASE_URL}/api/v1/academic/programs/public/${slug}`)
+        .then((res) => res.json())
+        .then((data) => {
+          if (Array.isArray(data)) {
+            setPrograms(data);
+          }
+        })
+        .catch((err) => {
+          console.error('Error fetching programs:', err);
+        })
+        .finally(() => setLoadingPrograms(false));
+    }
+  }, [isOpen, slug]);
+
+  const programOptions = programs.map(p => ({
+    value: p.id,
+    label: p.name
+  }));
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -34,7 +58,7 @@ export function RegistrationModal() {
     setError(null);
 
     try {
-      const response = await fetch('http://localhost:8000/api/v1/administration/registration-intents', {
+      const response = await fetch(`${API_BASE_URL}/api/v1/administration/registration-intents`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -44,7 +68,7 @@ export function RegistrationModal() {
           fullName: formData.fullName,
           phone: formData.phone || null,
           interests: formData.programs,
-          tenantId: '00000000-0000-0000-0000-000000000000' // Default tenant for landing page
+          tenantId: '00000000-0000-0000-0000-000000000000' // Default tenant or should we use one from data?
         }),
       });
 
@@ -120,18 +144,25 @@ export function RegistrationModal() {
               value={formData.phone}
               onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
             />
-            <MultiSelect
-              label={t('registration.fields.program')}
-              placeholder={t('registration.fields.programPlaceholder')}
-              data={programOptions}
-              radius="md"
-              required
-              value={formData.programs}
-              onChange={(val) => setFormData({ ...formData, programs: val })}
-              clearable
-              searchable
-              hidePickedOptions
-            />
+            {loadingPrograms ? (
+              <Stack gap="xs">
+                <Text size="sm" fw={500}>{t('registration.fields.program')}</Text>
+                <Skeleton h={42} radius="md" />
+              </Stack>
+            ) : (
+              <MultiSelect
+                label={t('registration.fields.program')}
+                placeholder={t('registration.fields.programPlaceholder')}
+                data={programOptions}
+                radius="md"
+                required
+                value={formData.programs}
+                onChange={(val) => setFormData({ ...formData, programs: val })}
+                clearable
+                searchable
+                hidePickedOptions
+              />
+            )}
             
             <Box mt="md">
               <Button 

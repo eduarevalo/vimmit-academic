@@ -13,7 +13,7 @@ export function HistorySection() {
       <Container size="lg">
         <Stack gap={80}>
           {/* Parrafo 1 */}
-          <SimpleGrid cols={{ base: 1, md: 2 }} spacing={50} align="center">
+          <SimpleGrid cols={{ base: 1, md: 2 }} spacing={50} style={{ alignItems: 'center' }}>
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -60,15 +60,14 @@ export function HistorySection() {
                 <Image 
                     src={BG_HISTORY} 
                     radius="lg" 
-                    shadow="xl"
-                    style={{ position: 'relative', zIndex: 1 }}
+                    style={{ position: 'relative', zIndex: 1, boxShadow: theme.shadows.xl }}
                 />
               </Box>
             </motion.div>
           </SimpleGrid>
 
           {/* Parrafo 2 & 3 */}
-          <SimpleGrid cols={{ base: 1, md: 2 }} spacing={50} align="center">
+          <SimpleGrid cols={{ base: 1, md: 2 }} spacing={50} style={{ alignItems: 'center' }}>
             <Box visibleFrom="md">
                  <motion.div
                     initial={{ opacity: 0, scale: 0.9 }}
@@ -79,7 +78,7 @@ export function HistorySection() {
                     <Image 
                         src="/assets/bg_career.png" 
                         radius="lg" 
-                        shadow="xl"
+                        style={{ boxShadow: theme.shadows.xl }}
                     />
                 </motion.div>
             </Box>
@@ -99,13 +98,13 @@ export function HistorySection() {
                 </Text>
                 <Box 
                     p="xl" 
-                    radius="md" 
                     style={{ 
                         backgroundColor: theme.colors.brand[0],
-                        borderLeft: `5px solid ${theme.colors.brand[6]}`
+                        borderLeft: `5px solid ${theme.colors.brand[6]}`,
+                        borderRadius: theme.radius.md
                     }}
                 >
-                    <Text fw={700} italic size="lg" c="brand.9">
+                    <Text fw={700} fs="italic" size="lg" c="brand.9">
                         "Transformando vidas a través del conocimiento y el servicio regional."
                     </Text>
                 </Box>

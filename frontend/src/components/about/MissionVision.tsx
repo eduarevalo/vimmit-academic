@@ -1,5 +1,5 @@
 import { Container, SimpleGrid, Text, Title, Paper, Stack, useMantineTheme, Box, Overlay } from '@mantine/core';
-import { IconTargetArrow, IconEye, IconDiamond } from '@tabler/icons-react';
+import { IconTargetArrow, IconEye } from '@tabler/icons-react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 
