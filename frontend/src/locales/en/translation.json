@@ -12,6 +12,7 @@
     "programs": "Programs",
     "admissions": "Admissions",
     "campusLife": "Campus Life",
+    "campus": "Campuses",
     "startJourney": "Start Journey",
     "educationalPortal": "Educational Portal"
   },
@@ -193,6 +194,16 @@
     "title": "Our Programs",
     "subtitle": "Technical and academic training designed for work and human development, with a focus on our region's productive needs.",
     "cta": "Request Information"
+  },
+  "publicCampusPage": {
+    "badge": "Our Facilities",
+    "title": "Our Campuses",
+    "subtitle": "Discover our strategically located facilities, bringing quality education across the Northern Cauca region.",
+    "empty": "No campuses available at this time.",
+    "contact": {
+      "title": "Need more information?",
+      "subtitle": "Contact us to learn more about our campuses, office hours, and directions."
+    }
   },
   "admissionsPage": {
     "title": "Admissions",

@@ -13,6 +13,7 @@
     "programs": "Programas",
     "admissions": "Admisiones",
     "campusLife": "Vida Estudiantil",
+    "campus": "Sedes",
     "contact": "Contacto",
     "startJourney": "Inicia tu Futuro",
     "educationalPortal": "Portal Educativo"
@@ -197,6 +198,16 @@
     "title": "Nuestros Programas",
     "subtitle": "Formación técnica y académica diseñada para el trabajo y el desarrollo humano, con un enfoque en las necesidades productivas de nuestra región.",
     "cta": "Solicitar Información"
+  },
+  "publicCampusPage": {
+    "badge": "Nuestras Instalaciones",
+    "title": "Nuestras Sedes",
+    "subtitle": "Conoce nuestras instalaciones distribuidas estratégicamente para llevar educación de calidad a toda la región del norte del Cauca.",
+    "empty": "No hay sedes disponibles en este momento.",
+    "contact": {
+      "title": "¿Necesitas más información?",
+      "subtitle": "Contáctanos para conocer más sobre nuestras sedes, horarios de atención y cómo llegar."
+    }
   },
   "admissionsPage": {
     "title": "Admisiones",

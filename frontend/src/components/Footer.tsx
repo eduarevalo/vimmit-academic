@@ -23,7 +23,7 @@ export function Footer() {
               {description}
             </Text>
           </Box>
-          <Group gap={80}>
+          <Group gap={80} align="flex-start">
             <Stack gap="sm">
               <Text fw={700} c="dark.8">{t('footer.quickLinks')}</Text>
               <Text 
@@ -37,6 +37,7 @@ export function Footer() {
                 {t('header.admissions')}
               </Text>
               <Text component={Link} to="/technical" size="sm" c="dimmed">{t('footer.links.technicalPrograms')}</Text>
+              <Text component={Link} to="/campus" size="sm" c="dimmed">{t('header.campus')}</Text>
               <Text component={Link} to="/about" size="sm" c="dimmed">{t('header.about')}</Text>
               <Text component={Link} to="/impact" size="sm" c="dimmed">{t('footer.links.socialImpact')}</Text>
             </Stack>

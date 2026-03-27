@@ -51,6 +51,7 @@ export function Header({
           <Group gap={30} visibleFrom="sm">
             <Text component={Link} to="/about" fw={500} c={isActive('/about') ? 'brand' : 'dimmed'}>{t('header.about')}</Text>
             <Text component={Link} to="/programs" fw={500} c={isActive('/programs') ? 'brand' : 'dimmed'}>{t('header.programs')}</Text>
+            <Text component={Link} to="/campus" fw={500} c={isActive('/campus') ? 'brand' : 'dimmed'}>{t('header.campus')}</Text>
             <Text component={Link} to="/admissions" fw={500} c={isActive('/admissions') ? 'brand' : 'dimmed'}>{t('header.admissions')}</Text>
             <Text component={Link} to="/student-life" fw={500} c={isActive('/student-life') ? 'brand' : 'dimmed'}>{t('header.campusLife')}</Text>
           </Group>

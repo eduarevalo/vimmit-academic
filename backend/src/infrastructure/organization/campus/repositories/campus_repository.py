@@ -42,6 +42,21 @@ class CampusRepository:
             stmt = stmt.where(CampusModel.id != exclude_id)
         return self._session.exec(stmt).first() is not None
 
+    def list_by_tenant_slug(
+        self, tenant_slug: str, active_only: bool = True
+    ) -> List[CampusModel]:
+        """
+        Returns all campuses for a given tenant slug.
+        """
+        stmt = (
+            select(CampusModel)
+            .join(TenantModel, CampusModel.tenant_id == TenantModel.id)
+            .where(TenantModel.slug == tenant_slug)
+        )
+        if active_only:
+            stmt = stmt.where(CampusModel.is_active == True)
+        return list(self._session.exec(stmt).all())
+
     def save(self, campus: CampusModel) -> CampusModel:
         self._session.add(campus)
         self._session.commit()

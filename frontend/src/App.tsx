@@ -19,6 +19,7 @@ const CalendarsPage = lazy(() => import('./pages/CalendarsPage').then(module => 
 const EnrollmentsPage = lazy(() => import('./pages/EnrollmentsPage').then(module => ({ default: module.EnrollmentsPage })));
 const ImpactPage = lazy(() => import('./pages/ImpactPage').then(module => ({ default: module.ImpactPage })));
 const TechnicalProgramsPage = lazy(() => import('./pages/TechnicalProgramsPage').then(module => ({ default: module.TechnicalProgramsPage })));
+const PublicCampusPage = lazy(() => import('./pages/PublicCampusPage').then(module => ({ default: module.PublicCampusPage })));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage').then(module => ({ default: module.NotFoundPage })));
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
               <Route path="/" element={<LandingPage />} />
               <Route path="/about" element={<AboutPage />} />
               <Route path="/programs" element={<PublicProgramsPage />} />
+              <Route path="/campus" element={<PublicCampusPage />} />
               <Route path="/admissions" element={<AdmissionsPage />} />
               <Route path="/student-life" element={<StudentLifePage />} />
               <Route path="/impact" element={<ImpactPage />} />

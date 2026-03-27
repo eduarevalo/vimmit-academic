@@ -16,6 +16,11 @@ resource "digitalocean_app" "vimmit_academic" {
     name   = var.app_name
     region = var.region
 
+    domain {
+      name = "www.aseder.edu.co"
+      type = "PRIMARY"
+    }
+
     # Backend Service (Containerized)
     service {
       name               = "backend-api"

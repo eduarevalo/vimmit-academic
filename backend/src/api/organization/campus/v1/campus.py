@@ -58,6 +58,22 @@ async def list_campuses(
     return campuses
 
 
+@router.get("/public/{tenant_slug}", response_model=List[CampusResponse])
+async def list_public_campuses(
+    tenant_slug: str,
+    session: Session = Depends(get_session),
+):
+    """List all active campuses for a given tenant slug publicly."""
+    repo = CampusRepository(session)
+    db_campuses = repo.list_by_tenant_slug(tenant_slug)
+
+    campuses = []
+    for campus in db_campuses:
+        campuses.append(CampusResponse.model_validate(campus))
+
+    return campuses
+
+
 @router.get("/{campus_id}", response_model=CampusResponse)
 async def get_campus(
     campus_id: UUID,
