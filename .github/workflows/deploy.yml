@@ -65,6 +65,20 @@ jobs:
         with:
           terraform_wrapper: false
 
+      - name: Download Terraform State
+        uses: actions/checkout@v4
+        with:
+          ref: terraform-state
+          path: state-repo
+        continue-on-error: true # Might fail if branch doesn't exist yet
+
+      - name: Prepare Terraform State
+        working-directory: ./infra
+        run: |
+          if [ -f ../state-repo/terraform.tfstate ]; then
+            cp ../state-repo/terraform.tfstate .
+          fi
+
       - name: Terraform Init
         working-directory: ./infra
         run: terraform init
@@ -79,3 +93,21 @@ jobs:
       - name: Terraform Apply
         working-directory: ./infra
         run: terraform apply -auto-approve tfplan
+
+      - name: Persist Terraform State
+        if: always()
+        run: |
+          mkdir -p state-repo
+          cp infra/terraform.tfstate state-repo/ || echo "No state file to copy"
+          cd state-repo
+          # Initialize git if not already in state-repo (in case checkout failed)
+          if [ ! -d ".git" ]; then
+            git init
+            git remote add origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+            git checkout -b terraform-state
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add terraform.tfstate
+          git commit -m "Update terraform state [skip ci]" || exit 0
+          git push origin terraform-state
