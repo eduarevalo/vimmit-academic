@@ -16,24 +16,6 @@ resource "digitalocean_app" "vimmit_academic" {
     name   = var.app_name
     region = var.region
 
-    # Primary institutional domain
-    dynamic "domain" {
-      for_each = var.custom_domain != "" ? [var.custom_domain] : []
-      content {
-        name = domain.value
-        type = "PRIMARY"
-      }
-    }
-
-    # WWW subdomain alias
-    dynamic "domain" {
-      for_each = var.custom_domain != "" ? ["www.${var.custom_domain}"] : []
-      content {
-        name = domain.value
-        type = "ALIAS"
-      }
-    }
-
     # Backend Service (Containerized)
     service {
       name               = "backend-api"
