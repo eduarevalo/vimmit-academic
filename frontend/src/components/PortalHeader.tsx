@@ -46,7 +46,7 @@ export function PortalHeader({ navOpened, onNavToggle }: PortalHeaderProps) {
             )}
             <Link to="/portal" style={{ textDecoration: 'none', color: 'inherit' }}>
               <Group gap="xs" style={{ cursor: 'pointer' }}>
-                <img src="/logo-clean.png" alt="Vimmit Logo" style={{ height: 28, width: 'auto' }} />
+                <img src="/logo-clean.png" alt={t('common.logoAlt')} style={{ height: 28, width: 'auto' }} />
                 <Text size="lg" fw={800} c="brand">
                   {name} <Text span fw={400} c="dimmed" size="xs">| {t('portal.header.tag')}</Text>
                 </Text>

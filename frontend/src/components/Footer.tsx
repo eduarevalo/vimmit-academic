@@ -1,5 +1,5 @@
 import { Container, Group, Box, Text, Stack } from '@mantine/core';
-import { IconBook2, IconBrandTwitter, IconBrandYoutube, IconBrandInstagram } from '@tabler/icons-react';
+import { IconBrandTwitter, IconBrandYoutube, IconBrandInstagram } from '@tabler/icons-react';
 import { useTranslation } from 'react-i18next';
 import { useInstitution } from '../hooks/useInstitution';
 import { useRegistrationModal } from '../hooks/useRegistrationModal';
@@ -16,7 +16,7 @@ export function Footer() {
         <Group justify="space-between" align="flex-start" mb={40}>
           <Box style={{ maxWidth: 300 }}>
             <Group gap="xs" mb="md">
-              <IconBook2 size={28} color="#12b886" />
+              <img src="/logo-clean.png" alt={t('common.logoAlt')} style={{ height: 32, width: 'auto' }} />
               <Text fw={800} size="lg" c="dark.8">{name}</Text>
             </Group>
             <Text size="sm" c="dimmed" lh={1.6}>

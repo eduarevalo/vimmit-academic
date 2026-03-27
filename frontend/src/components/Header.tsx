@@ -42,7 +42,7 @@ export function Header({
       <Container size="lg">
         <Group justify="space-between" h="100%">
           <Group gap="xs" onClick={onLogoClick} style={{ cursor: 'pointer' }}>
-            <img src="/logo-clean.png" alt="Aseder Logo" style={{ height: 32, width: 'auto' }} />
+            <img src="/logo-clean.png" alt={t('common.logoAlt')} style={{ height: 32, width: 'auto' }} />
             <Text size="xl" fw={900} variant="gradient" gradient={{ from: '#16884a', to: '#2b8a3e', deg: 45 }}>
               {name}
             </Text>
