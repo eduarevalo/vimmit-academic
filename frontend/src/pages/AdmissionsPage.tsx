@@ -51,8 +51,8 @@ export function AdmissionsPage() {
         <Group mt={50} p="xl" style={{ backgroundColor: '#f8f9fa', borderRadius: 16 }}>
           <IconInfoCircle size={40} color="#16884a" />
           <Stack gap={0} style={{ flex: 1 }}>
-            <Text fw={700} size="lg">¿Listo para comenzar?</Text>
-            <Text c="dimmed">Nuestro equipo de admisiones está listo para acompañarte en cada paso.</Text>
+            <Text fw={700} size="lg">{t('admissionsPage.cta.title')}</Text>
+            <Text c="dimmed">{t('admissionsPage.cta.text')}</Text>
           </Stack>
           <Button size="lg" radius="xl" color="brand" onClick={open}>
             {t('registration.submit')}

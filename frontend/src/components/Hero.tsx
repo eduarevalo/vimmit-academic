@@ -3,7 +3,7 @@ import { IconArrowRight } from '@tabler/icons-react';
 import { useTranslation } from 'react-i18next';
 import { useInstitution } from '../hooks/useInstitution';
 
-export function Hero({ onExplore }: { onExplore?: () => void }) {
+export function Hero({ onExplore, onLearnMore }: { onExplore?: () => void; onLearnMore?: () => void }) {
   const { t } = useTranslation();
   const { name } = useInstitution();
 
@@ -36,7 +36,7 @@ export function Hero({ onExplore }: { onExplore?: () => void }) {
           >
             {t('hero.explorePrograms')}
           </Button>
-          <Button size="xl" variant="white" radius="xl" c="dark.8">
+          <Button size="xl" variant="white" radius="xl" c="dark.8" onClick={onLearnMore}>
             {t('hero.learnMore')}
           </Button>
         </Group>

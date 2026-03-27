@@ -4,7 +4,8 @@
     "delete": "Eliminar",
     "fieldRequired": "Este campo es obligatorio",
     "error": {
-      "tooShort": "Debe tener al menos 2 caracteres"
+      "tooShort": "Debe tener al menos 2 caracteres",
+      "fetchPrograms": "Error al cargar los programas. Por favor, inténtalo de nuevo más tarde."
     },
     "logoAlt": "Logo de ASEDER"
   },
@@ -99,12 +100,12 @@
     "hero": {
         "tag": "Conoce nuestra institución",
         "title": "Comprometidos con el Desarrollo Regional",
-        "subtitle": "Desde hace más de dos décadas, ASEDER ha sido el motor de cambio para miles de personas en el norte del Cauca, brindando educación de calidad y oportunidades de crecimiento."
+        "subtitle": "Desde hace más de dos décadas, ASEDER ha sido el motor de cambio para miles de personas en las regiones del Norte del Cauca y el Valle del Cauca, brindando educación de calidad y oportunidades de crecimiento."
     },
     "history": {
       "tag": "Nuestros Orígenes",
       "title": "Nuestra Historia",
-      "p1": "Fundado en el año 2000 en Santander de Quilichao, el Centro Educativo Asesorías Educativas para el Desarrollo Regional (ASEDER) nació de una visión clara: cerrar las brechas educativas en el norte del Cauca y empoderar a las comunidades a través del conocimiento.",
+      "p1": "Fundado en el año 2000 en Santander de Quilichao, el Centro Educativo Asesorías Educativas para el Desarrollo Regional (ASEDER) nació de una visión clara: cerrar las brechas educativas en el suroccidente colombiano y empoderar a las comunidades a través del conocimiento.",
       "p2": "Con más de 25 años de trayectoria, hemos evolucionado de un pequeño centro de capacitación a una institución líder con múltiples sedes y una oferta académica diversificada que incluye bachillerato para adultos y programas técnicos laborales de alto impacto.",
       "p3": "Nuestra historia es la historia de miles de graduados que, con esfuerzo y dedicación, han transformado sus vidas y las de sus familias, convirtiéndose en motores de cambio para nuestra región.",
       "quote": "Transformando vidas a través del conocimiento y el servicio regional."
@@ -118,7 +119,7 @@
     },
     "vision": {
         "titleText": "Nuestra Visión",
-        "text": "Ser la institución educativa líder en el norte del Cauca para el 2030, reconocida por nuestra innovación académica y nuestro profundo compromiso con la transformación social y la paz territorial."
+        "text": "Ser la institución educativa líder en el suroccidente colombiano para el 2030, reconocida por nuestra innovación académica y nuestro profundo compromiso con la transformación social y la paz territorial."
     },
     "statsSection": {
         "tag": "Nuestro Impacto",
@@ -127,7 +128,7 @@
             "years": {
                 "value": "25+",
                 "label": "Años de Trayectoria",
-                "desc": "Transformando el norte del Cauca desde el año 2000."
+                "desc": "Transformando la región desde el año 2000."
             },
             "graduates": {
                 "value": "5000+",
@@ -149,8 +150,8 @@
   },
   "impactPage": {
     "title": "Impacto Regional y Compromiso Social",
-    "subtitle": "Transformando el Norte del Cauca desde el año 2000 through education and empowerment.",
-    "intro": "ASEDER no es solo una institución educativa; es un pilar de desarrollo en una región que ha enfrentado retos históricos. Nuestra presencia en Santander de Quilichao y Miranda es un testimonio de resiliencia.",
+    "subtitle": "Transformando las regiones del Norte del Cauca y el Valle desde el año 2000 a través de la educación y el empoderamiento.",
+    "intro": "ASEDER no es solo una institución educativa; es un pilar de desarrollo en una región que ha enfrentado retos históricos. Nuestra presencia en Santander de Quilichao, Miranda, Bugalagrande y Caicedonia es un testimonio de resiliencia y compromiso con el suroccidente colombiano.",
     "stats": {
         "graduates": "9,700+",
         "graduatesLabel": "Egresados transformando la región",
@@ -186,12 +187,86 @@
         "secondaryText": "Nuestra clínica permite a los estudiantes de enfermería y áreas de la salud practicar en un entorno controlado, cumpliendo con los estándares de calidad exigidos por el Ministerio de Educación."
     },
     "offersTitle": "Oferta Educativa",
+    "viewDetail": "Ver detalle",
+    "detail": {
+      "notFound": "Programa no encontrado",
+      "back": "Volver a programas",
+      "badge": "Programa Técnico Laboral",
+      "objectivesTitle": "Objetivos del Programa",
+      "profileTitle": "Perfil Profesional",
+      "check1": "Certificación de competencias laborales",
+      "check2": "Convenios para prácticas institucionales",
+      "check3": "Alta demanda en el sector laboral regional",
+      "curriculumTitle": "Estructura Académica",
+      "ctaTitle": "¿Listo para empezar?",
+      "ctaText": "Inscríbete ahora y transforma tu futuro con educación de calidad.",
+      "ctaButton": "Inicia tu Proceso de Matrícula"
+    },
     "programs": {
-        "nursing": { "title": "Auxiliar en Enfermería", "desc": "Cuidado integral del paciente y apoyo clínico." },
-        "oralHealth": { "title": "Auxiliar en Salud Oral", "desc": "Prevención y asistencia en consultorios odontológicos." },
-        "pharmacy": { "title": "Auxiliar en Farmacia", "desc": "Gestión de medicamentos y atención farmacéutica." },
-        "earlyChildhood": { "title": "Atención a la Primera Infancia", "desc": "Educación y cuidado del desarrollo infantil." },
-        "admin": { "title": "Auxiliar Administrativo", "desc": "Gestión empresarial y procesos institucionales." }
+        "nursing": { 
+            "title": "Auxiliar en Enfermería", 
+            "desc": "Cuidado integral del paciente y apoyo clínico.",
+            "image": "/assets/programs/nursing.png",
+            "objectives": "Formar personal técnico con sólidos conocimientos y valores éticos para brindar cuidado integral de enfermería a pacientes en diferentes niveles de complejidad.",
+            "profile": "Podrás trabajar en Hospitales, Clínicas, Centros de Salud y atención domiciliaria, apoyando en procedimientos clínicos y cuidado directo al paciente.",
+            "levels": ["Semestre 1: Fundamentos y Ética", "Semestre 2: Cuidado Médico-Quirúrgico", "Semestre 3: Salud Materno-Infantil"]
+        },
+        "oralHealth": { 
+            "title": "Auxiliar en Salud Oral", 
+            "desc": "Prevención y asistencia en consultorios odontológicos.",
+            "image": "/assets/programs/oral_health.png",
+            "objectives": "Capacitar en la asistencia técnica al profesional de odontología, manejo de instrumental y fomento de hábitos de higiene oral.",
+            "profile": "Desempéñate en consultorios odontológicos privados y clínicas de salud oral, gestionando materiales y asistiendo en procedimientos dentales.",
+            "levels": ["Semestre 1: Bioseguridad e Instrumental", "Semestre 2: Asistencia Clínica", "Semestre 3: Promoción y Prevención"]
+        },
+        "pharmacy": { 
+            "title": "Auxiliar en Servicios Farmacéuticos", 
+            "desc": "Gestión de medicamentos y atención farmacéutica.",
+            "image": "/assets/programs/pharmacy.png",
+            "objectives": "Desarrollar competencias en la recepción, almacenamiento y dispensación de medicamentos bajo normas legales vigentes.",
+            "profile": "Trabaja en farmacias comerciales, droguerías institucionales y depósitos de medicamentos, brindando una atención segura al usuario.",
+            "levels": ["Semestre 1: Farmacología Básica", "Semestre 2: Gestión de Inventarios", "Semestre 3: Dispensación y Normativa"]
+        },
+        "veterinary": { 
+            "title": "Auxiliar en Veterinaria", 
+            "desc": "Cuidado y asistencia en clínicas veterinarias.",
+            "image": "/assets/programs/veterinary.png",
+            "objectives": "Brindar apoyo técnico en el cuidado, manejo y bienestar animal en entornos clínicos y comerciales.",
+            "profile": "Ideal para trabajar en Clínicas Veterinarias, centros de estética animal (Grooming) y tiendas especializadas de mascotas.",
+            "levels": ["Semestre 1: Anatomía y Manejo Animal", "Semestre 2: Primeros Auxilios Veterinarios", "Semestre 3: Enfermedades y Nutrición"]
+        },
+        "foodIndustry": { 
+            "title": "Calidad en la Industria de Alimentos", 
+            "desc": "Control de calidad y procesos en producción de alimentos.",
+            "image": "/assets/programs/food_industry.png",
+            "objectives": "Garantizar la inocuidad y calidad de los alimentos mediante el control de procesos y aplicación de normas de seguridad alimentaria.",
+            "profile": "Trabaja en plantas de procesamiento de alimentos, laboratorios de calidad y servicios de alimentación institucional.",
+            "levels": ["Semestre 1: Microbiología de Alimentos", "Semestre 2: Control de Calidad", "Semestre 3: Procesos Industriales"]
+        },
+        "earlyChildhood": { 
+            "title": "Atención a la Primera Infancia", 
+            "desc": "Educación y cuidado del desarrollo infantil.",
+            "image": "/assets/programs/early_childhood.png",
+            "objectives": "Formar educadores capaces de estimular el desarrollo integral de los niños en sus primeros años de vida.",
+            "profile": "Desempéñate en Jardines Infantiles, Centros de Desarrollo Infantil (CDI) y programas de atención comunitaria a la niñez.",
+            "levels": ["Semestre 1: Psicología del Desarrollo", "Semestre 2: Lúdica y Pedagogía", "Semestre 3: Nutrición y Salud Infantil"]
+        },
+        "occupationalHealth": { 
+            "title": "Seguridad y Salud en el Trabajo", 
+            "desc": "Prevención de riesgos laborales y seguridad industrial.",
+            "image": "/assets/programs/occupational_health.png",
+            "objectives": "Implementar medidas de prevención y control de riesgos para proteger la salud de los trabajadores en las organizaciones.",
+            "profile": "Asistente en el área de SST de cualquier empresa pública o privada, velando por el cumplimiento de normas de seguridad industrial.",
+            "levels": ["Semestre 1: Normativa y Riesgos", "Semestre 2: Seguridad Industrial", "Semestre 3: Higiene Ocupacional"]
+        },
+        "trafficAgent": { 
+            "title": "Agente de Tránsito", 
+            "desc": "Regulación del tráfico y seguridad vial.",
+            "image": "/assets/programs/traffic_agent.png",
+            "objectives": "Capacitar en la regulación vial, prevención de accidentes y aplicación de la normativa de tránsito terrestre.",
+            "profile": "Podrás trabajar como apoyo en secretarías de tránsito municipales, empresas de transporte y consultoras de movilidad.",
+            "levels": ["Semestre 1: Código Nacional de Tránsito", "Semestre 2: Seguridad y Educación Vial", "Semestre 3: Técnicas de Control Vial"]
+        }
     }
   },
   "publicProgramsPage": {
@@ -202,7 +277,7 @@
   "publicCampusPage": {
     "badge": "Nuestras Instalaciones",
     "title": "Nuestras Sedes",
-    "subtitle": "Conoce nuestras instalaciones distribuidas estratégicamente para llevar educación de calidad a toda la región del norte del Cauca.",
+    "subtitle": "Conoce nuestras instalaciones distribuidas estratégicamente para llevar educación de calidad a las regiones del Norte del Cauca y el Valle del Cauca.",
     "empty": "No hay sedes disponibles en este momento.",
     "contact": {
       "title": "¿Necesitas más información?",
@@ -225,6 +300,10 @@
       "step2": "Presenta los requisitos en nuestra sede principal.",
       "step3": "Realiza la entrevista de orientación vocacional.",
       "step4": "Formaliza tu matrícula e inicia clases."
+    },
+    "cta": {
+      "title": "¿Listo para comenzar?",
+      "text": "Nuestro equipo de admisiones está listo para acompañarte en cada paso."
     }
   },
   "studentLifePage": {
@@ -232,13 +311,19 @@
     "subtitle": "Mucho más que estudio: una comunidad vibrante dedicada al crecimiento personal y el servicio regional.",
     "campus": {
       "title": "Nuestras Sedes",
-      "p1": "Contamos con instalaciones modernas en Santander de Quilichao y Miranda, equipadas para brindar una formación práctica y de calidad.",
+      "p1": "Contamos con instalaciones modernas estratégicamente distribuidas en Santander de Quilichao, Miranda, Bugalagrande y Caicedonia, equipadas para brindar una formación práctica y de calidad.",
       "p2": "Nuestros espacios están diseñados para fomentar la colaboración y el aprendizaje técnico, con laboratorios especializados en salud y áreas administrativas."
     },
     "impact": {
       "title": "Impacto Regional",
-      "p1": "ASEDER se consolida como un pilar del desarrollo en el norte del Cauca, formando profesionales íntegros que aportan soluciones reales a sus comunidades.",
-      "p2": "Nuestros graduados son el reflejo de nuestra labor: líderes territoriales que impulsan el progreso social y económico desde sus respectivos campos."
+      "p1": "ASEDER se consolida como un pilar del desarrollo en el suroccidente colombiano, formando profesionales íntegros que aportan soluciones reales a sus comunidades.",
+      "p2": "Nuestros egresados son el reflejo de nuestra labor: líderes territoriales que impulsan el progreso social y económico desde sus respectivos campos."
+    },
+    "leaders": {
+      "title": "Formando Líderes para la Región",
+      "item1": "Excelencia Técnica",
+      "item2": "Comunidad Inclusiva",
+      "item3": "Presencia Regional"
     }
   },
   "portal": {

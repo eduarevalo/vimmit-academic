@@ -4,7 +4,8 @@
     "delete": "Delete",
     "fieldRequired": "This field is required",
     "error": {
-      "tooShort": "Must be at least 2 characters"
+      "tooShort": "Must be at least 2 characters",
+      "fetchPrograms": "Error loading programs. Please try again later."
     }
   },
   "header": {
@@ -182,12 +183,86 @@
         "secondaryText": "Our clinic allows nursing and health students to practice in a controlled environment, complying with the quality standards required by the Ministry of Education."
     },
     "offersTitle": "Educational Offer",
+    "viewDetail": "View detail",
+    "detail": {
+      "notFound": "Program not found",
+      "back": "Back to programs",
+      "badge": "Vocational Technical Program",
+      "objectivesTitle": "Program Objectives",
+      "profileTitle": "Professional Profile",
+      "check1": "Labor competency certification",
+      "check2": "Institutional practice agreements",
+      "check3": "High regional labor market demand",
+      "curriculumTitle": "Academic Structure",
+      "ctaTitle": "Ready to start?",
+      "ctaText": "Enroll now and transform your future with quality education.",
+      "ctaButton": "Start Your Enrollment Process"
+    },
     "programs": {
-        "nursing": { "title": "Nursing Assistant", "desc": "Comprehensive patient care and clinical support." },
-        "oralHealth": { "title": "Oral Health Assistant", "desc": "Prevention and assistance in dental offices." },
-        "pharmacy": { "title": "Pharmacy Assistant", "desc": "Medication management and pharmaceutical care." },
-        "earlyChildhood": { "title": "Early Childhood Care", "desc": "Education and care for child development." },
-        "admin": { "title": "Administrative Assistant", "desc": "Business management and institutional processes." }
+        "nursing": { 
+            "title": "Nursing Assistant", 
+            "desc": "Comprehensive patient care and clinical support.",
+            "image": "/assets/programs/nursing.png",
+            "objectives": "To train technical personnel with solid knowledge and ethical values to provide comprehensive nursing care to patients at different levels of complexity.",
+            "profile": "You can work in Hospitals, Clinics, Health Centers, and home care, supporting clinical procedures and direct patient care.",
+            "levels": ["Semester 1: Fundamentals & Ethics", "Semester 2: Medical-Surgical Care", "Semester 3: Maternal-Child Health"]
+        },
+        "oralHealth": { 
+            "title": "Oral Health Assistant", 
+            "desc": "Prevention and assistance in dental offices.",
+            "image": "/assets/programs/oral_health.png",
+            "objectives": "To train in technical assistance to the dental professional, instrument management, and promotion of oral hygiene habits.",
+            "profile": "Perform in private dental offices and oral health clinics, managing materials and assisting in dental procedures.",
+            "levels": ["Semester 1: Biosafety & Instruments", "Semester 2: Clinical Assistance", "Semester 3: Promotion & Prevention"]
+        },
+        "pharmacy": { 
+            "title": "Pharmacy Services Assistant", 
+            "desc": "Medication management and pharmaceutical care.",
+            "image": "/assets/programs/pharmacy.png",
+            "objectives": "To develop skills in the reception, storage, and dispensing of medications under current legal regulations.",
+            "profile": "Work in commercial pharmacies, institutional drugstores, and medicine warehouses, providing safe care to the user.",
+            "levels": ["Semester 1: Basic Pharmacology", "Semester 2: Inventory Management", "Semester 3: Dispensing & Regulations"]
+        },
+        "veterinary": { 
+            "title": "Veterinary Assistant", 
+            "desc": "Care and assistance in veterinary clinics.",
+            "image": "/assets/programs/veterinary.png",
+            "objectives": "To provide technical support in the care, management, and welfare of animals in clinical and commercial settings.",
+            "profile": "Ideal for working in Veterinary Clinics, animal aesthetic centers (Grooming), and specialized pet stores.",
+            "levels": ["Semester 1: Anatomy & Animal Handling", "Semester 2: Veterinary First Aid", "Semester 3: Diseases & Nutrition"]
+        },
+        "foodIndustry": { 
+            "title": "Food Industry Quality", 
+            "desc": "Quality control and processes in food production.",
+            "image": "/assets/programs/food_industry.png",
+            "objectives": "To guarantee the safety and quality of food through process control and application of food safety standards.",
+            "profile": "Work in food processing plants, quality laboratories, and institutional food services.",
+            "levels": ["Semester 1: Food Microbiology", "Semester 2: Quality Control", "Semester 3: Industrial Processes"]
+        },
+        "earlyChildhood": { 
+            "title": "Early Childhood Care", 
+            "desc": "Education and care for child development.",
+            "image": "/assets/programs/early_childhood.png",
+            "objectives": "To train educators capable of stimulating the comprehensive development of children in their first years of life.",
+            "profile": "Perform in Kindergartens, Child Development Centers (CDI), and community child care programs.",
+            "levels": ["Semester 1: Developmental Psychology", "Semester 2: Play & Pedagogy", "Semester 3: Nutrition & Child Health"]
+        },
+        "occupationalHealth": { 
+            "title": "Occupational Health & Safety", 
+            "desc": "Prevention of occupational risks and industrial safety.",
+            "image": "/assets/programs/occupational_health.png",
+            "objectives": "To implement prevention and risk control measures to protect the health of workers in organizations.",
+            "profile": "Assistant in the OHS area of any public or private company, ensuring compliance with industrial safety standards.",
+            "levels": ["Semester 1: Regulations & Risks", "Semester 2: Industrial Safety", "Semester 3: Occupational Hygiene"]
+        },
+        "trafficAgent": { 
+            "title": "Traffic Agent", 
+            "desc": "Traffic regulation and road safety.",
+            "image": "/assets/programs/traffic_agent.png",
+            "objectives": "To train in road regulation, accident prevention, and application of land traffic regulations.",
+            "profile": "You can work as support in municipal traffic secretariats, transport companies, and mobility consultancies.",
+            "levels": ["Semester 1: National Traffic Code", "Semester 2: Road Safety & Education", "Semester 3: Traffic Control Techniques"]
+        }
     }
   },
   "publicProgramsPage": {
@@ -221,6 +296,10 @@
       "step2": "Present the requirements at our main campus.",
       "step3": "Complete the vocational orientation interview.",
       "step4": "Formalize your enrollment and start classes."
+    },
+    "cta": {
+      "title": "Ready to Start?",
+      "text": "Our admissions team is ready to accompany you every step of the way."
     }
   },
   "studentLifePage": {
@@ -235,6 +314,12 @@
       "title": "Regional Impact",
       "p1": "ASEDER consolidates itself as a pillar of development in Northern Cauca, forming upright professionals who provide real solutions to their communities.",
       "p2": "Our graduates are the reflection of our work: territorial leaders who drive social and economic progress from their respective fields."
+    },
+    "leaders": {
+      "title": "Training Leaders for the Region",
+      "item1": "Technical Excellence",
+      "item2": "Inclusive Community",
+      "item3": "Regional Presence"
     }
   },
   "portal": {

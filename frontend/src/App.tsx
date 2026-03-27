@@ -9,16 +9,16 @@ import { LoadingOverlay } from '@mantine/core';
 // Lazy load pages
 const LandingPage = lazy(() => import('./pages/LandingPage').then(module => ({ default: module.LandingPage })));
 const AboutPage = lazy(() => import('./pages/AboutPage').then(module => ({ default: module.AboutPage })));
-const PublicProgramsPage = lazy(() => import('./pages/PublicProgramsPage').then(module => ({ default: module.PublicProgramsPage })));
+const ProgramsPage = lazy(() => import('./pages/ProgramsPage').then(module => ({ default: module.ProgramsPage })));
 const AdmissionsPage = lazy(() => import('./pages/AdmissionsPage').then(module => ({ default: module.AdmissionsPage })));
 const StudentLifePage = lazy(() => import('./pages/StudentLifePage').then(module => ({ default: module.StudentLifePage })));
 const PortalPage = lazy(() => import('./pages/PortalPage').then(module => ({ default: module.PortalPage })));
-const ProgramsPage = lazy(() => import('./pages/ProgramsPage').then(module => ({ default: module.ProgramsPage })));
+const AcademicProgramsPage = lazy(() => import('./pages/AcademicProgramsPage').then(module => ({ default: module.AcademicProgramsPage })));
 const CampusPage = lazy(() => import('./pages/CampusPage').then(module => ({ default: module.CampusPage })));
 const CalendarsPage = lazy(() => import('./pages/CalendarsPage').then(module => ({ default: module.CalendarsPage })));
 const EnrollmentsPage = lazy(() => import('./pages/EnrollmentsPage').then(module => ({ default: module.EnrollmentsPage })));
 const ImpactPage = lazy(() => import('./pages/ImpactPage').then(module => ({ default: module.ImpactPage })));
-const TechnicalProgramsPage = lazy(() => import('./pages/TechnicalProgramsPage').then(module => ({ default: module.TechnicalProgramsPage })));
+const ProgramDetailPage = lazy(() => import('./pages/ProgramDetailPage').then(module => ({ default: module.ProgramDetailPage })));
 const PublicCampusPage = lazy(() => import('./pages/PublicCampusPage').then(module => ({ default: module.PublicCampusPage })));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage').then(module => ({ default: module.NotFoundPage })));
 
@@ -32,12 +32,12 @@ function App() {
             <Route element={<MainLayout />}>
               <Route path="/" element={<LandingPage />} />
               <Route path="/about" element={<AboutPage />} />
-              <Route path="/programs" element={<PublicProgramsPage />} />
+              <Route path="/programs" element={<ProgramsPage />} />
+              <Route path="/programs/:programId" element={<ProgramDetailPage />} />
               <Route path="/campus" element={<PublicCampusPage />} />
               <Route path="/admissions" element={<AdmissionsPage />} />
               <Route path="/student-life" element={<StudentLifePage />} />
               <Route path="/impact" element={<ImpactPage />} />
-              <Route path="/technical" element={<TechnicalProgramsPage />} />
             </Route>
             
             {/* Portal Routes */}
@@ -45,7 +45,7 @@ function App() {
               <Route index element={<PortalPage />} />
               
               {/* Academic */}
-              <Route path="academic/programs" element={<ProgramsPage />} />
+              <Route path="academic/programs" element={<AcademicProgramsPage />} />
               
               {/* Administrative */}
               <Route path="administrative/enrollments" element={<EnrollmentsPage />} />

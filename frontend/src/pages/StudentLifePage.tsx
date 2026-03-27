@@ -44,12 +44,12 @@ export function StudentLifePage() {
         </Grid>
 
         <Stack align="center" mt={80} gap="xl">
-          <Title order={2} ta="center">Formando Líderes para la Región</Title>
+          <Title order={2} ta="center">{t('studentLifePage.leaders.title')}</Title>
           <Grid gutter="xl">
             {[
-              { icon: IconCertificate, label: "Excelencia Técnica" },
-              { icon: IconUsers, label: "Comunidad Inclusiva" },
-              { icon: IconMapPin, label: "Presencia Regional" }
+              { icon: IconCertificate, label: t('studentLifePage.leaders.item1') },
+              { icon: IconUsers, label: t('studentLifePage.leaders.item2') },
+              { icon: IconMapPin, label: t('studentLifePage.leaders.item3') }
             ].map((item, idx) => (
               <Grid.Col key={idx} span={{ base: 12, sm: 4 }}>
                 <Stack align="center" gap="sm">

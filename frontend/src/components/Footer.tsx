@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useInstitution } from '../hooks/useInstitution';
 import { useRegistrationModal } from '../hooks/useRegistrationModal';
 import { Link } from 'react-router-dom';
+import { Anchor } from '@mantine/core';
 
 export function Footer() {
   const { t } = useTranslation();
@@ -36,7 +37,7 @@ export function Footer() {
               >
                 {t('header.admissions')}
               </Text>
-              <Text component={Link} to="/technical" size="sm" c="dimmed">{t('footer.links.technicalPrograms')}</Text>
+              <Text component={Link} to="/programs" size="sm" c="dimmed">{t('footer.links.technicalPrograms')}</Text>
               <Text component={Link} to="/campus" size="sm" c="dimmed">{t('header.campus')}</Text>
               <Text component={Link} to="/about" size="sm" c="dimmed">{t('header.about')}</Text>
               <Text component={Link} to="/impact" size="sm" c="dimmed">{t('footer.links.socialImpact')}</Text>
@@ -64,5 +65,3 @@ export function Footer() {
   );
 }
 
-// Helper component for socials if Anchor is not imported, but let's just use <a> or Anchor if available
-import { Anchor } from '@mantine/core';

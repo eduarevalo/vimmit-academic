@@ -73,6 +73,13 @@ export function PublicCampusPage() {
             <SimpleGrid cols={{ base: 1, sm: 2, md: campuses.length < 3 ? 2 : 3 }} spacing="xl">
               {campuses.map((campus, index) => {
                 const color = CAMPUS_COLORS[index % CAMPUS_COLORS.length];
+                const campusImages: Record<string, string> = {
+                  'MAIN': '/assets/campuses/santander.jpg',
+                  'BUGA': '/assets/campuses/bugalagrande.jpg',
+                  'CAIC': '/assets/campuses/caicedonia.jpg'
+                };
+                const bgImage = campusImages[campus.code] || 'https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&q=80&w=800';
+
                 return (
                   <motion.div
                     key={campus.id}
@@ -80,63 +87,59 @@ export function PublicCampusPage() {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.15, duration: 0.6 }}
                     viewport={{ once: true }}
+                    whileHover={{ scale: 1.02 }}
                   >
                     <Paper 
-                      p="xl" 
                       radius="lg" 
-                      withBorder 
-                      shadow="sm" 
+                      shadow="md" 
                       style={{ 
-                        height: '100%', 
-                        transition: 'all 0.3s ease',
+                        height: 320, 
+                        transition: 'all 0.4s ease',
                         overflow: 'hidden',
                         position: 'relative',
-                      }}
-                      onMouseEnter={(e) => { 
-                        e.currentTarget.style.transform = 'translateY(-8px)'; 
-                        e.currentTarget.style.boxShadow = '0 20px 40px rgba(0,0,0,0.08)';
-                      }}
-                      onMouseLeave={(e) => { 
-                        e.currentTarget.style.transform = 'translateY(0)'; 
-                        e.currentTarget.style.boxShadow = '';
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'flex-end',
+                        background: `url(${bgImage}) center center / cover no-repeat`,
+                        border: 'none'
                       }}
                     >
-                      {/* Top accent bar */}
-                      <Box 
-                        style={{ 
-                          position: 'absolute', 
-                          top: 0, 
-                          left: 0, 
-                          right: 0, 
-                          height: 4, 
-                          background: `var(--mantine-color-${color}-6)` 
-                        }} 
+                      <Overlay 
+                        gradient="linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.4) 40%, rgba(0, 0, 0, 0.9) 100%)" 
+                        opacity={1} 
+                        zIndex={1} 
                       />
 
-                      <Stack gap="lg" mt="xs">
-                        <Group>
-                          <ThemeIcon size={50} radius="md" variant="light" color={color}>
-                            <IconBuilding size={28} stroke={1.5} />
-                          </ThemeIcon>
-                          <Stack gap={2} style={{ flex: 1 }}>
-                            <Title order={3} size="h4" fw={700}>{campus.name}</Title>
-                            <Badge variant="outline" color="gray" size="sm">{campus.code}</Badge>
+                      <Stack gap="sm" p="xl" style={{ position: 'relative', zIndex: 2, color: 'white' }}>
+                        <Group justify="space-between" align="flex-start">
+                          <Stack gap={2}>
+                            <Title order={3} size="h3" fw={800} style={{ textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>
+                              {campus.name}
+                            </Title>
+                            <Badge variant="filled" color={color} size="sm" radius="sm">
+                              {campus.code}
+                            </Badge>
                           </Stack>
+                          <ThemeIcon size={44} radius="lg" variant="white" color={color}>
+                            <IconBuilding size={24} stroke={1.5} />
+                          </ThemeIcon>
                         </Group>
 
-                        <Stack gap="xs">
+                        <Stack gap="xs" mt="sm">
                           {campus.city && (
                             <Group gap="xs" wrap="nowrap">
-                              <IconMapPin size={16} color="var(--mantine-color-dimmed)" stroke={1.5} />
-                              <Text size="sm" c="dimmed">
+                              <IconMapPin size={16} stroke={2} />
+                              <Text size="sm" fw={600}>
                                 {campus.city}{campus.country ? `, ${campus.country}` : ''}
                               </Text>
                             </Group>
                           )}
                           {campus.address && (
-                            <Group gap="xs" wrap="nowrap">
-                              <IconBuilding size={16} color="var(--mantine-color-dimmed)" stroke={1.5} />
-                              <Text size="sm" c="dimmed">{campus.address}</Text>
+                            <Group gap="xs" wrap="nowrap" style={{ opacity: 0.9 }}>
+                              <IconBuilding size={16} stroke={1.5} />
+                              <Text size="xs" fs="italic">
+                                {campus.address}
+                              </Text>
                             </Group>
                           )}
                         </Stack>
