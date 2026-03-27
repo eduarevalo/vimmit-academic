@@ -43,8 +43,9 @@ TENANTS = [
         "slug": "aseder",
         "description": "ASEDER: institución técnica laboral con más de 25 años de experiencia.",
         "campuses": [
-            {"name": "Sede Principal",      "code": "MAIN", "city": "Santander de Quilichao", "country": "Colombia"},
-            {"name": "Sede Norte",           "code": "NORT", "city": "Santander de Quilichao", "country": "Colombia"},
+            {"name": "Sede Principal",      "code": "MAIN", "city": "Santander de Quilichao", "country": "Colombia", "address": "Calle 3 # 10-86, Barrio Centro"},
+            {"name": "Sede Bugalagrande",    "code": "BUGA", "city": "Bugalagrande",          "country": "Colombia", "address": "Calle 7 # 6-46, Barrio Antonio Nariño", "phone": "3234764325"},
+            {"name": "Sede Caicedonia",      "code": "CAIC", "city": "Caicedonia",            "country": "Colombia", "address": "Carrera 15 # 4-51, Barrio El Recreo", "phone": "3202609433"},
         ],
         "programs": [
             {
@@ -58,12 +59,72 @@ TENANTS = [
                 "levels": ["Primer Semestre", "Segundo Semestre", "Tercer Semestre"],
             },
             {
-                "name": "Salud Oral",
+                "name": "Auxiliar en Salud Oral",
                 "description": "Capacitación práctica en higiene dental, asistencia en consultorio y prevención de enfermedades orales.",
                 "program_type": ProgramType.TECHNICAL,
                 "total_levels": 3,
                 "level_label": "Semestre",
                 "degree_title": "Técnico en Salud Oral",
+                "credits_per_level": 20,
+                "levels": ["Primer Semestre", "Segundo Semestre", "Tercer Semestre"],
+            },
+            {
+                "name": "Auxiliar en Servicios Farmacéuticos",
+                "description": "Atención y suministro de medicamentos bajo normatividad legal y técnica.",
+                "program_type": ProgramType.TECHNICAL,
+                "total_levels": 3,
+                "level_label": "Semestre",
+                "degree_title": "Técnico en Servicios Farmacéuticos",
+                "credits_per_level": 20,
+                "levels": ["Primer Semestre", "Segundo Semestre", "Tercer Semestre"],
+            },
+            {
+                "name": "Auxiliar en Veterinaria",
+                "description": "Apoyo en el cuidado, manejo y asistencia médica de animales en clínicas especializadas.",
+                "program_type": ProgramType.TECHNICAL,
+                "total_levels": 3,
+                "level_label": "Semestre",
+                "degree_title": "Técnico en Veterinaria",
+                "credits_per_level": 20,
+                "levels": ["Primer Semestre", "Segundo Semestre", "Tercer Semestre"],
+            },
+            {
+                "name": "Técnico Laboral en Calidad y Procedimiento Aplicado a la Industria de Alimentos",
+                "description": "Control de calidad y procesos seguros en la producción alimentaria industrial.",
+                "program_type": ProgramType.TECHNICAL,
+                "total_levels": 3,
+                "level_label": "Semestre",
+                "degree_title": "Técnico en Calidad de Alimentos",
+                "credits_per_level": 20,
+                "levels": ["Primer Semestre", "Segundo Semestre", "Tercer Semestre"],
+            },
+            {
+                "name": "Técnico en Atención Integral a la Primera Infancia",
+                "description": "Cuidado, educación y desarrollo de niños y niñas en sus primeros años de vida.",
+                "program_type": ProgramType.TECHNICAL,
+                "total_levels": 3,
+                "level_label": "Semestre",
+                "degree_title": "Técnico en Primera Infancia",
+                "credits_per_level": 20,
+                "levels": ["Primer Semestre", "Segundo Semestre", "Tercer Semestre"],
+            },
+            {
+                "name": "Técnico en Seguridad y Salud en el Trabajo",
+                "description": "Prevención de riesgos laborales y fomento de entornos de trabajo seguros.",
+                "program_type": ProgramType.TECHNICAL,
+                "total_levels": 3,
+                "level_label": "Semestre",
+                "degree_title": "Técnico en Seguridad Laboral",
+                "credits_per_level": 20,
+                "levels": ["Primer Semestre", "Segundo Semestre", "Tercer Semestre"],
+            },
+            {
+                "name": "Técnico Laboral en Agente de Tránsito",
+                "description": "Control de movilidad, normatividad de tránsito y seguridad vial.",
+                "program_type": ProgramType.TECHNICAL,
+                "total_levels": 3,
+                "level_label": "Semestre",
+                "degree_title": "Técnico en Agente de Tránsito",
                 "credits_per_level": 20,
                 "levels": ["Primer Semestre", "Segundo Semestre", "Tercer Semestre"],
             },
@@ -165,6 +226,8 @@ def init_tenant():
                         "name": c_data["name"],
                         "city": c_data["city"],
                         "country": c_data["country"],
+                        "address": c_data.get("address"),
+                        "phone": c_data.get("phone"),
                     },
                 )
                 campus_objects.append(campus)
@@ -193,21 +256,21 @@ def init_tenant():
                     level_objects.append(level)
                     print(f"    Level {seq}: {level.name}")
 
-                # Calendar (one per program × first campus, year 2025-2026)
-                main_campus = campus_objects[0]
-                calendar = get_or_create(
-                    session, CalendarModel,
-                    filters={"program_id": program.id, "campus_id": main_campus.id},
-                    defaults={
-                        "tenant_id": tenant.id,
-                        "name": f"Año Académico 2025-2026 – {program.name}",
-                        "start_date": date(2025, 2, 1),
-                        "end_date":   date(2025, 12, 15),
-                        "enrollment_open":  date(2025, 1, 5),
-                        "enrollment_close": date(2025, 1, 25),
-                    },
-                )
-                print(f"    Calendar: {calendar.name}")
+                # Calendar (one per program per campus, year 2025-2026)
+                for campus in campus_objects:
+                    calendar = get_or_create(
+                        session, CalendarModel,
+                        filters={"program_id": program.id, "campus_id": campus.id},
+                        defaults={
+                            "tenant_id": tenant.id,
+                            "name": f"Año Académico 2025-2026 – {program.name} ({campus.city})",
+                            "start_date": date(2025, 2, 1),
+                            "end_date":   date(2025, 12, 15),
+                            "enrollment_open":  date(2025, 1, 5),
+                            "enrollment_close": date(2025, 1, 25),
+                        },
+                    )
+                    print(f"    Calendar: {calendar.name}")
 
                 # Terms (one term per level)
                 term_dates = [
@@ -231,21 +294,30 @@ def init_tenant():
                     )
                     print(f"      Term: {term.name}")
 
-                # ── Enrollment (test user in first level) ─────────────────────
+                # ── Enrollment (test user in first level, first campus) ─────────────
                 if level_objects:
-                    enrollment = get_or_create(
-                        session, EnrollmentModel,
-                        filters={
-                            "student_id":  admin_user.id,
-                            "level_id":    level_objects[0].id,
-                            "calendar_id": calendar.id,
-                        },
-                        defaults={
-                            "tenant_id": tenant.id,
-                            "status":    EnrollmentStatus.CONFIRMED,
-                        },
-                    )
-                    print(f"      Enrollment: {enrollment.status} → {level_objects[0].name}")
+                    # Use a calendar associated with the first campus for the test enrollment
+                    first_campus_calendar = session.exec(
+                        select(CalendarModel).where(
+                            CalendarModel.program_id == program.id,
+                            CalendarModel.campus_id == campus_objects[0].id
+                        )
+                    ).first()
+
+                    if first_campus_calendar:
+                        enrollment = get_or_create(
+                            session, EnrollmentModel,
+                            filters={
+                                "student_id":  admin_user.id,
+                                "level_id":    level_objects[0].id,
+                                "calendar_id": first_campus_calendar.id,
+                            },
+                            defaults={
+                                "tenant_id": tenant.id,
+                                "status":    EnrollmentStatus.CONFIRMED,
+                            },
+                        )
+                        print(f"      Enrollment: {enrollment.status} → {level_objects[0].name}")
 
                 # Restore levels list for potential re-runs
                 p_data["levels"] = levels_names

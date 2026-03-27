@@ -12,6 +12,7 @@ class CampusModel(SQLModel, table=True):
     name: str = Field(index=True)
     code: str = Field(index=True)          # Short code, e.g. "MAIN", "DT"
     address: Optional[str] = None
+    phone: Optional[str] = None
     city: Optional[str] = None
     country: Optional[str] = None
     is_active: bool = Field(default=True)

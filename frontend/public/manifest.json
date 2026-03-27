@@ -3,7 +3,7 @@
   "short_name": "Aseder",
   "description": "Institución técnica laboral con más de 25 años de experiencia.",
   "start_url": "/",
-  "display": "standalone",
+  "display": "minimal-ui",
   "background_color": "#ffffff",
   "theme_color": "#2c3e50",
   "icons": [
