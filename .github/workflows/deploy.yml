@@ -61,7 +61,16 @@ jobs:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Extract Per-Service SHA
+        id: extract_sha
+        run: |
+          echo "frontend_sha=$(git log -1 --format=%H -- frontend)" >> $GITHUB_OUTPUT
+          echo "backend_sha=$(git log -1 --format=%H -- backend)" >> $GITHUB_OUTPUT
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
@@ -86,21 +95,13 @@ jobs:
         working-directory: ./infra
         run: terraform init
 
-      - name: Terraform Import (Jumpstart)
-        working-directory: ./infra
-        run: |
-          if ! terraform state list | grep -q "digitalocean_app.vimmit_academic"; then
-            echo "App not found in state, attempting jumpstart import..."
-            terraform import \
-              -var "do_token=${{ secrets.DIGITALOCEAN_TOKEN }}" \
-              digitalocean_app.vimmit_academic 3397fdac-3096-4063-b47e-87f2b1af4b9c || echo "Import failed or app already managed"
-          fi
-
       - name: Terraform Plan
         working-directory: ./infra
         run: |
           terraform plan \
             -var "do_token=${{ secrets.DIGITALOCEAN_TOKEN }}" \
+            -var "frontend_sha=${{ steps.extract_sha.outputs.frontend_sha }}" \
+            -var "backend_sha=${{ steps.extract_sha.outputs.backend_sha }}" \
             -out=tfplan
 
       - name: Terraform Apply

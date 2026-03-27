@@ -60,6 +60,11 @@ resource "digitalocean_app" "vimmit_academic" {
         key   = "ENVIRONMENT"
         value = var.environment
       }
+      
+      env {
+        key   = "SOURCE_COMMIT_SHA"
+        value = var.backend_sha
+      }
     }
 
     # Frontend Static Site
@@ -73,6 +78,11 @@ resource "digitalocean_app" "vimmit_academic" {
       github {
         repo   = "eduarevalo/vimmit-academic"
         branch = "main"
+      }
+
+      env {
+        key   = "SOURCE_COMMIT_SHA"
+        value = var.frontend_sha
       }
     }
 

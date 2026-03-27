@@ -27,3 +27,15 @@ variable "custom_domain" {
   type        = string
   default     = "aseder.edu.co"
 }
+
+variable "frontend_sha" {
+  description = "Last commit SHA for frontend"
+  type        = string
+  default     = ""
+}
+
+variable "backend_sha" {
+  description = "Last commit SHA for backend"
+  type        = string
+  default     = ""
+}
