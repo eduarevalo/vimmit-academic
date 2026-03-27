@@ -24,9 +24,8 @@ resource "digitalocean_app" "vimmit_academic" {
       http_port          = 8080
 
       github {
-        repo           = "eduarevalo/vimmit-academic"
-        branch         = "main"
-        deploy_on_push = true
+        repo   = "eduarevalo/vimmit-academic"
+        branch = "main"
       }
 
       dockerfile_path = "backend/Dockerfile"
