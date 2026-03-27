@@ -86,6 +86,16 @@ jobs:
         working-directory: ./infra
         run: terraform init
 
+      - name: Terraform Import (Jumpstart)
+        working-directory: ./infra
+        run: |
+          if ! terraform state list | grep -q "digitalocean_app.vimmit_academic"; then
+            echo "App not found in state, attempting jumpstart import..."
+            terraform import \
+              -var "do_token=${{ secrets.DIGITALOCEAN_TOKEN }}" \
+              digitalocean_app.vimmit_academic 3397fdac-3096-4063-b47e-87f2b1af4b9c || echo "Import failed or app already managed"
+          fi
+
       - name: Terraform Plan
         working-directory: ./infra
         run: |
