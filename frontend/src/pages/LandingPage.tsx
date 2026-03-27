@@ -6,7 +6,7 @@ export function LandingPage() {
   const navigate = useNavigate();
   return (
     <>
-      <Hero onExplore={() => navigate('/info')} />
+      <Hero onExplore={() => navigate('/programs')} />
       <ProgramsSection />
     </>
   );

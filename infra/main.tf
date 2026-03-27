@@ -16,11 +16,30 @@ resource "digitalocean_app" "vimmit_academic" {
     name   = var.app_name
     region = var.region
 
+    # Primary institutional domain
+    dynamic "domain" {
+      for_each = var.custom_domain != "" ? [var.custom_domain] : []
+      content {
+        name = domain.value
+        type = "PRIMARY"
+      }
+    }
+
+    # WWW subdomain alias
+    dynamic "domain" {
+      for_each = var.custom_domain != "" ? ["www.${var.custom_domain}"] : []
+      content {
+        name = domain.value
+        type = "ALIAS"
+      }
+    }
+
     # Backend Service (Containerized)
     service {
       name               = "backend-api"
       instance_count     = 1
       instance_size_slug = "basic-xxs" # $5/month
+      http_port          = 8080
 
       github {
         repo   = "eduarevalo/vimmit-academic"
@@ -49,6 +68,7 @@ resource "digitalocean_app" "vimmit_academic" {
       build_command      = "npm install && npm run build"
       output_dir         = "dist"
       source_dir         = "frontend"
+      error_document     = "index.html"
       
       github {
         repo   = "eduarevalo/vimmit-academic"

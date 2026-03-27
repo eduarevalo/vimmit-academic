@@ -3,6 +3,7 @@ import { IconBook2, IconBrandTwitter, IconBrandYoutube, IconBrandInstagram } fro
 import { useTranslation } from 'react-i18next';
 import { useInstitution } from '../hooks/useInstitution';
 import { useRegistrationModal } from '../hooks/useRegistrationModal';
+import { Link } from 'react-router-dom';
 
 export function Footer() {
   const { t } = useTranslation();
@@ -36,7 +37,7 @@ export function Footer() {
                 {t('header.admissions')}
               </Text>
               <Text component="a" href="#programs" size="sm" c="dimmed">{t('footer.academics')}</Text>
-              <Text component="a" href="/info" size="sm" c="dimmed">{t('header.about')}</Text>
+              <Text component={Link} to="/about" size="sm" c="dimmed">{t('header.about')}</Text>
               <Text component="a" href="#" size="sm" c="dimmed">{t('footer.research')}</Text>
             </Stack>
             <Stack gap="sm">

@@ -21,3 +21,9 @@ variable "environment" {
   type        = string
   default     = "production"
 }
+
+variable "custom_domain" {
+  description = "Custom domain for the app (optional)"
+  type        = string
+  default     = "aseder.edu.co"
+}
