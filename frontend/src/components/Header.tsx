@@ -1,4 +1,5 @@
-import { Container, Group, Button, Text, Box, Menu, Avatar } from '@mantine/core';
+import { Container, Group, Button, Text, Box, Menu, Avatar, Burger, Drawer, Stack } from '@mantine/core';
+import { useDisclosure } from '@mantine/hooks';
 import { IconExternalLink, IconLogout, IconUser } from '@tabler/icons-react';
 import { useTranslation } from 'react-i18next';
 import { useInstitution } from '../hooks/useInstitution';
@@ -23,8 +24,40 @@ export function Header({
   const location = useLocation();
   const { name } = useInstitution();
   const { isAuthenticated, user, logout } = useAuth();
+  const [opened, { toggle, close }] = useDisclosure(false);
 
   const isActive = (path: string) => location.pathname === path;
+
+  const navLinks = [
+    { label: t('header.about'), path: '/about' },
+    { label: t('header.programs'), path: '/programs' },
+    { label: t('header.campus'), path: '/campus' },
+    { label: t('header.admissions'), path: '/admissions' },
+    { label: t('header.campusLife'), path: '/student-life' },
+  ];
+
+  const NavContent = ({ mobile = false }: { mobile?: boolean }) => (
+    <>
+      {navLinks.map((link) => (
+        <Text 
+          key={link.path}
+          component={Link} 
+          to={link.path} 
+          fw={500} 
+          size={mobile ? 'lg' : 'sm'}
+          c={isActive(link.path) ? 'brand' : 'dimmed'} 
+          onClick={mobile ? close : undefined}
+          style={{ 
+            transition: 'color 0.2s ease',
+            textDecoration: 'none'
+          }}
+          className="nav-link"
+        >
+          {link.label}
+        </Text>
+      ))}
+    </>
+  );
 
   return (
     <Box 
@@ -49,11 +82,7 @@ export function Header({
           </Group>
 
           <Group gap={30} visibleFrom="sm">
-            <Text component={Link} to="/about" fw={500} c={isActive('/about') ? 'brand' : 'dimmed'}>{t('header.about')}</Text>
-            <Text component={Link} to="/programs" fw={500} c={isActive('/programs') ? 'brand' : 'dimmed'}>{t('header.programs')}</Text>
-            <Text component={Link} to="/campus" fw={500} c={isActive('/campus') ? 'brand' : 'dimmed'}>{t('header.campus')}</Text>
-            <Text component={Link} to="/admissions" fw={500} c={isActive('/admissions') ? 'brand' : 'dimmed'}>{t('header.admissions')}</Text>
-            <Text component={Link} to="/student-life" fw={500} c={isActive('/student-life') ? 'brand' : 'dimmed'}>{t('header.campusLife')}</Text>
+            <NavContent />
           </Group>
 
           <Group gap="sm">
@@ -104,8 +133,87 @@ export function Header({
             <Button radius="xl" variant="filled" color="brand" onClick={onStartJourney}>
               {t('header.startJourney')}
             </Button>
+
+            <Burger 
+              opened={opened} 
+              onClick={toggle} 
+              hiddenFrom="sm" 
+              size="sm" 
+              color="brand"
+              aria-label="Toggle navigation"
+            />
           </Group>
         </Group>
+
+        <Drawer
+          opened={opened}
+          onClose={close}
+          size="75%"
+          padding="xl"
+          title={
+            <Group gap="xs">
+              <img src="/logo-clean.png" alt="Logo" style={{ height: 24 }} />
+              <Text fw={700} size="lg">{name}</Text>
+            </Group>
+          }
+          position="right"
+          zIndex={1001}
+        >
+          <Stack gap="lg" mt="xl">
+            <NavContent mobile />
+            
+            <Box style={{ borderTop: '1px solid #f1f3f5', paddingTop: '1.5rem' }}>
+              <Button 
+                component="a"
+                href="/portal"
+                target="_blank"
+                radius="xl" 
+                variant="light" 
+                color="gray"
+                fullWidth
+                rightSection={<IconExternalLink size={16} />}
+                mb="sm"
+              >
+                {t('header.educationalPortal')}
+              </Button>
+
+              {isAuthenticated && showUser ? (
+                <Stack gap="sm">
+                  <Text size="sm" fw={600} c="dimmed">Mi Cuenta</Text>
+                  <Button variant="subtle" color="gray" leftSection={<IconUser size={16} />} justify="flex-start" fullWidth>
+                    Mi Perfil
+                  </Button>
+                  <Button 
+                    variant="subtle" 
+                    color="red" 
+                    leftSection={<IconLogout size={16} />} 
+                    justify="flex-start" 
+                    fullWidth 
+                    onClick={() => {
+                      logout();
+                      close();
+                    }}
+                  >
+                    {t('header.logout')}
+                  </Button>
+                </Stack>
+              ) : showLogin && (
+                <Button 
+                  variant="outline" 
+                  color="brand" 
+                  radius="xl" 
+                  fullWidth 
+                  onClick={() => {
+                    navigate('/portal/login');
+                    close();
+                  }}
+                >
+                  {t('auth.login')}
+                </Button>
+              )}
+            </Box>
+          </Stack>
+        </Drawer>
       </Container>
     </Box>
   );
