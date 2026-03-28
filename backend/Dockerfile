@@ -19,14 +19,18 @@ COPY src ./src
 # Install the project itself
 RUN uv sync --frozen --no-dev
 
+# Initialize the database with tenant data
+RUN uv run python src/scripts/init_tenant.py
+
 # Final stage
 FROM python:3.12-slim-bookworm
 
 WORKDIR /app
 
-# Copy the environment (venv) and source from the builder
+# Copy the environment (venv), source, and the initialized database
 COPY --from=builder /app/.venv /app/.venv
 COPY --from=builder /app/src /app/src
+COPY --from=builder /app/test.db /app/test.db
 
 # Set environment variables
 ENV PATH="/app/.venv/bin:$PATH"
