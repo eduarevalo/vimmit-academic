@@ -41,25 +41,25 @@ app.add_middleware(
 )
 
 # Mounting Identity API
-app.include_router(auth_router, prefix="/api/v1/identity")
-app.include_router(user_router, prefix="/api/v1/identity")
+app.include_router(auth_router, prefix="/v1/identity")
+app.include_router(user_router, prefix="/v1/identity")
 
 # Mounting Administration API
-app.include_router(registration_intent_router, prefix="/api/v1/administration")
-app.include_router(tenants_router, prefix="/api/v1/administration")
+app.include_router(registration_intent_router, prefix="/v1/administration")
+app.include_router(tenants_router, prefix="/v1/administration")
 
 # Mounting Academic API
-app.include_router(programs_router, prefix="/api/v1/academic")
-app.include_router(program_levels_router, prefix="/api/v1/academic")
+app.include_router(programs_router, prefix="/v1/academic")
+app.include_router(program_levels_router, prefix="/v1/academic")
 
 # Mounting Administrative API
-app.include_router(enrollments_router, prefix="/api/v1/administrative")
+app.include_router(enrollments_router, prefix="/v1/administrative")
 
 # Mounting Organization API
-app.include_router(campus_router, prefix="/api/v1/organization")
+app.include_router(campus_router, prefix="/v1/organization")
 
 # Mounting Calendar API
-app.include_router(calendars_router, prefix="/api/v1/calendar")
+app.include_router(calendars_router, prefix="/v1/calendar")
 
 @app.get("/")
 def read_root():
