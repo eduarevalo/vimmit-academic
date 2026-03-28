@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '../hooks/useAuth';
 import { Can } from '../components/auth/Can';
 
-const API_BASE_URL = 'http://localhost:8000';
+import { API_BASE_URL } from '../config';
 
 interface Calendar {
   id: string;

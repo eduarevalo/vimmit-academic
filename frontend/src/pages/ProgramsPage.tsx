@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { useInstitution } from '../hooks/useInstitution';
 import { useNavigate } from 'react-router-dom';
 
-const API_BASE_URL = 'http://localhost:8000';
+import { API_BASE_URL } from '../config';
 
 interface Program {
   id: string;

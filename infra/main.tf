@@ -61,6 +61,11 @@ resource "digitalocean_app" "vimmit_academic" {
         branch         = "main"
         deploy_on_push = true
       }
+
+      env {
+        key   = "VITE_API_URL"
+        value = ""
+      }
     }
 
     # Central Ingress Routing (Fixes deprecation warning)

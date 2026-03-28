@@ -3,7 +3,7 @@ import { useForm } from '@mantine/form';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../hooks/useAuth';
 
-const API_BASE_URL = 'http://localhost:8000';
+import { API_BASE_URL } from '../../config';
 
 interface ProgramFormProps {
   initialValues?: any;

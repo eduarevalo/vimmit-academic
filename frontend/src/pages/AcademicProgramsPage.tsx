@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import { ProgramForm } from '../components/portal/ProgramForm';
 import { useAuth } from '../hooks/useAuth';
 
-const API_BASE_URL = 'http://localhost:8000';
+import { API_BASE_URL } from '../config';
 
 interface Program {
   id: string;

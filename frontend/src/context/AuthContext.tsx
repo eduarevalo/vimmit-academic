@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect, type ReactNode } from 'react';
 
-const API_BASE_URL = 'http://localhost:8000';
+import { API_BASE_URL } from '../config';
 
 interface Membership {
   tenant_id: string;

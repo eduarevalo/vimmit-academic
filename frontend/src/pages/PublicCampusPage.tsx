@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { useInstitution } from '../hooks/useInstitution';
 import { motion } from 'framer-motion';
 
-const API_BASE_URL = 'http://localhost:8000';
+import { API_BASE_URL } from '../config';
 
 interface Campus {
   id: string;
