@@ -14,10 +14,10 @@ export interface InstitutionData {
     };
   };
   socials: {
-    twitter: string;
-    youtube: string;
-    instagram: string;
-    facebook?: string;
+    facebook: string;
+    twitter?: string;
+    youtube?: string;
+    instagram?: string;
     linkedin?: string;
   };
 }
@@ -38,9 +38,7 @@ const institutionData: InstitutionData = {
     },
   },
   socials: {
-    twitter: 'https://twitter.com/aseder',
-    youtube: 'https://youtube.com/@aseder',
-    instagram: 'https://instagram.com/aseder_quilichao',
+    facebook: 'https://www.facebook.com/AsederADE',
   },
 };
 

@@ -1,5 +1,5 @@
 import { Container, Group, Box, Text, Stack } from '@mantine/core';
-import { IconBrandTwitter, IconBrandYoutube, IconBrandInstagram } from '@tabler/icons-react';
+import { IconBrandFacebook } from '@tabler/icons-react';
 import { useTranslation } from 'react-i18next';
 import { useInstitution } from '../hooks/useInstitution';
 import { useRegistrationModal } from '../hooks/useRegistrationModal';
@@ -55,9 +55,7 @@ export function Footer() {
         <Group justify="space-between" pt="md" style={{ borderTop: '1px solid #eaeaea' }}>
           <Text size="sm" c="dimmed">© {new Date().getFullYear()} {fullName}. {t('footer.rights')}</Text>
           <Group gap="md">
-            <Anchor href={socials.twitter} target="_blank"><IconBrandTwitter size={20} color="#868e96" style={{ cursor: 'pointer' }}/></Anchor>
-            <Anchor href={socials.youtube} target="_blank"><IconBrandYoutube size={20} color="#868e96" style={{ cursor: 'pointer' }}/></Anchor>
-            <Anchor href={socials.instagram} target="_blank"><IconBrandInstagram size={20} color="#868e96" style={{ cursor: 'pointer' }}/></Anchor>
+            <Anchor href={socials.facebook} target="_blank"><IconBrandFacebook size={20} color="#868e96" style={{ cursor: 'pointer' }}/></Anchor>
           </Group>
         </Group>
       </Container>
