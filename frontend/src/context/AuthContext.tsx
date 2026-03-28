@@ -38,7 +38,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   const fetchUserProfile = async (authToken: string) => {
     try {
-      const response = await fetch(`${API_BASE_URL}/api/v1/identity/auth/me`, {
+      const response = await fetch(`${API_BASE_URL}/v1/identity/auth/me`, {
         headers: { 'Authorization': `Bearer ${authToken}` },
       });
 
@@ -75,7 +75,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     formData.append('username', email);
     formData.append('password', password);
 
-    const response = await fetch(`${API_BASE_URL}/api/v1/identity/auth/token`, {
+    const response = await fetch(`${API_BASE_URL}/v1/identity/auth/token`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: formData.toString(),

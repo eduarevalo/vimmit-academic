@@ -33,7 +33,7 @@ export function RegistrationModal() {
   useEffect(() => {
     if (isOpen) {
       setLoadingPrograms(true);
-      fetch(`${API_BASE_URL}/api/v1/academic/programs/public/${slug}`)
+      fetch(`${API_BASE_URL}/v1/academic/programs/public/${slug}`)
         .then((res) => res.json())
         .then((data) => {
           if (Array.isArray(data)) {
@@ -58,7 +58,7 @@ export function RegistrationModal() {
     setError(null);
 
     try {
-      const response = await fetch(`${API_BASE_URL}/api/v1/administration/registration-intents`, {
+      const response = await fetch(`${API_BASE_URL}/v1/administration/registration-intents`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -62,7 +62,7 @@ function CalendarForm({ initialValues, programs, campuses, onSuccess, token }: {
       start_date: typeof values.start_date === 'string' ? values.start_date : values.start_date?.toISOString().split('T')[0],
       end_date:   typeof values.end_date === 'string' ? values.end_date : values.end_date?.toISOString().split('T')[0],
     };
-    const url = `${API_BASE_URL}/api/v1/calendar/academic-periods${initialValues ? `/${initialValues.id}` : ''}`;
+    const url = `${API_BASE_URL}/v1/calendar/academic-periods${initialValues ? `/${initialValues.id}` : ''}`;
     const method = initialValues ? 'PUT' : 'POST';
     await fetch(url, {
       method,
@@ -118,7 +118,7 @@ export function CalendarsPage() {
 
   const fetchCalendars = async () => {
     if (!token) return;
-    const res = await fetch(`${API_BASE_URL}/api/v1/calendar/academic-periods`, {
+    const res = await fetch(`${API_BASE_URL}/v1/calendar/academic-periods`, {
       headers: authHeaders
     });
     if (res.ok) setCalendars(await res.json());
@@ -127,8 +127,8 @@ export function CalendarsPage() {
   const fetchLookups = async () => {
     if (!token) return;
     const [progR, campR] = await Promise.all([
-      fetch(`${API_BASE_URL}/api/v1/academic/programs`, { headers: authHeaders }),
-      fetch(`${API_BASE_URL}/api/v1/academic/campuses`, { headers: authHeaders }),
+      fetch(`${API_BASE_URL}/v1/academic/programs`, { headers: authHeaders }),
+      fetch(`${API_BASE_URL}/v1/academic/campuses`, { headers: authHeaders }),
     ]);
     if (progR.ok) setPrograms(await progR.json());
     if (campR.ok) setCampuses(await campR.json());
@@ -136,7 +136,7 @@ export function CalendarsPage() {
 
   const deleteCalendar = async () => {
     if (!deleting || !token) return;
-    await fetch(`${API_BASE_URL}/api/v1/calendar/academic-periods/${deleting.id}`, {
+    await fetch(`${API_BASE_URL}/v1/calendar/academic-periods/${deleting.id}`, {
       method: 'DELETE', headers: authHeaders,
     });
     setDeleting(null);

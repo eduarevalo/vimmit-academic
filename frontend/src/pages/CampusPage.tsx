@@ -42,7 +42,7 @@ function CampusForm({ initialValues, onSuccess, token }: { initialValues?: Campu
   });
 
   const handleSubmit = async (values: any) => {
-    const url = `${API_BASE_URL}/api/v1/organization/campuses${initialValues ? `/${initialValues.id}` : ''}`;
+    const url = `${API_BASE_URL}/v1/organization/campuses${initialValues ? `/${initialValues.id}` : ''}`;
     const method = initialValues ? 'PUT' : 'POST';
     await fetch(url, {
       method,
@@ -93,7 +93,7 @@ export function CampusPage() {
 
   const fetch_ = async () => {
     if (!token) return;
-    const res = await fetch(`${API_BASE_URL}/api/v1/organization/campuses`, {
+    const res = await fetch(`${API_BASE_URL}/v1/organization/campuses`, {
       headers: { 'Authorization': `Bearer ${token}` },
     });
     if (res.ok) setCampuses(await res.json());
@@ -101,7 +101,7 @@ export function CampusPage() {
 
   const deleteCampus = async () => {
     if (!deleting || !token) return;
-    await fetch(`${API_BASE_URL}/api/v1/organization/campuses/${deleting.id}`, {
+    await fetch(`${API_BASE_URL}/v1/organization/campuses/${deleting.id}`, {
       method: 'DELETE',
       headers: { 'Authorization': `Bearer ${token}` },
     });

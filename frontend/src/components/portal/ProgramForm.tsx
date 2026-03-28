@@ -49,7 +49,7 @@ export function ProgramForm({ initialValues, onSuccess }: ProgramFormProps) {
   const handleSubmit = async (values: any) => {
     if (!token) return;
     try {
-      const url = `${API_BASE_URL}/api/v1/academic/programs` + (initialValues ? `/${initialValues.id}` : '');
+      const url = `${API_BASE_URL}/v1/academic/programs` + (initialValues ? `/${initialValues.id}` : '');
       const method = initialValues ? 'PUT' : 'POST';
 
       const response = await fetch(url, {

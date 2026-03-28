@@ -38,7 +38,7 @@ export function ProgramsPage() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch(`${API_BASE_URL}/api/v1/academic/programs/public/${slug}`)
+    fetch(`${API_BASE_URL}/v1/academic/programs/public/${slug}`)
       .then((res) => {
         if (!res.ok) throw new Error(t('common.error.fetchPrograms'));
         return res.json();

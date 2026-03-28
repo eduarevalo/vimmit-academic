@@ -26,7 +26,7 @@ export function PublicCampusPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`${API_BASE_URL}/api/v1/organization/campuses/public/${slug}`)
+    fetch(`${API_BASE_URL}/v1/organization/campuses/public/${slug}`)
       .then((res) => res.json())
       .then(setCampuses)
       .catch(console.error)

@@ -64,7 +64,7 @@ resource "digitalocean_app" "vimmit_academic" {
 
       env {
         key   = "VITE_API_URL"
-        value = ""
+        value = "/api"
       }
     }
 

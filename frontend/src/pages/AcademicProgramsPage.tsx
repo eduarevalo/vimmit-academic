@@ -32,7 +32,7 @@ export function AcademicProgramsPage() {
   const fetchPrograms = async () => {
     if (!token) return;
     try {
-      const response = await fetch(`${API_BASE_URL}/api/v1/academic/programs`, {
+      const response = await fetch(`${API_BASE_URL}/v1/academic/programs`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (response.ok) setPrograms(await response.json());
@@ -45,7 +45,7 @@ export function AcademicProgramsPage() {
     if (!deletingProgram || !token) return;
     try {
       const response = await fetch(
-        `${API_BASE_URL}/api/v1/academic/programs/${deletingProgram.id}`,
+        `${API_BASE_URL}/v1/academic/programs/${deletingProgram.id}`,
         { method: 'DELETE', headers: { 'Authorization': `Bearer ${token}` } }
       );
       if (response.ok || response.status === 204) {
