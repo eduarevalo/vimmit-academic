@@ -1,8 +1,9 @@
-import { Container, Text, Title, Stack, Box, useMantineTheme, Image, SimpleGrid } from '@mantine/core';
+import { Container, Text, Title, Stack, Box, useMantineTheme, SimpleGrid } from '@mantine/core';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
+import { ResponsiveImage } from '../common/ResponsiveImage';
 
-const BG_HISTORY = '/assets/aseder_graduation.png';
+const BG_HISTORY_BASE = '/assets/aseder_graduation';
 
 export function HistorySection() {
   const theme = useMantineTheme();
@@ -57,8 +58,11 @@ export function HistorySection() {
                         zIndex: 0
                     }} 
                 />
-                <Image 
-                    src={BG_HISTORY} 
+                <ResponsiveImage 
+                    srcSetBase={BG_HISTORY_BASE}
+                    fallbackExt="png"
+                    alt={t('aboutPage.history.title')}
+
                     radius="lg" 
                     style={{ position: 'relative', zIndex: 1, boxShadow: theme.shadows.xl }}
                 />
@@ -75,8 +79,10 @@ export function HistorySection() {
                     transition={{ duration: 0.8 }}
                     viewport={{ once: true }}
                 >
-                    <Image 
-                        src="/assets/aseder_medical.png" 
+                    <ResponsiveImage 
+                        srcSetBase="/assets/aseder_medical"
+                        fallbackExt="png"
+                        alt={t('aboutPage.history.medicalAlt')}
                         radius="lg" 
                         style={{ boxShadow: theme.shadows.xl }}
                     />

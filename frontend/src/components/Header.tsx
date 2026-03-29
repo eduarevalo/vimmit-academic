@@ -112,8 +112,8 @@ export function Header({
                   </Button>
                 </Menu.Target>
                 <Menu.Dropdown>
-                  <Menu.Label>Cuenta</Menu.Label>
-                  <Menu.Item leftSection={<IconUser size={14} />}>Mi Perfil</Menu.Item>
+                  <Menu.Label>{t('portal.header.accountLabel')}</Menu.Label>
+                  <Menu.Item leftSection={<IconUser size={14} />}>{t('portal.header.profile')}</Menu.Item>
                   <Menu.Divider />
                   <Menu.Item 
                     color="red" 
@@ -152,7 +152,7 @@ export function Header({
           padding="xl"
           title={
             <Group gap="xs">
-              <img src="/logo-clean.png" alt="Logo" style={{ height: 24 }} />
+              <img src="/logo-clean.png" alt={t('common.logoAlt')} style={{ height: 24 }} />
               <Text fw={700} size="lg">{name}</Text>
             </Group>
           }
@@ -179,9 +179,9 @@ export function Header({
 
               {isAuthenticated && showUser ? (
                 <Stack gap="sm">
-                  <Text size="sm" fw={600} c="dimmed">Mi Cuenta</Text>
+                  <Text size="sm" fw={600} c="dimmed">{t('portal.header.accountLabel')}</Text>
                   <Button variant="subtle" color="gray" leftSection={<IconUser size={16} />} justify="flex-start" fullWidth>
-                    Mi Perfil
+                    {t('portal.header.profile')}
                   </Button>
                   <Button 
                     variant="subtle" 

@@ -1,9 +1,10 @@
-import { Container, Title, Text, Stack, Box, SimpleGrid, Paper, ThemeIcon, useMantineTheme, Image, Overlay, Group, Skeleton } from '@mantine/core';
+import { Container, Title, Text, Stack, Box, SimpleGrid, Paper, ThemeIcon, useMantineTheme, Overlay, Group, Skeleton } from '@mantine/core';
 import { useTranslation } from 'react-i18next';
 import { IconStethoscope, IconDental, IconMedicineSyrup, IconBabyCarriage, IconUserCheck, IconMicroscope, IconAlertCircle } from '@tabler/icons-react';
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { useInstitution } from '../hooks/useInstitution';
+import { ResponsiveImage } from '../components/common/ResponsiveImage';
 import { useNavigate } from 'react-router-dom';
 
 import { API_BASE_URL } from '../config';
@@ -62,12 +63,26 @@ export function ProgramsPage() {
         py="100px" 
         style={{ 
             position: 'relative', 
-            backgroundImage: 'url(/assets/aseder_graduation.png)', 
-            backgroundSize: 'cover', 
-            backgroundPosition: 'center',
-            color: 'white'
+            color: 'white',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center'
         }}
       >
+        <ResponsiveImage 
+          srcSetBase="/assets/aseder_graduation"
+          fallbackExt="png"
+          alt={t('technicalPage.heroAlt')}
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            zIndex: 0
+          }}
+        />
         <Overlay color="#000" opacity={0.6} zIndex={1} />
         <Container size="lg" style={{ position: 'relative', zIndex: 2 }}>
           <Stack gap="md" align="center" ta="center">
@@ -91,11 +106,18 @@ export function ProgramsPage() {
                 transition={{ duration: 0.8 }}
                 viewport={{ once: true }}
             >
-                <Image 
-                    src="/assets/aseder_medical.png" 
-                    radius="lg" 
-                    height={400}
-                />
+                <Box h={400} style={{ position: 'relative', borderRadius: 'var(--mantine-radius-lg)', overflow: 'hidden' }}>
+                    <ResponsiveImage 
+                        srcSetBase="/assets/aseder_medical"
+                        fallbackExt="png"
+                        alt={t('technicalPage.clinicAlt')}
+                        style={{
+                          width: '100%',
+                          height: '100%',
+                          objectFit: 'cover'
+                        }}
+                    />
+                </Box>
             </motion.div>
             
             <motion.div
@@ -165,7 +187,12 @@ export function ProgramsPage() {
                                   onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = theme.shadows.sm; }}
                               >
                                   <Box h={160} style={{ position: 'relative' }}>
-                                      <Image src={meta.image} h={160} w="100%" />
+                                      <ResponsiveImage 
+                                          srcSetBase={meta.image.replace(/\.(png|jpg|jpeg)$/i, '')}
+                                          fallbackExt="png"
+                                          alt={program.name}
+                                          style={{ height: 160, width: '100%', objectFit: 'cover' }}
+                                      />
                                       <Overlay color="#000" opacity={0.2} zIndex={1} />
                                       <ThemeIcon 
                                           size="40px" 

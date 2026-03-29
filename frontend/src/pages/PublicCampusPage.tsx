@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
 import { useInstitution } from '../hooks/useInstitution';
 import { motion } from 'framer-motion';
+import { ResponsiveImage } from '../components/common/ResponsiveImage';
 
 import { API_BASE_URL } from '../config';
 
@@ -73,12 +74,12 @@ export function PublicCampusPage() {
             <SimpleGrid cols={{ base: 1, sm: 2, md: campuses.length < 3 ? 2 : 3 }} spacing="xl">
               {campuses.map((campus, index) => {
                 const color = CAMPUS_COLORS[index % CAMPUS_COLORS.length];
-                const campusImages: Record<string, string> = {
-                  'MAIN': '/assets/campuses/santander.jpg',
-                  'BUGA': '/assets/campuses/bugalagrande.jpg',
-                  'CAIC': '/assets/campuses/caicedonia.jpg'
+                const campusImagesBase: Record<string, string> = {
+                  'MAIN': '/assets/campuses/santander',
+                  'BUGA': '/assets/campuses/bugalagrande',
+                  'CAIC': '/assets/campuses/caicedonia'
                 };
-                const bgImage = campusImages[campus.code] || 'https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&q=80&w=800';
+                const bgImageBase = campusImagesBase[campus.code];
 
                 return (
                   <motion.div
@@ -100,10 +101,26 @@ export function PublicCampusPage() {
                         display: 'flex',
                         flexDirection: 'column',
                         justifyContent: 'flex-end',
-                        background: `url(${bgImage}) center center / cover no-repeat`,
-                        border: 'none'
+                        border: 'none',
+                        background: bgImageBase ? 'none' : 'url(https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&q=80&w=800) center center / cover no-repeat'
                       }}
                     >
+                      {bgImageBase && (
+                        <ResponsiveImage
+                          srcSetBase={bgImageBase}
+                          fallbackExt="jpg"
+                          alt={campus.name}
+                          style={{
+                            position: 'absolute',
+                            top: 0,
+                            left: 0,
+                            width: '100%',
+                            height: '100%',
+                            objectFit: 'cover',
+                            zIndex: 0
+                          }}
+                        />
+                      )}
                       <Overlay 
                         gradient="linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.4) 40%, rgba(0, 0, 0, 0.9) 100%)" 
                         opacity={1} 

@@ -104,7 +104,8 @@
       "p1": "Founded in 2000 in Santander de Quilichao, the Center for Educational Advising for Regional Development (ASEDER) was born from a clear vision: to close educational gaps in Northern Cauca and empower communities through knowledge.",
       "p2": "With over 25 years of experience, we have evolved from a small training center into a leading institution with multiple locations and a diversified academic offer including adult high school and high-impact technical vocational programs.",
       "p3": "Our history is the story of thousands of graduates who, with effort and dedication, have transformed their lives and those of their families, becoming engines of change for our region.",
-      "quote": "Transformando vidas a través del conocimiento y el servicio regional."
+      "quote": "Transforming lives through knowledge and regional service.",
+      "medicalAlt": "Aseder students in medical environment"
     },
     "mission": {
       "title": "Social and Community Mission",
@@ -183,6 +184,8 @@
         "secondaryText": "Our clinic allows nursing and health students to practice in a controlled environment, complying with the quality standards required by the Ministry of Education."
     },
     "offersTitle": "Educational Offer",
+    "heroAlt": "Aseder graduate students",
+    "clinicAlt": "Aseder nursing student",
     "viewDetail": "View detail",
     "detail": {
       "notFound": "Program not found",

@@ -108,7 +108,8 @@
       "p1": "Fundado en el año 2000 en Santander de Quilichao, el Centro Educativo Asesorías Educativas para el Desarrollo Regional (ASEDER) nació de una visión clara: cerrar las brechas educativas en el suroccidente colombiano y empoderar a las comunidades a través del conocimiento.",
       "p2": "Con más de 25 años de trayectoria, hemos evolucionado de un pequeño centro de capacitación a una institución líder con múltiples sedes y una oferta académica diversificada que incluye bachillerato para adultos y programas técnicos laborales de alto impacto.",
       "p3": "Nuestra historia es la historia de miles de graduados que, con esfuerzo y dedicación, han transformado sus vidas y las de sus familias, convirtiéndose en motores de cambio para nuestra región.",
-      "quote": "Transformando vidas a través del conocimiento y el servicio regional."
+      "quote": "Transformando vidas a través del conocimiento y el servicio regional.",
+      "medicalAlt": "Estudiantes de Aseder en ambiente médico"
     },
     "mission": {
       "title": "Misión Social y Comunitaria",
@@ -187,6 +188,8 @@
         "secondaryText": "Nuestra clínica permite a los estudiantes de enfermería y áreas de la salud practicar en un entorno controlado, cumpliendo con los estándares de calidad exigidos por el Ministerio de Educación."
     },
     "offersTitle": "Oferta Educativa",
+    "heroAlt": "Estudiantes graduados de Aseder",
+    "clinicAlt": "Estudiante de enfermería de Aseder",
     "viewDetail": "Ver detalle",
     "detail": {
       "notFound": "Programa no encontrado",
