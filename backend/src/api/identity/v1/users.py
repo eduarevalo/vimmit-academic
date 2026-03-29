@@ -9,6 +9,9 @@ from application.identity.services.identity_service import IdentityService
 from infrastructure.identity.repositories.user_repository import UserRepository
 from infrastructure.identity.repositories.role_repository import RoleRepository
 from infrastructure.security.hash_provider import HashProvider
+from api.identity.dependencies.auth_dependencies import get_current_user, enrich_user_memberships
+from domain.identity.models import User
+from .schemas import UserUpdate, UserOut
 
 router = APIRouter(prefix="/users", tags=["users"])
 
@@ -40,3 +43,23 @@ async def assign_role(user_id: UUID, role_in: RoleAssign, service: IdentityServi
             detail={"code": ErrorCode.RESOURCE_NOT_FOUND, "message": "User or Role not found"}
         )
     return {"message": "Role assigned successfully"}
+
+@router.patch("/me", response_model=UserOut)
+async def update_my_profile(
+    user_in: UserUpdate,
+    current_user: Annotated[User, Depends(get_current_user)],
+    service: IdentityService = Depends(get_identity_service)
+):
+    updated_user = service.update_user_profile(
+        current_user.id,
+        first_name=user_in.first_name,
+        last_name=user_in.last_name,
+        phone=user_in.phone
+    )
+    if not updated_user:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail={"code": ErrorCode.AUTH_USER_NOT_FOUND, "message": "User not found"}
+        )
+    
+    return enrich_user_memberships(updated_user, service._session)

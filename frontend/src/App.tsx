@@ -20,6 +20,9 @@ const EnrollmentsPage = lazy(() => import('./pages/EnrollmentsPage').then(module
 const ImpactPage = lazy(() => import('./pages/ImpactPage').then(module => ({ default: module.ImpactPage })));
 const ProgramDetailPage = lazy(() => import('./pages/ProgramDetailPage').then(module => ({ default: module.ProgramDetailPage })));
 const PublicCampusPage = lazy(() => import('./pages/PublicCampusPage').then(module => ({ default: module.PublicCampusPage })));
+const ForgotPasswordPage = lazy(() => import('./pages/ForgotPasswordPage').then(module => ({ default: module.ForgotPasswordPage })));
+const ResetPasswordPage = lazy(() => import('./pages/ResetPasswordPage').then(module => ({ default: module.ResetPasswordPage })));
+const ProfilePage = lazy(() => import('./pages/ProfilePage').then(module => ({ default: module.ProfilePage })));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage').then(module => ({ default: module.NotFoundPage })));
 
 function App() {
@@ -44,6 +47,10 @@ function App() {
             <Route path="/portal" element={<PortalLayout />}>
               <Route index element={<PortalPage />} />
               
+              {/* Auth flows under portal */}
+              <Route path="forgot-password" element={<ForgotPasswordPage />} />
+              <Route path="reset-password" element={<ResetPasswordPage />} />
+              
               {/* Academic */}
               <Route path="academic/programs" element={<AcademicProgramsPage />} />
               
@@ -55,6 +62,9 @@ function App() {
               
               {/* Calendar */}
               <Route path="calendar/academic-periods" element={<CalendarsPage />} />
+
+              {/* Profile */}
+              <Route path="profile" element={<ProfilePage />} />
 
               {/* Portal Catch-all */}
               <Route path="*" element={<NotFoundPage />} />

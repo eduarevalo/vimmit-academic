@@ -256,14 +256,14 @@ def init_tenant():
                     level_objects.append(level)
                     print(f"    Level {seq}: {level.name}")
 
-                # Calendar (one per program per campus, year 2025-2026)
+                # Calendar (one per program per campus, year 2026)
                 for campus in campus_objects:
                     calendar = get_or_create(
                         session, CalendarModel,
                         filters={"program_id": program.id, "campus_id": campus.id},
                         defaults={
                             "tenant_id": tenant.id,
-                            "name": f"Año Académico 2025-2026 – {program.name} ({campus.city})",
+                            "name": f"2026 – {program.name} ({campus.city})",
                             "start_date": date(2025, 2, 1),
                             "end_date":   date(2025, 12, 15),
                             "enrollment_open":  date(2025, 1, 5),

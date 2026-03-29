@@ -13,6 +13,9 @@ interface User {
   id: string;
   email: string;
   is_active: boolean;
+  first_name?: string | null;
+  last_name?: string | null;
+  phone?: string | null;
   memberships: Membership[];
 }
 
@@ -23,6 +26,10 @@ interface AuthContextType {
   isLoading: boolean;
   login: (email: string, password: string) => Promise<void>;
   logout: () => void;
+  forgotPassword: (email: string) => Promise<void>;
+  resetPassword: (token: string, newPassword: string) => Promise<void>;
+  changePassword: (currentPassword: string, newPassword: string) => Promise<void>;
+  updateProfile: (data: { first_name?: string; last_name?: string; phone?: string }) => Promise<void>;
   hasRole: (roles: string[], tenantId?: string) => boolean;
   logoutMessage: string | null;
   setLogoutMessage: (msg: string | null) => void;
@@ -101,6 +108,83 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     setToken(null);
   };
 
+  const forgotPassword = async (email: string) => {
+    const response = await fetch(`${API_BASE_URL}/v1/identity/auth/forgot-password`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      const detail = errorData.detail;
+      if (typeof detail === 'object' && detail.code) {
+        throw new Error(`auth.errors.${detail.code}`);
+      }
+      throw new Error('auth.errors.SYSTEM_ERROR');
+    }
+  };
+
+  const resetPassword = async (resetToken: string, newPassword: string) => {
+    const response = await fetch(`${API_BASE_URL}/v1/identity/auth/reset-password`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ token: resetToken, new_password: newPassword }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      const detail = errorData.detail;
+      if (typeof detail === 'object' && detail.code) {
+        throw new Error(`auth.errors.${detail.code}`);
+      }
+      throw new Error('auth.errors.SYSTEM_ERROR');
+    }
+  };
+
+  const changePassword = async (currentPassword: string, newPassword: string) => {
+    const response = await fetch(`${API_BASE_URL}/v1/identity/auth/change-password`, {
+      method: 'POST',
+      headers: { 
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({ current_password: currentPassword, new_password: newPassword }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      const detail = errorData.detail;
+      if (typeof detail === 'object' && detail.code) {
+        throw new Error(`auth.errors.${detail.code}`);
+      }
+      throw new Error('auth.errors.SYSTEM_ERROR');
+    }
+  };
+
+  const updateProfile = async (data: { first_name?: string; last_name?: string; phone?: string }) => {
+    const response = await fetch(`${API_BASE_URL}/v1/identity/users/me`, {
+      method: 'PATCH',
+      headers: { 
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      const detail = errorData.detail;
+      if (typeof detail === 'object' && detail.code) {
+        throw new Error(`auth.errors.${detail.code}`);
+      }
+      throw new Error('auth.errors.SYSTEM_ERROR');
+    }
+
+    const updatedUser = await response.json();
+    setUser(updatedUser);
+  };
+
   const hasRole = (roles: string[], tenantId?: string) => {
     if (!user) return false;
     // If no tenantId provided, check if they have the role in ANY of their memberships
@@ -121,6 +205,10 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         isLoading,
         login,
         logout,
+        forgotPassword,
+        resetPassword,
+        changePassword,
+        updateProfile,
         hasRole,
         logoutMessage,
         setLogoutMessage,

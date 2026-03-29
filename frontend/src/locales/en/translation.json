@@ -20,6 +20,18 @@
   "auth": {
     "login": "Login",
     "logout": "Logout",
+    "fields": {
+      "email": "Email Address",
+      "password": "Password",
+      "newPassword": "New Password",
+      "confirmPassword": "Confirm Password"
+    },
+    "placeholders": {
+      "email": "you@example.com",
+      "password": "Your password",
+      "newPassword": "Your new password",
+      "confirmPassword": "Confirm your new password"
+    },
     "errors": {
       "AUTH_INVALID_CREDENTIALS": "Incorrect username or password",
       "AUTH_SESSION_EXPIRED": "Session expired. Please log in again",

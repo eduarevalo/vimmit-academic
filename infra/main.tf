@@ -93,3 +93,24 @@ resource "digitalocean_app" "vimmit_academic" {
     }
   }
 }
+
+# DNS Management for aseder.edu.co
+resource "digitalocean_domain" "default" {
+  name = var.custom_domain
+}
+
+# ZeptoMail DKIM Record
+resource "digitalocean_record" "zeptomail_dkim" {
+  domain = digitalocean_domain.default.id
+  type   = "TXT"
+  name   = "29162140._domainkey"
+  value  = "k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAm4UxnQ2AfyjHT7MKZCe9Du9RQWePTQaUEu6OTw33FoW1/owl3HHHGoHn41Z85KAPDXuahiD97uuT4yLrXw9YeVNsxGcW01zBgR40T1OT4BcIDqRSJ8IXYbIhwODWw7KjVg3JhJQ6v2+UmjG0jUIYX5UXayb42MgHBrWO6g7qkba+e7dVL6xb8bVZATdvTPaK5KjAsoZTBM3IWaOPTmG1L0TFaKN/lx2EB5SvvtuxTRHNJzDGu82yDMyvlPEWklKscy3mQTLID89tyzz+bNjrDdu+O1vKvG6l/yhTCuKyjolXzIzinqKIotTV9UnrMe1xgd6ggKzRdorfsPneivrKpwIDAQAB"
+}
+
+# ZeptoMail CNAME for bounce/tracking
+resource "digitalocean_record" "zeptomail_cname" {
+  domain = digitalocean_domain.default.id
+  type   = "CNAME"
+  name   = "bounce-zem"
+  value  = "cluster89.zeptomail.com."
+}

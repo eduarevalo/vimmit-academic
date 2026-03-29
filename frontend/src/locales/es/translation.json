@@ -22,15 +22,78 @@
   "auth": {
     "login": "Iniciar Sesión",
     "logout": "Cerrar Sesión",
+    "loginButton": "Iniciar Sesión",
+    "backToLogin": "Volver al inicio de sesión",
+    "fields": {
+      "email": "Correo Electrónico",
+      "password": "Contraseña",
+      "newPassword": "Nueva Contraseña",
+      "confirmPassword": "Confirmar Contraseña"
+    },
+    "placeholders": {
+      "email": "tu@ejemplo.com",
+      "password": "Tu contraseña",
+      "newPassword": "Tu nueva contraseña",
+      "confirmPassword": "Repite tu nueva contraseña"
+    },
+    "forgotPassword": {
+      "link": "¿Olvidaste tu contraseña?",
+      "title": "Recuperar Contraseña",
+      "instruction": "Ingresa tu correo electrónico y te enviaremos un enlace para restablecer tu contraseña.",
+      "submit": "Enviar Enlace de Recuperación",
+      "successTitle": "Correo Enviado",
+      "successMessage": "Si el correo está registrado, recibirás un enlace en unos momentos."
+    },
+    "resetPassword": {
+      "title": "Nueva Contraseña",
+      "instruction": "Ingresa tu nueva contraseña para acceder a tu cuenta.",
+      "submit": "Restablecer Contraseña",
+      "successTitle": "Contraseña Actualizada",
+      "successMessage": "Tu contraseña ha sido actualizada correctamente. Ya puedes iniciar sesión."
+    },
     "errors": {
       "AUTH_INVALID_CREDENTIALS": "Usuario o contraseña incorrectos",
       "AUTH_SESSION_EXPIRED": "Tu sesión ha expirado. Por favor, inicia sesión de nuevo",
       "AUTH_USER_NOT_FOUND": "Usuario no encontrado",
+      "AUTH_INVALID_TOKEN": "El token es inválido o ha expirado",
       "RESOURCE_NOT_FOUND": "Recurso no encontrado. Por favor, verifica la información",
       "SYSTEM_ERROR": "Error del sistema. Inténtalo más tarde",
-      "NETWORK_ERROR": "Error de conexión. Verifica tu internet"
+      "NETWORK_ERROR": "Error de conexión. Verifica tu internet",
+      "INVALID_EMAIL": "Correo electrónico inválido",
+      "PASSWORD_TOO_SHORT": "La contraseña debe tener al menos 8 caracteres",
+      "PASSWORD_TOO_SHORT_SIMPLE": "La contraseña es muy corta",
+      "PASSWORD_MISMATCH": "Las contraseñas no coinciden",
+      "LOGIN_FAILED": "Error al iniciar sesión",
+      "INVALID_TOKEN_TITLE": "Enlace Inválido",
+      "INVALID_TOKEN_MESSAGE": "El enlace de recuperación es inválido o ha expirado. Por favor, solicita uno nuevo.",
+      "NAME_TOO_SHORT": "El nombre es muy corto"
     },
     "logoutSuccess": "Has cerrado sesión correctamente"
+  },
+  "profile": {
+    "title": "Mi Perfil",
+    "subtitle": "Administra tu información personal y configuración de seguridad",
+    "updatedTitle": "Perfil Actualizado",
+    "updatedMessage": "Tus datos han sido guardados correctamente.",
+    "errorTitle": "Error",
+    "passwordChangedTitle": "Contraseña Cambiada",
+    "passwordChangedMessage": "Tu contraseña ha sido actualizada.",
+    "saveChanges": "Guardar Cambios",
+    "changePassword": "Cambiar Contraseña",
+    "membershipsTitle": "Instituciones y Roles",
+    "tenantId": "ID de Institución",
+    "tabs": {
+      "account": "Información Personal",
+      "security": "Seguridad"
+    },
+    "fields": {
+      "firstName": "Nombres",
+      "lastName": "Apellidos",
+      "phone": "Teléfono",
+      "currentPassword": "Contraseña Actual",
+      "newPassword": "Nueva Contraseña",
+      "confirmPassword": "Confirmar Nueva Contraseña"
+    }
   },
   "hero": {
     "welcome": "Bienvenido a",

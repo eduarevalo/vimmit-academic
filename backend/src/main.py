@@ -11,6 +11,7 @@ from api.organization.campus.v1.campus import router as campus_router
 from api.calendar.academic_period.v1.calendars import router as calendars_router
 from api.administrative.enrollment.v1.enrollments import router as enrollments_router
 from api.tenants.v1.tenants import router as tenants_router
+from infrastructure.config.settings import get_settings
 
 # Ensure models are loaded for init_db()
 from domain.academic.programs.models import ProgramModel, ProgramLevelModel
@@ -25,8 +26,9 @@ async def lifespan(app: FastAPI):
     init_db()
     yield
 
+settings = get_settings()
 app = FastAPI(
-    title="Vimmit Academic API", 
+    title=settings.PROJECT_NAME, 
     version="1.0.0",
     lifespan=lifespan
 )
@@ -34,10 +36,10 @@ app = FastAPI(
 # Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # In production, this should be restricted
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_origins=settings.ALLOWED_ORIGINS,
+    allow_credentials=settings.ALLOW_CREDENTIALS,
+    allow_methods=settings.ALLOW_METHODS,
+    allow_headers=settings.ALLOW_HEADERS,
 )
 
 # Mounting Identity API

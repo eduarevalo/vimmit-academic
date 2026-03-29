@@ -1,9 +1,10 @@
-import { TextInput, PasswordInput, Button, Stack, Title, Text, Alert } from '@mantine/core';
+import { TextInput, PasswordInput, Button, Stack, Title, Text, Alert, Group, Anchor } from '@mantine/core';
 import { IconAlertCircle } from '@tabler/icons-react';
 import { useForm } from '@mantine/form';
 import { useAuth } from '../hooks/useAuth';
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 interface LoginFormProps {
   onSuccess?: () => void;
@@ -22,8 +23,8 @@ export function LoginForm({ onSuccess, title, subtitle }: LoginFormProps) {
       password: '',
     },
     validate: {
-      email: (value: string) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
-      password: (value: string) => (value.length < 6 ? 'Password is too short' : null),
+      email: (value: string) => (/^\S+@\S+$/.test(value) ? null : t('auth.errors.INVALID_EMAIL')),
+      password: (value: string) => (value.length < 6 ? t('auth.errors.PASSWORD_TOO_SHORT_SIMPLE') : null),
     },
   });
 
@@ -35,7 +36,7 @@ export function LoginForm({ onSuccess, title, subtitle }: LoginFormProps) {
       form.reset();
       onSuccess?.();
     } catch (err: any) {
-      setError(err.message || 'Error al iniciar sesión. Inténtalo de nuevo.');
+      setError(err.message || 'auth.errors.LOGIN_FAILED');
     }
   };
 
@@ -46,7 +47,7 @@ export function LoginForm({ onSuccess, title, subtitle }: LoginFormProps) {
         {subtitle && <Text size="sm" c="dimmed" ta="center">{subtitle}</Text>}
         
         {error && (
-          <Alert variant="light" color="red" title="Error" icon={<IconAlertCircle size={16} />}>
+          <Alert variant="light" color="red" icon={<IconAlertCircle size={16} />}>
             {t(error)}
           </Alert>
         )}
@@ -58,21 +59,28 @@ export function LoginForm({ onSuccess, title, subtitle }: LoginFormProps) {
         )}
         
         <TextInput
-          label="Correo Electrónico"
-          placeholder="tu@ejemplo.com"
+          label={t('auth.fields.email')}
+          placeholder={t('auth.placeholders.email')}
           required
           {...form.getInputProps('email')}
         />
         
-        <PasswordInput
-          label="Contraseña"
-          placeholder="Tu contraseña"
-          required
-          {...form.getInputProps('password')}
-        />
+        <Stack gap={5}>
+          <Group justify="space-between" mb={5}>
+            <Text size="sm" fw={500}>{t('auth.fields.password')}</Text>
+            <Anchor component={Link} to="/portal/forgot-password" size="xs" fw={700} c="brand">
+              {t('auth.forgotPassword.link')}
+            </Anchor>
+          </Group>
+          <PasswordInput
+            placeholder={t('auth.placeholders.password')}
+            required
+            {...form.getInputProps('password')}
+          />
+        </Stack>
         
         <Button type="submit" fullWidth mt="md" color="brand" radius="xl">
-          Continuar
+          {t('auth.loginButton')}
         </Button>
       </Stack>
     </form>

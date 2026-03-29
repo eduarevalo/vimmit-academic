@@ -30,3 +30,17 @@ class IdentityService:
             user.roles.append(role)
             self._user_repo.save(user)
         return True
+
+    def update_user_profile(self, user_id: UUID, first_name: Optional[str] = None, last_name: Optional[str] = None, phone: Optional[str] = None) -> Optional[User]:
+        user = self._user_repo.get_by_id(user_id)
+        if not user:
+            return None
+        
+        if first_name is not None:
+            user.first_name = first_name
+        if last_name is not None:
+            user.last_name = last_name
+        if phone is not None:
+            user.phone = phone
+            
+        return self._user_repo.save(user)

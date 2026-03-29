@@ -60,15 +60,23 @@ export function PortalHeader({ navOpened, onNavToggle }: PortalHeaderProps) {
                 <Box style={{ cursor: 'pointer' }}>
                   <Group gap={8}>
                     <Avatar size={30} color="brand" radius="xl">
-                      {user?.email?.charAt(0).toUpperCase()}
+                      {user?.first_name ? user.first_name.charAt(0).toUpperCase() : user?.email?.charAt(0).toUpperCase()}
                     </Avatar>
-                    <Text size="xs" fw={600} visibleFrom="xs">{user?.email?.split('@')[0]}</Text>
+                    <Text size="xs" fw={600} visibleFrom="xs">
+                      {user?.first_name ? `${user.first_name}` : user?.email?.split('@')[0]}
+                    </Text>
                   </Group>
                 </Box>
               </Menu.Target>
               <Menu.Dropdown>
                 <Menu.Label>{t('portal.header.accountLabel')}</Menu.Label>
-                <Menu.Item leftSection={<IconUser size={14} />}>{t('portal.header.profile')}</Menu.Item>
+                <Menu.Item 
+                  component={Link} 
+                  to="/portal/profile" 
+                  leftSection={<IconUser size={14} />}
+                >
+                  {t('portal.header.profile')}
+                </Menu.Item>
                 <Menu.Divider />
                 <Menu.Item
                   color="red"

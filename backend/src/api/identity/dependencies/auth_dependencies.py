@@ -12,9 +12,11 @@ from domain.academic.programs.models import ProgramModel
 from domain.tenants.models import TenantModel
 from infrastructure.identity.repositories.user_repository import UserRepository
 from infrastructure.security.token_provider import TokenProvider
+from infrastructure.config.settings import get_settings
 
 # Database engine setup
-DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./test.db")
+settings = get_settings()
+DATABASE_URL = settings.DATABASE_URL
 connect_args = {"check_same_thread": False} if DATABASE_URL.startswith("sqlite") else {}
 engine = create_engine(DATABASE_URL, connect_args=connect_args)
 
@@ -198,3 +200,24 @@ def body_with_tenant_access(body_class: Type[T], required_roles: Optional[List[s
         return body
 
     return dependency
+
+
+def enrich_user_memberships(user: User, session: Session) -> dict:
+    """
+    Enriches a User object with tenant and role names for its memberships.
+    Returns a dictionary suitable for UserOut schema.
+    """
+    memberships_with_names = []
+    for membership in user.memberships:
+        tenant = session.get(TenantModel, membership.tenant_id)
+        role = session.get(Role, membership.role_id)
+        memberships_with_names.append({
+            "tenant_id": membership.tenant_id,
+            "tenant_name": tenant.name if tenant else "Unknown",
+            "role_id": membership.role_id,
+            "role_name": role.name if role else "Unknown",
+        })
+
+    user_data = user.model_dump()
+    user_data["memberships"] = memberships_with_names
+    return user_data

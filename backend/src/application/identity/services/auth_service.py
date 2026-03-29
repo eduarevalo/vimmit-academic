@@ -1,3 +1,4 @@
+from datetime import timedelta
 from typing import Optional
 from domain.identity.models import User
 from infrastructure.identity.repositories.user_repository import UserRepository
@@ -23,3 +24,22 @@ class AuthService:
     def create_access_token(self, username: str) -> str:
         # We use standard 'sub' for identification
         return self._token_provider.create_access_token(data={"sub": username})
+
+    def create_password_reset_token(self, email: str) -> str:
+        # Set a short expiration for security (e.g., 60 minutes)
+        expires = timedelta(minutes=60)
+        return self._token_provider.create_access_token(
+            data={"sub": email, "purpose": "password_reset"}, 
+            expires_delta=expires
+        )
+
+    def verify_password_reset_token(self, token: str) -> Optional[str]:
+        payload = self._token_provider.decode_token(token)
+        if not payload or payload.get("purpose") != "password_reset":
+            return None
+        return payload.get("sub")
+
+    def update_password(self, user: User, new_password: str) -> User:
+        user.hashed_password = self._hash_provider.get_password_hash(new_password)
+        self._user_repo.save(user)
+        return user
