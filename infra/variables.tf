@@ -39,3 +39,9 @@ variable "zeptomail_smtp_user" {
   type        = string
   sensitive   = true
 }
+
+variable "github_sha" {
+  description = "The commit SHA to force deployment"
+  type        = string
+  default     = "local"
+}

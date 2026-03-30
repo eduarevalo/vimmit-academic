@@ -90,6 +90,7 @@ jobs:
         working-directory: ./infra
         run: |
           terraform plan \
+            -var "github_sha=${{ github.sha }}" \
             -var "do_token=${{ secrets.DIGITALOCEAN_TOKEN }}" \
             -var "zeptomail_token=${{ secrets.ZEPTOMAIL_TOKEN }}" \
             -var "zeptomail_smtp_user=${{ secrets.ZEPTOMAIL_SMTP_USER }}" \
