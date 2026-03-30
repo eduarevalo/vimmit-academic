@@ -163,7 +163,7 @@ export function AcceptInvitationPage() {
       <Container size="xs" py={100}>
         <Stack align="center">
           <Loader size="xl" color="brand" variant="dots" />
-          <Text c="dimmed">Cargando invitación...</Text>
+          <Text c="dimmed">{t('tenantManagement.acceptInvitation.loading')}</Text>
         </Stack>
       </Container>
     );
@@ -177,9 +177,9 @@ export function AcceptInvitationPage() {
             <IconCheck size={32} />
           </ThemeIcon>
           <Title order={2} mb="sm">{t('tenantManagement.acceptInvitation.alreadyMember')}</Title>
-          <Text c="dimmed" mb="xl">Ya tienes acceso a esta institución.</Text>
+          <Text c="dimmed" mb="xl">{t('tenantManagement.acceptInvitation.alreadyMemberDesc')}</Text>
           <Button component={Link} to="/portal/profile" fullWidth radius="md">
-            Ir a mi Perfil
+            {t('profile.title')}
           </Button>
         </Paper>
       </Container>
@@ -193,12 +193,12 @@ export function AcceptInvitationPage() {
           <ThemeIcon size={60} radius="xl" color="red" variant="light" mb="md">
             <IconAlertCircle size={32} />
           </ThemeIcon>
-          <Title order={2} mb="sm">Invitación Inválida</Title>
+          <Title order={2} mb="sm">{t('tenantManagement.acceptInvitation.invalidInvitation')}</Title>
           <Text c="dimmed" mb="xl">
-            {error ? t(error) : 'Esta invitación ya no es válida o ha sido cancelada.'}
+            {error ? t(error) : t('tenantManagement.acceptInvitation.invalidInvitationDesc')}
           </Text>
           <Button component={Link} to="/" fullWidth variant="light" radius="md">
-            Volver al Inicio
+            {t('common.backToHome')}
           </Button>
         </Paper>
       </Container>
@@ -213,9 +213,9 @@ export function AcceptInvitationPage() {
             <IconShieldCheck size={32} />
           </ThemeIcon>
           <Title order={2} mb="sm">{t('tenantManagement.acceptInvitation.success')}</Title>
-          <Text c="dimmed" mb="xl">Ahora eres parte de la institución con el rol de <strong>{invitation.role_name}</strong>.</Text>
+          <Text c="dimmed" mb="xl">{t('tenantManagement.acceptInvitation.successDesc', { roleName: invitation.role_name })}</Text>
           <Button component={Link} to="/portal/profile" fullWidth radius="md" rightSection={<IconArrowRight size={16} />}>
-            Explorar Mi Perfil
+            {t('profile.title')}
           </Button>
         </Paper>
       </Container>
@@ -245,8 +245,8 @@ export function AcceptInvitationPage() {
             <>
               {isEmailMismatch ? (
                 <Stack gap="md">
-                  <Alert icon={<IconAlertCircle size={16} />} title="Conflicto de cuenta" color="orange" variant="light">
-                    Estás identificado como <strong>{user?.email}</strong>, pero esta invitación es para <strong>{invitation.email}</strong>.
+                  <Alert icon={<IconAlertCircle size={16} />} title={t('tenantManagement.acceptInvitation.accountConflict')} color="orange" variant="light">
+                    {t('tenantManagement.acceptInvitation.accountConflictDesc', { currentEmail: user?.email, invitationEmail: invitation.email })}
                   </Alert>
                   <Button 
                     variant="outline" 
@@ -255,7 +255,7 @@ export function AcceptInvitationPage() {
                     radius="md" 
                     onClick={handleLogoutAndSwitch}
                   >
-                    Cerrar sesión y cambiar de cuenta
+                    {t('tenantManagement.acceptInvitation.logoutAndSwitch')}
                   </Button>
                 </Stack>
               ) : (
@@ -267,7 +267,7 @@ export function AcceptInvitationPage() {
                       </ThemeIcon>
                       <Text size="sm" fw={500}>{user?.email}</Text>
                     </Group>
-                    <Badge variant="dot" color="green">Cuenta Activa</Badge>
+                    <Badge variant="dot" color="green">{t('tenantManagement.acceptInvitation.activeAccount')}</Badge>
                   </Group>
 
                   <Button 
@@ -288,8 +288,8 @@ export function AcceptInvitationPage() {
             <>
               {invitation.user_exists ? (
                 <Stack gap="md">
-                  <Alert icon={<IconAlertCircle size={16} />} title="Cuenta existente" color="blue" variant="light">
-                    Ya existe una cuenta para <strong>{invitation.email}</strong>. Por favor, inicia sesión para aceptar la invitación.
+                  <Alert icon={<IconAlertCircle size={16} />} title={t('tenantManagement.acceptInvitation.existingAccount')} color="blue" variant="light">
+                    {t('tenantManagement.acceptInvitation.existingAccountDesc', { email: invitation.email })}
                   </Alert>
                   <Button component={Link} to={`/portal?email=${invitation.email}`} fullWidth radius="md" size="lg">
                     {t('auth.login')}
@@ -298,8 +298,8 @@ export function AcceptInvitationPage() {
               ) : (
                 <form onSubmit={registrationForm.onSubmit(handleAccept)}>
                   <Stack gap="md">
-                    <Alert icon={<IconUserCheck size={16} />} title="Nueva cuenta" color="brand" variant="light">
-                      Estás a un paso de unirte. Crea tu cuenta para continuar.
+                    <Alert icon={<IconUserCheck size={16} />} title={t('tenantManagement.acceptInvitation.newAccount')} color="brand" variant="light">
+                      {t('tenantManagement.acceptInvitation.newAccountDesc')}
                     </Alert>
                     
                     <Group grow>

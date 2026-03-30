@@ -124,8 +124,19 @@ export function TenantManagementPage() {
   };
 
   useEffect(() => {
+    const init = async () => {
+      try {
+        setIsLoading(true);
+        setError(null);
+        await fetchData();
+      } catch (err: any) {
+        setError(err.message);
+      } finally {
+        setIsLoading(false);
+      }
+    };
     if (tenantId && token) {
-      fetchData();
+      init();
     }
   }, [tenantId, token]);
 
@@ -403,14 +414,15 @@ export function TenantManagementPage() {
                             <Group gap="xs">
                               {inv.status === 'PENDING' && (
                                 <Tooltip label={t('tenantManagement.invitations.resend') || 'Resend Invitation'}>
-                                  <ActionIcon 
-                                    variant="subtle" 
-                                    color="brand" 
-                                    onClick={() => handleResendInvitation(inv.id)}
-                                    loading={resendingId === inv.id}
-                                  >
-                                    <IconRefresh size={16} />
-                                  </ActionIcon>
+                                    <ActionIcon 
+                                      variant="subtle" 
+                                      color="brand" 
+                                      onClick={() => handleResendInvitation(inv.id)}
+                                      loading={resendingId === inv.id}
+                                      aria-label={t('tenantManagement.invitations.resend')}
+                                    >
+                                      <IconRefresh size={16} />
+                                    </ActionIcon>
                                 </Tooltip>
                               )}
                               <Tooltip label={t('common.delete')}>
@@ -419,6 +431,7 @@ export function TenantManagementPage() {
                                   color="red"
                                   onClick={() => handleDeleteInvitation(inv)}
                                   loading={deletingId === inv.id}
+                                  aria-label={t('tenantManagement.invitations.delete')}
                                 >
                                   <IconTrash size={16} />
                                 </ActionIcon>

@@ -12,7 +12,7 @@ export function Footer() {
   const { open: openRegistration } = useRegistrationModal();
 
   return (
-    <Box id="footer" mt={120} py={60} style={{ borderTop: '1px solid #eaeaea', backgroundColor: '#ffffff' }}>
+    <Box component="footer" id="footer" mt={120} py={60} style={{ borderTop: '1px solid #eaeaea', backgroundColor: '#ffffff' }}>
       <Container size="lg">
         <Group justify="space-between" align="flex-start" mb={40}>
           <Box style={{ maxWidth: 300 }}>
