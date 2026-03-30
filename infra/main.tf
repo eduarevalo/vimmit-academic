@@ -142,10 +142,35 @@ resource "digitalocean_record" "zoho_dkim_marketing" {
   value  = "k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnOVNDqdCN2HCX+OJgkQQ5zhNmZFikLLZdwyGbOiXXO0tKkRucTTZpu3MG4iphYkY5rDCfWG/3A5fx72qHs8gPLPlRlAU4ZIFhmOhy26Y1fkISUUOcSbNdRywnehtTFC6CMBzzUAQgIvNQLHyWJ/MEn5FEJH04NIUeDsidCEGFy5DeUlgMkwwUFfS9XnL+4L1QZTQ9TK21xOVxZODw6HlOojgYR44J1DSGbrkxrDYflKb4kk1h02eEynEIwI4VF6LVEUGSiDUWtcJEORF+JA2VdsC4lZnxIt0HCRIqySiSrdjsbc/54tWxw4L1BtjmZHD1kjnS8ums2H7AoOiOoM56wIDAQAB"
 }
 
-# Zoho SPF Record
+# Zoho SPF Record (Merged)
 resource "digitalocean_record" "zoho_spf" {
   domain = digitalocean_domain.default.id
   type   = "TXT"
   name   = "@"
-  value  = "v=spf1 include:zoho.com ~all"
+  value  = "v=spf1 include:zohomail.com include:zoho.com ~all"
+}
+
+# Zoho MX Records
+resource "digitalocean_record" "zoho_mx_1" {
+  domain   = digitalocean_domain.default.id
+  type     = "MX"
+  name     = "@"
+  priority = 10
+  value    = "mx.zoho.com."
+}
+
+resource "digitalocean_record" "zoho_mx_2" {
+  domain   = digitalocean_domain.default.id
+  type     = "MX"
+  name     = "@"
+  priority = 20
+  value    = "mx2.zoho.com."
+}
+
+resource "digitalocean_record" "zoho_mx_3" {
+  domain   = digitalocean_domain.default.id
+  type     = "MX"
+  name     = "@"
+  priority = 50
+  value    = "mx3.zoho.com."
 }

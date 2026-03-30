@@ -33,6 +33,7 @@ function CalendarForm({ initialValues, programs, campuses, onSuccess, token }: {
 }) {
   const { t } = useTranslation();
   const { user } = useAuth();
+  const adminMemberships = user?.memberships.filter(m => m.role_name === 'Admin') || [];
 
   const form = useForm({
     initialValues: initialValues ? {
@@ -45,11 +46,12 @@ function CalendarForm({ initialValues, programs, campuses, onSuccess, token }: {
       campus_id: '',
       start_date: null as Date | null,
       end_date: null as Date | null,
-      tenant_id: user?.memberships[0]?.tenant_id || '',
+      tenant_id: adminMemberships[0]?.tenant_id || '',
       is_active: true,
     },
     validate: {
       name:       (v) => (!v ? t('common.error.tooShort') : null),
+      tenant_id:  (v) => (!v ? t('portal.programsManagement.form.institutionRequired') : null),
       program_id: (v) => (!v ? t('common.fieldRequired') : null),
       campus_id:  (v) => (!v ? t('common.fieldRequired') : null),
     },
@@ -58,7 +60,6 @@ function CalendarForm({ initialValues, programs, campuses, onSuccess, token }: {
   const handleSubmit = async (values: any) => {
     const payload = {
       ...values,
-      // Ensure they are strings, which they should be from type="date"
       start_date: typeof values.start_date === 'string' ? values.start_date : values.start_date?.toISOString().split('T')[0],
       end_date:   typeof values.end_date === 'string' ? values.end_date : values.end_date?.toISOString().split('T')[0],
     };
@@ -72,24 +73,41 @@ function CalendarForm({ initialValues, programs, campuses, onSuccess, token }: {
     onSuccess();
   };
 
+  const filteredPrograms = programs.filter(p => p.tenant_id === form.values.tenant_id);
+  const filteredCampuses = campuses.filter(c => c.tenant_id === form.values.tenant_id);
+
   return (
     <form onSubmit={form.onSubmit(handleSubmit)}>
       <Stack gap="sm">
+        {adminMemberships.length > 1 && !initialValues && (
+          <Select
+            label={t('portal.programsManagement.form.institution')}
+            placeholder={t('portal.programsManagement.form.institutionPlaceholder')}
+            data={adminMemberships.map(m => ({ value: m.tenant_id, label: m.tenant_name }))}
+            required
+            {...form.getInputProps('tenant_id')}
+            onChange={(value) => {
+              form.setFieldValue('tenant_id', value || '');
+              form.setFieldValue('program_id', '');
+              form.setFieldValue('campus_id', '');
+            }}
+          />
+        )}
         <TextInput label={t('portal.calendars.form.name')} placeholder={t('portal.calendars.form.namePlaceholder')} required {...form.getInputProps('name')} />
         <Select
           label={t('portal.calendars.form.program')}
           placeholder={t('portal.calendars.form.programPlaceholder')}
-          data={programs.map(p => ({ value: p.id, label: p.name }))}
+          data={filteredPrograms.map(p => ({ value: p.id, label: p.name }))}
           required
-          disabled={!!initialValues}
+          disabled={!!initialValues || !form.values.tenant_id}
           {...form.getInputProps('program_id')}
         />
         <Select
           label={t('portal.calendars.form.campus')}
           placeholder={t('portal.calendars.form.campusPlaceholder')}
-          data={campuses.map(c => ({ value: c.id, label: c.name }))}
+          data={filteredCampuses.map(c => ({ value: c.id, label: c.name }))}
           required
-          disabled={!!initialValues}
+          disabled={!!initialValues || !form.values.tenant_id}
           {...form.getInputProps('campus_id')}
         />
         <Group grow>
