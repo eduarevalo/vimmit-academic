@@ -31,7 +31,7 @@ resource "digitalocean_app" "vimmit_academic" {
       github {
         repo           = "eduarevalo/vimmit-academic"
         branch         = "main"
-        deploy_on_push = false
+        deploy_on_push = true
       }
 
       dockerfile_path = "backend/Dockerfile"
@@ -59,11 +59,6 @@ resource "digitalocean_app" "vimmit_academic" {
         value = var.zeptomail_smtp_user
         type  = "SECRET"
       }
-
-      env {
-        key   = "DEPLOY_TRIGGER_SHA"
-        value = var.github_sha
-      }
     }
 
     # Frontend Static Site
@@ -77,17 +72,12 @@ resource "digitalocean_app" "vimmit_academic" {
       github {
         repo           = "eduarevalo/vimmit-academic"
         branch         = "main"
-        deploy_on_push = false
+        deploy_on_push = true
       }
 
       env {
         key   = "VITE_API_URL"
         value = "/api"
-      }
-
-      env {
-        key   = "DEPLOY_TRIGGER_SHA"
-        value = var.github_sha
       }
     }
 
