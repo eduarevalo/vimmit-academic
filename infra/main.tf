@@ -114,3 +114,38 @@ resource "digitalocean_record" "zeptomail_cname" {
   name   = "bounce-zem"
   value  = "cluster89.zeptomail.com."
 }
+
+# Zoho Email Configuration
+# ---------------------------------------------------------
+
+# Zoho Domain Verification
+resource "digitalocean_record" "zoho_verification" {
+  domain = digitalocean_domain.default.id
+  type   = "TXT"
+  name   = "@"
+  value  = "zoho-verification=zb85361907.zmverify.zoho.com"
+}
+
+# Zoho DKIM (Transactional)
+resource "digitalocean_record" "zoho_dkim_transactional" {
+  domain = digitalocean_domain.default.id
+  type   = "TXT"
+  name   = "291732328._domainkey"
+  value  = "k=rsa; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDq6OIICyLJowSBxZVaVtfNgILw6Y0Rn49JA4ZSNKWhgA4aUT9zFKaM0xCUtDyWKRV1Ujujgtbh3HGYezZ3pE/FyAxGAoCiM3ZE6veJlTFW8tIaj6ATcD1G3F8GChUR0AUI/kyt3sB+p+WNDc4vVOhGERKx/sejDgeLVAtI0HPcvQIDAQAB"
+}
+
+# Zoho DKIM (Marketing)
+resource "digitalocean_record" "zoho_dkim_marketing" {
+  domain = digitalocean_domain.default.id
+  type   = "TXT"
+  name   = "zc919422121._domainkey"
+  value  = "k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnOVNDqdCN2HCX+OJgkQQ5zhNmZFikLLZdwyGbOiXXO0tKkRucTTZpu3MG4iphYkY5rDCfWG/3A5fx72qHs8gPLPlRlAU4ZIFhmOhy26Y1fkISUUOcSbNdRywnehtTFC6CMBzzUAQgIvNQLHyWJ/MEn5FEJH04NIUeDsidCEGFy5DeUlgMkwwUFfS9XnL+4L1QZTQ9TK21xOVxZODw6HlOojgYR44J1DSGbrkxrDYflKb4kk1h02eEynEIwI4VF6LVEUGSiDUWtcJEORF+JA2VdsC4lZnxIt0HCRIqySiSrdjsbc/54tWxw4L1BtjmZHD1kjnS8ums2H7AoOiOoM56wIDAQAB"
+}
+
+# Zoho SPF Record
+resource "digitalocean_record" "zoho_spf" {
+  domain = digitalocean_domain.default.id
+  type   = "TXT"
+  name   = "@"
+  value  = "v=spf1 include:zoho.com ~all"
+}
