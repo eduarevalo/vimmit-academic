@@ -21,11 +21,13 @@ class Settings(BaseSettings):
     # Database Settings
     DATABASE_URL: str = Field(default="sqlite:///./test.db")
 
-    # Email Settings (ZeptoMail)
-    ZEPTOMAIL_TOKEN: Optional[str] = None
-    ZEPTOMAIL_API_URL: str = "https://api.zeptomail.com/v1.1/email"
-    AUTHORIZED_SENDER_EMAIL: EmailStr = "notifications@vimmit.com"
-    AUTHORIZED_SENDER_NAME: str = "Vimmit Academic"
+    # Email Settings (ZeptoMail SMTP)
+    ZEPTOMAIL_TOKEN: str = "" # This is the SMTP Password
+    ZEPTOMAIL_SMTP_HOST: str = "smtp.zeptomail.com"
+    ZEPTOMAIL_SMTP_PORT: int = 587
+    ZEPTOMAIL_SMTP_USER: str = "notificaciones@aseder.edu.co" # Update with correct username if different
+    AUTHORIZED_SENDER_EMAIL: EmailStr = "notificaciones@aseder.edu.co"
+    AUTHORIZED_SENDER_NAME: str = "Notificación Aseder"
 
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8", case_sensitive=True)
 

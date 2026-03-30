@@ -1,6 +1,8 @@
-import httpx
+import smtplib
+import anyio
 import os
 import jinja2
+from email.message import EmailMessage
 from typing import Dict, Any, Optional, List
 from jinja2 import Environment, FileSystemLoader
 
@@ -12,7 +14,9 @@ class EmailService:
         self.token = settings.ZEPTOMAIL_TOKEN
         self.sender_email = settings.AUTHORIZED_SENDER_EMAIL
         self.sender_name = settings.AUTHORIZED_SENDER_NAME
-        self.api_url = settings.ZEPTOMAIL_API_URL
+        self.smtp_host = settings.ZEPTOMAIL_SMTP_HOST
+        self.smtp_port = settings.ZEPTOMAIL_SMTP_PORT
+        self.smtp_user = settings.ZEPTOMAIL_SMTP_USER
         
         # Setup Jinja2 for templates
         template_dir = os.path.join(os.path.dirname(__file__), "..", "templates")
@@ -21,64 +25,63 @@ class EmailService:
     async def send_email(
         self, 
         to_email: str, 
-        subject: str, 
         template_name: str, 
         context: Dict[str, Any],
+        subject: Optional[str] = None,
         tenant_slug: str = "default"
     ) -> bool:
         """
-        Sends an email using ZeptoMail API.
+        Sends an email using ZeptoMail SMTP.
         Attempts to load a tenant-specific template, falling back to default.
         """
         if not self.token:
             print("WARNING: ZEPTOMAIL_TOKEN not found. Email not sent.")
             return False
 
-        # Try to load tenant template: tenants/{slug}/{template_name}
-        # Fallback: tenants/default/{template_name}
         try:
             template_path = f"tenants/{tenant_slug}/{template_name}"
-            # Check if template exists for tenant
             try:
                 template = self.jinja_env.get_template(template_path)
             except jinja2.TemplateNotFound:
                 template_path = f"tenants/default/{template_name}"
                 template = self.jinja_env.get_template(template_path)
             
+            # Load subject from configuration if not provided
+            if not subject:
+                try:
+                    subject_template = self.jinja_env.get_template(f"{template_path}.subject")
+                    subject = subject_template.render(**context)
+                except jinja2.TemplateNotFound:
+                    subject = "Vimmit Academic Notification"
+            
             html_content = template.render(**context)
         except Exception as e:
             print(f"Error rendering email template: {e}")
             return False
 
-        payload = {
-            "from": {"address": self.sender_email, "name": self.sender_name},
-            "to": [{"email_address": {"address": to_email}}],
-            "subject": subject,
-            "htmlbody": html_content
-        }
+        msg = EmailMessage()
+        msg['Subject'] = subject
+        msg['From'] = f"{self.sender_name} <{self.sender_email}>"
+        msg['To'] = to_email
+        msg.set_content(html_content, subtype='html')
 
-        headers = {
-            "accept": "application/json",
-            "content-type": "application/json",
-            "authorization": self.token
-        }
+        try:
+            await anyio.to_thread.run_sync(self._send_smtp_sync, msg)
+            return True
+        except Exception as e:
+            print(f"Error sending email through ZeptoMail SMTP: {e}")
+            return False
 
-        async with httpx.AsyncClient() as client:
-            try:
-                response = await client.post(self.api_url, json=payload, headers=headers)
-                response.raise_for_status()
-                return True
-            except httpx.HTTPStatusError as e:
-                print(f"ZeptoMail API error: {e.response.text}")
-                return False
-            except Exception as e:
-                print(f"Error sending email through ZeptoMail: {e}")
-                return False
+    def _send_smtp_sync(self, msg: EmailMessage):
+        """Synchronous SMTP sending logic to be run in a thread"""
+        with smtplib.SMTP(self.smtp_host, self.smtp_port) as server:
+            server.starttls()
+            server.login(self.smtp_user, self.token)
+            server.send_message(msg)
 
     async def send_password_reset(self, to_email: str, reset_link: str, tenant_slug: str = "default"):
         return await self.send_email(
             to_email=to_email,
-            subject="Restablece tu contraseña - Vimmit Academic",
             template_name="forgot_password.html",
             context={"reset_link": reset_link, "email": to_email},
             tenant_slug=tenant_slug

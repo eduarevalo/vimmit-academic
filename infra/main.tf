@@ -46,6 +46,18 @@ resource "digitalocean_app" "vimmit_academic" {
         key   = "ENVIRONMENT"
         value = var.environment
       }
+
+      env {
+        key   = "ZEPTOMAIL_TOKEN"
+        value = var.zeptomail_token
+        type  = "SECRET"
+      }
+
+      env {
+        key   = "ZEPTOMAIL_SMTP_USER"
+        value = var.zeptomail_smtp_user
+        type  = "SECRET"
+      }
     }
 
     # Frontend Static Site

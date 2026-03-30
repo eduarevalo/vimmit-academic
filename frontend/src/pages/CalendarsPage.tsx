@@ -76,6 +76,22 @@ function CalendarForm({ initialValues, programs, campuses, onSuccess, token }: {
   const filteredPrograms = programs.filter(p => p.tenant_id === form.values.tenant_id);
   const filteredCampuses = campuses.filter(c => c.tenant_id === form.values.tenant_id);
 
+  useEffect(() => {
+    if (!initialValues) {
+      if (filteredCampuses.length === 1) {
+        form.setFieldValue('campus_id', filteredCampuses[0].id);
+      } else if (form.values.campus_id && !filteredCampuses.some(c => c.id === form.values.campus_id)) {
+        form.setFieldValue('campus_id', null as any);
+      }
+
+      if (filteredPrograms.length === 1) {
+        form.setFieldValue('program_id', filteredPrograms[0].id);
+      } else if (form.values.program_id && !filteredPrograms.some(p => p.id === form.values.program_id)) {
+        form.setFieldValue('program_id', null as any);
+      }
+    }
+  }, [form.values.tenant_id, filteredCampuses.length, filteredPrograms.length]);
+
   return (
     <form onSubmit={form.onSubmit(handleSubmit)}>
       <Stack gap="sm">
@@ -88,8 +104,8 @@ function CalendarForm({ initialValues, programs, campuses, onSuccess, token }: {
             {...form.getInputProps('tenant_id')}
             onChange={(value) => {
               form.setFieldValue('tenant_id', value || '');
-              form.setFieldValue('program_id', '');
-              form.setFieldValue('campus_id', '');
+              form.setFieldValue('program_id', null as any);
+              form.setFieldValue('campus_id', null as any);
             }}
           />
         )}
@@ -107,7 +123,7 @@ function CalendarForm({ initialValues, programs, campuses, onSuccess, token }: {
           placeholder={t('portal.calendars.form.campusPlaceholder')}
           data={filteredCampuses.map(c => ({ value: c.id, label: c.name }))}
           required
-          disabled={!!initialValues || !form.values.tenant_id}
+          disabled={!!initialValues || !form.values.tenant_id || filteredCampuses.length === 1}
           {...form.getInputProps('campus_id')}
         />
         <Group grow>
@@ -146,7 +162,7 @@ export function CalendarsPage() {
     if (!token) return;
     const [progR, campR] = await Promise.all([
       fetch(`${API_BASE_URL}/v1/academic/programs`, { headers: authHeaders }),
-      fetch(`${API_BASE_URL}/v1/academic/campuses`, { headers: authHeaders }),
+      fetch(`${API_BASE_URL}/v1/organization/campuses`, { headers: authHeaders }),
     ]);
     if (progR.ok) setPrograms(await progR.json());
     if (campR.ok) setCampuses(await campR.json());

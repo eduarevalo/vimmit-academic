@@ -27,3 +27,15 @@ variable "custom_domain" {
   type        = string
   default     = "aseder.edu.co"
 }
+
+variable "zeptomail_token" {
+  description = "ZeptoMail SMTP Password / Token"
+  type        = string
+  sensitive   = true
+}
+
+variable "zeptomail_smtp_user" {
+  description = "ZeptoMail SMTP Username"
+  type        = string
+  sensitive   = true
+}
