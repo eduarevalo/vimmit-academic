@@ -467,5 +467,64 @@
       "backPortal": "Back to Portal",
       "loginNotice": "To access this section of the portal, you must log in."
     }
+  },
+  "profile": {
+    "title": "My Profile",
+    "subtitle": "Manage your personal information and security settings",
+    "updatedMessage": "Your data has been saved successfully.",
+    "passwordChangedMessage": "Your password has been updated.",
+    "saveChanges": "Save Changes",
+    "changePassword": "Change Password",
+    "tenantId": "Institution ID",
+    "tabs": {
+      "account": "Personal Information",
+      "security": "Security",
+      "memberships": "Institutions"
+    },
+    "fields": {
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "phone": "Phone",
+      "currentPassword": "Current Password",
+      "newPassword": "New Password",
+      "confirmPassword": "Confirm New Password"
+    },
+    "noMemberships": "No associated institutions found.",
+    "placeholders": {
+      "firstName": "John",
+      "lastName": "Doe",
+      "phone": "+1 555-000-0000"
+    }
+  },
+  "tenantManagement": {
+    "title": "Institution Management",
+    "manage": "MANAGE",
+    "users": "Users",
+    "invitations": {
+      "title": "Invitations",
+      "deleteTitle": "Delete Invitation",
+      "deleteConfirm": "Are you sure you want to delete this invitation? This action cannot be undone.",
+      "resend": "Resend Invitation"
+    },
+    "inviteCollaborator": "Invite Collaborator",
+    "email": "Email Address",
+    "role": "Role",
+    "status": "Status",
+    "actions": "Actions",
+    "pending": "Pending",
+    "accepted": "Accepted",
+    "cancelled": "Cancelled",
+    "sendInvitation": "Send Invitation",
+    "invitationSent": "Invitation sent successfully",
+    "noMembers": "No registered members",
+    "noInvitations": "No pending invitations",
+    "acceptInvitation": {
+      "title": "Institution Invitation",
+      "description": "You have been invited to join {{tenantName}} as {{roleName}}.",
+      "accept": "Accept and Join",
+      "success": "You have joined the institution successfully",
+      "alreadyMember": "You are already a member of this institution",
+      "error": "There was an error processing your invitation"
+    }
   }
 }

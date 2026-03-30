@@ -4,6 +4,7 @@ import { AuthProvider } from './context/AuthContext';
 import { RegistrationModal } from './components/RegistrationModal';
 import { MainLayout } from './layouts/MainLayout';
 import { PortalLayout } from './layouts/PortalLayout';
+import { AuthLayout } from './layouts/AuthLayout';
 import { LoadingOverlay } from '@mantine/core';
 
 // Lazy load pages
@@ -23,6 +24,8 @@ const PublicCampusPage = lazy(() => import('./pages/PublicCampusPage').then(modu
 const ForgotPasswordPage = lazy(() => import('./pages/ForgotPasswordPage').then(module => ({ default: module.ForgotPasswordPage })));
 const ResetPasswordPage = lazy(() => import('./pages/ResetPasswordPage').then(module => ({ default: module.ResetPasswordPage })));
 const ProfilePage = lazy(() => import('./pages/ProfilePage').then(module => ({ default: module.ProfilePage })));
+const TenantManagementPage = lazy(() => import('./pages/TenantManagementPage').then(module => ({ default: module.TenantManagementPage })));
+const AcceptInvitationPage = lazy(() => import('./pages/AcceptInvitationPage').then(module => ({ default: module.AcceptInvitationPage })));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage').then(module => ({ default: module.NotFoundPage })));
 
 function App() {
@@ -43,13 +46,16 @@ function App() {
               <Route path="/impact" element={<ImpactPage />} />
             </Route>
             
-            {/* Portal Routes */}
-            <Route path="/portal" element={<PortalLayout />}>
-              <Route index element={<PortalPage />} />
-              
-              {/* Auth flows under portal */}
+            {/* Distraction-free Portal Flows */}
+            <Route path="/portal" element={<AuthLayout />}>
+              <Route path="accept-invitation" element={<AcceptInvitationPage />} />
               <Route path="forgot-password" element={<ForgotPasswordPage />} />
               <Route path="reset-password" element={<ResetPasswordPage />} />
+            </Route>
+
+            {/* Portal Application Routes */}
+            <Route path="/portal" element={<PortalLayout />}>
+              <Route index element={<PortalPage />} />
               
               {/* Academic */}
               <Route path="academic/programs" element={<AcademicProgramsPage />} />
@@ -65,6 +71,9 @@ function App() {
 
               {/* Profile */}
               <Route path="profile" element={<ProfilePage />} />
+
+              {/* Tenant Management */}
+              <Route path="manage/:tenantId" element={<TenantManagementPage />} />
 
               {/* Portal Catch-all */}
               <Route path="*" element={<NotFoundPage />} />

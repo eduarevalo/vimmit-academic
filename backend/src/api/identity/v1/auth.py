@@ -1,23 +1,35 @@
-from typing import Annotated
+from typing import Annotated, Optional
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from sqlmodel import Session, select
 
-from api.identity.dependencies.auth_dependencies import get_session, get_current_user, oauth2_scheme, enrich_user_memberships, get_settings
+from api.identity.dependencies.auth_dependencies import (
+    get_session, 
+    get_current_user, 
+    get_optional_current_user,
+    oauth2_scheme, 
+    enrich_user_memberships, 
+    get_settings
+)
 from domain.identity.models import User
 from application.identity.services.auth_service import AuthService
 from infrastructure.identity.repositories.user_repository import UserRepository
 from infrastructure.security.hash_provider import HashProvider
 from infrastructure.security.token_provider import TokenProvider
 from infrastructure.email.email_service import EmailService
+from application.identity.services.invitation_service import InvitationService
+from infrastructure.identity.repositories.invitation_repository import InvitationRepository
+from infrastructure.identity.repositories.role_repository import RoleRepository
 from .error_codes import ErrorCode
 from .schemas import (
     Token, 
     UserOut, 
     ForgotPasswordRequest, 
     ResetPasswordRequest, 
-    ChangePasswordRequest
+    ChangePasswordRequest,
+    InvitationOut,
+    AcceptInvitationRequest
 )
 
 router = APIRouter(prefix="/auth", tags=["auth"])
@@ -27,6 +39,102 @@ def get_auth_service(session: Annotated[Session, Depends(get_session)]):
     hash_provider = HashProvider()
     token_provider = TokenProvider()
     return AuthService(user_repo, hash_provider, token_provider)
+
+def get_invitation_service(session: Annotated[Session, Depends(get_session)]):
+    invitation_repo = InvitationRepository(session)
+    user_repo = UserRepository(session)
+    role_repo = RoleRepository(session)
+    email_service = EmailService()
+    hash_provider = HashProvider()
+    return InvitationService(invitation_repo, user_repo, role_repo, email_service, hash_provider)
+
+@router.get("/invitations/{token}", response_model=InvitationOut)
+async def get_invitation(
+    token: str,
+    service: Annotated[InvitationService, Depends(get_invitation_service)]
+):
+    invitation = service.get_invitation_by_token(token)
+    if not invitation:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail={"code": ErrorCode.AUTH_INVALID_TOKEN, "message": "Invitation not found"}
+        )
+    
+    role_name = invitation.role.name if invitation.role else "Unknown"
+    
+    # Check if user exists
+    user_repo = UserRepository(service._invitation_repo._session)
+    user_exists = user_repo.get_by_email(invitation.email) is not None
+    
+    # Get tenant name (assuming we have a tenant repo or can join)
+    # For now, we can manually fetch it from session if needed or just use default
+    from domain.tenants.models import TenantModel
+    tenant = service._invitation_repo._session.get(TenantModel, invitation.tenant_id)
+    tenant_name = tenant.name if tenant else "Institution"
+
+    return InvitationOut(
+        id=invitation.id,
+        email=invitation.email,
+        tenant_id=invitation.tenant_id,
+        role_id=invitation.role_id,
+        role_name=role_name,
+        token=invitation.token,
+        status=invitation.status,
+        user_exists=user_exists,
+        tenant_name=tenant_name,
+        created_at=invitation.created_at,
+        accepted_at=invitation.accepted_at
+    )
+
+@router.post("/invitations/accept")
+async def accept_invitation(
+    request: AcceptInvitationRequest,
+    service: Annotated[InvitationService, Depends(get_invitation_service)],
+    current_user: Annotated[Optional[User], Depends(get_optional_current_user)] = None
+):
+    # Verify the invitation exists
+    invitation = service.get_invitation_by_token(request.token)
+    if not invitation:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail={"code": ErrorCode.AUTH_INVALID_TOKEN, "message": "Invitation not found"}
+        )
+    
+    # Case 1: Logged in - must match email
+    if current_user:
+        if invitation.email.lower() != current_user.email.lower():
+            raise HTTPException(
+                status_code=status.HTTP_403_FORBIDDEN,
+                detail={"code": ErrorCode.AUTH_UNAUTHORIZED, "message": "This invitation was sent to a different email address"}
+            )
+        
+        user_id = current_user.id
+        password = None
+    else:
+        # Case 2: Not logged in - must provide password to register
+        if not request.password:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail={"code": ErrorCode.AUTH_INVALID_CREDENTIALS, "message": "Password is required to register and accept invitation"}
+            )
+        user_id = None
+        password = request.password
+
+    user = service.accept_invitation(
+        token=request.token, 
+        user_id=user_id,
+        password=password,
+        first_name=request.first_name,
+        last_name=request.last_name
+    )
+    
+    if not user:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={"code": ErrorCode.AUTH_SYSTEM_ERROR, "message": "Failed to accept invitation"}
+        )
+    
+    return {"message": "Invitation accepted successfully", "email": user.email}
 
 @router.post("/token", response_model=Token)
 async def login_for_access_token(

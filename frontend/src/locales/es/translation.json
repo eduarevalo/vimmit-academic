@@ -80,11 +80,11 @@
     "passwordChangedMessage": "Tu contraseña ha sido actualizada.",
     "saveChanges": "Guardar Cambios",
     "changePassword": "Cambiar Contraseña",
-    "membershipsTitle": "Instituciones y Roles",
     "tenantId": "ID de Institución",
     "tabs": {
       "account": "Información Personal",
-      "security": "Seguridad"
+      "security": "Seguridad",
+      "memberships": "Instituciones"
     },
     "fields": {
       "firstName": "Nombres",
@@ -93,6 +93,12 @@
       "currentPassword": "Contraseña Actual",
       "newPassword": "Nueva Contraseña",
       "confirmPassword": "Confirmar Nueva Contraseña"
+    },
+    "noMemberships": "No se encontraron instituciones asociadas.",
+    "placeholders": {
+      "firstName": "Juan",
+      "lastName": "Pérez",
+      "phone": "+57 300 123 4567"
     }
   },
   "hero": {
@@ -521,6 +527,37 @@
       "backHome": "Volver al Inicio",
       "backPortal": "Volver al Portal",
       "loginNotice": "Para acceder a esta sección del portal, debes iniciar sesión."
+    }
+  },
+  "tenantManagement": {
+    "title": "Administración de Institución",
+    "manage": "ADMINISTRAR",
+    "users": "Usuarios",
+    "invitations": {
+      "title": "Invitaciones",
+      "deleteTitle": "Eliminar Invitación",
+      "deleteConfirm": "¿Estás seguro de que deseas eliminar esta invitación? Esta acción no se puede deshacer.",
+      "resend": "Reenviar invitación"
+    },
+    "inviteCollaborator": "Invitar Colaborador",
+    "email": "Correo Electrónico",
+    "role": "Rol",
+    "status": "Estado",
+    "actions": "Acciones",
+    "pending": "Pendiente",
+    "accepted": "Aceptado",
+    "cancelled": "Cancelado",
+    "sendInvitation": "Enviar Invitación",
+    "invitationSent": "Invitación enviada con éxito",
+    "noMembers": "No hay miembros registrados",
+    "noInvitations": "No hay invitaciones pendientes",
+    "acceptInvitation": {
+      "title": "Invitación a Institución",
+      "description": "Has sido invitado a unirte a {{tenantName}} como {{roleName}}.",
+      "accept": "Aceptar y Unirme",
+      "success": "Te has unido a la institución correctamente",
+      "alreadyMember": "Ya eres miembro de esta institución",
+      "error": "Hubo un error al procesar tu invitación"
     }
   }
 }

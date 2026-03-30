@@ -7,6 +7,7 @@ class Settings(BaseSettings):
     # App Settings
     PROJECT_NAME: str = "Vimmit Academic"
     FRONTEND_URL: str = "http://localhost:5173"
+    PORTAL_FRONTEND_URL: str = "http://localhost:5173/portal"
     ALLOWED_ORIGINS: list[str] = ["*"]
     ALLOW_METHODS: list[str] = ["*"]
     ALLOW_HEADERS: list[str] = ["*"]

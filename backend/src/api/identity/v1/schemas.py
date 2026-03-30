@@ -1,6 +1,7 @@
 from pydantic import BaseModel, EmailStr
-from typing import Optional
+from typing import Optional, List
 from uuid import UUID
+from datetime import datetime
 
 class Token(BaseModel):
     access_token: str
@@ -58,3 +59,37 @@ class UserUpdate(BaseModel):
     first_name: Optional[str] = None
     last_name: Optional[str] = None
     phone: Optional[str] = None
+
+class InvitationCreate(BaseModel):
+    email: EmailStr
+    role_id: UUID
+
+class InvitationOut(BaseModel):
+    id: UUID
+    email: str
+    tenant_id: UUID
+    role_id: UUID
+    role_name: str
+    token: str
+    status: str
+    user_exists: bool = False
+    tenant_name: Optional[str] = None
+    created_at: datetime
+    accepted_at: Optional[datetime] = None
+
+    class Config:
+        from_attributes = True
+
+class MemberOut(BaseModel):
+    user_id: UUID
+    email: str
+    first_name: Optional[str]
+    last_name: Optional[str]
+    role_id: UUID
+    role_name: str
+
+class AcceptInvitationRequest(BaseModel):
+    token: str
+    password: Optional[str] = None
+    first_name: Optional[str] = None
+    last_name: Optional[str] = None

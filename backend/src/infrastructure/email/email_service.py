@@ -80,9 +80,14 @@ class EmailService:
             server.send_message(msg)
 
     async def send_password_reset(self, to_email: str, reset_link: str, tenant_slug: str = "default"):
+        settings = get_settings()
         return await self.send_email(
             to_email=to_email,
             template_name="forgot_password.html",
-            context={"reset_link": reset_link, "email": to_email},
+            context={
+                "reset_link": reset_link, 
+                "email": to_email,
+                "frontend_url": settings.FRONTEND_URL
+            },
             tenant_slug=tenant_slug
         )

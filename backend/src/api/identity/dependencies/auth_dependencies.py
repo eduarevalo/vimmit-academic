@@ -31,6 +31,7 @@ SessionDep = Annotated[Session, Depends(get_session)]
 
 # Defined once here to be reused everywhere
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/v1/identity/auth/token")
+oauth2_scheme_optional = OAuth2PasswordBearer(tokenUrl="/api/v1/identity/auth/token", auto_error=False)
 
 from api.identity.v1.error_codes import ErrorCode
 
@@ -62,6 +63,17 @@ def get_current_user(
             detail={"code": ErrorCode.AUTH_USER_NOT_FOUND, "message": "User not found"}
         )
     return user
+
+def get_optional_current_user(
+    session: SessionDep,
+    token: Optional[str] = Depends(oauth2_scheme_optional)
+) -> Optional[User]:
+    if not token:
+        return None
+    try:
+        return get_current_user(session, token)
+    except HTTPException:
+        return None
 
 class AllowedTenants:
     """
@@ -141,7 +153,7 @@ class TenantAccess:
         tenant_id: UUID,
         session: Session = Depends(get_session),
         current_user: User = Depends(get_current_user),
-    ) -> UUID:
+    ) -> User:
         """
         tenant_id is injected by FastAPI from the route path/body — the caller
         passes it explicitly via Depends(TenantAccess())(tenant_id=...).
@@ -170,7 +182,7 @@ class TenantAccess:
                     },
                 )
 
-        return tenant_id
+        return current_user
 
 
 def require_tenant_access(tenant_id: UUID, required_roles: Optional[List[str]] = None):

@@ -1,9 +1,11 @@
-import { Container, Paper, Title, Text, TextInput, Button, Stack, Group, Avatar, Tabs, PasswordInput, Divider, Loader, Alert } from '@mantine/core';
+import { Container, Paper, Title, Text, TextInput, Button, Stack, Group, Avatar, Tabs, PasswordInput, Divider, Loader, Alert, Badge } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { useState, useEffect } from 'react';
 import { useAuth } from '../hooks/useAuth';
 import { useTranslation } from 'react-i18next';
-import { IconUser, IconLock, IconCheck, IconAlertCircle, IconMail, IconPhone } from '@tabler/icons-react';
+import { IconUser, IconLock, IconCheck, IconAlertCircle, IconMail, IconPhone, IconSettings, IconBuildingCommunity } from '@tabler/icons-react';
+import { Link } from 'react-router-dom';
+import classes from './ProfilePage.module.css';
 
 
 export function ProfilePage() {
@@ -99,13 +101,13 @@ export function ProfilePage() {
           </Stack>
         </Group>
 
-        <Paper withBorder shadow="sm" radius="md" p={30}>
-          <Group gap="xl" mb={40}>
+        <Paper withBorder shadow="sm" radius="md" py={30} px={0}>
+          <Group gap="xl" mb={40} px={30}>
             <Avatar size={100} radius="100%" color="brand">
               {user.first_name ? user.first_name[0] : user.email[0]}
             </Avatar>
             <Stack gap={5}>
-              <Title order={2}>{user.first_name || ''} {user.last_name || ''}</Title>
+              <Title order={2} fw={800}>{user.first_name || ''} {user.last_name || ''}</Title>
               <Group gap="xs">
                 <IconMail size={16} color="var(--mantine-color-dimmed)" />
                 <Text c="dimmed">{user.email}</Text>
@@ -117,46 +119,59 @@ export function ProfilePage() {
             </Stack>
           </Group>
 
-          <Tabs defaultValue="account" color="brand" variant="underline">
-            <Tabs.List mb="xl">
-              <Tabs.Tab value="account" leftSection={<IconUser size={16} />}>
+          <Tabs 
+            defaultValue="account" 
+            color="brand" 
+            variant="outline"
+            classNames={{
+              tab: classes.tab,
+            }}
+          >
+            <Tabs.List mb="xl" pl={30}>
+              <Tabs.Tab value="account" leftSection={<IconUser size={18} />}>
                 {t('profile.tabs.account')}
               </Tabs.Tab>
-              <Tabs.Tab value="security" leftSection={<IconLock size={16} />}>
+              <Tabs.Tab value="security" leftSection={<IconLock size={18} />}>
                 {t('profile.tabs.security')}
+              </Tabs.Tab>
+              <Tabs.Tab value="memberships" leftSection={<IconBuildingCommunity size={18} />}>
+                {t('profile.tabs.memberships')}
               </Tabs.Tab>
             </Tabs.List>
 
-            <Tabs.Panel value="account">
+            <Tabs.Panel value="account" pt="md" px={30}>
               <form onSubmit={profileForm.onSubmit(handleUpdateProfile)}>
-                <Stack gap="md">
+                <Stack gap="md" style={{ maxWidth: 600 }}>
                   <Group grow>
                     <TextInput
                       label={t('profile.fields.firstName')}
-                      placeholder="Juan"
+                      placeholder={t('profile.placeholders.firstName')}
+                      radius="md"
                       {...profileForm.getInputProps('first_name')}
                     />
                     <TextInput
                       label={t('profile.fields.lastName')}
-                      placeholder="Pérez"
+                      placeholder={t('profile.placeholders.lastName')}
+                      radius="md"
                       {...profileForm.getInputProps('last_name')}
                     />
                   </Group>
                   <TextInput
                     label={t('profile.fields.phone')}
-                    placeholder="+54 11 1234 5678"
+                    placeholder={t('profile.placeholders.phone')}
+                    radius="md"
                     leftSection={<IconPhone size={16} />}
                     {...profileForm.getInputProps('phone')}
                   />
                   
                   {profileError && (
-                    <Alert variant="light" color="red" icon={<IconAlertCircle size={16} />}>
+                    <Alert variant="light" color="red" icon={<IconAlertCircle size={16} />} radius="md">
                       {t(profileError)}
                     </Alert>
                   )}
                   
                   {profileSuccess && (
-                    <Alert variant="light" color="green" icon={<IconCheck size={16} />}>
+                    <Alert variant="light" color="green" icon={<IconCheck size={16} />} radius="md">
                       {t('profile.updatedMessage')}
                     </Alert>
                   )}
@@ -164,7 +179,7 @@ export function ProfilePage() {
                   <Divider my="sm" />
                   
                   <Group justify="flex-end">
-                    <Button type="submit" loading={profileLoading} radius="md" px={30}>
+                    <Button type="submit" loading={profileLoading} radius="md" px={40}>
                       {t('profile.saveChanges')}
                     </Button>
                   </Group>
@@ -172,33 +187,36 @@ export function ProfilePage() {
               </form>
             </Tabs.Panel>
 
-            <Tabs.Panel value="security">
+            <Tabs.Panel value="security" pt="md" px={30}>
               <form onSubmit={passwordForm.onSubmit(handleChangePassword)}>
                 <Stack gap="md" style={{ maxWidth: 500 }}>
                   <PasswordInput
                     label={t('profile.fields.currentPassword')}
+                    radius="md"
                     required
                     {...passwordForm.getInputProps('current_password')}
                   />
                   <PasswordInput
                     label={t('profile.fields.newPassword')}
+                    radius="md"
                     required
                     {...passwordForm.getInputProps('new_password')}
                   />
                   <PasswordInput
                     label={t('profile.fields.confirmPassword')}
+                    radius="md"
                     required
                     {...passwordForm.getInputProps('confirm_password')}
                   />
                   
                   {passwordError && (
-                    <Alert variant="light" color="red" icon={<IconAlertCircle size={16} />}>
+                    <Alert variant="light" color="red" icon={<IconAlertCircle size={16} />} radius="md">
                       {t(passwordError)}
                     </Alert>
                   )}
                   
                   {passwordSuccess && (
-                    <Alert variant="light" color="green" icon={<IconCheck size={16} />}>
+                    <Alert variant="light" color="green" icon={<IconCheck size={16} />} radius="md">
                       {t('profile.passwordChangedMessage')}
                     </Alert>
                   )}
@@ -206,35 +224,56 @@ export function ProfilePage() {
                   <Divider my="sm" />
                   
                   <Group justify="flex-end">
-                    <Button type="submit" color="brand" loading={passwordLoading} radius="md">
+                    <Button type="submit" color="brand" loading={passwordLoading} radius="md" px={40}>
                       {t('profile.changePassword')}
                     </Button>
                   </Group>
                 </Stack>
               </form>
             </Tabs.Panel>
+
+            <Tabs.Panel value="memberships" pt="md" px={30}>
+              <Stack gap="md">
+                {user.memberships.length > 0 ? (
+                  <Stack gap="sm">
+                    {user.memberships.map((membership, idx) => (
+                      <Paper key={idx} withBorder p="md" radius="md">
+                        <Group justify="space-between">
+                          <Stack gap={0}>
+                            <Text fw={700} size="lg">{membership.tenant_name}</Text>
+                            <Text size="sm" c="dimmed">{t('profile.tenantId')}: {membership.tenant_id}</Text>
+                          </Stack>
+                          <Group gap="sm">
+                            <Badge color="brand" variant="light" size="lg" radius="sm">
+                              {membership.role_name}
+                            </Badge>
+                            {membership.role_name === 'Admin' && (
+                              <Button 
+                                component={Link} 
+                                to={`/portal/manage/${membership.tenant_id}`}
+                                variant="filled" 
+                                color="brand"
+                                radius="md"
+                                size="sm" 
+                                leftSection={<IconSettings size={16} />}
+                              >
+                                {t('tenantManagement.manage')}
+                              </Button>
+                            )}
+                          </Group>
+                        </Group>
+                      </Paper>
+                    ))}
+                  </Stack>
+                ) : (
+                  <Text c="dimmed" fs="italic">{t('profile.noMemberships')}</Text>
+                )}
+              </Stack>
+            </Tabs.Panel>
           </Tabs>
         </Paper>
-        
-        {user.memberships.length > 0 && (
-          <Paper withBorder shadow="sm" radius="md" p={30}>
-            <Title order={3} mb="md">{t('profile.membershipsTitle')}</Title>
-            <Stack>
-              {user.memberships.map((membership, idx) => (
-                <Group key={idx} justify="space-between" p="md" style={{ border: '1px solid var(--mantine-color-gray-2)', borderRadius: 'var(--mantine-radius-md)' }}>
-                  <Stack gap={0}>
-                    <Text fw={700}>{membership.tenant_name}</Text>
-                    <Text size="sm" c="dimmed">{t('profile.tenantId')}: {membership.tenant_id}</Text>
-                  </Stack>
-                  <Alert color="brand" py={5} px={15} radius="xl">
-                    <Text fw={600} size="sm">{membership.role_name}</Text>
-                  </Alert>
-                </Group>
-              ))}
-            </Stack>
-          </Paper>
-        )}
       </Stack>
+
     </Container>
   );
 }

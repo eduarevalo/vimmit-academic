@@ -4,6 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from api.identity.dependencies.auth_dependencies import init_db
 from api.identity.v1.auth import router as auth_router
 from api.identity.v1.users import router as user_router
+from api.identity.v1.tenant_management import router as tenant_management_router
 from api.administration.v1.registration_intent import router as registration_intent_router
 from api.academic.programs.v1.programs import router as programs_router
 from api.academic.programs.v1.program_levels import router as program_levels_router
@@ -45,6 +46,7 @@ app.add_middleware(
 # Mounting Identity API
 app.include_router(auth_router, prefix="/v1/identity")
 app.include_router(user_router, prefix="/v1/identity")
+app.include_router(tenant_management_router, prefix="/v1/identity")
 
 # Mounting Administration API
 app.include_router(registration_intent_router, prefix="/v1/administration")
