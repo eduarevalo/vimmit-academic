@@ -1,11 +1,25 @@
-import { Container, Stack, Title, Text, Button, Group, Table, Badge, ActionIcon, Modal, Paper, TextInput, Select } from '@mantine/core';
-import { IconPlus, IconEdit, IconTrash } from '@tabler/icons-react';
-import { useForm } from '@mantine/form';
-import { useTranslation } from 'react-i18next';
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+import { 
+  Container, 
+  Stack, 
+  Text, 
+  Button, 
+  Group, 
+  Table, 
+  Badge, 
+  ActionIcon, 
+  Modal, 
+  Paper, 
+  TextInput, 
+  Select 
+} from '@mantine/core';
+import { useForm } from '@mantine/form';
+import { IconPlus, IconEdit, IconTrash } from '@tabler/icons-react';
+
 import { useAuth } from '../hooks/useAuth';
 import { Can } from '../components/auth/Can';
-
+import { PageHeader } from '../components/common/PageHeader';
 import { API_BASE_URL } from '../config';
 
 interface Calendar {
@@ -182,22 +196,22 @@ export function CalendarsPage() {
   return (
     <Container size="lg" py={40}>
       <Stack gap="xl">
-        <Group justify="space-between" align="flex-end">
-          <Stack gap={4}>
-            <Title order={2}>{t('portal.calendars.title')}</Title>
-            <Text c="dimmed" size="sm">{t('portal.calendars.subtitle')}</Text>
-          </Stack>
-          <Can roles={["Admin"]}>
-            <Button leftSection={<IconPlus size={18} />} radius="md" color="brand"
-              onClick={() => {
-                setEditing(null);
-                fetchLookups();
-                setOpened(true);
-              }}>
-              {t('portal.calendars.create')}
-            </Button>
-          </Can>
-        </Group>
+        <PageHeader 
+          title={t('portal.calendars.title')}
+          subtitle={t('portal.calendars.subtitle')}
+          actions={
+            <Can roles={["Admin"]}>
+              <Button leftSection={<IconPlus size={18} />} radius="md" color="brand"
+                onClick={() => {
+                  setEditing(null);
+                  fetchLookups();
+                  setOpened(true);
+                }}>
+                {t('portal.calendars.create')}
+              </Button>
+            </Can>
+          }
+        />
 
         {calendars.length > 0 ? (
           <Table verticalSpacing="md" highlightOnHover>
@@ -276,3 +290,5 @@ export function CalendarsPage() {
     </Container>
   );
 }
+
+

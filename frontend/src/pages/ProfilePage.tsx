@@ -1,4 +1,4 @@
-import { Container, Paper, Title, Text, TextInput, Button, Stack, Group, Avatar, Tabs, PasswordInput, Divider, Loader, Alert, Badge } from '@mantine/core';
+import { Container, Paper, TextInput, Button, Stack, Group, Avatar, Tabs, PasswordInput, Divider, Loader, Alert, Badge, Text, Title } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { useState, useEffect } from 'react';
 import { useAuth } from '../hooks/useAuth';
@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { IconUser, IconLock, IconCheck, IconAlertCircle, IconMail, IconPhone, IconSettings, IconBuildingCommunity } from '@tabler/icons-react';
 import { Link } from 'react-router-dom';
 import classes from './ProfilePage.module.css';
+import { PageHeader } from '../components/common/PageHeader';
 
 
 export function ProfilePage() {
@@ -83,7 +84,7 @@ export function ProfilePage() {
 
   if (isLoading || !user) {
     return (
-      <Container size="md" py={100}>
+      <Container size="lg" py={100}>
         <Stack align="center">
           <Loader size="xl" color="brand" />
         </Stack>
@@ -92,14 +93,12 @@ export function ProfilePage() {
   }
 
   return (
-    <Container size="md" py={60}>
+    <Container size="lg" py={40}>
       <Stack gap="xl">
-        <Group justify="space-between" align="flex-end">
-          <Stack gap={0}>
-            <Title order={1} fw={900}>{t('profile.title')}</Title>
-            <Text c="dimmed">{t('profile.subtitle')}</Text>
-          </Stack>
-        </Group>
+        <PageHeader 
+          title={t('profile.title')}
+          subtitle={t('profile.subtitle')}
+        />
 
         <Paper withBorder shadow="sm" radius="md" py={30} px={0}>
           <Group gap="xl" mb={40} px={30}>
@@ -141,7 +140,7 @@ export function ProfilePage() {
 
             <Tabs.Panel value="account" pt="md" px={30}>
               <form onSubmit={profileForm.onSubmit(handleUpdateProfile)}>
-                <Stack gap="md" style={{ maxWidth: 600 }}>
+                <Stack gap="md">
                   <Group grow>
                     <TextInput
                       label={t('profile.fields.firstName')}
@@ -189,7 +188,7 @@ export function ProfilePage() {
 
             <Tabs.Panel value="security" pt="md" px={30}>
               <form onSubmit={passwordForm.onSubmit(handleChangePassword)}>
-                <Stack gap="md" style={{ maxWidth: 500 }}>
+                <Stack gap="md">
                   <PasswordInput
                     label={t('profile.fields.currentPassword')}
                     radius="md"

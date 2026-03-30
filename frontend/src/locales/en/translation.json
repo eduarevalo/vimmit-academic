@@ -2,6 +2,8 @@
   "common": {
     "cancel": "Cancel",
     "delete": "Delete",
+    "loading": "Loading...",
+    "goBack": "Go back",
     "fieldRequired": "This field is required",
     "error": {
       "tooShort": "Must be at least 2 characters",

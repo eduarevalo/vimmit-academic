@@ -2,6 +2,7 @@ import { Stack, Text, Container, Title, List, ThemeIcon, Button, Group } from '@
 import { IconCheck, IconInfoCircle } from '@tabler/icons-react';
 import { useTranslation } from 'react-i18next';
 import { useRegistrationModal } from '../hooks/useRegistrationModal';
+import { PageHeader } from '../components/common/PageHeader';
 
 export function AdmissionsPage() {
   const { t } = useTranslation();
@@ -10,10 +11,11 @@ export function AdmissionsPage() {
   return (
     <Container size="lg" py={80}>
       <Stack gap="xl">
-        <Stack gap="xs">
-          <Title order={1} size="42px" fw={900}>{t('admissionsPage.title')}</Title>
-          <Text size="xl" c="dimmed">{t('admissionsPage.subtitle')}</Text>
-        </Stack>
+        <PageHeader 
+          title={t('admissionsPage.title')}
+          subtitle={t('admissionsPage.subtitle')}
+          withBackButton
+        />
 
         <Stack gap="lg">
           <Title order={2}>{t('admissionsPage.requirements.title')}</Title>

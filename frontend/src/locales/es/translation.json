@@ -2,6 +2,8 @@
   "common": {
     "cancel": "Cancelar",
     "delete": "Eliminar",
+    "loading": "Cargando...",
+    "goBack": "Ir atrás",
     "fieldRequired": "Este campo es obligatorio",
     "error": {
       "tooShort": "Debe tener al menos 2 caracteres",

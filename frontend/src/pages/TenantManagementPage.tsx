@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { 
   Container, 
-  Title, 
   Text, 
   Paper, 
   Stack, 
@@ -31,14 +30,15 @@ import {
   IconCheck, 
   IconAlertCircle, 
   IconClock,
-  IconBuildingCommunity,
   IconArrowLeft,
   IconSend,
   IconRefresh
 } from '@tabler/icons-react';
 import { useTranslation } from 'react-i18next';
+
 import { useAuth } from '../hooks/useAuth';
 import { API_BASE_URL } from '../config';
+import { PageHeader } from '../components/common/PageHeader';
 
 interface Member {
   user_id: string;
@@ -234,7 +234,7 @@ export function TenantManagementPage() {
 
   if (isLoading) {
     return (
-      <Container size="xl" py={100}>
+      <Container size="lg" py={100}>
         <Stack align="center">
           <Loader size="xl" color="brand" variant="dots" />
           <Text c="dimmed">{t('common.loading')}</Text>
@@ -245,7 +245,7 @@ export function TenantManagementPage() {
 
   if (error) {
     return (
-      <Container size="md" py={100}>
+      <Container size="lg" py={100}>
         <Alert icon={<IconAlertCircle size={16} />} title="Error" color="red" variant="light">
           {error}
         </Alert>
@@ -257,41 +257,24 @@ export function TenantManagementPage() {
   }
 
   return (
-    <Container size="xl" py={40}>
+    <Container size="lg" py={40}>
       <Stack gap="xl">
-        <Group justify="space-between" align="flex-end">
-          <Stack gap={5}>
+        <PageHeader 
+          title={t('tenantManagement.title')}
+          subtitle={`ID: ${tenantId}`}
+          withBackButton
+          actions={
             <Button 
-              variant="subtle" 
-              leftSection={<IconArrowLeft size={16} />} 
-              component={Link} 
-              to="/portal/profile"
-              p={0}
-              h="auto"
-              c="dimmed"
-              mb="xs"
+              leftSection={<IconUserPlus size={20} />} 
+              onClick={() => setInviteModalOpen(true)}
+              size="md"
+              radius="md"
+              className="brand-button"
             >
-              {t('profile.title')}
+              {t('tenantManagement.inviteCollaborator')}
             </Button>
-            <Title order={1} fw={900}>{t('tenantManagement.title')}</Title>
-            <Group gap="xs">
-              <ThemeIcon variant="light" color="brand" radius="xl">
-                <IconBuildingCommunity size={18} />
-              </ThemeIcon>
-              <Text c="dimmed" fw={500}>ID: {tenantId}</Text>
-            </Group>
-          </Stack>
-          
-          <Button 
-            leftSection={<IconUserPlus size={20} />} 
-            onClick={() => setInviteModalOpen(true)}
-            size="md"
-            radius="md"
-            className="brand-button"
-          >
-            {t('tenantManagement.inviteCollaborator')}
-          </Button>
-        </Group>
+          }
+        />
 
         <Paper withBorder shadow="sm" radius="lg">
           <Tabs defaultValue="members" color="brand" variant="pills" p="md">

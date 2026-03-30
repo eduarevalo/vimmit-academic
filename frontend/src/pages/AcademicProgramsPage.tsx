@@ -1,10 +1,22 @@
-import { Container, Stack, Title, Text, Button, Group, Table, Badge, ActionIcon, Modal, Paper } from '@mantine/core';
-import { IconPlus, IconEdit, IconTrash } from '@tabler/icons-react';
-import { useTranslation } from 'react-i18next';
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+import { 
+  Container, 
+  Stack, 
+  Text, 
+  Button, 
+  Group, 
+  Table, 
+  Badge, 
+  ActionIcon, 
+  Modal, 
+  Paper 
+} from '@mantine/core';
+import { IconPlus, IconEdit, IconTrash } from '@tabler/icons-react';
+
+import { PageHeader } from '../components/common/PageHeader';
 import { ProgramForm } from '../components/portal/ProgramForm';
 import { useAuth } from '../hooks/useAuth';
-
 import { API_BASE_URL } from '../config';
 
 interface Program {
@@ -99,18 +111,18 @@ export function AcademicProgramsPage() {
   return (
     <Container size="lg" py={40}>
       <Stack gap="xl">
-        <Group justify="space-between" align="flex-end">
-          <Stack gap={4}>
-            <Title order={2}>{t('portal.programsManagement.title')}</Title>
-            <Text c="dimmed" size="sm">{t('portal.programsManagement.subtitle')}</Text>
-          </Stack>
-          <Button leftSection={<IconPlus size={18} />} radius="md" color="brand" onClick={() => {
-            setEditingProgram(null);
-            setOpened(true);
-          }}>
-            {t('portal.programsManagement.create')}
-          </Button>
-        </Group>
+        <PageHeader 
+          title={t('portal.programsManagement.title')}
+          subtitle={t('portal.programsManagement.subtitle')}
+          actions={
+            <Button leftSection={<IconPlus size={18} />} radius="md" color="brand" onClick={() => {
+              setEditingProgram(null);
+              setOpened(true);
+            }}>
+              {t('portal.programsManagement.create')}
+            </Button>
+          }
+        />
 
         {programs.length > 0 ? (
           <Table verticalSpacing="md" highlightOnHover>
