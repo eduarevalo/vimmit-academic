@@ -3,8 +3,8 @@ from sqlmodel import Session
 from typing import List
 from uuid import UUID
 
+from infrastructure.persistence.database import get_session
 from api.identity.dependencies.auth_dependencies import (
-    get_session,
     get_allowed_tenants,
     AllowedTenants,
     body_with_tenant_access,
@@ -45,7 +45,7 @@ async def create_campus(
 @router.get("", response_model=List[CampusResponse])
 async def list_campuses(
     session: Session = Depends(get_session),
-    allowed_tenants: List[UUID] = Depends(get_allowed_tenants),
+    allowed_tenants: List[UUID] = Depends(AllowedTenants(required_roles=["Admin"])),
 ):
     repo = CampusRepository(session)
     results = repo.list_by_tenants(allowed_tenants)
@@ -78,7 +78,7 @@ async def list_public_campuses(
 async def get_campus(
     campus_id: UUID,
     session: Session = Depends(get_session),
-    allowed_tenants: List[UUID] = Depends(get_allowed_tenants),
+    allowed_tenants: List[UUID] = Depends(AllowedTenants(required_roles=["Admin"])),
 ):
     return get_campus_or_404(campus_id, allowed_tenants, session)
 

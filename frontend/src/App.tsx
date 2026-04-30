@@ -15,9 +15,12 @@ const AdmissionsPage = lazy(() => import('./pages/AdmissionsPage').then(module =
 const StudentLifePage = lazy(() => import('./pages/StudentLifePage').then(module => ({ default: module.StudentLifePage })));
 const PortalPage = lazy(() => import('./pages/PortalPage').then(module => ({ default: module.PortalPage })));
 const AcademicProgramsPage = lazy(() => import('./pages/AcademicProgramsPage').then(module => ({ default: module.AcademicProgramsPage })));
+const AcademicProgramDetailPage = lazy(() => import('./pages/AcademicProgramDetailPage').then(module => ({ default: module.AcademicProgramDetailPage })));
 const CampusPage = lazy(() => import('./pages/CampusPage').then(module => ({ default: module.CampusPage })));
 const CalendarsPage = lazy(() => import('./pages/CalendarsPage').then(module => ({ default: module.CalendarsPage })));
+const CoursesPage = lazy(() => import('./pages/CoursesPage').then(module => ({ default: module.CoursesPage })));
 const EnrollmentsPage = lazy(() => import('./pages/EnrollmentsPage').then(module => ({ default: module.EnrollmentsPage })));
+const DeadlinesPage = lazy(() => import('./pages/DeadlinesPage').then(module => ({ default: module.DeadlinesPage })));
 const ImpactPage = lazy(() => import('./pages/ImpactPage').then(module => ({ default: module.ImpactPage })));
 const ProgramDetailPage = lazy(() => import('./pages/ProgramDetailPage').then(module => ({ default: module.ProgramDetailPage })));
 const PublicCampusPage = lazy(() => import('./pages/PublicCampusPage').then(module => ({ default: module.PublicCampusPage })));
@@ -26,7 +29,13 @@ const ResetPasswordPage = lazy(() => import('./pages/ResetPasswordPage').then(mo
 const ProfilePage = lazy(() => import('./pages/ProfilePage').then(module => ({ default: module.ProfilePage })));
 const TenantManagementPage = lazy(() => import('./pages/TenantManagementPage').then(module => ({ default: module.TenantManagementPage })));
 const AcceptInvitationPage = lazy(() => import('./pages/AcceptInvitationPage').then(module => ({ default: module.AcceptInvitationPage })));
+const LeadsManagementPage = lazy(() => import('./pages/LeadsManagementPage').then(module => ({ default: module.LeadsManagementPage })));
+const LeadDetailPage = lazy(() => import('./pages/LeadDetailPage').then(module => ({ default: module.LeadDetailPage })));
+const AdmissionsManagementPage = lazy(() => import('./pages/AdmissionsManagementPage').then(module => ({ default: module.AdmissionsManagementPage })));
+const AdmissionDetailsPage = lazy(() => import('./pages/AdmissionDetailsPage').then(module => ({ default: module.AdmissionDetailsPage })));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage').then(module => ({ default: module.NotFoundPage })));
+const StudentsDirPage = lazy(() => import('./pages/StudentsDirPage').then(module => ({ default: module.StudentsDirPage })));
+const StudentProfilePage = lazy(() => import('./pages/StudentProfilePage').then(module => ({ default: module.StudentProfilePage })));
 
 function App() {
   return (
@@ -59,9 +68,20 @@ function App() {
               
               {/* Academic */}
               <Route path="academic/programs" element={<AcademicProgramsPage />} />
+              <Route path="academic/programs/:id" element={<AcademicProgramDetailPage />} />
+              <Route path="academic/courses" element={<CoursesPage />} />
               
               {/* Administrative */}
               <Route path="administrative/enrollments" element={<EnrollmentsPage />} />
+              <Route path="administrative/leads" element={<LeadsManagementPage />} />
+              <Route path="administrative/admissions" element={<AdmissionsManagementPage />} />
+              <Route path="administrative/admissions/:id" element={<AdmissionDetailsPage />} />
+              <Route path="administrative/deadlines" element={<DeadlinesPage />} />
+              <Route path="administrative/leads/:leadId" element={<LeadDetailPage />} />
+              
+              {/* Students Hub */}
+              <Route path="students" element={<StudentsDirPage />} />
+              <Route path="students/:id" element={<StudentProfilePage />} />
               
               {/* Organization */}
               <Route path="organization/campus" element={<CampusPage />} />

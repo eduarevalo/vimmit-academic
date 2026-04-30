@@ -3,8 +3,8 @@ from uuid import UUID
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlmodel import Session, select
 
+from infrastructure.persistence.database import get_session
 from api.identity.dependencies.auth_dependencies import (
-    get_session, 
     get_current_user, 
     TenantAccess,
     enrich_user_memberships

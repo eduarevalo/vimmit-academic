@@ -4,7 +4,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from pydantic import BaseModel
 from sqlmodel import Session
 
-from api.identity.dependencies.auth_dependencies import get_session
+from infrastructure.persistence.database import get_session
 from application.identity.services.identity_service import IdentityService
 from infrastructure.identity.repositories.user_repository import UserRepository
 from infrastructure.identity.repositories.role_repository import RoleRepository

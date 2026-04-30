@@ -1,6 +1,6 @@
 import { Container, Group, Button, Text, Box, Menu, Avatar, Burger, Drawer, Stack } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { IconExternalLink, IconLogout, IconUser } from '@tabler/icons-react';
+import { IconExternalLink, IconLogout, IconUser, IconSchool } from '@tabler/icons-react';
 import { useTranslation } from 'react-i18next';
 import { useInstitution } from '../hooks/useInstitution';
 import { useAuth } from '../hooks/useAuth';
@@ -67,16 +67,22 @@ export function Header({
         position: 'sticky', 
         top: 0, 
         zIndex: 100, 
-        backgroundColor: 'rgba(255, 255, 255, 0.8)', 
-        backdropFilter: 'blur(10px)',
-        borderBottom: '1px solid #f1f3f5'
+        backgroundColor: '#fff', 
+        borderBottom: `1px solid var(--mantine-color-brand-2)`
       }}
     >
-      <Container size="lg">
+      <Container size="xl">
         <Group justify="space-between" h="100%">
-          <Group gap="xs" onClick={onLogoClick} style={{ cursor: 'pointer' }}>
-            <img src="/logo-clean.png" alt={t('common.logoAlt')} style={{ height: 32, width: 'auto' }} />
-            <Text size="xl" fw={900} variant="gradient" gradient={{ from: '#16884a', to: '#2b8a3e', deg: 45 }}>
+          <Group gap={8} onClick={onLogoClick} style={{ cursor: 'pointer' }}>
+            <img 
+              src="/logo.jpg" 
+              alt={t('common.logoAlt')} 
+              style={{ 
+                height: 32, 
+                borderRadius: 'var(--mantine-radius-xs)' 
+              }} 
+            />
+            <Text size="xl" fw={900} c="brand" style={{ letterSpacing: -1 }}>
               {name}
             </Text>
           </Group>
@@ -90,9 +96,9 @@ export function Header({
               component="a"
               href="/portal"
               target="_blank"
-              radius="xl" 
+              radius="xs" 
               variant="subtle" 
-              color="gray"
+              color="secondary"
               rightSection={<IconExternalLink size={16} />}
               visibleFrom="sm"
             >
@@ -100,14 +106,14 @@ export function Header({
             </Button>
             
             {isAuthenticated && showUser ? (
-              <Menu shadow="md" width={200} position="bottom-end">
+              <Menu shadow="md" width={200} position="bottom-end" radius="xs">
                 <Menu.Target>
-                  <Button variant="subtle" color="gray" radius="xl" px={8}>
+                  <Button variant="subtle" color="gray" radius="xs" px={8}>
                     <Group gap={8}>
-                      <Avatar size={24} color="brand" radius="xl">
+                      <Avatar size={24} color="brand" radius="xs">
                         {user?.email?.charAt(0).toUpperCase()}
                       </Avatar>
-                      <Text size="sm" fw={500} visibleFrom="xs">{user?.email?.split('@')[0]}</Text>
+                      <Text size="sm" fw={600} visibleFrom="xs">{user?.email?.split('@')[0]}</Text>
                     </Group>
                   </Button>
                 </Menu.Target>
@@ -125,12 +131,12 @@ export function Header({
                 </Menu.Dropdown>
               </Menu>
             ) : showLogin && (
-              <Button variant="subtle" color="brand" radius="xl" onClick={() => navigate('/portal/login')}>
+              <Button variant="subtle" color="brand" radius="xs" onClick={() => navigate('/portal/login')}>
                 {t('auth.login')}
               </Button>
             )}
 
-            <Button radius="xl" variant="filled" color="brand" onClick={onStartJourney}>
+            <Button radius="xs" variant="filled" color="brand" onClick={onStartJourney}>
               {t('header.startJourney')}
             </Button>
 
@@ -152,7 +158,7 @@ export function Header({
           padding="xl"
           title={
             <Group gap="xs">
-              <img src="/logo-clean.png" alt={t('common.logoAlt')} style={{ height: 24 }} />
+              <img src="/logo.jpg" alt={t('common.logoAlt')} style={{ height: 24 }} />
               <Text fw={700} size="lg">{name}</Text>
             </Group>
           }
@@ -167,7 +173,7 @@ export function Header({
                 component="a"
                 href="/portal"
                 target="_blank"
-                radius="xl" 
+                radius="xs" 
                 variant="light" 
                 color="gray"
                 fullWidth
@@ -201,7 +207,7 @@ export function Header({
                 <Button 
                   variant="outline" 
                   color="brand" 
-                  radius="xl" 
+                  radius="xs" 
                   fullWidth 
                   onClick={() => {
                     navigate('/portal/login');

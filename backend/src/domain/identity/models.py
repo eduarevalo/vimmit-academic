@@ -41,6 +41,8 @@ class User(SQLModel, table=True):
     first_name: Optional[str] = Field(default=None)
     last_name: Optional[str] = Field(default=None)
     phone: Optional[str] = Field(default=None)
+    avatar_url: Optional[str] = Field(default=None)
+    is_superuser: bool = Field(default=False)
     
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))

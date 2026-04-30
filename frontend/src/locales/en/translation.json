@@ -3,9 +3,18 @@
     "cancel": "Cancel",
     "delete": "Delete",
     "loading": "Loading...",
+    "previous": "Previous",
+    "next": "Next",
     "goBack": "Go back",
-    "fieldRequired": "This field is required",
+    "back": "Back",
+    "me": "Me",
+    "none": "None",
+    "success": "Success",
+    "refresh": "Refresh",
+    "search": "Search",
     "error": {
+      "title": "Error",
+      "unknown": "An unexpected error occurred",
       "tooShort": "Must be at least 2 characters",
       "fetchPrograms": "Error loading programs. Please try again later."
     }
@@ -46,7 +55,7 @@
   },
   "hero": {
     "welcome": "Welcome to",
-    "title": "Academy",
+    "title": "Aseder",
     "subtitle": "Your future begins here. Explore our world-class programs, vibrant community, and ignite your potential in an environment designed for innovators.",
     "explorePrograms": "Explore Programs",
     "learnMore": "Learn More"
@@ -94,28 +103,75 @@
   "registration": {
     "title": "Registration of Interest",
     "subtitle": "Join our community and take the first step towards your professional future today.",
+    "start": "Start Registration",
     "fields": {
       "fullName": "Full Name",
       "email": "Email Address",
       "phone": "Phone Number",
+      "campus": "Campus",
+      "campusPlaceholder": "Select a campus",
       "program": "Program of Interest",
-      "programPlaceholder": "Select a program"
+      "programPlaceholder": "Select a program",
+      "calendar": "Academic Period",
+      "calendarPlaceholder": "Select a period",
+      "notes": "Additional Notes",
+      "notesPlaceholder": "Anything else we should know?"
     },
     "submit": "Register My Interest",
     "disclaimer": "This is only a registration of interest, not a commitment to enroll.",
     "success": "Thank you for your interest! We will get in touch with you soon.",
-    "error": "There was an error processing your request. Please try again."
+    "error": "There was an error processing your request. Please try again.",
+    "successTitle": "Application Submitted",
+    "successMessage": "Your enrollment application has been received. Please check your email for further details.",
+    "errorTitle": "Submission Error",
+    "errorMessage": "We couldn't process your enrollment. Please verify the information and try again.",
+    "steps": {
+      "intro": "Information",
+      "introDesc": "Requirements & process",
+      "details": "Your Details",
+      "detailsDesc": "Personal information",
+      "selection": "Your Career",
+      "selectionDesc": "Program & documents",
+      "docs": "Documents",
+      "docsDesc": "Upload requirements",
+      "review": "Review",
+      "reviewDesc": "Verify & submit",
+      "docsUploaded": "Documents uploaded"
+    },
+    "validation": {
+      "nameTooShort": "Name is too short",
+      "invalidEmail": "Invalid email address",
+      "invalidPhone": "Invalid phone number",
+      "campusRequired": "You must select a campus",
+      "programRequired": "You must select a program",
+      "calendarRequired": "You must select an academic period"
+    },
+    "docs": {
+      "missingTitle": "Missing Documents",
+      "missingMessage": "Please upload the following documents: {{docs}}",
+      "dropZoneLabel": "Drag files here or click to select",
+      "dropZoneMax": "Max size 5MB. Formats: JPG, PNG, PDF",
+      "physicalLabel": "Physical",
+      "digitalLabel": "Digital",
+      "physicalRequired": "Physical Required",
+      "required": "Required",
+      "optional": "Optional"
+    },
+    "program": {
+      "requirementsTitle": "Program Requirements",
+      "requirementsInfo": "For this program, you need to upload the following documents:"
+    }
   },
   "aboutPage": {
     "hero": {
         "tag": "Get to know our institution",
         "title": "Committed to Regional Development",
-        "subtitle": "For more than two decades, ASEDER has been the engine of change for thousands of people in Northern Cauca, providing quality education and growth opportunities."
+        "subtitle": "For more than two decades, Aseder has been the engine of change for thousands of people in Northern Cauca, providing quality education and growth opportunities."
     },
     "history": {
       "tag": "Our Origins",
       "title": "Our History",
-      "p1": "Founded in 2000 in Santander de Quilichao, the Center for Educational Advising for Regional Development (ASEDER) was born from a clear vision: to close educational gaps in Northern Cauca and empower communities through knowledge.",
+      "p1": "Founded in 2000 in Santander de Quilichao, the Center for Educational Advising for Regional Development (Aseder) was born from a clear vision: to close educational gaps in Northern Cauca and empower communities through knowledge.",
       "p2": "With over 25 years of experience, we have evolved from a small training center into a leading institution with multiple locations and a diversified academic offer including adult high school and high-impact technical vocational programs.",
       "p3": "Our history is the story of thousands of graduates who, with effort and dedication, have transformed their lives and those of their families, becoming engines of change for our region.",
       "quote": "Transforming lives through knowledge and regional service.",
@@ -134,7 +190,7 @@
     },
     "statsSection": {
         "tag": "Our Impact",
-        "title": "ASEDER in Numbers",
+        "title": "Aseder in Numbers",
         "items": {
             "years": {
                 "value": "25+",
@@ -162,7 +218,7 @@
   "impactPage": {
     "title": "Regional Impact and Social Commitment",
     "subtitle": "Transforming Northern Cauca since 2000 through education and empowerment.",
-    "intro": "ASEDER is not just an educational institution; it is a pillar of development in a region that has faced historic challenges. Our presence in Santander de Quilichao and Miranda is a testament to resilience.",
+    "intro": "Aseder is not just an educational institution; it is a pillar of development in a region that has faced historic challenges. Our presence in Santander de Quilichao and Miranda is a testament to resilience.",
     "stats": {
         "graduates": "9,700+",
         "graduatesLabel": "Graduates transforming the region",
@@ -329,7 +385,7 @@
     },
     "impact": {
       "title": "Regional Impact",
-      "p1": "ASEDER consolidates itself as a pillar of development in Northern Cauca, forming upright professionals who provide real solutions to their communities.",
+      "p1": "Aseder consolidates itself as a pillar of development in Northern Cauca, forming upright professionals who provide real solutions to their communities.",
       "p2": "Our graduates are the reflection of our work: territorial leaders who drive social and economic progress from their respective fields."
     },
     "leaders": {
@@ -386,6 +442,13 @@
         "title": "Delete program",
         "message": "Are you sure you want to delete '{{name}}'? This action cannot be undone."
       },
+      "costs": {
+        "title": "Program Costs",
+        "add": "Add Cost",
+        "amount": "Amount",
+        "empty": "No fixed costs defined for this program.",
+        "deleteConfirm": "Do you want to inactive or delete this cost item?"
+      },
       "list": {
         "empty": "No programs registered",
         "name": "Program",
@@ -401,11 +464,40 @@
       "calendar": "Calendar",
       "programs": "Programs",
       "courses": "Courses",
-      "campus": "Campuses",
-      "calendars": "Academic Periods",
+      "leads": "Leads",
       "enrollments": "Enrollments",
+      "students": "Students",
       "deadlines": "Deadlines",
+      "campus": "Campuses",
       "enrollmentsSubtitle": "Manage student enrollments"
+    },
+    "courses": {
+      "title": "Courses",
+      "subtitle": "Manage course offerings and subjects"
+    },
+    "enrollments": {
+      "title": "Academic Enrollments",
+      "subtitle": "Manage students enrolled in programs",
+      "list": {
+        "student": "Student",
+        "program": "Program",
+        "level": "Level / Grade",
+        "period": "Period",
+        "status": "Status",
+        "date": "Date",
+        "empty": "No enrollments registered yet.",
+        "actions": "Actions"
+      },
+      "status": {
+        "PENDING": "Pending",
+        "CONFIRMED": "Confirmed",
+        "CANCELLED": "Cancelled",
+        "GRADUATED": "Graduated"
+      }
+    },
+    "deadlines": {
+      "title": "Deadlines",
+      "subtitle": "Manage deadlines and key dates"
     },
     "campus": {
       "title": "Campuses",
@@ -468,6 +560,166 @@
       "backHome": "Back to Home",
       "backPortal": "Back to Portal",
       "loginNotice": "To access this section of the portal, you must log in."
+    },
+    "leads": {
+      "title": "Leads",
+      "subtitle": "Manage registration intents and commercial follow-ups.",
+      "list": {
+        "name": "Name",
+        "contact": "Contact",
+        "interests": "Interests",
+        "status": "Status",
+        "assigned": "Assigned to",
+        "actions": "Actions",
+        "empty": "No leads registered yet."
+      },
+      "form": {
+        "status": "Status",
+        "assignedTo": "Assign to",
+        "unassigned": "Unassigned",
+        "notes": "Commercial Notes",
+        "notesPlaceholder": "Add follow-up notes or call details...",
+        "save": "Save Changes",
+        "details": "Lead Details",
+        "interactionHistory": "Interaction History",
+        "noInteractions": "No commercial interactions recorded yet."
+      },
+      "status": {
+        "PENDING": "Pending",
+        "CONTACTED": "Contacted",
+        "IN_PROGRESS": "In Progress",
+        "CONVERTED": "Converted",
+        "LOST": "Lost"
+      },
+      "timeline": {
+        "title_STATUS_CHANGE": "Status Change",
+        "title_ASSIGNMENT": "Assignment",
+        "title_NOTE": "Commercial Note",
+        "title_UNKNOWN": "Unknown Interaction",
+        "title_CREATED": "Lead Created",
+        "statusChanged": "The status changed from {{old}} to {{new}}.",
+        "assigned": "Assigned to operator {{name}}.",
+        "unassigned": "Operator unassigned.",
+        "noteAdded": "{{note}}",
+        "interactionHistory": "Interaction History",
+        "created": "Lead Created"
+      },
+      "error": {
+        "notFound": "Lead not found"
+      }
+    },
+    "admissions": {
+      "title": "Admissions Management",
+      "subtitle": "Manage applications, review submitted documents, and enroll students.",
+      "search": "Search applications by name, email or program",
+      "error": {
+        "notFound": "Admission application not found",
+        "fetch": "Error loading applications"
+      },
+      "status": {
+        "PENDING": "Pending",
+        "VERIFYING": "Verifying",
+        "VERIFIED": "Verified",
+        "REJECTED": "Rejected",
+        "ENROLLED": "Enrolled"
+      },
+      "list": {
+        "applicant": "Applicant",
+        "program": "Program",
+        "status": "Status",
+        "date": "Date",
+        "actions": "Actions",
+        "empty": "No admission applications found.",
+        "viewDetails": "View Details",
+        "changeStatus": "Change Status",
+        "enroll": "Approve and Enroll",
+        "enrollSuccess": "Student enrolled successfully. A welcome email with credentials has been sent."
+      }
+    },
+    "students": {
+      "title": "Students Hub",
+      "subtitle": "Directory and active status of all enrolled students",
+      "list": {
+        "name": "Name",
+        "contact": "Contact",
+        "academic": "Academic Status",
+        "balance": "Balance",
+        "inactive": "No active enrollment",
+        "empty": "No students found"
+      },
+      "tabs": {
+        "general": "General Info",
+        "enrollments": "Enrollments",
+        "finances": "Finances"
+      },
+      "profile": {
+        "contact": "Contact Details",
+        "email": "Email",
+        "phone": "Phone",
+        "joined": "Joined Date"
+      },
+      "finances": {
+        "totalCharged": "Total Charged",
+        "totalPaid": "Total Paid",
+        "currentBalance": "Current Balance",
+        "historyTitle": "Payment History & Charges",
+        "registerPaymentBtn": "Register Payment",
+        "chargesTitle": "Generated Charges",
+        "paymentsTitle": "Applied Payments",
+        "status": {
+          "PAID": "Paid",
+          "PENDING": "Pending",
+          "PARTIALLY_PAID": "Partially Paid",
+          "CANCELLED": "Cancelled"
+        },
+        "columns": {
+          "description": "Description",
+          "status": "Status",
+          "amount": "Amount",
+          "date": "Date",
+          "method": "Method"
+        },
+        "methods": {
+          "CASH": "Cash",
+          "TRANSFER": "Transfer",
+          "CHECK": "Check",
+          "CARD": "Card",
+          "OTHER": "Other"
+        },
+        "modal": {
+          "title": "Register Manual Payment",
+          "amount": "Amount to Apply",
+          "method": "Payment Method",
+          "reference": "Reference / Transaction No.",
+          "referencePlaceholder": "e.g. Transaction ID, Check No...",
+          "notes": "Additional Notes",
+          "notesPlaceholder": "Optional: Payment details...",
+          "submit": "Confirm and Apply Payment"
+        }
+      }
+    },
+    "photoEditor": {
+      "title": "Document Editor",
+      "crop": "Crop",
+      "adjustments": "Adjustments",
+      "zoom": "Zoom",
+      "preview": "Preview with applied filters",
+      "controls": "Image Controls",
+      "brightness": "Brightness",
+      "contrast": "Contrast",
+      "backgroundAi": "Background (AI)",
+      "removeBackground": "Remove Background",
+      "processing": "Processing...",
+      "backgroundNotice": "Maintains white background after removal.",
+      "confirm": "Confirm Edit",
+      "errorAi": "AI processing failed. Check your connection or try another image.",
+      "reset": "Reset",
+      "rotation": "Rotation",
+      "aspectRatio": "Aspect Ratio",
+      "aspectFree": "Free",
+      "aspectSquare": "Square (1:1)",
+      "aspectPortrait": "ID (3:4)",
+      "aspectLandscape": "Landscape (16:9)"
     }
   },
   "profile": {

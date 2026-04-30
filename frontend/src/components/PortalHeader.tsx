@@ -1,4 +1,4 @@
-import { Container, Group, Text, Box, Menu, Avatar, Burger } from '@mantine/core';
+import { Container, Group, Text, Box, Menu, Avatar, Burger, rem } from '@mantine/core';
 import { IconLogout, IconUser } from '@tabler/icons-react';
 import { useTranslation } from 'react-i18next';
 import { useInstitution } from '../hooks/useInstitution';
@@ -25,13 +25,16 @@ export function PortalHeader({ navOpened, onNavToggle }: PortalHeaderProps) {
   return (
     <Box
       component="header"
-      py="xs"
-      style={{
+      py={rem(12)}
+      style={(theme) => ({
         backgroundColor: '#fff',
-        borderBottom: '1px solid #f1f3f5',
-      }}
+        borderBottom: `1px solid ${theme.colors.brand[2]}`,
+        zIndex: 100,
+        position: 'sticky',
+        top: 0
+      })}
     >
-      <Container size="lg">
+      <Container size="xl">
         <Group justify="space-between">
           <Group gap="sm">
             {/* Hamburger — mobile only */}
@@ -46,23 +49,30 @@ export function PortalHeader({ navOpened, onNavToggle }: PortalHeaderProps) {
             )}
             <Link to="/portal" style={{ textDecoration: 'none', color: 'inherit' }}>
               <Group gap="xs" style={{ cursor: 'pointer' }}>
-                <img src="/logo-clean.png" alt={t('common.logoAlt')} style={{ height: 28, width: 'auto' }} />
-                <Text size="lg" fw={800} c="brand">
-                  {name} <Text span fw={400} c="dimmed" size="xs">| {t('portal.header.tag')}</Text>
+                <img 
+                  src="/logo.jpg" 
+                  alt={t('common.logoAlt')} 
+                  style={{ 
+                    height: 24, 
+                    borderRadius: 'var(--mantine-radius-xs)' 
+                  }} 
+                />
+                <Text size="lg" fw={800} c="brand" style={{ letterSpacing: -0.5 }}>
+                  {name}
                 </Text>
               </Group>
             </Link>
           </Group>
 
           <Group gap="sm">
-            <Menu shadow="md" width={200} position="bottom-end">
+            <Menu shadow="md" width={200} position="bottom-end" radius="xs">
               <Menu.Target>
                 <Box style={{ cursor: 'pointer' }}>
                   <Group gap={8}>
-                    <Avatar size={30} color="brand" radius="xl">
+                    <Avatar src={user?.avatar_url} size={30} color="brand" radius="xs">
                       {user?.first_name ? user.first_name.charAt(0).toUpperCase() : user?.email?.charAt(0).toUpperCase()}
                     </Avatar>
-                    <Text size="xs" fw={600} visibleFrom="xs">
+                    <Text size="xs" fw={700} visibleFrom="xs" c="brand.8">
                       {user?.first_name ? `${user.first_name}` : user?.email?.split('@')[0]}
                     </Text>
                   </Group>

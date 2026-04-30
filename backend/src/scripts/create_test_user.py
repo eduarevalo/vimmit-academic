@@ -7,7 +7,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from domain.identity.models import User
 from infrastructure.security.hash_provider import HashProvider
-from api.identity.dependencies.auth_dependencies import engine
+from infrastructure.persistence.database import engine
 
 def create_test_user():
     # Ensure tables exist

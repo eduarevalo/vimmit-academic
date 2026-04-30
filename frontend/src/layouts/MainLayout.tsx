@@ -8,17 +8,17 @@ export function MainLayout() {
   const { open: openRegistration } = useRegistrationModal();
 
   return (
-    <>
+    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       <Header 
         onStartJourney={openRegistration} 
         showLogin={false} 
         onLogoClick={() => navigate('/')}
         showUser={false}
       />
-      <main>
+      <main style={{ flex: 1 }}>
         <Outlet />
       </main>
       <Footer />
-    </>
+    </div>
   );
 }

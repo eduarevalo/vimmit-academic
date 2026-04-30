@@ -40,7 +40,7 @@ export function ScrollSection({ backgroundImage, title, children, id }: ScrollSe
           <Container size="lg" style={{ position: 'relative', zIndex: 2, width: '100%' }}>
             <Paper 
               p={{ base: 'xl', md: 50 }} 
-              radius="lg" 
+              radius="xs" 
               style={{ 
                 backgroundColor: 'rgba(255, 255, 255, 0.92)', 
                 backdropFilter: 'blur(8px)',

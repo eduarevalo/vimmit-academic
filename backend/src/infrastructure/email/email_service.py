@@ -91,3 +91,90 @@ class EmailService:
             },
             tenant_slug=tenant_slug
         )
+
+    async def send_lead_confirmation(self, to_email: str, full_name: str, tenant_slug: str, tenant_name: str):
+        settings = get_settings()
+        return await self.send_email(
+            to_email=to_email,
+            template_name="lead_confirmation.html",
+            context={
+                "full_name": full_name,
+                "tenant_name": tenant_name,
+                "frontend_url": settings.FRONTEND_URL
+            },
+            tenant_slug=tenant_slug
+        )
+
+    async def send_new_lead_admin(self, to_email: str, lead_data: dict, tenant_slug: str, tenant_name: str):
+        settings = get_settings()
+        return await self.send_email(
+            to_email=to_email,
+            template_name="new_lead_admin.html",
+            context={
+                "lead_data": lead_data,
+                "tenant_name": tenant_name,
+                "frontend_url": settings.FRONTEND_URL
+            },
+            tenant_slug=tenant_slug
+        )
+
+    async def send_admission_confirmation(self, to_email: str, full_name: str, tenant_slug: str, tenant_name: str):
+        settings = get_settings()
+        return await self.send_email(
+            to_email=to_email,
+            template_name="admission_confirmation.html",
+            context={
+                "full_name": full_name,
+                "tenant_name": tenant_name,
+                "frontend_url": settings.FRONTEND_URL
+            },
+            tenant_slug=tenant_slug,
+            subject=f"Confirmación de Proceso de Matrícula - {tenant_name}"
+        )
+
+    async def send_enrollment_finalized(
+        self, 
+        to_email: str, 
+        full_name: str, 
+        tenant_slug: str, 
+        tenant_name: str,
+        is_new_user: bool = False,
+        temp_password: str = ""
+    ):
+        settings = get_settings()
+        return await self.send_email(
+            to_email=to_email,
+            template_name="enrollment_confirmed.html",
+            context={
+                "full_name": full_name,
+                "tenant_name": tenant_name,
+                "is_new_user": is_new_user,
+                "temp_password": temp_password,
+                "frontend_url": settings.FRONTEND_URL,
+                "email": to_email
+            },
+            tenant_slug=tenant_slug,
+            subject=f"¡Bienvenido! Matrícula Finalizada exitosamente - {tenant_name}"
+        )
+
+    async def send_balance_statement(
+        self,
+        to_email: str,
+        full_name: str,
+        tenant_slug: str,
+        tenant_name: str,
+        balance_summary: 'StudentBalanceResponse'
+    ):
+        settings = get_settings()
+        return await self.send_email(
+            to_email=to_email,
+            template_name="balance_statement.html",
+            context={
+                "full_name": full_name,
+                "tenant_name": tenant_name,
+                "balance_summary": balance_summary,
+                "frontend_url": settings.FRONTEND_URL
+            },
+            tenant_slug=tenant_slug,
+            subject=f"Estado de Cuenta - {tenant_name}"
+        )

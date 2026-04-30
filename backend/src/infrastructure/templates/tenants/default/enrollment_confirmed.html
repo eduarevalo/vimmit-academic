@@ -1,0 +1,27 @@
+{% extends "base_email.html" %}
+
+{% block title %}Matrícula Finalizada - {{ tenant_name }}{% endblock %}
+
+{% block content %}
+<h1>¡Bienvenido a la Institución!</h1>
+<p>Hola, <strong>{{ full_name }}</strong>,</p>
+<p>Te informamos que tu proceso de matrícula en <strong>{{ tenant_name }}</strong> ha sido finalizado con éxito. Ahora eres oficialmente parte de nuestra comunidad académica.</p>
+
+{% if is_new_user %}
+<div class="info-box info-box-blue">
+    <p class="info-label">Tus credenciales de acceso</p>
+    <p style="margin: 10px 0 5px; color: #52525b; font-size: 14px;"><strong>Usuario:</strong> {{ email }}</p>
+    <p style="margin: 0; color: #52525b; font-size: 14px;"><strong>Contraseña temporal:</strong> <span style="font-family: monospace; background: #e2e8f0; padding: 2px 4px; border-radius: 2px;">{{ temp_password }}</span></p>
+    <p style="margin: 15px 0 0; font-size: 12px; color: #71717a;"><em>Por seguridad, se te pedirá cambiar tu contraseña al iniciar sesión por primera vez.</em></p>
+</div>
+{% endif %}
+
+<div style="text-align: center;">
+    <a href="{{ frontend_url }}" class="button button-primary">Iniciar Sesión</a>
+</div>
+
+<p>Estamos emocionados de acompañarte en este nuevo camino académico.</p>
+
+<hr />
+<p style="color: #71717a; font-size: 14px;">El equipo de {{ tenant_name }}</p>
+{% endblock %}

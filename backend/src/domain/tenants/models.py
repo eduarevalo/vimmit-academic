@@ -10,6 +10,7 @@ class TenantModel(SQLModel, table=True):
     name: str = Field(index=True)
     slug: str = Field(unique=True, index=True) # e.g. "aseder"
     description: Optional[str] = None
+    currency: str = Field(default="USD")  # ISO 4217 code per institution
     is_active: bool = Field(default=True)
     created_at: datetime = Field(default_factory=datetime.utcnow)
     updated_at: datetime = Field(default_factory=datetime.utcnow)

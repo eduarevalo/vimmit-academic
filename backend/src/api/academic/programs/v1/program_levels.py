@@ -4,8 +4,8 @@ from typing import List
 from uuid import UUID
 from datetime import datetime, timezone
 
+from infrastructure.persistence.database import get_session
 from api.identity.dependencies.auth_dependencies import (
-    get_session,
     get_allowed_tenants,
     body_with_tenant_access,
     AllowedTenants,

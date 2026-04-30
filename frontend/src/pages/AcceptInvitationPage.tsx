@@ -24,7 +24,8 @@ import {
   IconMail, 
   IconUserCheck,
   IconArrowRight,
-  IconShieldCheck
+  IconShieldCheck,
+  IconSchool
 } from '@tabler/icons-react';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../hooks/useAuth';
@@ -172,13 +173,13 @@ export function AcceptInvitationPage() {
   if (error === 'ALREADY_MEMBER') {
     return (
       <Container size="xs" py={100}>
-        <Paper withBorder shadow="md" p={30} radius="md" style={{ textAlign: 'center' }}>
-          <ThemeIcon size={60} radius="xl" color="green" variant="light" mb="md">
+        <Paper withBorder shadow="md" p={30} radius="xs" style={{ textAlign: 'center' }}>
+          <ThemeIcon size={60} radius="xs" color="green" variant="light" mb="md">
             <IconCheck size={32} />
           </ThemeIcon>
           <Title order={2} mb="sm">{t('tenantManagement.acceptInvitation.alreadyMember')}</Title>
           <Text c="dimmed" mb="xl">{t('tenantManagement.acceptInvitation.alreadyMemberDesc')}</Text>
-          <Button component={Link} to="/portal/profile" fullWidth radius="md">
+          <Button component={Link} to="/portal/profile" fullWidth radius="xs">
             {t('profile.title')}
           </Button>
         </Paper>
@@ -189,15 +190,15 @@ export function AcceptInvitationPage() {
   if (error || !invitation) {
     return (
       <Container size="xs" py={100}>
-        <Paper withBorder shadow="md" p={30} radius="md" style={{ textAlign: 'center' }}>
-          <ThemeIcon size={60} radius="xl" color="red" variant="light" mb="md">
+        <Paper withBorder shadow="md" p={30} radius="xs" style={{ textAlign: 'center' }}>
+          <ThemeIcon size={60} radius="xs" color="red" variant="light" mb="md">
             <IconAlertCircle size={32} />
           </ThemeIcon>
           <Title order={2} mb="sm">{t('tenantManagement.acceptInvitation.invalidInvitation')}</Title>
           <Text c="dimmed" mb="xl">
             {error ? t(error) : t('tenantManagement.acceptInvitation.invalidInvitationDesc')}
           </Text>
-          <Button component={Link} to="/" fullWidth variant="light" radius="md">
+          <Button component={Link} to="/" fullWidth variant="light" radius="xs">
             {t('common.backToHome')}
           </Button>
         </Paper>
@@ -208,13 +209,13 @@ export function AcceptInvitationPage() {
   if (success) {
     return (
       <Container size="xs" py={100}>
-        <Paper withBorder shadow="md" p={30} radius="md" style={{ textAlign: 'center' }}>
-          <ThemeIcon size={60} radius="xl" color="green" variant="light" mb="md">
+        <Paper withBorder shadow="md" p={30} radius="xs" style={{ textAlign: 'center' }}>
+          <ThemeIcon size={60} radius="xs" color="green" variant="light" mb="md">
             <IconShieldCheck size={32} />
           </ThemeIcon>
           <Title order={2} mb="sm">{t('tenantManagement.acceptInvitation.success')}</Title>
           <Text c="dimmed" mb="xl">{t('tenantManagement.acceptInvitation.successDesc', { roleName: invitation.role_name })}</Text>
-          <Button component={Link} to="/portal/profile" fullWidth radius="md" rightSection={<IconArrowRight size={16} />}>
+          <Button component={Link} to="/portal/profile" fullWidth radius="xs" rightSection={<IconArrowRight size={16} />}>
             {t('profile.title')}
           </Button>
         </Paper>
@@ -224,18 +225,30 @@ export function AcceptInvitationPage() {
 
   return (
     <Container size="xs" py={100}>
-      <Paper withBorder shadow="md" p={30} radius="md" style={{ position: 'relative' }}>
+      <Paper withBorder shadow="md" p={40} radius="xs" style={{ position: 'relative' }} bg="white">
         <Box mb="xl">
-          <ThemeIcon size={50} radius="md" color="brand" variant="light" mb="md">
-            <IconUserCheck size={28} />
-          </ThemeIcon>
-          <Title order={1} fw={900}>{t('tenantManagement.acceptInvitation.title')}</Title>
-          <Text c="dimmed" size="lg">
-            {t('tenantManagement.acceptInvitation.description', { 
-              tenantName: invitation.tenant_name || 'una Institución', 
-              roleName: invitation.role_name 
-            })}
-          </Text>
+          <Center mb="lg">
+            <Group gap="xs">
+              <Box 
+                bg="brand.6" 
+                p={4} 
+                style={{ borderRadius: 'var(--mantine-radius-xs)', display: 'flex' }}
+              >
+                <IconSchool color="white" size={28} />
+              </Box>
+              <Title order={3} fw={900} style={{ letterSpacing: -1 }} c="brand">Aseder</Title>
+            </Group>
+          </Center>
+
+          <Stack gap={4}>
+            <Title order={2} fw={800} ta="center" style={{ letterSpacing: -0.5 }}>{t('tenantManagement.acceptInvitation.title')}</Title>
+            <Text c="brand.4" ta="center" size="sm">
+              {t('tenantManagement.acceptInvitation.description', { 
+                tenantName: invitation.tenant_name || 'una Institución', 
+                roleName: invitation.role_name 
+              })}
+            </Text>
+          </Stack>
         </Box>
 
         <Divider my="xl" />
@@ -252,7 +265,7 @@ export function AcceptInvitationPage() {
                     variant="outline" 
                     color="orange" 
                     fullWidth 
-                    radius="md" 
+                    radius="xs" 
                     onClick={handleLogoutAndSwitch}
                   >
                     {t('tenantManagement.acceptInvitation.logoutAndSwitch')}
@@ -260,14 +273,14 @@ export function AcceptInvitationPage() {
                 </Stack>
               ) : (
                 <>
-                  <Group justify="space-between" p="md" style={{ border: '1px solid var(--mantine-color-gray-2)', borderRadius: 'var(--mantine-radius-md)' }}>
+                  <Group justify="space-between" p="md" style={(theme) => ({ border: `1px solid ${theme.colors.brand[2]}`, borderRadius: 'var(--mantine-radius-xs)', backgroundColor: 'var(--mantine-color-brand-0)' })}>
                     <Group gap="sm">
-                      <ThemeIcon size="sm" variant="light" color="brand">
+                      <ThemeIcon size="sm" variant="white" color="brand">
                         <IconMail size={14} />
                       </ThemeIcon>
-                      <Text size="sm" fw={500}>{user?.email}</Text>
+                      <Text size="sm" fw={600} c="brand.7">{user?.email}</Text>
                     </Group>
-                    <Badge variant="dot" color="green">{t('tenantManagement.acceptInvitation.activeAccount')}</Badge>
+                    <Badge variant="filled" color="brand" radius="xs">{t('tenantManagement.acceptInvitation.activeAccount')}</Badge>
                   </Group>
 
                   <Button 
@@ -276,7 +289,7 @@ export function AcceptInvitationPage() {
                     className="brand-button" 
                     size="lg" 
                     fullWidth 
-                    radius="md"
+                    radius="xs"
                     mt="md"
                   >
                     {t('tenantManagement.acceptInvitation.accept')}
@@ -291,7 +304,7 @@ export function AcceptInvitationPage() {
                   <Alert icon={<IconAlertCircle size={16} />} title={t('tenantManagement.acceptInvitation.existingAccount')} color="blue" variant="light">
                     {t('tenantManagement.acceptInvitation.existingAccountDesc', { email: invitation.email })}
                   </Alert>
-                  <Button component={Link} to={`/portal?email=${invitation.email}`} fullWidth radius="md" size="lg">
+                  <Button component={Link} to={`/portal?email=${invitation.email}`} fullWidth radius="xs" size="lg">
                     {t('auth.login')}
                   </Button>
                 </Stack>
@@ -330,7 +343,7 @@ export function AcceptInvitationPage() {
                       className="brand-button" 
                       size="lg" 
                       fullWidth 
-                      radius="md"
+                      radius="xs"
                       mt="md"
                     >
                       {t('tenantManagement.acceptInvitation.accept')}

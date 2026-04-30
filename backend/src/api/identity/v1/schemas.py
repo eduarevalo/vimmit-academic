@@ -1,4 +1,4 @@
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, EmailStr, ConfigDict
 from typing import Optional, List
 from uuid import UUID
 from datetime import datetime
@@ -39,10 +39,10 @@ class UserOut(BaseModel):
     first_name: Optional[str] = None
     last_name: Optional[str] = None
     phone: Optional[str] = None
+    avatar_url: Optional[str] = None
     memberships: List[MembershipOut] = []
     
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 class ForgotPasswordRequest(BaseModel):
     email: EmailStr
@@ -77,8 +77,7 @@ class InvitationOut(BaseModel):
     created_at: datetime
     accepted_at: Optional[datetime] = None
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 class MemberOut(BaseModel):
     user_id: UUID

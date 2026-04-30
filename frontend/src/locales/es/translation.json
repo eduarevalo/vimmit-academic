@@ -3,13 +3,28 @@
     "cancel": "Cancelar",
     "delete": "Eliminar",
     "loading": "Cargando...",
+    "previous": "Anterior",
+    "next": "Siguiente",
     "goBack": "Ir atrás",
+    "back": "Volver",
+    "me": "Yo",
+    "none": "Ninguno",
+    "success": "Éxito",
+    "refresh": "Recargar",
+    "search": "Buscar",
     "fieldRequired": "Este campo es obligatorio",
+    "active": "Activo",
+    "inactive": "Inactivo",
+    "save": "Guardar",
+    "confirm": "Confirmar",
+    "general": "General",
     "error": {
+      "title": "Error",
+      "unknown": "Ha ocurrido un error inesperado",
       "tooShort": "Debe tener al menos 2 caracteres",
       "fetchPrograms": "Error al cargar los programas. Por favor, inténtalo de nuevo más tarde."
     },
-    "logoAlt": "Logo de ASEDER"
+    "logoAlt": "Logo de Aseder"
   },
   "header": {
     "about": "Nosotros",
@@ -105,7 +120,7 @@
   },
   "hero": {
     "welcome": "Bienvenido a",
-    "title": "ASEDER",
+    "title": "Aseder",
     "subtitle": "Tu futuro profesional comienza aquí en Santander de Quilichao. Formación de calidad en salud, básica y media diseñada para transformar tu vida y tu región.",
     "explorePrograms": "Ver Programas",
     "learnMore": "Conócenos"
@@ -153,30 +168,103 @@
     }
   },
   "registration": {
-    "title": "Registro de Intención",
+    "title": "Registro de Interés",
     "subtitle": "Únete a nuestra comunidad y da el primer paso hacia tu futuro profesional hoy mismo.",
+    "start": "Iniciar Registro",
     "fields": {
       "fullName": "Nombre Completo",
       "email": "Correo Electrónico",
       "phone": "Teléfono",
+      "campus": "Sede",
+      "campusPlaceholder": "Selecciona una sede",
       "program": "Programa de Interés",
-      "programPlaceholder": "Selecciona un programa"
+      "programPlaceholder": "Selecciona un programa",
+      "calendar": "Periodo Académico",
+      "calendarPlaceholder": "Selecciona un periodo",
+      "notes": "Notas adicionales",
+      "notesPlaceholder": "¿Algo más que debamos saber?"
+    },
+    "placeholders": {
+      "fullName": "Juan Pérez",
+      "email": "juan@email.com",
+      "phone": "+57 300 000 0000"
     },
     "submit": "Registrar Mi Interés",
     "disclaimer": "Este es solo un registro de interés, no implica compromiso de matrícula.",
     "success": "¡Gracias por tu interés! Nos pondremos en contacto contigo pronto.",
-    "error": "Hubo un error al procesar tu solicitud. Por favor, inténtalo de nuevo."
+    "error": "Hubo un error al procesar tu solicitud. Por favor, inténtalo de nuevo.",
+    "successTitle": "Solicitud Enviada",
+    "successMessage": "Tu solicitud de matrícula ha sido recibida. Revisa tu correo electrónico para más detalles.",
+    "errorTitle": "Error de Envío",
+    "errorMessage": "No pudimos procesar tu matrícula. Por favor verifica los datos e inténtalo de nuevo.",
+    "steps": {
+      "intro": "Información",
+      "introDesc": "Requisitos y proceso",
+      "details": "Tus Datos",
+      "detailsDesc": "Información personal",
+      "selection": "Tu Carrera",
+      "selectionDesc": "Programa y documentos",
+      "docs": "Documentos",
+      "docsDesc": "Carga de requisitos",
+      "review": "Revisión",
+      "reviewDesc": "Verifica y envía",
+      "docsUploaded": "Documentos cargados"
+    },
+    "validation": {
+      "nameTooShort": "El nombre es muy corto",
+      "invalidEmail": "Correo electrónico no válido",
+      "invalidPhone": "Número de teléfono no válido",
+      "campusRequired": "Debes seleccionar una sede",
+      "programRequired": "Debes seleccionar un programa",
+      "calendarRequired": "Debes seleccionar un periodo académico"
+    },
+    "wizard": {
+      "headerTitle": "Registro de Admisión",
+      "headerSubtitle": "Inicia tu camino hacia el éxito profesional. Proceso de inscripción sencillo y accesible para todos.",
+      "welcomeMessage": "Para completar tu solicitud, te pediremos algunos datos personales y documentos básicos. Toda la información y documentos cargados estarán sujetos a revisión para formalizar tu proceso de admisión.",
+      "filesNotice": "Se solicitarán algunos archivos a cargar en etapas posteriores."
+    },
+    "docs": {
+      "status": {
+        "uploaded": "Documento cargado",
+        "pleaseUpload": "Por favor carga: {{doc}}",
+        "completed": "Completado",
+        "uploading": "Subiendo...",
+        "pending": "Pendiente"
+      },
+      "dropzone": {
+        "titleText": "Arrastra tus archivos aquí",
+        "subtitle": "(Tamaño máx. 5 MB)",
+        "button": "Seleccionar Archivos"
+      },
+      "listTitle": "Documentos para el trámite",
+      "uploadNow": "Cargar ahora",
+      "skip": "Saltar",
+      "missingTitle": "Documentos faltantes",
+      "missingMessage": "Por favor carga los siguientes documentos: {{docs}}",
+      "dropZoneLabel": "Arrastra el archivo aquí o haz clic para seleccionar",
+      "dropZoneMax": "Tamaño máximo 5MB. Formatos: JPG, PNG, PDF",
+      "physicalLabel": "Físico",
+      "digitalLabel": "Digital",
+      "physicalRequired": "Físico Requerido",
+      "required": "Requerido",
+      "optional": "Opcional"
+    },
+    "program": {
+      "requirementsTitle": "Requisitos del Programa",
+      "requirementsInfo": "Para este programa necesitas cargar los siguientes documentos:"
+    }
   },
   "aboutPage": {
     "hero": {
         "tag": "Conoce nuestra institución",
         "title": "Comprometidos con el Desarrollo Regional",
-        "subtitle": "Desde hace más de dos décadas, ASEDER ha sido el motor de cambio para miles de personas en las regiones del Norte del Cauca y el Valle del Cauca, brindando educación de calidad y oportunidades de crecimiento."
+        "subtitle": "Desde hace más de dos décadas, Aseder ha sido el motor de cambio para miles de personas en las regiones del Norte del Cauca y el Valle del Cauca, brindando educación de calidad y oportunidades de crecimiento."
     },
     "history": {
       "tag": "Nuestros Orígenes",
       "title": "Nuestra Historia",
-      "p1": "Fundado en el año 2000 en Santander de Quilichao, el Centro Educativo Asesorías Educativas para el Desarrollo Regional (ASEDER) nació de una visión clara: cerrar las brechas educativas en el suroccidente colombiano y empoderar a las comunidades a través del conocimiento.",
+      "p1": "Fundado en el año 2000 en Santander de Quilichao, el Centro Educativo Asesorías Educativas para el Desarrollo Regional (Aseder) nació de una visión clara: cerrar las brechas educativas en el suroccidente colombiano y empoderar a las comunidades a través del conocimiento.",
       "p2": "Con más de 25 años de trayectoria, hemos evolucionado de un pequeño centro de capacitación a una institución líder con múltiples sedes y una oferta académica diversificada que incluye bachillerato para adultos y programas técnicos laborales de alto impacto.",
       "p3": "Nuestra historia es la historia de miles de graduados que, con esfuerzo y dedicación, han transformado sus vidas y las de sus familias, convirtiéndose en motores de cambio para nuestra región.",
       "quote": "Transformando vidas a través del conocimiento y el servicio regional.",
@@ -195,7 +283,7 @@
     },
     "statsSection": {
         "tag": "Nuestro Impacto",
-        "title": "ASEDER en Números",
+        "title": "Aseder en Números",
         "items": {
             "years": {
                 "value": "25+",
@@ -223,7 +311,7 @@
   "impactPage": {
     "title": "Impacto Regional y Compromiso Social",
     "subtitle": "Transformando las regiones del Norte del Cauca y el Valle desde el año 2000 a través de la educación y el empoderamiento.",
-    "intro": "ASEDER no es solo una institución educativa; es un pilar de desarrollo en una región que ha enfrentado retos históricos. Nuestra presencia en Santander de Quilichao, Miranda, Bugalagrande y Caicedonia es un testimonio de resiliencia y compromiso con el suroccidente colombiano.",
+    "intro": "Aseder no es solo una institución educativa; es un pilar de desarrollo en una region que ha enfrentado retos históricos. Nuestra presencia en Santander de Quilichao, Miranda, Bugalagrande y Caicedonia es un testimonio de resiliencia y compromiso con el suroccidente colombiano.",
     "stats": {
         "graduates": "9,700+",
         "graduatesLabel": "Egresados transformando la región",
@@ -390,7 +478,7 @@
     },
     "impact": {
       "title": "Impacto Regional",
-      "p1": "ASEDER se consolida como un pilar del desarrollo en el suroccidente colombiano, formando profesionales íntegros que aportan soluciones reales a sus comunidades.",
+      "p1": "Aseder se consolida como un pilar del desarrollo en el suroccidente colombiano, formando profesionales íntegros que aportan soluciones reales a sus comunidades.",
       "p2": "Nuestros egresados son el reflejo de nuestra labor: líderes territoriales que impulsan el progreso social y económico desde sus respectivos campos."
     },
     "leaders": {
@@ -447,6 +535,13 @@
         "title": "Eliminar programa",
         "message": "¿Estás seguro de que deseas eliminar '{{name}}'? Esta acción no se puede deshacer."
       },
+      "costs": {
+        "title": "Costos del Programa",
+        "add": "Agregar Costo",
+        "amount": "Monto",
+        "empty": "No se han definido costos fijos para este programa.",
+        "deleteConfirm": "¿Deseas inactivar o eliminar este costo?"
+      },
       "list": {
         "empty": "No hay programas registrados",
         "name": "Programa",
@@ -458,15 +553,48 @@
     "nav": {
       "academic": "Académico",
       "administrative": "Administrativo",
+      "leads": "Prospectos",
       "organization": "Organización",
       "calendar": "Calendario",
       "programs": "Programas",
       "courses": "Cursos",
       "campus": "Sedes",
+      "leads": "Prospectos",
+      "enrollments": "Matrículas",
+      "students": "Estudiantes",
+      "deadlines": "Calendario Académico",
       "calendars": "Periodos Académicos",
       "enrollments": "Matrículas",
       "deadlines": "Plazos",
       "enrollmentsSubtitle": "Administra las matrículas de los estudiantes"
+    },
+    "courses": {
+      "title": "Cursos",
+      "subtitle": "Gestiona la oferta de cursos y materias"
+    },
+    "enrollments": {
+      "title": "Matrículas Académicas",
+      "subtitle": "Gestiona los estudiantes inscritos en los programas",
+      "list": {
+        "student": "Estudiante",
+        "program": "Programa",
+        "level": "Nivel / Grado",
+        "period": "Periodo",
+        "status": "Estado",
+        "date": "Fecha",
+        "empty": "No hay matrículas registradas aún.",
+        "actions": "Acciones"
+      },
+      "status": {
+        "PENDING": "Pendiente",
+        "CONFIRMED": "Confirmada",
+        "CANCELLED": "Cancelada",
+        "GRADUATED": "Graduado"
+      }
+    },
+    "deadlines": {
+      "title": "Plazos",
+      "subtitle": "Gestiona los plazos y fechas límite"
     },
     "campus": {
       "title": "Sedes",
@@ -529,6 +657,172 @@
       "backHome": "Volver al Inicio",
       "backPortal": "Volver al Portal",
       "loginNotice": "Para acceder a esta sección del portal, debes iniciar sesión."
+    },
+    "leads": {
+      "title": "Prospectos",
+      "subtitle": "Gestiona las intenciones de registro y realiza seguimiento comercial.",
+      "list": {
+        "name": "Nombre",
+        "contact": "Contacto",
+        "interests": "Intereses",
+        "status": "Estado",
+        "assigned": "Asignado a",
+        "actions": "Acciones",
+        "empty": "No hay prospectos registrados aún."
+      },
+      "form": {
+        "status": "Estado",
+        "assignedTo": "Asignar a",
+        "unassigned": "Sin Asignar",
+        "notes": "Notas del Comercial",
+        "notesPlaceholder": "Añade notas de seguimiento o llamadas...",
+        "save": "Guardar Cambios",
+        "details": "Detalles del Prospecto",
+        "interactionHistory": "Historial de Interacciones",
+        "noInteractions": "No hay interacciones comerciales registradas aún."
+      },
+      "status": {
+        "PENDING": "Pendiente",
+        "CONTACTED": "Contactado",
+        "IN_PROGRESS": "En Proceso",
+        "CONVERTED": "Convertido",
+        "LOST": "Perdido"
+      },
+      "timeline": {
+        "title_STATUS_CHANGE": "Cambio de Estado",
+        "title_ASSIGNMENT": "Asignación",
+        "title_NOTE": "Nota Comercial",
+        "title_UNKNOWN": "Interacción Desconocida",
+        "title_CREATED": "Prospecto Creado",
+        "statusChanged": "El estado cambió de {{old}} a {{new}}.",
+        "assigned": "Asignado al operador {{name}}.",
+        "unassigned": "Operador desasignado.",
+        "noteAdded": "{{note}}",
+        "interactionHistory": "Historial de Interacciones",
+        "created": "Prospecto Creado"
+      },
+      "error": {
+        "notFound": "Prospecto no encontrado"
+      }
+    },
+    "admissions": {
+      "title": "Gestión de Admisiones",
+      "subtitle": "Revisa y aprueba las solicitudes de matrícula de nuevos estudiantes",
+      "search": "Buscar solicitudes por nombre, correo o programa",
+      "error": {
+        "notFound": "Solicitud de admisión no encontrada",
+        "fetch": "Error al cargar las solicitudes"
+      },
+      "status": {
+        "PENDING": "Pendiente",
+        "VERIFYING": "Verificando",
+        "VERIFIED": "Verificado",
+        "REJECTED": "Rechazado",
+        "ENROLLED": "Matriculado"
+      },
+      "list": {
+        "applicant": "Postulante",
+        "program": "Programa",
+        "status": "Estado",
+        "date": "Fecha",
+        "actions": "Acciones",
+        "empty": "No se encontraron solicitudes de admisión.",
+        "viewDetails": "Ver Detalles",
+        "changeStatus": "Cambiar Estado",
+        "enroll": "Aprobar y Matricular",
+        "enrollSuccess": "Estudiante matriculado exitosamente. Se ha enviado un correo con sus credenciales."
+      }
+    },
+    "students": {
+      "title": "Directorio de Estudiantes",
+      "subtitle": "Información general y estado activo de todos los matriculados",
+      "list": {
+        "name": "Nombre",
+        "contact": "Contacto",
+        "academic": "Estado Académico",
+        "balance": "Saldo a Favor/Deuda",
+        "inactive": "Sin matrícula activa",
+        "empty": "No hay estudiantes registrados"
+      },
+      "actions": {
+        "viewProfile": "Ver Perfil 360"
+      },
+      "status": {
+        "debtBalance": "Saldo Pendiente"
+      },
+      "tabs": {
+        "general": "Información General",
+        "enrollments": "Historial de Matrículas",
+        "finances": "Estado Financiero"
+      },
+      "profile": {
+        "contact": "Datos de Contacto",
+        "email": "Correo Electrónico",
+        "phone": "Teléfono",
+        "joined": "Fecha de Registro"
+      },
+      "finances": {
+        "totalCharged": "Total Facturado",
+        "totalPaid": "Total Pagado",
+        "currentBalance": "Saldo Actual",
+        "historyTitle": "Historial de Pagos y Cobros",
+        "registerPaymentBtn": "Registrar Pago Manual",
+        "chargesTitle": "Cargos Generados",
+        "paymentsTitle": "Pagos Aplicados",
+        "status": {
+          "PAID": "Pagado",
+          "PENDING": "Pendiente",
+          "PARTIALLY_PAID": "Pago Parcial",
+          "CANCELLED": "Cancelado"
+        },
+        "columns": {
+          "description": "Descripción",
+          "status": "Estado",
+          "amount": "Monto",
+          "date": "Fecha",
+          "method": "Método"
+        },
+        "methods": {
+          "CASH": "Efectivo",
+          "TRANSFER": "Transferencia",
+          "CHECK": "Cheque",
+          "CARD": "Tarjeta",
+          "OTHER": "Otro"
+        },
+        "modal": {
+          "title": "Registrar Pago Manual",
+          "amount": "Monto a Aplicar",
+          "method": "Método de Pago",
+          "reference": "Referencia / No. Operación",
+          "referencePlaceholder": "Ej: ID Transacción, No. de Cheque...",
+          "notes": "Notas Adicionales",
+          "notesPlaceholder": "Opcional: Detalles del pago...",
+          "submit": "Confirmar y Aplicar Pago"
+        }
+      }
+    },
+    "photoEditor": {
+      "title": "Editor de Documento",
+      "crop": "Recortar",
+      "adjustments": "Ajustes",
+      "zoom": "Zoom",
+      "preview": "Vista previa con filtros aplicados",
+      "controls": "Controles de Imagen",
+      "brightness": "Brillo",
+      "contrast": "Contraste",
+      "backgroundAi": "Fondo (IA)",
+      "removeBackground": "Remover Fondo",
+      "processing": "Procesando...",
+      "backgroundNotice": "Mantiene el fondo blanco después de removerlo.",
+      "confirm": "Confirmar Edición",
+      "errorAi": "No se pudo procesar la IA. Verifica tu conexión o intenta con otra imagen.",
+      "reset": "Reset",
+      "rotation": "Rotación",
+      "aspectRatio": "Relación de Aspecto",
+      "aspectFree": "Libre",
+      "aspectSquare": "Cuadrado (1:1)",
+      "aspectPortrait": "ID (3:4)",
+      "aspectLandscape": "Panorámico (16:9)"
     }
   },
   "tenantManagement": {

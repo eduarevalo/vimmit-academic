@@ -35,7 +35,7 @@ export function MissionVision() {
             >
                 <Paper 
                     p={40} 
-                    radius="lg" 
+                    radius="xs" 
                     style={{ 
                         backgroundColor: 'rgba(255, 255, 255, 0.1)',
                         backdropFilter: 'blur(12px)',
@@ -79,7 +79,7 @@ export function MissionVision() {
             >
                 <Paper 
                     p={40} 
-                    radius="lg" 
+                    radius="xs" 
                     style={{ 
                         backgroundColor: 'rgba(255, 255, 255, 0.1)',
                         backdropFilter: 'blur(12px)',

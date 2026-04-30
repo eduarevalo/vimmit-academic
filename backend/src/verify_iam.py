@@ -6,7 +6,7 @@ from fastapi.testclient import TestClient
 sys.path.append(os.path.abspath("backend/src"))
 
 from main import app
-from api.identity.dependencies.auth_dependencies import init_db
+from infrastructure.persistence.database import init_db
 
 def test_iam_flow():
     # 1. Initialize Database

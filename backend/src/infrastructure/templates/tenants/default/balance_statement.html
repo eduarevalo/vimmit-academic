@@ -1,0 +1,36 @@
+{% extends "base_email.html" %}
+
+{% block title %}Estado de Cuenta - {{ tenant_name }}{% endblock %}
+
+{% block content %}
+<h1>Tu Estado de Cuenta</h1>
+<p>Hola, <strong>{{ full_name }}</strong>,</p>
+<p>Adjuntamos el resumen de tu estado de cuenta actual en <strong>{{ tenant_name }}</strong>.</p>
+
+<div class="info-box info-box-blue">
+    <p class="info-label">Saldo Pendiente</p>
+    <p class="info-value-large">$ {{ "{:,.2f}".format(balance_summary.total_pending_amount) }} COP</p>
+    
+    <hr style="margin: 15px 0;" />
+    
+    <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+            <td style="color: #64748b; font-size: 13px;">Total Cobrado:</td>
+            <td style="text-align: right; color: #1e293b; font-size: 14px;">$ {{ "{:,.2f}".format(balance_summary.total_billed_amount) }}</td>
+        </tr>
+        <tr>
+            <td style="color: #64748b; font-size: 13px; padding-top: 5px;">Total Pagado:</td>
+            <td style="text-align: right; color: #1e293b; font-size: 14px; padding-top: 5px;">$ {{ "{:,.2f}".format(balance_summary.total_paid_amount) }}</td>
+        </tr>
+    </table>
+</div>
+
+<p>Puedes consultar el detalle de tus pagos y descargar tus facturas desde el portal del estudiante.</p>
+
+<div style="text-align: center;">
+    <a href="{{ frontend_url }}/student/financials" class="button button-primary">Ver Detalle de Pagos</a>
+</div>
+
+<hr />
+<p style="color: #71717a; font-size: 14px;">Departamento Financiero<br>{{ tenant_name }}</p>
+{% endblock %}

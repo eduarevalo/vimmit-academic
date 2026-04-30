@@ -2,6 +2,7 @@ from typing import List, Optional
 from uuid import UUID
 from sqlmodel import Session, select
 from domain.calendar.academic_period.models import CalendarModel, TermModel
+from domain.tenants.models import TenantModel
 
 
 class CalendarRepository:
@@ -56,6 +57,22 @@ class CalendarRepository:
             cal_dict["campus_name"] = c_name
             enriched.append(cal_dict)
         return enriched
+
+    def list_public_calendars(
+        self, tenant_slug: str, campus_id: Optional[UUID] = None, program_id: Optional[UUID] = None, active_only: bool = True
+    ) -> List[CalendarModel]:
+        stmt = (
+            select(CalendarModel)
+            .join(TenantModel, CalendarModel.tenant_id == TenantModel.id)
+            .where(TenantModel.slug == tenant_slug)
+        )
+        if campus_id:
+            stmt = stmt.where(CalendarModel.campus_id == campus_id)
+        if program_id:
+            stmt = stmt.where(CalendarModel.program_id == program_id)
+        if active_only:
+            stmt = stmt.where(CalendarModel.is_active == True)
+        return list(self._session.exec(stmt).all())
 
     def save(self, calendar: CalendarModel) -> CalendarModel:
         self._session.add(calendar)

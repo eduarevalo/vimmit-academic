@@ -7,17 +7,16 @@ import { API_BASE_URL } from '../../config';
 
 interface ProgramFormProps {
   initialValues?: any;
-  onSuccess: () => void;
+  onSuccess: (id?: string) => void;
 }
 
 export function ProgramForm({ initialValues, onSuccess }: ProgramFormProps) {
   const { t } = useTranslation();
   const { token, user } = useAuth();
 
-  const institutionOptions = user?.memberships.map(m => ({
-    value: m.tenant_id,
-    label: m.tenant_name
-  })) || [];
+  const institutionOptions = Array.from(
+    new Map(user?.memberships.map(m => [m.tenant_id, m.tenant_name])).entries()
+  ).map(([value, label]) => ({ value, label }));
 
   const programTypeOptions = [
     { value: 'K12',       label: t('portal.programsManagement.form.programTypeK12') },
@@ -60,15 +59,23 @@ export function ProgramForm({ initialValues, onSuccess }: ProgramFormProps) {
         },
         body: JSON.stringify({
           ...values,
-          credits_per_level: isTechnical ? values.credits_per_level : null,
+          total_levels: values.total_levels === '' ? 1 : Number(values.total_levels),
+          credits_per_level: isTechnical 
+            ? (values.credits_per_level === '' || values.credits_per_level === null ? null : Number(values.credits_per_level)) 
+            : null,
         }),
       });
 
       if (response.ok) {
-        onSuccess();
+        const data = await response.json();
+        onSuccess(data.id);
+      } else {
+        const errData = await response.json();
+        alert(JSON.stringify(errData, null, 2));
       }
     } catch (error) {
       console.error('Error saving program:', error);
+      alert(String(error));
     }
   };
 

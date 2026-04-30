@@ -52,19 +52,34 @@ class ProgramRepository:
         return self._session.exec(statement).all()
 
     def list_by_tenant_slug(
-        self, tenant_slug: str, active_only: bool = True
+        self, tenant_slug: str, campus_id: Optional[UUID] = None, active_only: bool = True
     ) -> List[ProgramModel]:
         """
-        Returns all programs for a given tenant slug.
+        Returns all programs for a given tenant slug, optionally filtered by campus.
         """
         statement = (
             select(ProgramModel)
             .join(TenantModel, ProgramModel.tenant_id == TenantModel.id)
             .where(TenantModel.slug == tenant_slug)
         )
+        if campus_id:
+            # We only show programs that have at least one active calendar/period in the selected campus
+            from domain.calendar.academic_period.models import CalendarModel
+            
+            # Use a subquery to find programs with active calendars in this campus
+            subquery = (
+                select(CalendarModel.program_id)
+                .where(
+                    CalendarModel.campus_id == campus_id,
+                    CalendarModel.is_active == True
+                )
+            )
+            statement = statement.where(ProgramModel.id.in_(subquery))
+            
         if active_only:
             statement = statement.where(ProgramModel.is_active == True)
-        return self._session.exec(statement).all()
+        
+        return list(self._session.exec(statement).all())
 
     def save(self, program: ProgramModel) -> ProgramModel:
         self._session.add(program)

@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional, List
 from pydantic import BaseModel, ConfigDict
 from uuid import UUID
 from datetime import datetime
@@ -6,6 +6,17 @@ from domain.academic.programs.models import ProgramType
 
 
 # ── Program ──────────────────────────────────────────────────────────────────
+
+from pydantic import BaseModel, ConfigDict, field_validator
+
+
+class RequiredDocument(BaseModel):
+    name: str
+    is_required: bool = True
+    physical_required: bool = False
+    physical: Optional[str] = None
+    digital: Optional[str] = None
+
 
 class ProgramBase(BaseModel):
     name: str
@@ -15,7 +26,15 @@ class ProgramBase(BaseModel):
     level_label: str = "Level"
     degree_title: Optional[str] = None
     credits_per_level: Optional[int] = None
+    required_documents: List[RequiredDocument] = []
     is_active: bool = True
+
+    @field_validator("required_documents", mode="before")
+    @classmethod
+    def validate_documents(cls, v):
+        if v is None:
+            return []
+        return v
 
 
 class ProgramCreate(ProgramBase):
@@ -29,6 +48,7 @@ class ProgramUpdate(BaseModel):
     level_label: Optional[str] = None
     degree_title: Optional[str] = None
     credits_per_level: Optional[int] = None
+    required_documents: Optional[List[RequiredDocument]] = None
     is_active: Optional[bool] = None
 
 

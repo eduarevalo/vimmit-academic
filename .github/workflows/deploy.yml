@@ -47,7 +47,7 @@ jobs:
         working-directory: ./frontend
         run: npm install
 
-      - name: Run Frontend Tests
+      - name: Run Frontend Unit Tests
         working-directory: ./frontend
         run: npm run test:coverage
 
@@ -55,9 +55,48 @@ jobs:
         working-directory: ./frontend
         run: npm run build
 
+  test-e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'npm'
+          cache-dependency-path: 'frontend/package-lock.json'
+
+      - name: Install dependencies
+        working-directory: ./frontend
+        run: npm install
+
+      - name: Install Playwright Browsers
+        working-directory: ./frontend
+        run: npx playwright install chromium --with-deps
+
+      - name: Build Frontend (for preview server)
+        working-directory: ./frontend
+        run: npm run build
+
+      - name: Run E2E Tests (with mocked API)
+        working-directory: ./frontend
+        env:
+          CI: true
+          VITE_API_URL: http://localhost:8000
+        run: npm run test:bdd
+
+      - name: Upload E2E Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: frontend/playwright-report/
+          retention-days: 7
+
   terraform-deploy:
     name: Terraform Apply
-    needs: [test-backend, test-frontend]
+    needs: [test-backend, test-frontend, test-e2e]
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
@@ -96,6 +135,9 @@ jobs:
             -var "do_token=${{ secrets.DIGITALOCEAN_TOKEN }}" \
             -var "zeptomail_token=${{ secrets.ZEPTOMAIL_TOKEN }}" \
             -var "zeptomail_smtp_user=${{ secrets.ZEPTOMAIL_SMTP_USER }}" \
+            -var "spaces_access_id=${{ secrets.SPACES_ACCESS_ID }}" \
+            -var "spaces_secret_key=${{ secrets.SPACES_SECRET_KEY }}" \
+            -var "db_password=${{ secrets.MYSQL_DB_PASSWORD }}" \
             -out=tfplan
           exitcode=$?
           set -e

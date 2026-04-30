@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import { useTranslation } from 'react-i18next';
-import { IconCheck, IconLock } from '@tabler/icons-react';
+import { IconCheck, IconLock, IconSchool } from '@tabler/icons-react';
 
 export function ResetPasswordPage() {
   const { t } = useTranslation();
@@ -50,7 +50,7 @@ export function ResetPasswordPage() {
   if (!token && !submitted) {
     return (
       <Container size="xs" py={80}>
-        <Paper withBorder shadow="md" p={30} radius="md">
+        <Paper withBorder shadow="md" p={30} radius="xs">
           <Title order={2} ta="center" c="red">{t('auth.errors.INVALID_TOKEN_TITLE')}</Title>
           <Text ta="center" mt="md">{t('auth.errors.INVALID_TOKEN_MESSAGE')}</Text>
           <Button fullWidth mt="xl" component={Link} to="/portal">
@@ -63,18 +63,30 @@ export function ResetPasswordPage() {
 
   return (
     <Container size="xs" py={80}>
-      <Paper withBorder shadow="xl" p={40} radius="lg">
+      <Paper withBorder shadow="xl" p={40} radius="xs" bg="white">
         {!submitted ? (
-          <Stack gap="md">
+          <Stack gap="xl">
             <Center mb="sm">
-              <IconLock size={40} color="var(--mantine-color-brand-6)" />
+              <Group gap="xs">
+                <Box 
+                  bg="brand.6" 
+                  p={4} 
+                  style={{ borderRadius: 'var(--mantine-radius-xs)', display: 'flex' }}
+                >
+                  <IconSchool color="white" size={28} />
+                </Box>
+                <Title order={3} fw={900} style={{ letterSpacing: -1 }}>Aseder</Title>
+              </Group>
             </Center>
-            <Title order={2} ta="center" fw={900}>
-              {t('auth.resetPassword.title')}
-            </Title>
-            <Text c="dimmed" fz="sm" ta="center">
-              {t('auth.resetPassword.instruction')}
-            </Text>
+            
+            <Stack gap="xs">
+              <Title order={3} fw={800} ta="center" style={{ letterSpacing: -0.5 }}>
+                {t('auth.resetPassword.title')}
+              </Title>
+              <Text c="brand.4" size="sm" ta="center">
+                {t('auth.resetPassword.instruction')}
+              </Text>
+            </Stack>
 
             <form onSubmit={form.onSubmit(handleSubmit)}>
               <Stack gap="md">
@@ -97,7 +109,7 @@ export function ResetPasswordPage() {
                   </Text>
                 )}
 
-                <Button type="submit" fullWidth loading={loading} radius="md" color="brand" mt="md">
+                <Button type="submit" fullWidth loading={loading} radius="xs" color="brand" mt="md">
                   {t('auth.resetPassword.submit')}
                 </Button>
               </Stack>
@@ -114,7 +126,7 @@ export function ResetPasswordPage() {
             <Text c="dimmed" ta="center" size="sm">
               {t('auth.resetPassword.successMessage')}
             </Text>
-            <Button component={Link} to="/portal" variant="light" fullWidth mt="md" radius="md">
+            <Button component={Link} to="/portal" variant="light" fullWidth mt="md" radius="xs">
               {t('auth.backToLogin')}
             </Button>
           </Stack>

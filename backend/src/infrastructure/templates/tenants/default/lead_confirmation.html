@@ -1,0 +1,24 @@
+{% extends "base_email.html" %}
+
+{% block title %}Gracias por tu interés - {{ tenant_name }}{% endblock %}
+
+{% block content %}
+<h1>¡Gracias por contactarnos!</h1>
+<p>Hola, <strong>{{ full_name }}</strong>,</p>
+<p>Hemos recibido tu interés en los programas académicos de <strong>{{ tenant_name }}</strong>. Es un gusto para nosotros saludarte.</p>
+<p>Uno de nuestros asesores académicos se pondrá en contacto contigo muy pronto para brindarte toda la información detallada sobre el programa de tu interés, costos y fechas de inicio.</p>
+
+<div class="info-box">
+    <p class="info-label">Siguiente paso</p>
+    <p style="margin: 5px 0 0; color: #52525b; font-size: 14px;">Estar atento a tu teléfono o correo electrónico para la llamada de asesoría.</p>
+</div>
+
+<p>Mientras tanto, puedes seguir explorando nuestra oferta académica en nuestro sitio web.</p>
+
+<div style="text-align: center;">
+    <a href="{{ frontend_url }}" class="button button-primary">Ver Sitio Web</a>
+</div>
+
+<hr />
+<p style="color: #71717a; font-size: 14px;">Saludos,<br>Admisiones {{ tenant_name }}</p>
+{% endblock %}

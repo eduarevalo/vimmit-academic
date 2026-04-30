@@ -3,7 +3,7 @@ from typing import Annotated, Generator, Optional, List, Type, TypeVar
 from uuid import UUID
 from fastapi import Depends, HTTPException, status, Header
 from fastapi.security import OAuth2PasswordBearer
-from sqlmodel import Session, create_engine, SQLModel, select
+from sqlmodel import Session, select
 
 # Import entities and infrastructure
 from domain.identity.models import User, Role, UserRoleLink
@@ -12,20 +12,8 @@ from domain.academic.programs.models import ProgramModel
 from domain.tenants.models import TenantModel
 from infrastructure.identity.repositories.user_repository import UserRepository
 from infrastructure.security.token_provider import TokenProvider
-from infrastructure.config.settings import get_settings
-
-# Database engine setup
-settings = get_settings()
-DATABASE_URL = settings.DATABASE_URL
-connect_args = {"check_same_thread": False} if DATABASE_URL.startswith("sqlite") else {}
-engine = create_engine(DATABASE_URL, connect_args=connect_args)
-
-def init_db():
-    SQLModel.metadata.create_all(engine)
-
-def get_session() -> Generator[Session, None, None]:
-    with Session(engine) as session:
-        yield session
+# Use centralized database infrastructure
+from infrastructure.persistence.database import get_session
 
 SessionDep = Annotated[Session, Depends(get_session)]
 
@@ -90,9 +78,6 @@ class AllowedTenants:
         current_user: User = Depends(get_current_user)
     ) -> List[UUID]:
         # Base statement: get all tenant IDs where user has a membership
-        statement = select(UserRoleLink.tenant_id).where(UserRoleLink.user_id == current_user.id)
-        
-        # If roles are required, join with Role and filter
         if self.required_roles:
             statement = (
                 select(UserRoleLink.tenant_id)
@@ -101,7 +86,9 @@ class AllowedTenants:
                     UserRoleLink.user_id == current_user.id,
                     Role.name.in_(self.required_roles)
                 )
-            )
+            ).distinct()
+        else:
+            statement = select(UserRoleLink.tenant_id).where(UserRoleLink.user_id == current_user.id).distinct()
             
         allowed_tenant_ids = session.exec(statement).all()
         
@@ -219,6 +206,9 @@ def enrich_user_memberships(user: User, session: Session) -> dict:
     Enriches a User object with tenant and role names for its memberships.
     Returns a dictionary suitable for UserOut schema.
     """
+    from domain.shared.attachments import AttachmentModel
+    from application.shared.attachment_service import AttachmentService
+    
     memberships_with_names = []
     for membership in user.memberships:
         tenant = session.get(TenantModel, membership.tenant_id)
@@ -232,4 +222,21 @@ def enrich_user_memberships(user: User, session: Session) -> dict:
 
     user_data = user.model_dump()
     user_data["memberships"] = memberships_with_names
+    
+    # Resolve dynamic pre-signed URLs for avatars
+    if user.avatar_url and user.avatar_url.startswith("attachment:"):
+        import uuid
+        try:
+            att_id_str = user.avatar_url.split(":")[1]
+            att_id = uuid.UUID(att_id_str)
+            att = session.get(AttachmentModel, att_id)
+            if att:
+                svc = AttachmentService(session)
+                user_data["avatar_url"] = svc.get_download_url(att)
+            else:
+                user_data["avatar_url"] = None
+        except Exception as e:
+            # Silently fallback to no avatar on error (e.g. invalid uuid)
+            user_data["avatar_url"] = None
+
     return user_data

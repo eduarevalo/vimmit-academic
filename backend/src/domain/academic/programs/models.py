@@ -1,6 +1,6 @@
 import enum
-from typing import Optional
-from sqlmodel import SQLModel, Field, Column, Enum as SAEnum
+from typing import Optional, List
+from sqlmodel import SQLModel, Field, Column, Enum as SAEnum, JSON
 from uuid import UUID, uuid4
 from datetime import datetime, timezone
 
@@ -25,6 +25,7 @@ class ProgramModel(SQLModel, table=True):
     level_label: str = Field(default="Level")              # e.g. "Grade", "Semester", "Level"
     degree_title: Optional[str] = None                    # e.g. "Bachiller", "Técnico Superior"
     credits_per_level: Optional[int] = None               # Technical only
+    required_documents: list = Field(default=[], sa_column=Column(JSON))
     is_active: bool = Field(default=True)
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))

@@ -74,7 +74,7 @@ export function StatsSection() {
             >
               <Paper 
                 p="xl" 
-                radius="md" 
+                radius="xs" 
                 withBorder 
                 shadow="md"
                 style={{ 

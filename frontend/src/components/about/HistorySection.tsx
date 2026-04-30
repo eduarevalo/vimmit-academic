@@ -63,7 +63,7 @@ export function HistorySection() {
                     fallbackExt="png"
                     alt={t('aboutPage.history.title')}
 
-                    radius="lg" 
+                    radius="xs" 
                     style={{ position: 'relative', zIndex: 1, boxShadow: theme.shadows.xl }}
                 />
               </Box>
@@ -83,7 +83,7 @@ export function HistorySection() {
                         srcSetBase="/assets/aseder_medical"
                         fallbackExt="png"
                         alt={t('aboutPage.history.medicalAlt')}
-                        radius="lg" 
+                        radius="xs" 
                         style={{ boxShadow: theme.shadows.xl }}
                     />
                 </motion.div>

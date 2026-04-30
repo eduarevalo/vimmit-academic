@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import { useTranslation } from 'react-i18next';
-import { IconArrowLeft, IconCheck } from '@tabler/icons-react';
+import { IconArrowLeft, IconCheck, IconSchool } from '@tabler/icons-react';
 
 export function ForgotPasswordPage() {
   const { t } = useTranslation();
@@ -37,15 +37,30 @@ export function ForgotPasswordPage() {
 
   return (
     <Container size="xs" py={80}>
-      <Paper withBorder shadow="xl" p={40} radius="lg">
+      <Paper withBorder shadow="xl" p={40} radius="xs" bg="white">
         {!submitted ? (
-          <Stack gap="md">
-            <Title order={2} ta="center" fw={900}>
-              {t('auth.forgotPassword.title')}
-            </Title>
-            <Text c="dimmed" fz="sm" ta="center">
-              {t('auth.forgotPassword.instruction')}
-            </Text>
+          <Stack gap="xl">
+            <Center mb="sm">
+              <Group gap="xs">
+                <Box 
+                  bg="brand.6" 
+                  p={4} 
+                  style={{ borderRadius: 'var(--mantine-radius-xs)', display: 'flex' }}
+                >
+                  <IconSchool color="white" size={28} />
+                </Box>
+                <Title order={3} fw={900} style={{ letterSpacing: -1 }}>Aseder</Title>
+              </Group>
+            </Center>
+            
+            <Stack gap="xs">
+              <Title order={3} fw={800} ta="center" style={{ letterSpacing: -0.5 }}>
+                {t('auth.forgotPassword.title')}
+              </Title>
+              <Text c="brand.4" size="sm" ta="center">
+                {t('auth.forgotPassword.instruction')}
+              </Text>
+            </Stack>
 
             <form onSubmit={form.onSubmit(handleSubmit)}>
               <Stack gap="md">
@@ -62,7 +77,7 @@ export function ForgotPasswordPage() {
                   </Text>
                 )}
 
-                <Button type="submit" fullWidth loading={loading} radius="md" color="brand">
+                <Button type="submit" fullWidth loading={loading} radius="xs" color="brand">
                   {t('auth.forgotPassword.submit')}
                 </Button>
               </Stack>
@@ -88,7 +103,7 @@ export function ForgotPasswordPage() {
             <Text c="dimmed" ta="center" size="sm">
               {t('auth.forgotPassword.successMessage')}
             </Text>
-            <Button component={Link} to="/portal" variant="light" fullWidth mt="md" radius="md">
+            <Button component={Link} to="/portal" variant="light" fullWidth mt="md" radius="xs">
               {t('auth.backToLogin')}
             </Button>
           </Stack>

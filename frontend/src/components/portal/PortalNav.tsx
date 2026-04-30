@@ -1,7 +1,8 @@
 import { NavLink, Stack, Text, Box, Drawer } from '@mantine/core';
-import { IconBuilding, IconCalendar, IconBook2, IconClipboardList, IconClock, IconListCheck } from '@tabler/icons-react';
+import { IconBuilding, IconCalendar, IconBook2, IconClipboardList, IconClock, IconListCheck, IconUsersGroup, IconSchool } from '@tabler/icons-react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { useAuth } from '../../hooks/useAuth';
 
 interface PortalNavProps {
   mobileOpened: boolean;
@@ -24,6 +25,9 @@ function NavSection({ title, children }: { title: string; children: React.ReactN
 function NavContent({ onClose }: { onClose?: () => void }) {
   const { t } = useTranslation();
   const { pathname } = useLocation();
+  const { hasRole } = useAuth();
+
+  const isAdmin = hasRole(['Admin']);
 
   const renderLink = (to: string, labelKey: string, icon: any) => (
     <NavLink
@@ -34,30 +38,41 @@ function NavContent({ onClose }: { onClose?: () => void }) {
       leftSection={icon}
       active={pathname.includes(to)}
       onClick={onClose}
-      styles={{ root: { borderRadius: 8, fontWeight: 500 } }}
+      styles={{ root: { borderRadius: 'var(--mantine-radius-xs)', fontWeight: 600 } }}
       color="brand"
     />
   );
 
   return (
     <Stack gap={0}>
-      <NavSection title={t('portal.nav.academic')}>
-        {renderLink('/portal/academic/programs', 'portal.nav.programs', <IconBook2 size={16} />)}
-        {renderLink('/portal/academic/courses',  'portal.nav.courses',  <IconListCheck size={16} />)}
-      </NavSection>
+      {isAdmin && (
+        <NavSection title={t('portal.nav.academic')}>
+          {renderLink('/portal/academic/programs', 'portal.nav.programs', <IconClipboardList size={16} />)}
+          {renderLink('/portal/academic/courses',  'portal.nav.courses',  <IconBook2 size={16} />)}
+        </NavSection>
+      )}
 
-      <NavSection title={t('portal.nav.administrative')}>
-        {renderLink('/portal/administrative/enrollments', 'portal.nav.enrollments', <IconClipboardList size={16} />)}
-        {renderLink('/portal/administrative/deadlines',   'portal.nav.deadlines',   <IconClock size={16} />)}
-      </NavSection>
+      {isAdmin && (
+        <NavSection title={t('portal.nav.administrative')}>
+          {renderLink('/portal/students',                       'portal.nav.students',    <IconSchool size={16} />)}
+          {renderLink('/portal/administrative/leads',           'portal.nav.leads',       <IconUsersGroup size={16} />)}
+          {renderLink('/portal/administrative/admissions',      'admissionsPage.title',   <IconClipboardList size={16} />)}
+          {renderLink('/portal/administrative/enrollments',     'portal.nav.enrollments', <IconListCheck size={16} />)}
+          {renderLink('/portal/administrative/deadlines',       'portal.nav.deadlines',   <IconClock size={16} />)}
+        </NavSection>
+      )}
 
-      <NavSection title={t('portal.nav.organization')}>
-        {renderLink('/portal/organization/campus', 'portal.nav.campus', <IconBuilding size={16} />)}
-      </NavSection>
+      {isAdmin && (
+        <NavSection title={t('portal.nav.organization')}>
+          {renderLink('/portal/organization/campus', 'portal.nav.campus', <IconBuilding size={16} />)}
+        </NavSection>
+      )}
 
-      <NavSection title={t('portal.nav.calendar')}>
-        {renderLink('/portal/calendar/academic-periods', 'portal.nav.calendars', <IconCalendar size={16} />)}
-      </NavSection>
+      {isAdmin && (
+        <NavSection title={t('portal.nav.calendar')}>
+          {renderLink('/portal/calendar/academic-periods', 'portal.nav.calendars', <IconCalendar size={16} />)}
+        </NavSection>
+      )}
     </Stack>
   );
 }
@@ -69,13 +84,13 @@ export function PortalNav({ mobileOpened, onMobileClose }: PortalNavProps) {
       <Box
         component="nav"
         visibleFrom="sm"
-        style={{
+        style={(theme) => ({
           width: 220,
           flexShrink: 0,
-          borderRight: '1px solid #f1f3f5',
+          borderRight: `1px solid ${theme.colors.brand[2]}`,
           backgroundColor: '#fff',
           padding: '24px 12px',
-        }}
+        })}
       >
         <NavContent />
       </Box>

@@ -1,0 +1,24 @@
+{% extends "base_email.html" %}
+
+{% block title %}Confirmación de Matrícula - {{ tenant_name }}{% endblock %}
+
+{% block content %}
+<h1>Confirmación de Proceso</h1>
+<p>Hola, <strong>{{ full_name }}</strong>,</p>
+<p>Tu solicitud de matrícula en <strong>{{ tenant_name }}</strong> ha sido recibida exitosamente. Nuestro equipo revisará la documentación proporcionada y se pondrá en contacto contigo pronto.</p>
+
+<div class="info-box info-box-blue">
+    <p class="info-label">Estado de la solicitud</p>
+    <p class="info-value">En revisión administrativa</p>
+    <p style="margin: 0; font-size: 14px; color: #64748b;">Pronto recibirás instrucciones adicionales para completar tu proceso.</p>
+</div>
+
+<div style="text-align: center;">
+    <a href="{{ frontend_url }}" class="button button-secondary">Ir a la Plataforma</a>
+</div>
+
+<p>Si tienes alguna pregunta, no dudes en contactarnos.</p>
+
+<hr />
+<p style="color: #71717a; font-size: 14px;">Cordialmente,<br>Admisiones {{ tenant_name }}</p>
+{% endblock %}

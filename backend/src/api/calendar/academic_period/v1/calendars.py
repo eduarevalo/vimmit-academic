@@ -1,11 +1,11 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlmodel import Session
-from typing import List
+from typing import List, Optional
 from uuid import UUID
 from datetime import datetime, timezone
 
+from infrastructure.persistence.database import get_session
 from api.identity.dependencies.auth_dependencies import (
-    get_session,
     get_allowed_tenants,
     body_with_tenant_access,
     AllowedTenants,
@@ -45,7 +45,7 @@ async def create_calendar(
 @router.get("", response_model=List[CalendarResponse])
 async def list_calendars(
     session: Session = Depends(get_session),
-    allowed_tenants: List[UUID] = Depends(get_allowed_tenants),
+    allowed_tenants: List[UUID] = Depends(AllowedTenants(required_roles=["Admin"])),
 ):
     repo = CalendarRepository(session)
     results = []
@@ -54,11 +54,23 @@ async def list_calendars(
     return results
 
 
+@router.get("/public/{tenant_slug}", response_model=List[CalendarResponse])
+async def list_public_calendars(
+    tenant_slug: str,
+    campus_id: Optional[UUID] = None,
+    program_id: Optional[UUID] = None,
+    session: Session = Depends(get_session),
+):
+    """List all active calendars for a given tenant slug publicly, with optional filters."""
+    repo = CalendarRepository(session)
+    return repo.list_public_calendars(tenant_slug, campus_id, program_id)
+
+
 @router.get("/{calendar_id}", response_model=CalendarResponse)
 async def get_calendar(
     calendar_id: UUID,
     session: Session = Depends(get_session),
-    allowed_tenants: List[UUID] = Depends(get_allowed_tenants),
+    allowed_tenants: List[UUID] = Depends(AllowedTenants(required_roles=["Admin"])),
 ):
     return get_calendar_or_404(calendar_id, allowed_tenants, session)
 
@@ -96,7 +108,7 @@ async def delete_calendar(
 async def list_terms(
     calendar_id: UUID,
     session: Session = Depends(get_session),
-    allowed_tenants: List[UUID] = Depends(get_allowed_tenants),
+    allowed_tenants: List[UUID] = Depends(AllowedTenants(required_roles=["Admin"])),
 ):
     get_calendar_or_404(calendar_id, allowed_tenants, session)
     return TermRepository(session).list_by_calendar(calendar_id)

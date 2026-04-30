@@ -32,7 +32,7 @@ export function PageHeader({ title, subtitle, withBackButton, actions }: PageHea
                 }
               }}
             >
-              {t('common.goBack')}
+              {t('common.back')}
             </Button>
           )}
           <Title order={1} fw={900} size={38} style={{ lineHeight: 1.1 }}>

@@ -1,7 +1,7 @@
 from typing import Optional
 from uuid import UUID
 from sqlmodel import Session, select
-from domain.identity.models import User
+from domain.identity.models import User, Role, UserRoleLink
 
 class UserRepository:
     def __init__(self, session: Session):
@@ -19,3 +19,13 @@ class UserRepository:
         self._session.commit()
         self._session.refresh(user)
         return user
+
+    def get_users_by_role(self, role_name: str, tenant_id: UUID) -> list[User]:
+        statement = (
+            select(User)
+            .join(UserRoleLink)
+            .join(Role)
+            .where(Role.name == role_name, UserRoleLink.tenant_id == tenant_id)
+            .order_by(User.first_name, User.last_name)
+        )
+        return list(self._session.exec(statement).all())

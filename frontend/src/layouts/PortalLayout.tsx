@@ -19,7 +19,7 @@ export function PortalLayout() {
   }
 
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: '#f8f9fa' }}>
+    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: '#ffffff' }}>
       {isAuthenticated && (
         <PortalHeader
           navOpened={navOpened}

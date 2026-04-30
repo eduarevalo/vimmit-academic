@@ -9,13 +9,13 @@ import {
   Table, 
   Badge, 
   ActionIcon, 
-  Modal, 
-  Paper 
+  Paper,
+  Modal
 } from '@mantine/core';
 import { IconPlus, IconEdit, IconTrash } from '@tabler/icons-react';
+import { useNavigate } from 'react-router-dom';
 
 import { PageHeader } from '../components/common/PageHeader';
-import { ProgramForm } from '../components/portal/ProgramForm';
 import { useAuth } from '../hooks/useAuth';
 import { API_BASE_URL } from '../config';
 
@@ -36,9 +36,9 @@ export function AcademicProgramsPage() {
   const { t } = useTranslation();
   const { token } = useAuth();
 
-  const [opened, setOpened]                   = useState(false);
+  const navigate = useNavigate();
+
   const [programs, setPrograms]               = useState<Program[]>([]);
-  const [editingProgram, setEditingProgram]   = useState<Program | null>(null);
   const [deletingProgram, setDeletingProgram] = useState<Program | null>(null);
 
   const fetchPrograms = async () => {
@@ -89,15 +89,12 @@ export function AcademicProgramsPage() {
       </Table.Td>
       <Table.Td>
         <Badge color={program.is_active ? 'green' : 'gray'} variant="light">
-          {program.is_active ? t('portal.programsManagement.form.active') : t('portal.inactive')}
+          {program.is_active ? t('common.active') : t('common.inactive')}
         </Badge>
       </Table.Td>
       <Table.Td>
         <Group gap="xs">
-          <ActionIcon variant="subtle" color="brand" onClick={() => {
-            setEditingProgram(program);
-            setOpened(true);
-          }}>
+          <ActionIcon variant="subtle" color="brand" onClick={() => navigate(`/portal/academic/programs/${program.id}`)}>
             <IconEdit size={16} />
           </ActionIcon>
           <ActionIcon variant="subtle" color="red" onClick={() => setDeletingProgram(program)}>
@@ -115,10 +112,7 @@ export function AcademicProgramsPage() {
           title={t('portal.programsManagement.title')}
           subtitle={t('portal.programsManagement.subtitle')}
           actions={
-            <Button leftSection={<IconPlus size={18} />} radius="md" color="brand" onClick={() => {
-              setEditingProgram(null);
-              setOpened(true);
-            }}>
+            <Button leftSection={<IconPlus size={18} />} radius="xs" color="brand" onClick={() => navigate('/portal/academic/programs/new')}>
               {t('portal.programsManagement.create')}
             </Button>
           }
@@ -138,31 +132,18 @@ export function AcademicProgramsPage() {
             <Table.Tbody>{rows}</Table.Tbody>
           </Table>
         ) : (
-          <Paper withBorder p="xl" radius="md" ta="center">
+          <Paper withBorder p="xl" radius="xs" ta="center">
             <Text c="dimmed">{t('portal.programsManagement.list.empty')}</Text>
           </Paper>
         )}
       </Stack>
-
-      {/* Create / Edit modal */}
-      <Modal
-        opened={opened}
-        onClose={() => setOpened(false)}
-        title={editingProgram ? t('portal.programsManagement.edit') : t('portal.programsManagement.create')}
-        radius="md"
-      >
-        <ProgramForm
-          initialValues={editingProgram}
-          onSuccess={() => { setOpened(false); fetchPrograms(); }}
-        />
-      </Modal>
 
       {/* Delete confirmation modal */}
       <Modal
         opened={!!deletingProgram}
         onClose={() => setDeletingProgram(null)}
         title={t('portal.programsManagement.deleteConfirm.title')}
-        radius="md"
+        radius="xs"
         size="sm"
       >
         <Stack gap="md">

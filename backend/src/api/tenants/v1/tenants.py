@@ -3,7 +3,8 @@ from sqlmodel import Session, select
 from typing import List
 from uuid import UUID
 
-from api.identity.dependencies.auth_dependencies import get_session, get_current_user
+from infrastructure.persistence.database import get_session
+from api.identity.dependencies.auth_dependencies import get_current_user
 from domain.tenants.models import TenantModel
 from domain.tenants.schemas import TenantCreate, TenantResponse
 from domain.identity.models import User
@@ -16,8 +17,13 @@ async def create_tenant(
     session: Session = Depends(get_session),
     current_user: User = Depends(get_current_user)
 ):
-    # Only super-admins (if they exist) should create tenants
-    # For now, let's just allow it for testing
+    # Only super-admins can create tenants
+    if not current_user.is_superuser:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Only super-administrators can create tenants"
+        )
+        
     db_tenant = TenantModel(**tenant_in.model_dump())
     session.add(db_tenant)
     session.commit()

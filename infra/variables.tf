@@ -39,3 +39,20 @@ variable "zeptomail_smtp_user" {
   type        = string
   sensitive   = true
 }
+
+variable "spaces_access_id" {
+  description = "DigitalOcean Spaces Access ID"
+  type        = string
+  sensitive   = true
+}
+
+variable "spaces_secret_key" {
+  description = "DigitalOcean Spaces Secret Key"
+  type        = string
+  sensitive   = true
+}
+variable "db_password" {
+  description = "Remote Database Password"
+  type        = string
+  sensitive   = true
+}

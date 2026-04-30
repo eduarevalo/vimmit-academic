@@ -18,7 +18,7 @@ export function NotFoundPage() {
     if (!isAuthenticated) {
       return (
         <Container size="xs" py={100}>
-          <Paper withBorder shadow="md" p={30} radius="md">
+          <Paper withBorder shadow="md" p={30} radius="xs">
             <Stack gap="md">
               <Title order={2} ta="center">{t('portal.notFound.title')}</Title>
               <Text ta="center" c="dimmed" mb="md">{t('portal.notFound.loginNotice')}</Text>
@@ -39,7 +39,7 @@ export function NotFoundPage() {
           <Group>
             <Button 
               size="lg" 
-              radius="xl" 
+              radius="xs" 
               color="brand" 
               variant="light"
               leftSection={<IconArrowLeft size={22} />}
@@ -64,7 +64,7 @@ export function NotFoundPage() {
       padding: '20px'
     }}>
       <Container size="md">
-        <Paper withBorder p={60} radius="xl" shadow="xl" style={{ borderTop: '6px solid var(--mantine-color-brand-6)' }}>
+        <Paper withBorder p={60} radius="xs" shadow="xl" style={{ borderTop: '6px solid var(--mantine-color-brand-6)' }}>
           <Stack align="center" gap="xl">
             <Title order={1} style={{ fontSize: 120, fontWeight: 900, lineHeight: 1, color: 'var(--mantine-color-brand-6)', opacity: 0.8 }}>
               404
@@ -82,7 +82,7 @@ export function NotFoundPage() {
                 size="lg" 
                 variant="light" 
                 color="brand" 
-                radius="xl"
+                radius="xs"
                 leftSection={<IconHome size={22} />}
                 onClick={() => navigate('/')}
               >

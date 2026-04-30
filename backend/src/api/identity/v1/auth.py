@@ -4,14 +4,14 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from sqlmodel import Session, select
 
+from infrastructure.persistence.database import get_session
 from api.identity.dependencies.auth_dependencies import (
-    get_session, 
     get_current_user, 
     get_optional_current_user,
     oauth2_scheme, 
     enrich_user_memberships, 
-    get_settings
 )
+from infrastructure.config.settings import get_settings
 from domain.identity.models import User
 from application.identity.services.auth_service import AuthService
 from infrastructure.identity.repositories.user_repository import UserRepository

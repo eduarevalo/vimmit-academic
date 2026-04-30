@@ -1,12 +1,40 @@
-import { Container, Title, Text, Stack, Box, SimpleGrid, Paper, ThemeIcon, useMantineTheme, Overlay, Group, Skeleton } from '@mantine/core';
 import { useTranslation } from 'react-i18next';
-import { IconStethoscope, IconDental, IconMedicineSyrup, IconBabyCarriage, IconUserCheck, IconMicroscope, IconAlertCircle } from '@tabler/icons-react';
-import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
+import { 
+  HeroSection, 
+  NarrativeBlock,
+  Button as VimmitButton
+} from '@ux/index';
+import { 
+  IconStethoscope, 
+  IconDental, 
+  IconMedicineSyrup, 
+  IconBabyCarriage, 
+  IconUserCheck, 
+  IconMicroscope, 
+  IconAlertCircle,
+  IconArrowRight,
+  IconClock,
+  IconMapPin
+} from '@tabler/icons-react';
+import { 
+  Container, 
+  SimpleGrid, 
+  Paper, 
+  Title, 
+  Text, 
+  Stack, 
+  Box, 
+  Skeleton, 
+  AspectRatio, 
+  Image, 
+  Badge, 
+  Group,
+  ThemeIcon,
+  useMantineTheme
+} from '@mantine/core';
 import { useEffect, useState } from 'react';
 import { useInstitution } from '../hooks/useInstitution';
-import { ResponsiveImage } from '../components/common/ResponsiveImage';
-import { useNavigate } from 'react-router-dom';
-
 import { API_BASE_URL } from '../config';
 
 interface Program {
@@ -15,19 +43,18 @@ interface Program {
   description: string;
 }
 
-// Frontend metadata mapping for programs not fully configured in backend yet
 const PROGRAM_METADATA: Record<string, any> = {
-  'Auxiliar en Enfermería': { id: 'nursing', icon: IconStethoscope, color: 'blue', image: '/assets/programs/nursing.png' },
-  'Auxiliar en Salud Oral': { id: 'oralHealth', icon: IconDental, color: 'teal', image: '/assets/programs/oral_health.png' },
-  'Auxiliar en Servicios Farmacéuticos': { id: 'pharmacy', icon: IconMedicineSyrup, color: 'red', image: '/assets/programs/pharmacy.png' },
-  'Auxiliar en Veterinaria': { id: 'veterinary', icon: IconStethoscope, color: 'green', image: '/assets/programs/veterinary.png' },
-  'Técnico Laboral en Calidad y Procedimiento Aplicado a la Industria de Alimentos': { id: 'foodIndustry', icon: IconMicroscope, color: 'yellow', image: '/assets/programs/food_industry.png' },
-  'Técnico en Atención Integral a la Primera Infancia': { id: 'earlyChildhood', icon: IconBabyCarriage, color: 'orange', image: '/assets/programs/early_childhood.png' },
-  'Técnico en Seguridad y Salud en el Trabajo': { id: 'occupationalHealth', icon: IconUserCheck, color: 'gray', image: '/assets/programs/occupational_health.png' },
-  'Técnico Laboral en Agente de Tránsito': { id: 'trafficAgent', icon: IconUserCheck, color: 'indigo', image: '/assets/programs/traffic_agent.png' },
+  'Auxiliar en Enfermería': { id: 'nursing', color: 'blue', image: '/assets/programs/nursing.png' },
+  'Auxiliar en Salud Oral': { id: 'oralHealth', color: 'teal', image: '/assets/programs/oral_health.png' },
+  'Auxiliar en Servicios Farmacéuticos': { id: 'pharmacy', color: 'red', image: '/assets/programs/pharmacy.png' },
+  'Auxiliar en Veterinaria': { id: 'veterinary', color: 'green', image: '/assets/programs/veterinary.png' },
+  'Técnico Laboral en Calidad y Procedimiento Aplicado a la Industria de Alimentos': { id: 'foodIndustry', color: 'yellow', image: '/assets/programs/food_industry.png' },
+  'Técnico en Atención Integral a la Primera Infancia': { id: 'earlyChildhood', color: 'orange', image: '/assets/programs/early_childhood.png' },
+  'Técnico en Seguridad y Salud en el Trabajo': { id: 'occupationalHealth', color: 'gray', image: '/assets/programs/occupational_health.png' },
+  'Técnico Laboral en Agente de Tránsito': { id: 'trafficAgent', color: 'indigo', image: '/assets/programs/traffic_agent.png' },
 };
 
-const DEFAULT_METADATA = { icon: IconUserCheck, color: 'brand', image: '/assets/aseder_graduation.png' };
+const DEFAULT_METADATA = { color: 'brand', image: '/assets/aseder_graduation.png' };
 
 export function ProgramsPage() {
   const { t } = useTranslation();
@@ -50,179 +77,100 @@ export function ProgramsPage() {
         setError(err.message);
       })
       .finally(() => setLoading(false));
-  }, [slug]);
+  }, [slug, t]);
 
   const getMetadata = (name: string) => {
-    return PROGRAM_METADATA[name] || DEFAULT_METADATA;
+    const normalizedName = name.trim();
+    // Case-insensitive lookup
+    const key = Object.keys(PROGRAM_METADATA).find(
+      k => k.toLowerCase() === normalizedName.toLowerCase()
+    );
+    return (key ? PROGRAM_METADATA[key] : null) || DEFAULT_METADATA;
   };
 
   return (
-    <Box>
-      {/* Hero Section */}
-      <Box 
-        py="100px" 
-        style={{ 
-            position: 'relative', 
-            color: 'white',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center'
-        }}
-      >
-        <ResponsiveImage 
-          srcSetBase="/assets/aseder_graduation"
-          fallbackExt="png"
-          alt={t('technicalPage.heroAlt')}
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-            zIndex: 0
-          }}
-        />
-        <Overlay color="#000" opacity={0.6} zIndex={1} />
-        <Container size="lg" style={{ position: 'relative', zIndex: 2 }}>
-          <Stack gap="md" align="center" ta="center">
-            <Title order={1} size={50} fw={900}>
-              {t('technicalPage.title')}
-            </Title>
-            <Text size="xl" maw={700}>
-              {t('technicalPage.subtitle')}
-            </Text>
-          </Stack>
-        </Container>
-      </Box>
+    <>
+      <HeroSection 
+        title={t('technicalPage.title')}
+        subtitle={t('technicalPage.subtitle')}
+        image="/assets/aseder_graduation.png"
+      />
 
-      <Container size="lg" py={80}>
-        <Stack gap={80}>
-          {/* Clinic Highlight */}
-          <SimpleGrid cols={{ base: 1, md: 2 }} spacing="50px">
-            <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.8 }}
-                viewport={{ once: true }}
-            >
-                <Box h={400} style={{ position: 'relative', borderRadius: 'var(--mantine-radius-lg)', overflow: 'hidden' }}>
-                    <ResponsiveImage 
-                        srcSetBase="/assets/aseder_medical"
-                        fallbackExt="png"
-                        alt={t('technicalPage.clinicAlt')}
-                        style={{
-                          width: '100%',
-                          height: '100%',
-                          objectFit: 'cover'
-                        }}
-                    />
-                </Box>
-            </motion.div>
-            
-            <motion.div
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8 }}
-                viewport={{ once: true }}
-            >
-                <Stack gap="xl" justify="center" h="100%">
-                    <Group gap="xs">
-                        <ThemeIcon size={50} radius="md" color="brand.6">
-                            <IconMicroscope size={32} />
-                        </ThemeIcon>
-                        <Title order={2}>{t('technicalPage.clinic.title')}</Title>
-                    </Group>
-                    <Text size="lg" lh={1.8}>
-                        {t('technicalPage.clinic.text')}
-                    </Text>
-                    <Text size="md" c="dimmed">
-                        {t('technicalPage.clinic.secondaryText')}
-                    </Text>
-                </Stack>
-            </motion.div>
-          </SimpleGrid>
-
-          {/* Programs Grid */}
-          <Stack gap="xl">
-            <Title order={2} ta="center" size={36}>{t('technicalPage.offersTitle')}</Title>
-            
-            {loading ? (
-              <SimpleGrid cols={{ base: 1, sm: 2, md: 3, lg: 4 }} spacing="xl">
-                {[1, 2, 3, 4].map((i) => (
-                  <Skeleton key={i} h={300} radius="lg" />
-                ))}
-              </SimpleGrid>
-            ) : error ? (
-              <Paper p="xl" radius="md" withBorder style={{ textAlign: 'center' }}>
-                <IconAlertCircle size={48} color="red" />
-                <Text mt="md">{error}</Text>
-              </Paper>
-            ) : (
-              <SimpleGrid cols={{ base: 1, sm: 2, md: 3, lg: 4 }} spacing="xl">
-                  {programs.map((program, index) => {
-                      const meta = getMetadata(program.name);
-                      return (
-                          <motion.div
-                              key={program.id}
-                              initial={{ opacity: 0, y: 30 }}
-                              whileInView={{ opacity: 1, y: 0 }}
-                              transition={{ delay: index * 0.1 }}
-                              viewport={{ once: true }}
-                          >
-                              <Paper 
-                                  radius="lg" 
-                                  withBorder 
-                                  shadow="sm" 
-                                  style={{ 
-                                      height: '100%', 
-                                      transition: 'all 0.3s ease',
-                                      cursor: 'pointer',
-                                      overflow: 'hidden',
-                                      display: 'flex',
-                                      flexDirection: 'column'
-                                  }} 
-                                  onClick={() => navigate(`/programs/${meta.id || program.id}`)}
-                                  onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-8px)'; e.currentTarget.style.boxShadow = theme.shadows.lg; }} 
-                                  onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = theme.shadows.sm; }}
-                              >
-                                  <Box h={160} style={{ position: 'relative' }}>
-                                      <ResponsiveImage 
-                                          srcSetBase={meta.image.replace(/\.(png|jpg|jpeg)$/i, '')}
-                                          fallbackExt="png"
-                                          alt={program.name}
-                                          style={{ height: 160, width: '100%', objectFit: 'cover' }}
-                                      />
-                                      <Overlay color="#000" opacity={0.2} zIndex={1} />
-                                      <ThemeIcon 
-                                          size="40px" 
-                                          radius="md" 
-                                          variant="filled" 
-                                          color={meta.color} 
-                                          style={{ position: 'absolute', bottom: -15, left: 20, zIndex: 2, boxShadow: theme.shadows.md }}
-                                      >
-                                          <meta.icon size={22} stroke={2} />
-                                      </ThemeIcon>
-                                  </Box>
-                                  
-                                  <Stack p="xl" pt="30px" gap="xs" style={{ flexGrow: 1 }}>
-                                      <Title order={3} size="h5" fw={800}>{program.name}</Title>
-                                      <Text size="sm" c="dimmed" lh={1.5} lineClamp={3}>
-                                          {program.description}
-                                      </Text>
-                                      <Text fw={700} size="xs" c="brand.6" tt="uppercase" mt="auto">
-                                          {t('technicalPage.viewDetail')} &rarr;
-                                      </Text>
-                                  </Stack>
-                              </Paper>
-                          </motion.div>
-                      );
-                  })}
-              </SimpleGrid>
-            )}
+      <NarrativeBlock 
+        title={t('technicalPage.clinic.title')}
+        image="/assets/aseder_medical.png"
+        imagePosition="right"
+        description={
+          <Stack gap="md">
+            <Text size="lg" lh={1.8}>{t('technicalPage.clinic.text')}</Text>
+            <Text c="dimmed">{t('technicalPage.clinic.secondaryText')}</Text>
           </Stack>
+        }
+      />
+
+      <Container size="xl" py={80}>
+        <Stack gap="xl">
+          <Title order={2} ta="center" size={36} mb="xl">{t('technicalPage.offersTitle')}</Title>
+          
+          {loading ? (
+            <SimpleGrid cols={{ base: 1, sm: 2, md: 3, lg: 4 }} spacing="xl">
+              {[1, 2, 3, 4].map((i) => (
+                <Skeleton key={i} h={350} radius="xs" />
+              ))}
+            </SimpleGrid>
+          ) : error ? (
+            <Paper p="xl" radius="xs" withBorder style={{ textAlign: 'center' }}>
+              <IconAlertCircle size={48} color="red" />
+              <Text mt="md">{error}</Text>
+            </Paper>
+          ) : (
+            <SimpleGrid cols={{ base: 1, sm: 2, md: 3, lg: 4 }} spacing="xl">
+              {programs.map((program, index) => {
+                const meta = getMetadata(program.name);
+                return (
+                  <Paper 
+                    key={program.id}
+                    radius="xs" 
+                    withBorder 
+                    shadow="sm" 
+                    style={{ 
+                      height: '100%', 
+                      transition: 'all 0.3s ease',
+                      cursor: 'pointer',
+                      overflow: 'hidden',
+                      display: 'flex',
+                      flexDirection: 'column'
+                    }} 
+                    onClick={() => navigate(`/programs/${meta.id || program.id}`)}
+                  >
+                    <AspectRatio ratio={16/9}>
+                      <Image 
+                        src={meta.image} 
+                        alt={program.name} 
+                        style={{ objectFit: 'cover' }}
+                      />
+                    </AspectRatio>
+                    
+                    <Stack p="xl" gap="md" style={{ flexGrow: 1 }}>
+                      <Badge color={meta.color} variant="light" radius="xs" size="sm">Técnico Laboral</Badge>
+                      <Title order={3} size="h5" fw={800} style={{ minHeight: '3em' }}>{program.name}</Title>
+                      <Text size="sm" c="dimmed" lh={1.5} lineClamp={3}>
+                        {program.description}
+                      </Text>
+                      <Group justify="space-between" mt="auto" pt="md">
+                        <Text fw={700} size="xs" c="brand.6" tt="uppercase">
+                          {t('technicalPage.viewDetail')}
+                        </Text>
+                        <IconArrowRight size={16} color="var(--mantine-color-brand-6)" />
+                      </Group>
+                    </Stack>
+                  </Paper>
+                );
+              })}
+            </SimpleGrid>
+          )}
         </Stack>
       </Container>
-    </Box>
+    </>
   );
 }

@@ -201,7 +201,7 @@ export function CalendarsPage() {
           subtitle={t('portal.calendars.subtitle')}
           actions={
             <Can roles={["Admin"]}>
-              <Button leftSection={<IconPlus size={18} />} radius="md" color="brand"
+              <Button leftSection={<IconPlus size={18} />} radius="xs" color="brand"
                 onClick={() => {
                   setEditing(null);
                   fetchLookups();
@@ -258,14 +258,14 @@ export function CalendarsPage() {
             </Table.Tbody>
           </Table>
         ) : (
-          <Paper withBorder p="xl" radius="md" ta="center">
-            <Text c="dimmed">{t('portal.calendars.list.empty')}</Text>
+          <Paper withBorder p="xl" radius="xs" ta="center">
+            <Text c="brand.4">{t('portal.calendars.list.empty')}</Text>
           </Paper>
         )}
       </Stack>
 
       <Modal opened={opened} onClose={() => setOpened(false)}
-        title={editing ? t('portal.calendars.edit') : t('portal.calendars.create')} radius="md" size="lg">
+        title={editing ? t('portal.calendars.edit') : t('portal.calendars.create')} radius="xs" size="lg">
         {token && (
           <CalendarForm
             initialValues={editing}
@@ -278,7 +278,7 @@ export function CalendarsPage() {
       </Modal>
 
       <Modal opened={!!deleting} onClose={() => setDeleting(null)}
-        title={t('portal.programsManagement.deleteConfirm.title')} radius="md" size="sm">
+        title={t('portal.programsManagement.deleteConfirm.title')} radius="xs" size="sm">
         <Stack gap="md">
           <Text size="sm">{t('portal.programsManagement.deleteConfirm.message', { name: deleting?.name })}</Text>
           <Group justify="flex-end">

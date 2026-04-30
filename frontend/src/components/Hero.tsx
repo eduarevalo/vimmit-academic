@@ -29,14 +29,14 @@ export function Hero({ onExplore, onLearnMore }: { onExplore?: () => void; onLea
         <Group justify="center">
           <Button 
             size="xl" 
-            radius="xl" 
+            radius="xs" 
             onClick={onExplore}
             rightSection={<IconArrowRight size={20} />} 
             style={{ boxShadow: '0 8px 15px rgba(22, 136, 74, 0.2)' }}
           >
             {t('hero.explorePrograms')}
           </Button>
-          <Button size="xl" variant="white" radius="xl" c="dark.8" onClick={onLearnMore}>
+          <Button size="xl" variant="white" radius="xs" c="dark.8" onClick={onLearnMore}>
             {t('hero.learnMore')}
           </Button>
         </Group>

@@ -23,3 +23,8 @@ dist-ssr
 *.sln
 *.sw?
 coverage/
+
+# Testing (Playwright / BDD)
+playwright-report/
+test-results/
+.features-gen/

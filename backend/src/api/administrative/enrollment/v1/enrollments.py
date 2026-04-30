@@ -3,8 +3,8 @@ from sqlmodel import Session
 from typing import List
 from uuid import UUID
 
+from infrastructure.persistence.database import get_session
 from api.identity.dependencies.auth_dependencies import (
-    get_session,
     get_allowed_tenants,
     get_current_user,
     AllowedTenants,
@@ -48,36 +48,26 @@ async def create_enrollment(
 @router.get("", response_model=List[EnrollmentResponse])
 async def list_enrollments(
     session: Session = Depends(get_session),
-    allowed_tenants: List[UUID] = Depends(get_allowed_tenants),
+    allowed_tenants: List[UUID] = Depends(AllowedTenants(required_roles=["Admin"])),
     calendar_id: UUID | None = None,
+    status: str | None = None,
 ):
     repo = EnrollmentRepository(session)
     results = []
     for tenant_id in allowed_tenants:
-        if calendar_id:
-            results.extend(repo.list_by_calendar(calendar_id, tenant_id))
-        else:
-            # List all active enrollments across all student IDs for this tenant
-            # (requires a new repository method — for now filter by tenant is sufficient)
-            from sqlmodel import select as sql_select
-            from domain.administrative.enrollment.models import EnrollmentModel as EM
-            rows = session.exec(sql_select(EM).where(EM.tenant_id == tenant_id)).all()
-            results.extend(rows)
+        enrollments = repo.list_detailed_enrollments(tenant_id, calendar_id, status)
+        results.extend([EnrollmentResponse(**e) for e in enrollments])
     return results
 
 
 @router.get("/me", response_model=List[EnrollmentResponse])
 async def get_my_enrollments(
     session: Session = Depends(get_session),
-    allowed_tenants: List[UUID] = Depends(get_allowed_tenants),
     current_user: User = Depends(get_current_user),
 ):
     """Returns all enrollments for the currently authenticated student."""
     repo = EnrollmentRepository(session)
-    results = []
-    for tenant_id in allowed_tenants:
-        results.extend(repo.list_by_student_and_tenant(current_user.id, tenant_id))
-    return results
+    return repo.list_by_student(current_user.id)
 
 
 @router.put("/{enrollment_id}", response_model=EnrollmentResponse)

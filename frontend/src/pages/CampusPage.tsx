@@ -1,10 +1,11 @@
-import { Container, Stack, Title, Text, Button, Group, Table, Badge, ActionIcon, Modal, Paper, TextInput, Checkbox, Select } from '@mantine/core';
+import { Container, Stack, Text, Button, Group, Table, Badge, ActionIcon, Modal, Paper, TextInput, Checkbox, Select } from '@mantine/core';
 import { IconPlus, IconEdit, IconTrash } from '@tabler/icons-react';
 import { useForm } from '@mantine/form';
 import { useTranslation } from 'react-i18next';
 import { useState, useEffect } from 'react';
 import { useAuth } from '../hooks/useAuth';
 import { Can } from '../components/auth/Can';
+import { PageHeader } from '../components/common/PageHeader';
 
 import { API_BASE_URL } from '../config';
 
@@ -23,7 +24,9 @@ interface Campus {
 function CampusForm({ initialValues, onSuccess, token }: { initialValues?: Campus | null; onSuccess: () => void; token: string }) {
   const { t } = useTranslation();
   const { user } = useAuth();
-  const institutionOptions = user?.memberships.map(m => ({ value: m.tenant_id, label: m.tenant_name })) || [];
+  const institutionOptions = Array.from(
+    new Map(user?.memberships.map(m => [m.tenant_id, m.tenant_name])).entries()
+  ).map(([value, label]) => ({ value, label }));
 
   const form = useForm({
     initialValues: initialValues || {
@@ -114,18 +117,18 @@ export function CampusPage() {
   return (
     <Container size="lg" py={40}>
       <Stack gap="xl">
-        <Group justify="space-between" align="flex-end">
-          <Stack gap={4}>
-            <Title order={2}>{t('portal.campus.title')}</Title>
-            <Text c="dimmed" size="sm">{t('portal.campus.subtitle')}</Text>
-          </Stack>
-          <Can roles={["Admin"]}>
-            <Button leftSection={<IconPlus size={18} />} radius="md" color="brand"
-              onClick={() => { setEditing(null); setOpened(true); }}>
-              {t('portal.campus.add')}
-            </Button>
-          </Can>
-        </Group>
+        <PageHeader 
+          title={t('portal.campus.title')}
+          subtitle={t('portal.campus.subtitle')}
+          actions={
+            <Can roles={["Admin"]}>
+              <Button leftSection={<IconPlus size={18} />} radius="xs" color="brand"
+                onClick={() => { setEditing(null); setOpened(true); }}>
+                {t('portal.campus.add')}
+              </Button>
+            </Can>
+          }
+        />
 
         {campuses.length > 0 ? (
           <Table verticalSpacing="md" highlightOnHover>
@@ -168,19 +171,19 @@ export function CampusPage() {
             </Table.Tbody>
           </Table>
         ) : (
-          <Paper withBorder p="xl" radius="md" ta="center">
+          <Paper withBorder p="xl" radius="xs" ta="center">
             <Text c="dimmed">{t('portal.campus.list.empty')}</Text>
           </Paper>
         )}
       </Stack>
 
       <Modal opened={opened} onClose={() => setOpened(false)}
-        title={editing ? t('portal.campus.edit') : t('portal.campus.create')} radius="md">
+        title={editing ? t('portal.campus.edit') : t('portal.campus.create')} radius="xs">
         {token && <CampusForm initialValues={editing} onSuccess={() => { setOpened(false); fetch_(); }} token={token} />}
       </Modal>
 
       <Modal opened={!!deleting} onClose={() => setDeleting(null)}
-        title={t('portal.programsManagement.deleteConfirm.title')} radius="md" size="sm">
+        title={t('portal.programsManagement.deleteConfirm.title')} radius="xs" size="sm">
         <Stack gap="md">
           <Text size="sm">{t('portal.programsManagement.deleteConfirm.message', { name: deleting?.name })}</Text>
           <Group justify="flex-end">

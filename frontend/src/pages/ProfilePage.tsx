@@ -100,7 +100,7 @@ export function ProfilePage() {
           subtitle={t('profile.subtitle')}
         />
 
-        <Paper withBorder shadow="sm" radius="md" py={30} px={0}>
+        <Paper withBorder shadow="sm" radius="xs" py={30} px={0}>
           <Group gap="xl" mb={40} px={30}>
             <Avatar size={100} radius="100%" color="brand">
               {user.first_name ? user.first_name[0] : user.email[0]}
@@ -145,32 +145,32 @@ export function ProfilePage() {
                     <TextInput
                       label={t('profile.fields.firstName')}
                       placeholder={t('profile.placeholders.firstName')}
-                      radius="md"
+                      radius="xs"
                       {...profileForm.getInputProps('first_name')}
                     />
                     <TextInput
                       label={t('profile.fields.lastName')}
                       placeholder={t('profile.placeholders.lastName')}
-                      radius="md"
+                      radius="xs"
                       {...profileForm.getInputProps('last_name')}
                     />
                   </Group>
                   <TextInput
                     label={t('profile.fields.phone')}
                     placeholder={t('profile.placeholders.phone')}
-                    radius="md"
+                    radius="xs"
                     leftSection={<IconPhone size={16} />}
                     {...profileForm.getInputProps('phone')}
                   />
                   
                   {profileError && (
-                    <Alert variant="light" color="red" icon={<IconAlertCircle size={16} />} radius="md">
+                    <Alert variant="light" color="red" icon={<IconAlertCircle size={16} />} radius="xs">
                       {t(profileError)}
                     </Alert>
                   )}
                   
                   {profileSuccess && (
-                    <Alert variant="light" color="green" icon={<IconCheck size={16} />} radius="md">
+                    <Alert variant="light" color="green" icon={<IconCheck size={16} />} radius="xs">
                       {t('profile.updatedMessage')}
                     </Alert>
                   )}
@@ -178,7 +178,7 @@ export function ProfilePage() {
                   <Divider my="sm" />
                   
                   <Group justify="flex-end">
-                    <Button type="submit" loading={profileLoading} radius="md" px={40}>
+                    <Button type="submit" loading={profileLoading} radius="xs" px={40}>
                       {t('profile.saveChanges')}
                     </Button>
                   </Group>
@@ -191,31 +191,31 @@ export function ProfilePage() {
                 <Stack gap="md">
                   <PasswordInput
                     label={t('profile.fields.currentPassword')}
-                    radius="md"
+                    radius="xs"
                     required
                     {...passwordForm.getInputProps('current_password')}
                   />
                   <PasswordInput
                     label={t('profile.fields.newPassword')}
-                    radius="md"
+                    radius="xs"
                     required
                     {...passwordForm.getInputProps('new_password')}
                   />
                   <PasswordInput
                     label={t('profile.fields.confirmPassword')}
-                    radius="md"
+                    radius="xs"
                     required
                     {...passwordForm.getInputProps('confirm_password')}
                   />
                   
                   {passwordError && (
-                    <Alert variant="light" color="red" icon={<IconAlertCircle size={16} />} radius="md">
+                    <Alert variant="light" color="red" icon={<IconAlertCircle size={16} />} radius="xs">
                       {t(passwordError)}
                     </Alert>
                   )}
                   
                   {passwordSuccess && (
-                    <Alert variant="light" color="green" icon={<IconCheck size={16} />} radius="md">
+                    <Alert variant="light" color="green" icon={<IconCheck size={16} />} radius="xs">
                       {t('profile.passwordChangedMessage')}
                     </Alert>
                   )}
@@ -223,7 +223,7 @@ export function ProfilePage() {
                   <Divider my="sm" />
                   
                   <Group justify="flex-end">
-                    <Button type="submit" color="brand" loading={passwordLoading} radius="md" px={40}>
+                    <Button type="submit" color="brand" loading={passwordLoading} radius="xs" px={40}>
                       {t('profile.changePassword')}
                     </Button>
                   </Group>
@@ -236,14 +236,14 @@ export function ProfilePage() {
                 {user.memberships.length > 0 ? (
                   <Stack gap="sm">
                     {user.memberships.map((membership, idx) => (
-                      <Paper key={idx} withBorder p="md" radius="md">
+                      <Paper key={idx} withBorder p="md" radius="xs">
                         <Group justify="space-between">
                           <Stack gap={0}>
                             <Text fw={700} size="lg">{membership.tenant_name}</Text>
                             <Text size="sm" c="dimmed">{t('profile.tenantId')}: {membership.tenant_id}</Text>
                           </Stack>
                           <Group gap="sm">
-                            <Badge color="brand" variant="light" size="lg" radius="sm">
+                            <Badge color="brand" variant="light" size="lg" radius="xs">
                               {membership.role_name}
                             </Badge>
                             {membership.role_name === 'Admin' && (
@@ -252,7 +252,7 @@ export function ProfilePage() {
                                 to={`/portal/manage/${membership.tenant_id}`}
                                 variant="filled" 
                                 color="brand"
-                                radius="md"
+                                radius="xs"
                                 size="sm" 
                                 leftSection={<IconSettings size={16} />}
                               >

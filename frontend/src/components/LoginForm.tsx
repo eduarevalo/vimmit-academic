@@ -79,7 +79,7 @@ export function LoginForm({ onSuccess, title, subtitle }: LoginFormProps) {
           />
         </Stack>
         
-        <Button type="submit" fullWidth mt="md" color="brand" radius="xl">
+        <Button type="submit" fullWidth mt="md" color="brand" radius="xs">
           {t('auth.loginButton')}
         </Button>
       </Stack>

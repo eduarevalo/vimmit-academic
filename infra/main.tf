@@ -8,7 +8,9 @@ terraform {
 }
 
 provider "digitalocean" {
-  token = var.do_token
+  token             = var.do_token
+  spaces_access_id  = var.spaces_access_id
+  spaces_secret_key = var.spaces_secret_key
 }
 
 resource "digitalocean_app" "vimmit_academic" {
@@ -40,7 +42,8 @@ resource "digitalocean_app" "vimmit_academic" {
       # Environment Variables
       env {
         key   = "DATABASE_URL"
-        value = "sqlite:///test.db"
+        value = "mysql://vimmit-academic:${var.db_password}@misnotasquilichao.com:6033/vimmit-academic"
+        type  = "SECRET"
       }
       
       env {
@@ -59,12 +62,41 @@ resource "digitalocean_app" "vimmit_academic" {
         value = var.zeptomail_smtp_user
         type  = "SECRET"
       }
+
+      env {
+        key   = "SPACES_ACCESS_ID"
+        value = var.spaces_access_id
+        type  = "SECRET"
+      }
+
+      env {
+        key   = "SPACES_SECRET_KEY"
+        value = var.spaces_secret_key
+        type  = "SECRET"
+      }
+
+      env {
+        key   = "SPACES_BUCKET"
+        value = digitalocean_spaces_bucket.attachments.name
+      }
+
+      env {
+        key   = "SPACES_REGION"
+        value = digitalocean_spaces_bucket.attachments.region
+      }
+
+      env {
+        key   = "SPACES_ENDPOINT"
+        value = "https://${digitalocean_spaces_bucket.attachments.region}.digitaloceanspaces.com"
+      }
     }
 
     # Frontend Static Site
     static_site {
       name               = "frontend-web"
-      build_command      = "npm install && npm run build"
+      # Order: unit tests → production build → install browser → E2E tests
+      # DO aborts the deploy if any step exits non-zero.
+      build_command      = "npm install && npm run test:coverage && npm run build && npx playwright install chromium --with-deps && CI=1 npm run test:bdd"
       output_dir         = "dist"
       source_dir         = "frontend"
       error_document     = "index.html"
@@ -186,4 +218,18 @@ resource "digitalocean_record" "zoho_mx_3" {
   name     = "@"
   priority = 50
   value    = "mx3.zoho.com."
+}
+
+# Storage for Attachments
+resource "digitalocean_spaces_bucket" "attachments" {
+  name   = "vimmit-academic-attachments-${var.environment}"
+  region = var.region
+  acl    = "private"
+
+  cors_rule {
+    allowed_headers = ["*"]
+    allowed_methods = ["GET", "PUT", "POST", "DELETE", "HEAD"]
+    allowed_origins = ["*"]
+    max_age_seconds = 3000
+  }
 }

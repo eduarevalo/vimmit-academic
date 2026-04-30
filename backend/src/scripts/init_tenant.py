@@ -1,18 +1,20 @@
 import sys
 import os
+import argparse
 from sqlmodel import Session, select
 from datetime import date
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from infrastructure.security.hash_provider import HashProvider
-from api.identity.dependencies.auth_dependencies import engine, init_db
+from infrastructure.persistence.database import engine as default_engine, init_db, create_engine
 from domain.identity.models import User, Role, UserRoleLink
 from domain.tenants.models import TenantModel
 from domain.academic.programs.models import ProgramModel, ProgramLevelModel, ProgramType
 from domain.organization.campus.models import CampusModel
 from domain.calendar.academic_period.models import CalendarModel, TermModel
 from domain.administrative.enrollment.models import EnrollmentModel, EnrollmentStatus
+from domain.financial.models import ProgramCostItem
 
 
 # ─── Helpers ─────────────────────────────────────────────────────────────────
@@ -43,9 +45,9 @@ TENANTS = [
         "slug": "aseder",
         "description": "ASEDER: institución técnica laboral con más de 25 años de experiencia.",
         "campuses": [
-            {"name": "Sede Principal",      "code": "MAIN", "city": "Santander de Quilichao", "country": "Colombia", "address": "Calle 3 # 10-86, Barrio Centro"},
+            {"name": "Sede Santander de Quilichao",      "code": "QUILICHAO", "city": "Santander de Quilichao", "country": "Colombia", "address": "Calle 3 # 10-86, Barrio Centro"},
             {"name": "Sede Bugalagrande",    "code": "BUGA", "city": "Bugalagrande",          "country": "Colombia", "address": "Calle 7 # 6-46, Barrio Antonio Nariño", "phone": "3234764325"},
-            {"name": "Sede Caicedonia",      "code": "CAIC", "city": "Caicedonia",            "country": "Colombia", "address": "Carrera 15 # 4-51, Barrio El Recreo", "phone": "3202609433"},
+            {"name": "Sede Caicedonia",      "code": "CAICE", "city": "Caicedonia",            "country": "Colombia", "address": "Carrera 15 # 4-51, Barrio El Recreo", "phone": "3202609433"},
         ],
         "programs": [
             {
@@ -56,6 +58,12 @@ TENANTS = [
                 "level_label": "Semestre",
                 "degree_title": "Técnico en Enfermería",
                 "credits_per_level": 20,
+                "required_documents": [
+                    {"name": "Documento de identidad", "is_required": True, "physical_required": True},
+                    {"name": "Certificado de estudios", "is_required": True, "physical_required": True},
+                    {"name": "Fotos tamaño carnet", "is_required": True, "physical_required": True},
+                    {"name": "Recibo de servicios públicos", "is_required": False, "physical_required": False}
+                ],
                 "levels": ["Primer Semestre", "Segundo Semestre", "Tercer Semestre"],
             },
             {
@@ -66,6 +74,12 @@ TENANTS = [
                 "level_label": "Semestre",
                 "degree_title": "Técnico en Salud Oral",
                 "credits_per_level": 20,
+                "required_documents": [
+                    {"name": "Documento de identidad", "is_required": True, "physical_required": True},
+                    {"name": "Certificado de estudios", "is_required": True, "physical_required": True},
+                    {"name": "Fotos tamaño carnet", "is_required": True, "physical_required": True},
+                    {"name": "Recibo de servicios públicos", "is_required": False, "physical_required": False}
+                ],
                 "levels": ["Primer Semestre", "Segundo Semestre", "Tercer Semestre"],
             },
             {
@@ -76,6 +90,12 @@ TENANTS = [
                 "level_label": "Semestre",
                 "degree_title": "Técnico en Servicios Farmacéuticos",
                 "credits_per_level": 20,
+                "required_documents": [
+                    {"name": "Documento de identidad", "is_required": True, "physical_required": True},
+                    {"name": "Certificado de estudios", "is_required": True, "physical_required": True},
+                    {"name": "Fotos tamaño carnet", "is_required": True, "physical_required": True},
+                    {"name": "Recibo de servicios públicos", "is_required": False, "physical_required": False}
+                ],
                 "levels": ["Primer Semestre", "Segundo Semestre", "Tercer Semestre"],
             },
             {
@@ -86,6 +106,12 @@ TENANTS = [
                 "level_label": "Semestre",
                 "degree_title": "Técnico en Veterinaria",
                 "credits_per_level": 20,
+                "required_documents": [
+                    {"name": "Documento de identidad", "is_required": True, "physical_required": True},
+                    {"name": "Certificado de estudios", "is_required": True, "physical_required": True},
+                    {"name": "Fotos tamaño carnet", "is_required": True, "physical_required": True},
+                    {"name": "Recibo de servicios públicos", "is_required": False, "physical_required": False}
+                ],
                 "levels": ["Primer Semestre", "Segundo Semestre", "Tercer Semestre"],
             },
             {
@@ -96,6 +122,12 @@ TENANTS = [
                 "level_label": "Semestre",
                 "degree_title": "Técnico en Calidad de Alimentos",
                 "credits_per_level": 20,
+                "required_documents": [
+                    {"name": "Documento de identidad", "is_required": True, "physical_required": True},
+                    {"name": "Certificado de estudios", "is_required": True, "physical_required": True},
+                    {"name": "Fotos tamaño carnet", "is_required": True, "physical_required": True},
+                    {"name": "Recibo de servicios públicos", "is_required": False, "physical_required": False}
+                ],
                 "levels": ["Primer Semestre", "Segundo Semestre", "Tercer Semestre"],
             },
             {
@@ -106,6 +138,12 @@ TENANTS = [
                 "level_label": "Semestre",
                 "degree_title": "Técnico en Primera Infancia",
                 "credits_per_level": 20,
+                "required_documents": [
+                    {"name": "Documento de identidad", "is_required": True, "physical_required": True},
+                    {"name": "Certificado de estudios", "is_required": True, "physical_required": True},
+                    {"name": "Fotos tamaño carnet", "is_required": True, "physical_required": True},
+                    {"name": "Recibo de servicios públicos", "is_required": False, "physical_required": False}
+                ],
                 "levels": ["Primer Semestre", "Segundo Semestre", "Tercer Semestre"],
             },
             {
@@ -116,6 +154,12 @@ TENANTS = [
                 "level_label": "Semestre",
                 "degree_title": "Técnico en Seguridad Laboral",
                 "credits_per_level": 20,
+                "required_documents": [
+                    {"name": "Documento de identidad", "is_required": True, "physical_required": True},
+                    {"name": "Certificado de estudios", "is_required": True, "physical_required": True},
+                    {"name": "Fotos tamaño carnet", "is_required": True, "physical_required": True},
+                    {"name": "Recibo de servicios públicos", "is_required": False, "physical_required": False}
+                ],
                 "levels": ["Primer Semestre", "Segundo Semestre", "Tercer Semestre"],
             },
             {
@@ -126,37 +170,13 @@ TENANTS = [
                 "level_label": "Semestre",
                 "degree_title": "Técnico en Agente de Tránsito",
                 "credits_per_level": 20,
+                "required_documents": [
+                    {"name": "Documento de identidad", "is_required": True, "physical": "Original y copia", "digital": "Escaneo legible de ambas caras"},
+                    {"name": "Certificado de estudios", "is_required": True, "physical": "Último grado aprobado", "digital": "Escaneo legible"},
+                    {"name": "Fotos tamaño carnet", "is_required": True, "physical": "Dos fotos", "digital": "Una foto"},
+                    {"name": "Recibo de servicios públicos", "is_required": False, "physical": "Copia de recibo reciente", "digital": "Imagen legible"}
+                ],
                 "levels": ["Primer Semestre", "Segundo Semestre", "Tercer Semestre"],
-            },
-        ],
-    },
-    {
-        "name": "Vimmit Academy",
-        "slug": "vimmit-academy",
-        "description": "Una academia moderna enfocada en tecnología y diseño.",
-        "campuses": [
-            {"name": "Campus Digital", "code": "DIGI", "city": "Bogotá", "country": "Colombia"},
-        ],
-        "programs": [
-            {
-                "name": "Desarrollo Web Fullstack",
-                "description": "Domina las tecnologías más demandadas: desde el diseño de interfaces hasta la arquitectura de servidores.",
-                "program_type": ProgramType.TECHNICAL,
-                "total_levels": 2,
-                "level_label": "Módulo",
-                "degree_title": "Certificado Fullstack",
-                "credits_per_level": 15,
-                "levels": ["Módulo 1: Frontend", "Módulo 2: Backend"],
-            },
-            {
-                "name": "Diseño UX/UI",
-                "description": "Aprende a crear experiencias digitales cautivadoras centradas en el usuario y su necesidad.",
-                "program_type": ProgramType.TECHNICAL,
-                "total_levels": 2,
-                "level_label": "Módulo",
-                "degree_title": "Certificado UX/UI",
-                "credits_per_level": 12,
-                "levels": ["Módulo 1: Fundamentos", "Módulo 2: Prototipado"],
             },
         ],
     },
@@ -165,29 +185,24 @@ TENANTS = [
 
 # ─── Main ────────────────────────────────────────────────────────────────────
 
-def init_tenant():
-    init_db()
+def init_tenant(engine=default_engine):
+    init_db(engine)
 
     with Session(engine) as session:
         # ── Test Users ────────────────────────────────────────────────────────
         admin_user = get_or_create(
             session, User,
-            filters={"email": "test@aseder.edu.co"},
+            filters={"email": "admin@aseder.edu.co"},
             defaults={"hashed_password": HashProvider.get_password_hash("password")},
         )
-        viewer_user = get_or_create(
-            session, User,
-            filters={"email": "viewer@aseder.edu.co"},
-            defaults={"hashed_password": HashProvider.get_password_hash("password")},
-        )
-        print(f"Users: {admin_user.email}, {viewer_user.email}")
+        print(f"User: {admin_user.email}")
 
         for t_data in TENANTS:
             # ── Tenant ────────────────────────────────────────────────────────
             tenant = get_or_create(
                 session, TenantModel,
                 filters={"slug": t_data["slug"]},
-                defaults={"name": t_data["name"], "description": t_data["description"]},
+                defaults={"name": t_data["name"], "currency": "COP", "description": t_data["description"]},
             )
             print(f"\nTenant: {tenant.name}")
 
@@ -197,23 +212,12 @@ def init_tenant():
                 filters={"name": "Admin", "tenant_id": tenant.id},
                 defaults={},
             )
-            viewer_role = get_or_create(
-                session, Role,
-                filters={"name": "Viewer", "tenant_id": tenant.id},
-                defaults={},
-            )
 
             # Link Admin user
             get_or_create(
                 session, UserRoleLink,
-                filters={"user_id": admin_user.id, "tenant_id": tenant.id},
-                defaults={"role_id": admin_role.id},
-            )
-            # Link Viewer user
-            get_or_create(
-                session, UserRoleLink,
-                filters={"user_id": viewer_user.id, "tenant_id": tenant.id},
-                defaults={"role_id": viewer_role.id},
+                filters={"user_id": admin_user.id, "tenant_id": tenant.id, "role_id": admin_role.id},
+                defaults={},
             )
 
             # ── Campuses ──────────────────────────────────────────────────────
@@ -244,6 +248,20 @@ def init_tenant():
                     defaults={k: v for k, v in p_data.items() if k != "name"},
                 )
                 print(f"  Program: {program.name}")
+
+                # Program costs
+                if tenant.slug == "aseder":
+                    get_or_create(
+                        session, ProgramCostItem,
+                        filters={"program_id": program.id, "name": "Matrícula"},
+                        defaults={"tenant_id": tenant.id, "amount": 250000, "is_recurring": False, "effective_from": date(2025, 1, 1)}
+                    )
+                    get_or_create(
+                        session, ProgramCostItem,
+                        filters={"program_id": program.id, "name": "Uniformes"},
+                        defaults={"tenant_id": tenant.id, "amount": 150000, "is_recurring": False, "effective_from": date(2025, 1, 1)}
+                    )
+                    print(f"    Costs generated for {program.name}")
 
                 # Program levels
                 level_objects = []
@@ -323,6 +341,25 @@ def init_tenant():
                 p_data["levels"] = levels_names
 
 
-if __name__ == "__main__":
-    init_tenant()
+def main():
+    parser = argparse.ArgumentParser(description="Initialize tenant data")
+    parser.add_argument("--db-url", help="Database URL to target (overrides default)")
+    args = parser.parse_args()
+
+    target_engine = default_engine
+    if args.db_url:
+        # Ensure mysql URLs use pymysql
+        url = args.db_url
+        if url.startswith("mysql:"):
+            url = url.replace("mysql:", "mysql+pymysql:", 1)
+        
+        print(f"Targeting custom database: {url.split('@')[-1] if '@' in url else url}")
+        connect_args = {"check_same_thread": False} if url.startswith("sqlite") else {}
+        target_engine = create_engine(url, connect_args=connect_args, pool_pre_ping=True)
+
+    init_tenant(target_engine)
     print("\nTenant initialization complete.")
+
+
+if __name__ == "__main__":
+    main()

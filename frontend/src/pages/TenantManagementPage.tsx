@@ -268,7 +268,7 @@ export function TenantManagementPage() {
               leftSection={<IconUserPlus size={20} />} 
               onClick={() => setInviteModalOpen(true)}
               size="md"
-              radius="md"
+              radius="xs"
               className="brand-button"
             >
               {t('tenantManagement.inviteCollaborator')}
@@ -276,7 +276,7 @@ export function TenantManagementPage() {
           }
         />
 
-        <Paper withBorder shadow="sm" radius="lg">
+        <Paper withBorder shadow="sm" radius="xs">
           <Tabs defaultValue="members" color="brand" variant="pills" p="md">
             <Tabs.List mb="md" p="xs" style={{ backgroundColor: 'var(--mantine-color-gray-0)', borderRadius: 'var(--mantine-radius-md)' }}>
               <Tabs.Tab value="members" leftSection={<IconUsers size={16} />}>
@@ -311,7 +311,7 @@ export function TenantManagementPage() {
                         <Table.Tr key={member.user_id}>
                           <Table.Td>
                             <Group gap="sm">
-                              <Avatar color="brand" radius="xl">
+                              <Avatar color="brand" radius="xs">
                                 {member.first_name ? member.first_name[0] : member.email[0]}
                               </Avatar>
                               <Stack gap={0}>
@@ -368,7 +368,7 @@ export function TenantManagementPage() {
                         <Table.Tr key={inv.id}>
                           <Table.Td>
                             <Group gap="sm">
-                              <ThemeIcon variant="light" color="gray" radius="xl">
+                              <ThemeIcon variant="light" color="gray" radius="xs">
                                 <IconMail size={16} />
                               </ThemeIcon>
                               <Text fw={500}>{inv.email}</Text>
@@ -438,7 +438,7 @@ export function TenantManagementPage() {
         onClose={() => setInviteModalOpen(false)} 
         title={<Text fw={700} size="lg">{t('tenantManagement.inviteCollaborator')}</Text>}
         centered
-        radius="lg"
+        radius="xs"
         padding="xl"
       >
         <form onSubmit={inviteForm.onSubmit(handleInvite)}>
@@ -459,13 +459,13 @@ export function TenantManagementPage() {
             />
             
             {inviteError && (
-              <Alert variant="light" color="red" icon={<IconAlertCircle size={16} />} radius="md">
+              <Alert variant="light" color="red" icon={<IconAlertCircle size={16} />} radius="xs">
                 {inviteError}
               </Alert>
             )}
 
             {inviteSuccess && (
-              <Alert variant="light" color="green" icon={<IconCheck size={16} />} radius="md">
+              <Alert variant="light" color="green" icon={<IconCheck size={16} />} radius="xs">
                 {t('tenantManagement.invitationSent')}
               </Alert>
             )}
@@ -489,7 +489,7 @@ export function TenantManagementPage() {
         opened={!!deletingInvitation}
         onClose={() => setDeletingInvitation(null)}
         title={t('tenantManagement.invitations.deleteTitle')}
-        radius="md"
+        radius="xs"
         size="sm"
       >
         <Stack gap="md">

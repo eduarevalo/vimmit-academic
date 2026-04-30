@@ -1,8 +1,9 @@
-import { Container, Title, Text, Stack, Box, SimpleGrid, Paper, List, Button, Image, Badge, Group } from '@mantine/core';
+import { Container, Title, Text, Stack, Box, SimpleGrid, Paper, List, Image, Badge, Group } from '@mantine/core';
 import { useTranslation } from 'react-i18next';
 import { useParams, useNavigate } from 'react-router-dom';
 import { IconArrowLeft, IconCheck, IconTarget, IconBriefcase, IconCertificate } from '@tabler/icons-react';
 import { motion } from 'framer-motion';
+import { HeroSection, Button as VimmitButton } from '@ux/index';
 
 export function ProgramDetailPage() {
     const { programId } = useParams();
@@ -25,55 +26,15 @@ export function ProgramDetailPage() {
 
     return (
         <Box>
-            {/* Hero Section */}
-            <Box 
-                style={{ 
-                    position: 'relative', 
-                    height: '50vh', 
-                    minHeight: '400px',
-                    backgroundColor: '#1A1B1E',
-                    overflow: 'hidden',
-                    display: 'flex',
-                    alignItems: 'center'
+            <HeroSection 
+                title={programData.title}
+                subtitle={programData.desc}
+                image={programData.image}
+                ctaPrimary={{ 
+                    label: t('technicalPage.detail.back'), 
+                    onClick: () => navigate('/programs') 
                 }}
-            >
-                <Image 
-                    src={programData.image} 
-                    style={{ 
-                        position: 'absolute', 
-                        top: 0, 
-                        left: 0, 
-                        width: '100%', 
-                        height: '100%', 
-                        objectFit: 'cover',
-                        opacity: 0.4
-                    }} 
-                />
-                <Container size="lg" style={{ position: 'relative', zIndex: 2 }}>
-                    <Stack gap="xl">
-                        <Button 
-                            variant="subtle" 
-                            color="gray.0" 
-                            leftSection={<IconArrowLeft size={16} />}
-                            onClick={() => navigate('/programs')}
-                            style={{ alignSelf: 'flex-start' }}
-                        >
-                            {t('technicalPage.detail.back')}
-                        </Button>
-                        <Stack gap="xs">
-                            <Badge color="brand.5" size="lg" radius="sm" variant="filled">
-                                {t('technicalPage.detail.badge')}
-                            </Badge>
-                            <Title order={1} size={56} fw={900} c="white" style={{ lineHeight: 1.1 }}>
-                                {programData.title}
-                            </Title>
-                            <Text size="xl" c="gray.3" maw={700}>
-                                {programData.desc}
-                            </Text>
-                        </Stack>
-                    </Stack>
-                </Container>
-            </Box>
+            />
 
             <Container size="lg" py={80}>
                 <SimpleGrid cols={{ base: 1, md: 2 }} spacing={60}>
@@ -84,7 +45,7 @@ export function ProgramDetailPage() {
                                 <IconTarget size={28} color="var(--mantine-color-brand-6)" />
                                 <Title order={2} size="h3" fw={800}>{t('technicalPage.detail.objectivesTitle')}</Title>
                             </Group>
-                            <Paper p="xl" radius="lg" withBorder bg="gray.0">
+                            <Paper p="xl" radius="xs" withBorder bg="gray.0">
                                 <Text size="lg" lh={1.7}>
                                     {programData.objectives}
                                 </Text>
@@ -129,7 +90,7 @@ export function ProgramDetailPage() {
                                         transition={{ delay: i * 0.1 }}
                                         viewport={{ once: true }}
                                     >
-                                        <Paper p="lg" radius="md" withBorder style={{ borderLeft: '4px solid var(--mantine-color-brand-6)' }}>
+                                        <Paper p="lg" radius="xs" withBorder style={{ borderLeft: '4px solid var(--mantine-color-brand-6)' }}>
                                             <Text fw={700} size="lg">{level}</Text>
                                         </Paper>
                                     </motion.div>
@@ -138,15 +99,15 @@ export function ProgramDetailPage() {
                         </Box>
 
                         {/* CTA Section */}
-                        <Paper p={40} radius="xl" bg="brand.6" c="white" shadow="xl">
+                        <Paper p={40} radius="xs" bg="brand.6" c="white" shadow="xl">
                             <Stack align="center" ta="center" gap="lg">
                                 <Title order={2} size="h2" fw={900}>{t('technicalPage.detail.ctaTitle')}</Title>
                                 <Text size="lg" opacity={0.9}>
                                     {t('technicalPage.detail.ctaText')}
                                 </Text>
-                                <Button size="xl" radius="md" variant="white" color="brand.6" fullWidth>
+                                <VimmitButton size="xl" radius="xs" variant="white" color="brand.6" fullWidth>
                                     {t('technicalPage.detail.ctaButton')}
-                                </Button>
+                                </VimmitButton>
                             </Stack>
                         </Paper>
                     </Stack>

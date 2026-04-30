@@ -58,7 +58,7 @@ export function RegistrationModal() {
     setError(null);
 
     try {
-      const response = await fetch(`${API_BASE_URL}/v1/administration/registration-intents`, {
+      const response = await fetch(`${API_BASE_URL}/v1/administration/registration-intents/public/${slug}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -67,8 +67,7 @@ export function RegistrationModal() {
           email: formData.email,
           fullName: formData.fullName,
           phone: formData.phone || null,
-          interests: formData.programs,
-          tenantId: '00000000-0000-0000-0000-000000000000' // Default tenant or should we use one from data?
+          interests: formData.programs
         }),
       });
 
@@ -94,8 +93,8 @@ export function RegistrationModal() {
     <Modal 
       opened={isOpen} 
       onClose={close} 
-      title={<Text fw={700} size="lg">{t('registration.title')}</Text>}
-      radius="lg"
+      title={<Text fw={900} size="lg" tt="uppercase" c="brand" style={{ letterSpacing: -0.5 }}>{t('registration.title')}</Text>}
+      radius="xs"
       size="md"
       padding="xl"
       centered
@@ -108,14 +107,14 @@ export function RegistrationModal() {
       ) : (
         <form onSubmit={handleSubmit}>
           <Box mb="xl">
-            <Text size="sm" c="dimmed" mb="xs">
+            <Text size="sm" c="brand.4" mb="xs" fw={500}>
               {t('registration.subtitle')}
             </Text>
           </Box>
 
           <Stack gap="md">
             {error && (
-              <Alert icon={<IconAlertCircle size={16} />} title="Error" color="red" radius="md">
+              <Alert icon={<IconAlertCircle size={16} />} title="Error" color="red" radius="xs">
                 {error}
               </Alert>
             )}
@@ -124,7 +123,7 @@ export function RegistrationModal() {
               label={t('registration.fields.fullName')} 
               placeholder="Juan Pérez" 
               required 
-              radius="md"
+              radius="xs"
               value={formData.fullName}
               onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
             />
@@ -133,28 +132,28 @@ export function RegistrationModal() {
               placeholder="juan.perez@email.com" 
               type="email"
               required 
-              radius="md"
+              radius="xs"
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
             />
             <TextInput 
               label={t('registration.fields.phone')} 
               placeholder="+57 300 123 4567" 
-              radius="md"
+              radius="xs"
               value={formData.phone}
               onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
             />
             {loadingPrograms ? (
               <Stack gap="xs">
                 <Text size="sm" fw={500}>{t('registration.fields.program')}</Text>
-                <Skeleton h={42} radius="md" />
+                <Skeleton h={42} radius="xs" />
               </Stack>
             ) : (
               <MultiSelect
                 label={t('registration.fields.program')}
                 placeholder={t('registration.fields.programPlaceholder')}
                 data={programOptions}
-                radius="md"
+                radius="xs"
                 required
                 value={formData.programs}
                 onChange={(val) => setFormData({ ...formData, programs: val })}
@@ -170,7 +169,7 @@ export function RegistrationModal() {
                 fullWidth 
                 size="md" 
                 color="brand" 
-                radius="xl"
+                radius="xs"
                 loading={loading}
               >
                 {t('registration.submit')}

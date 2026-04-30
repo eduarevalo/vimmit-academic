@@ -1,11 +1,11 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlmodel import Session, select
-from typing import List
+from typing import List, Optional
 from uuid import UUID
 from datetime import datetime
 
+from infrastructure.persistence.database import get_session
 from api.identity.dependencies.auth_dependencies import (
-    get_session,
     get_allowed_tenants,
     body_with_tenant_access,
     AllowedTenants,
@@ -46,7 +46,7 @@ async def create_program(
 @router.get("", response_model=List[ProgramResponse])
 async def list_programs(
     session: Session = Depends(get_session),
-    allowed_tenants: List[UUID] = Depends(get_allowed_tenants),
+    allowed_tenants: List[UUID] = Depends(AllowedTenants(required_roles=["Admin"])),
 ):
     """List all active programs across all authorized institutions."""
     repo = ProgramRepository(session)
@@ -64,11 +64,12 @@ async def list_programs(
 @router.get("/public/{tenant_slug}", response_model=List[ProgramResponse])
 async def list_public_programs(
     tenant_slug: str,
+    campus_id: Optional[UUID] = None,
     session: Session = Depends(get_session),
 ):
-    """List all active programs for a given tenant slug publicly."""
+    """List all active programs for a given tenant slug publicly, with optional campus filter."""
     repo = ProgramRepository(session)
-    db_programs = repo.list_by_tenant_slug(tenant_slug)
+    db_programs = repo.list_by_tenant_slug(tenant_slug, campus_id=campus_id)
 
     programs = []
     for program in db_programs:
@@ -81,7 +82,7 @@ async def list_public_programs(
 async def get_program(
     program_id: UUID,
     session: Session = Depends(get_session),
-    allowed_tenants: List[UUID] = Depends(get_allowed_tenants),
+    allowed_tenants: List[UUID] = Depends(AllowedTenants(required_roles=["Admin"])),
 ):
     return get_program_or_404(program_id, allowed_tenants, session)
 

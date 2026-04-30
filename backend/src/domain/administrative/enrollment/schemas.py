@@ -31,5 +31,12 @@ class EnrollmentResponse(EnrollmentBase):
     tenant_id: UUID
     enrolled_at: datetime
     updated_at: datetime
+    
+    # Joined fields for UI
+    student_name: Optional[str] = None
+    program_name: Optional[str] = None
+    level_name: Optional[str] = None
+    calendar_name: Optional[str] = None
+    tenant_name: Optional[str] = None
 
     model_config = ConfigDict(from_attributes=True)

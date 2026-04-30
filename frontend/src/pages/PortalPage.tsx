@@ -11,7 +11,7 @@ export function PortalPage() {
   if (!isAuthenticated) {
     return (
       <Container size="xs" py={100}>
-        <Paper withBorder shadow="md" p={30} radius="md">
+        <Paper withBorder shadow="md" p={30} radius="xs">
           <Stack gap="md">
             <Title order={2} ta="center">{t('portal.accessRequired')}</Title>
             <Text ta="center" c="dimmed" mb="md">{t('portal.loginNotice')}</Text>
@@ -30,7 +30,7 @@ export function PortalPage() {
           {t('portal.welcome')}
         </Text>
         <Group>
-          <Button size="lg" radius="xl" color="brand" variant="light">
+          <Button size="lg" radius="xs" color="brand" variant="light">
             {t('portal.exploreResources')}
           </Button>
         </Group>
